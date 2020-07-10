@@ -16,6 +16,7 @@
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
 		0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26B24B84FD3002D2A12 /* Home.storyboard */; };
 		0804D27024B850E3002D2A12 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D26F24B850E3002D2A12 /* HomeVC.swift */; };
+		0804D27224B8526B002D2A12 /* UITableView+Extensions.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D27124B8526B002D2A12 /* UITableView+Extensions.swift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		0804D26324B84C5D002D2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0804D26B24B84FD3002D2A12 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0804D26F24B850E3002D2A12 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		0804D27124B8526B002D2A12 /* UITableView+Extensions.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift.swift"; sourceTree = "<group>"; };
 		568D2029B4D2C58F7F2D5318 /* Pods-mytine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.debug.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.debug.xcconfig"; sourceTree = "<group>"; };
 		69B35999940CD37C423E5A5B /* Pods-mytine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.release.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.release.xcconfig"; sourceTree = "<group>"; };
 		AFDA17E344702CFAAB58362C /* Pods_mytine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mytine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,7 @@
 		0804D26D24B85066002D2A12 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0804D27124B8526B002D2A12 /* UITableView+Extensions.swift.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				0804D25A24B84C5B002D2A12 /* ViewController.swift in Sources */,
 				0804D27024B850E3002D2A12 /* HomeVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
+				0804D27224B8526B002D2A12 /* UITableView+Extensions.swift.swift in Sources */,
 				0804D25824B84C5B002D2A12 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
