@@ -11,7 +11,7 @@
         <!--7월 2주차-->
         <scene sceneID="BaT-7e-Hdr">
             <objects>
-                <viewController id="MYX-hV-COP" sceneMemberID="viewController">
+                <viewController id="MYX-hV-COP" customClass="HomeVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rcP-xQ-YnA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
