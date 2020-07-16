@@ -271,6 +271,7 @@
 				08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */,
 				0804D27024B850E3002D2A12 /* HomeVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
+				0804D27224B8526B002D2A12 /* UITableView+Extensions.swift.swift in Sources */,
 				0804D25824B84C5B002D2A12 /* SceneDelegate.swift in Sources */,
 				08D4139E24BF4F2C0049BB44 /* UIView+Extensions.swift in Sources */,
 			);
