@@ -20,12 +20,26 @@ extension UIView {
         self.layer.masksToBounds = true
     }
     
-    func viewBorder(borderColor : UIColor?, borderWidth : CGFloat?) {
-        if let borderColor_ = borderColor {
-            self.layer.borderColor = borderColor_.cgColor
-        } else {
-            self.layer.borderColor = UIColor(red: 205/255, green: 209/255, blue: 208/255, alpha: 1.0).cgColor
-        }
+    func viewRoundedCustom(cornerRadius : Double, borderColor : UIColor, firstCorner : UIRectCorner, secondCorner : UIRectCorner){
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [firstCorner, secondCorner], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        let maskLayer = CAShapeLayer()
+        
+        maskLayer.frame = self.bounds
+        maskLayer.path = path.cgPath
+        
+        self.layer.mask = maskLayer
+        
+        let borderShape = CAShapeLayer()
+        borderShape.frame = self.layer.bounds
+        borderShape.path = path.cgPath
+        borderShape.strokeColor = borderColor.cgColor
+        borderShape.fillColor = nil
+        borderShape.lineWidth = 0.5
+        self.layer.addSublayer(borderShape)
+    }
+    
+    func viewBorder(borderColor : UIColor, borderWidth : CGFloat?) {
+        self.layer.borderColor = borderColor.cgColor
         
         // UIView 의 테두리 두께 설정
         if let borderWidth_ = borderWidth {
