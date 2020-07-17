@@ -19,4 +19,20 @@ extension UIView {
         }
         self.layer.masksToBounds = true
     }
+    
+    func viewBorder(borderColor : UIColor?, borderWidth : CGFloat?) {
+        if let borderColor_ = borderColor {
+            self.layer.borderColor = borderColor_.cgColor
+        } else {
+            self.layer.borderColor = UIColor(red: 205/255, green: 209/255, blue: 208/255, alpha: 1.0).cgColor
+        }
+        
+        // UIView 의 테두리 두께 설정
+        if let borderWidth_ = borderWidth {
+            self.layer.borderWidth = borderWidth_
+        } else {
+            // borderWidth 변수가 nil 일 경우의 default
+            self.layer.borderWidth = 1.0
+        }
+    }
 }
