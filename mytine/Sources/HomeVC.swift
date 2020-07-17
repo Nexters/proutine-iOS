@@ -9,11 +9,9 @@
 import UIKit
 
 class HomeVC: UIViewController {
-    
     var routineList = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어"]
     var monthList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     var todayData = 15
-    
     @IBOutlet var routineCV: UICollectionView!
     @IBOutlet var routineTV: UITableView!
     @IBOutlet var day1Label: UILabel!

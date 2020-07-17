@@ -14,14 +14,6 @@ class CheckCVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        checkBtn[0].viewBorder(borderColor: UIColor.gray, borderWidth: 1)
-        checkBtn[1].viewBorder(borderColor: UIColor.gray, borderWidth: 1)
-        checkBtn[2].viewBorder(borderColor: UIColor.gray, borderWidth: 1)
-        checkBtn[3].viewBorder(borderColor: UIColor.gray, borderWidth: 1)
-        checkBtn[4].viewBorder(borderColor: UIColor.gray, borderWidth: 1)
-        checkBtn[5].viewBorder(borderColor: UIColor.gray, borderWidth: 1)
-        checkBtn[6].viewBorder(borderColor: UIColor.gray, borderWidth: 1)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
