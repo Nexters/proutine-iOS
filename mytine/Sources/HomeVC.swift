@@ -9,8 +9,9 @@
 import UIKit
 
 class HomeVC: UIViewController {
-    
     var routineList = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어"]
+    var monthList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    var todayData = 15
     @IBOutlet var routineCV: UICollectionView!
     @IBOutlet var routineTV: UITableView!
     @IBOutlet var day1Label: UILabel!
@@ -20,6 +21,8 @@ class HomeVC: UIViewController {
     @IBOutlet var day5Label: UILabel!
     @IBOutlet var day6Label: UILabel!
     @IBOutlet var day7Label: UILabel!
+    @IBOutlet var collectionViewHeight: NSLayoutConstraint!
+    @IBOutlet var tableViewHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,8 @@ class HomeVC: UIViewController {
         routineTV.dataSource = self
         routineTV.delegate = self
         setUI()
+        collectionViewHeight.constant = CGFloat(50 * routineList.count)
+        tableViewHeight.constant =  self.view.frame.size.height - (80 + 60) - CGFloat((50 * routineList.count))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,10 +52,9 @@ class HomeVC: UIViewController {
         day7Label.viewRounded(cornerRadius: 5)
     }
 }
-
 extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7 * routineList.count
+        return 7 * routineList.count * 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -93,13 +97,13 @@ extension HomeVC: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            self.routineList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            self.routineList.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
 }
 extension HomeVC: UITableViewDelegate{
     //    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -111,15 +115,13 @@ extension HomeVC: UITableViewDelegate{
     //        return UISwipeActionsConfiguration(actions: [filterAction])
     //    }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let doneAction = UIContextualAction(style: .normal, title: "다했다 !!!!") { (action, view, bool) in
-//            print("루틴 완료")
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            //
-//            self.routineList.remove(at: indexPath.row)
-//        }
-//        doneAction.backgroundColor = UIColor.mainGreen
-//        
-//        return UISwipeActionsConfiguration(actions: [doneAction])
-//    }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let doneAction = UIContextualAction(style: .normal, title: "다했다 !!!!") { (action, view, bool) in
+            print("루틴 완료")
+            
+        }
+        doneAction.backgroundColor = UIColor.mainGreen
+        
+        return UISwipeActionsConfiguration(actions: [doneAction])
+    }
 }
