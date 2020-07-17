@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xwN-o1-4zC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oy5-Yx-MCx">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kq1-Gg-ha6" userLabel="DateView">
-                                <rect key="frame" x="10" y="54" width="355" height="30"/>
+                                <rect key="frame" x="10" y="10" width="355" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7/12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gP7-Cp-kYB">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
@@ -148,7 +148,7 @@
                                 </prototypes>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qqq-le-pwk" userLabel="DateCollectionView">
-                                <rect key="frame" x="0.0" y="84" width="375" height="58"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="92"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="58" id="VCo-5j-MQX"/>
@@ -161,7 +161,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CheckCell" id="pKv-MA-zg2" customClass="RoutineCVCell" customModule="mytine" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="48" height="48"/>
+                                        <rect key="frame" x="10" y="27" width="48" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eXM-Ig-Jvh">
                                             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -220,19 +220,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAE-lh-TFK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1279.2" y="-196.10194902548727"/>
+            <point key="canvasLocation" x="3696.8000000000002" y="-196.10194902548727"/>
         </scene>
         <!--HomeVC2-->
         <scene sceneID="89I-NR-Lkv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zjf-NX-Spd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="xwN-o1-4zC" customClass="HomeVC2" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UDH-wz-PBV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1m-ds-WT6" userLabel="TopDateView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcf-Tz-0ip" userLabel="topDateButton">
                                         <rect key="frame" x="155" y="6" width="65" height="32"/>
@@ -266,7 +265,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cqA-bU-LP2" userLabel="DateView">
-                                <rect key="frame" x="10" y="44" width="355" height="30"/>
+                                <rect key="frame" x="10" y="88" width="355" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7/12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aw1-BR-UCS">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
@@ -323,7 +322,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p1k-hC-g9f">
-                                <rect key="frame" x="0.0" y="84" width="375" height="816"/>
+                                <rect key="frame" x="0.0" y="128" width="375" height="772"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CheckCVCell" rowHeight="54" id="Tkb-3g-ZCn" customClass="CheckCVCell" customModule="mytine" customModuleProvider="target">
@@ -440,31 +439,40 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KE6-Xh-pnC"/>
                     </view>
+                    <navigationItem key="navigationItem" id="cz1-oP-ypN">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="foA-or-L3x"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="O6c-3k-8pP">
+                            <connections>
+                                <action selector="showEditing:" destination="xwN-o1-4zC" id="9SM-Fk-y5d"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="tableView" destination="p1k-hC-g9f" id="qHD-yM-XB1"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zjf-NX-Spd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="-196.10194902548727"/>
+            <point key="canvasLocation" x="2903.1999999999998" y="-196.10194902548727"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="jZU-5v-59C">
+        <scene sceneID="Oi9-qh-Ey9">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pDR-BK-qur" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Oy5-Yx-MCx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lxf-El-rv9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Ce-Ha-qOS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="MYX-hV-COP" kind="relationship" relationship="rootViewController" id="ut0-F0-bMy"/>
+                        <segue destination="xwN-o1-4zC" kind="relationship" relationship="rootViewController" id="98s-FO-5MR"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jg1-B8-fwF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wr8-Aq-GhW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="340" y="-195.6521739130435"/>
+            <point key="canvasLocation" x="1964" y="-196.55172413793105"/>
         </scene>
     </scenes>
 </document>

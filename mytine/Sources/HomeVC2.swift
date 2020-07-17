@@ -15,7 +15,7 @@ class HomeVC2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.isEditing = false
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -26,6 +26,10 @@ class HomeVC2: UIViewController {
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: index, animated: true)
         }
+    }
+    
+    @IBAction func showEditing(_ sender: UIBarButtonItem) {
+        tableView.isEditing = !tableView.isEditing
     }
 }
 extension HomeVC2: UITableViewDelegate {
@@ -54,6 +58,21 @@ extension HomeVC2: UITableViewDataSource {
             tableView.restore()
         }
         return routineList.count
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.routineList[sourceIndexPath.row]
+        routineList.remove(at: sourceIndexPath.row)
+        routineList.insert(movedObject, at: destinationIndexPath.row)
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
