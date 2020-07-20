@@ -90,8 +90,8 @@ extension HomeVC: UITableViewDataSource {
         else {
             let listCell = routineTV.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
             
-            listCell.numLabel.text = "\(indexPath.row + 1)"
-            listCell.listLabel.text = "\(routineList[indexPath.row])"
+//            listCell.numLabel.text = "\(indexPath.row + 1)"
+//            listCell.listLabel.text = "\(routineList[indexPath.row])"
             
             return listCell
         }
