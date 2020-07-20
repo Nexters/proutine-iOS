@@ -17,13 +17,18 @@ class CalendarVC: UIViewController {
         super.viewDidLoad()
         calendarCV.delegate = self
         calendarCV.dataSource = self
-        
+        calendarCV.allowsMultipleSelection = false
         let dvc = self.storyboard?.instantiateViewController(identifier: "HomeVC3") as! HomeVC3
         self.navigationController?.pushViewController(dvc, animated: false)
     }
 }
 extension CalendarVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let dvc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC3") as! HomeVC3
+        
+        dvc.index = indexPath
+        self.navigationController?.pushViewController(dvc, animated: true)
+    }
 }
 extension CalendarVC: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
