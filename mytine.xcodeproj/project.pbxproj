@@ -16,16 +16,16 @@
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
 		0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26B24B84FD3002D2A12 /* Home.storyboard */; };
 		0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D26F24B850E3002D2A12 /* CalendarVC.swift */; };
-		0804D27524B85966002D2A12 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D27424B85966002D2A12 /* UITableView+Extensions.swift */; };
 		08A3F42724C40CB300201278 /* HomeVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F42624C40CB300201278 /* HomeVC3.swift */; };
 		08A3F44924C57B1E00201278 /* WeekTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44824C57B1E00201278 /* WeekTVCell.swift */; };
 		08A3F44B24C57B8B00201278 /* WeekCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44A24C57B8B00201278 /* WeekCVCell.swift */; };
 		08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44C24C58AE400201278 /* HomePopVC.swift */; };
 		08A3F44F24C5D46300201278 /* TabTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44E24C5D46300201278 /* TabTVCell.swift */; };
 		08A3F45224C5FC3D00201278 /* CheckReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F45124C5FC3D00201278 /* CheckReusableView.swift */; };
+		08A3F45624C61B0A00201278 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F45324C61B0A00201278 /* UIColor+Additions.swift */; };
+		08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F45424C61B0A00201278 /* UIView+Extensions.swift */; };
+		08A3F45824C61B0A00201278 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F45524C61B0A00201278 /* UITableView+Extensions.swift */; };
 		08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */; };
-		08D4139E24BF4F2C0049BB44 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4139D24BF4F2C0049BB44 /* UIView+Extensions.swift */; };
-		08D413A024BF5DAD0049BB44 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4139F24BF5DAD0049BB44 /* UIColor+Additions.swift */; };
 		08D413A624C144830049BB44 /* CheckCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D413A524C144830049BB44 /* CheckCVCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,16 +40,16 @@
 		0804D26324B84C5D002D2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0804D26B24B84FD3002D2A12 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0804D26F24B850E3002D2A12 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
-		0804D27424B85966002D2A12 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = SOURCE_ROOT; };
 		08A3F42624C40CB300201278 /* HomeVC3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC3.swift; sourceTree = "<group>"; };
 		08A3F44824C57B1E00201278 /* WeekTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTVCell.swift; sourceTree = "<group>"; };
 		08A3F44A24C57B8B00201278 /* WeekCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCVCell.swift; sourceTree = "<group>"; };
 		08A3F44C24C58AE400201278 /* HomePopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopVC.swift; sourceTree = "<group>"; };
 		08A3F44E24C5D46300201278 /* TabTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTVCell.swift; sourceTree = "<group>"; };
 		08A3F45124C5FC3D00201278 /* CheckReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckReusableView.swift; sourceTree = "<group>"; };
+		08A3F45324C61B0A00201278 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		08A3F45424C61B0A00201278 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		08A3F45524C61B0A00201278 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineTVCell.swift; sourceTree = "<group>"; };
-		08D4139D24BF4F2C0049BB44 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = SOURCE_ROOT; };
-		08D4139F24BF5DAD0049BB44 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = SOURCE_ROOT; };
 		08D413A524C144830049BB44 /* CheckCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCVCell.swift; sourceTree = "<group>"; };
 		568D2029B4D2C58F7F2D5318 /* Pods-mytine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.debug.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.debug.xcconfig"; sourceTree = "<group>"; };
 		69B35999940CD37C423E5A5B /* Pods-mytine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.release.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,9 +134,9 @@
 		0804D27324B8594C002D2A12 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0804D27424B85966002D2A12 /* UITableView+Extensions.swift */,
-				08D4139D24BF4F2C0049BB44 /* UIView+Extensions.swift */,
-				08D4139F24BF5DAD0049BB44 /* UIColor+Additions.swift */,
+				08A3F45324C61B0A00201278 /* UIColor+Additions.swift */,
+				08A3F45524C61B0A00201278 /* UITableView+Extensions.swift */,
+				08A3F45424C61B0A00201278 /* UIView+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -294,9 +294,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0804D27524B85966002D2A12 /* UITableView+Extensions.swift in Sources */,
+				08A3F45824C61B0A00201278 /* UITableView+Extensions.swift in Sources */,
+				08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */,
 				08A3F44924C57B1E00201278 /* WeekTVCell.swift in Sources */,
-				08D413A024BF5DAD0049BB44 /* UIColor+Additions.swift in Sources */,
+				08A3F45624C61B0A00201278 /* UIColor+Additions.swift in Sources */,
 				08A3F44F24C5D46300201278 /* TabTVCell.swift in Sources */,
 				0804D25A24B84C5B002D2A12 /* ViewController.swift in Sources */,
 				08A3F44B24C57B8B00201278 /* WeekCVCell.swift in Sources */,
@@ -308,7 +309,6 @@
 				08A3F42724C40CB300201278 /* HomeVC3.swift in Sources */,
 				0804D25824B84C5B002D2A12 /* SceneDelegate.swift in Sources */,
 				08A3F45224C5FC3D00201278 /* CheckReusableView.swift in Sources */,
-				08D4139E24BF4F2C0049BB44 /* UIView+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +384,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -438,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -453,15 +453,18 @@
 			baseConfigurationReference = 568D2029B4D2C58F7F2D5318 /* Pods-mytine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 39X44DH4RN;
 				INFOPLIST_FILE = mytine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -472,15 +475,18 @@
 			baseConfigurationReference = 69B35999940CD37C423E5A5B /* Pods-mytine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 39X44DH4RN;
 				INFOPLIST_FILE = mytine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
