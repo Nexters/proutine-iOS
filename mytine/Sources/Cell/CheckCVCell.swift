@@ -9,12 +9,22 @@
 import UIKit
 
 class CheckCVCell: UICollectionViewCell {
-
+    
     @IBOutlet var dataLabel: UILabel!
     @IBOutlet var checkLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.viewRounded(cornerRadius: 10)
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.contentView.backgroundColor = UIColor.lightGray
+            } else {
+                self.contentView.backgroundColor = UIColor.clear
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class HomeVC3: UIViewController {
     var array: NSArray?
+    var index: IndexPath?
     var weekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     var routineList = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어", "허벅지 불타오르기", "오빠 괴롭히기"]
     
