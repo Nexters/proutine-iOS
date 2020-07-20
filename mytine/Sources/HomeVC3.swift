@@ -34,6 +34,10 @@ class HomeVC3: UIViewController {
             tableView.deselectRow(at: index, animated: true)
         }
     }
+    
+    @IBAction func showCalendar(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 extension HomeVC3: UICollectionViewDelegate {
     
@@ -76,6 +80,7 @@ extension HomeVC3: UITableViewDataSource {
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
             
+            cell.viewRounded(cornerRadius: 10)
             //            cell.timeLabel.text =
             cell.listLabel.text = routineList[indexPath.row]
             //            cell.iconLabel.text =
@@ -83,18 +88,25 @@ extension HomeVC3: UITableViewDataSource {
         }
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if section == 1 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell") as! WeekTVCell
-//
-//            cell.weekLabel.text = "월"
-//
-//            return cell
-//        }
-//        else {
-//            let rect = CGRect(x: 0, y: 0, width: 0, height: 0)
-//            let myView = UIView(frame: rect)
-//            return myView
-//        }
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TabTVCell")
+
+            return cell
+        }
+        else {
+            let rect = CGRect(x: 0, y: 0, width: 0, height: 0)
+            let myView = UIView(frame: rect)
+            return myView
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 50
+        }
+        else {
+            return 0
+        }
+    }
 }

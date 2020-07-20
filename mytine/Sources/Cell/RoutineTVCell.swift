@@ -10,13 +10,14 @@ import UIKit
 
 class RoutineTVCell: UITableViewCell {
 
+    @IBOutlet var backView: UIView!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var iconLabel: UILabel!
     @IBOutlet var listLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.backView.viewRounded(cornerRadius: 10)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
