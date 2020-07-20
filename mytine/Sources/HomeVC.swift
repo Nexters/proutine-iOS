@@ -90,13 +90,12 @@ extension HomeVC: UITableViewDataSource {
         else {
             let listCell = routineTV.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
             
-            listCell.numLabel.text = "\(indexPath.row + 1)"
-            listCell.listLabel.text = "\(routineList[indexPath.row])"
+//            listCell.numLabel.text = "\(indexPath.row + 1)"
+//            listCell.listLabel.text = "\(routineList[indexPath.row])"
             
             return listCell
         }
     }
-    
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //        if editingStyle == .delete {
 //            // Delete the row from the data source
@@ -118,7 +117,6 @@ extension HomeVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let doneAction = UIContextualAction(style: .normal, title: "다했다 !!!!") { (action, view, bool) in
             print("루틴 완료")
-            
         }
         doneAction.backgroundColor = UIColor.mainGreen
         
