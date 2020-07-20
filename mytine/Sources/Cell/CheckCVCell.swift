@@ -8,18 +8,13 @@
 
 import UIKit
 
-class CheckCVCell: UITableViewCell {
+class CheckCVCell: UICollectionViewCell {
 
-    @IBOutlet var checkBtn: [UIButton]!
+    @IBOutlet var dataLabel: UILabel!
+    @IBOutlet var checkLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.contentView.viewRounded(cornerRadius: 10)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
