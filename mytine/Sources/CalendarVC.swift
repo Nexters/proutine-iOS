@@ -52,13 +52,19 @@ extension CalendarVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let rect = CGRect(x: 10, y: 10, width: 100, height: 100)
+        let view = UICollectionReusableView(frame: rect)
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CheckReusableView", for: indexPath) as! CheckReusableView
-            headerView.monthLabel.text = months[indexPath.row]
+            if indexPath.section == 0 {
+                headerView.monthLabel.text = months[0]
+            } else {
+                headerView.monthLabel.text = months[1]
+            }
             return headerView
         default:
-            assert(false, "응 아니야")
+            return view
         }
     }
 }
