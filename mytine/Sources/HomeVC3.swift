@@ -92,7 +92,7 @@ extension HomeVC3: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TabTVCell")
-
+            
             return cell
         }
         else {
@@ -109,5 +109,23 @@ extension HomeVC3: UITableViewDataSource {
         else {
             return 0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
+            print("루틴 완료")
+        }
+        doneAction.backgroundColor = UIColor.doneColor
+        
+        return UISwipeActionsConfiguration(actions: [doneAction])
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
+            self.view.viewRounded(cornerRadius: 10)
+            print("완료 취소")
+        }
+        cancelAction.backgroundColor = UIColor.doneColor
+        return UISwipeActionsConfiguration(actions: [cancelAction])
     }
 }
