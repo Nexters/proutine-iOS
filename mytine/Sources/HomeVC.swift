@@ -12,19 +12,22 @@ import DropDown
 class HomeVC: UIViewController {
     var array: NSArray?
     var index: IndexPath?
-    // var dropDown: DropDown?
+    var dropDown: DropDown?
+    private let downButton = UIButton()
     var weekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    var routineList: [String] = []
+    var routineList: [String] = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어", "허벅지 불타오르기", "오빠 괴롭히기"]
     
     @IBOutlet var tableView: UITableView!
-    // @IBOutlet var dropView: UIView!
+    @IBOutlet var dropView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
+        setDownButton()
+        setListDropDown()
+        //      self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //      self.navigationController?.navigationBar.shadowImage = UIImage()
         let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as! HomePopVC
         popup.modalPresentationStyle = .overFullScreen
         popup.modalTransitionStyle = .crossDissolve
@@ -48,23 +51,53 @@ class HomeVC: UIViewController {
         self.navigationController?.pushViewController(dvc, animated: true)
     }
     
+    func setDownButton() {
+        self.navigationController?.navigationBar.addSubview(downButton)
+        downButton.setImage(UIImage(named: "icDownArrow"), for: .selected)
+        downButton.setImage(UIImage(named: "icUpArrow"), for: .normal)
+        downButton.clipsToBounds = true
+        downButton.translatesAutoresizingMaskIntoConstraints = false
+        downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 45),
+            downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
+            downButton.widthAnchor.constraint(equalToConstant: 24),
+            downButton.heightAnchor.constraint(equalToConstant: 24),
+        ])
+    }
     
-//    func setListDropDown(){
-//        let dropList : [String] = ["1주차", "2주차", "3주차", "4주차", "5주차"]
-//        dropDown = DropDown()
-//        dropDown?.anchorView = dropView
-//        // self.dropDown?.width = 168
-//        self.dropDown?.backgroundColor = UIColor.white
-//        self.dropDown?.selectionBackgroundColor = UIColor.dropSelectColor
-//        self.dropDown?.cellHeight = 36
-//        self.dropDown?.viewBorder(borderColor: .lightGray, borderWidth: 1)
-//        DropDown.appearance().setupCornerRadius(10)
-//        dropDown?.dataSource = dropList
-//        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
-//        dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
-//            cell.optionLabel.textAlignment = .center
-//        }
-//    }
+    // 지역 선택 버튼 클릭
+    @objc func clickDownButton(){
+        downButton.isSelected = !downButton.isSelected
+        if downButton.isSelected == true {
+            self.dropDown?.reloadAllComponents()
+            dropDown?.show()
+        }
+        else {
+//            UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
+//                // 투명하게 만들기
+//                self.downButton.transform = .identity
+//                self.view.layoutIfNeeded()
+//            })
+        }
+    }
+    
+    func setListDropDown(){
+        let dropList : [String] = ["July.3-10", "July.11-18", "July.19-25"]
+        dropDown = DropDown()
+        dropDown?.anchorView = dropView
+        self.dropDown?.cellHeight = 36
+        self.dropDown?.backgroundColor = UIColor.white
+        self.dropDown?.selectionBackgroundColor = UIColor.dropSelectColor
+        DropDown.appearance().setupCornerRadius(10)
+        dropDown?.dataSource = dropList
+        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
+        dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+            cell.optionLabel.textAlignment = .center
+            cell.optionLabel.font = UIFont(name: "Montserrat-Bold", size: 17)
+        }
+    }
 }
 extension HomeVC: UICollectionViewDelegate {
     
@@ -145,20 +178,32 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
-            print("루틴 완료")
+        if indexPath.section == 1 {
+            let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
+                print("루틴 완료")
+            }
+            doneAction.backgroundColor = UIColor.doneColor
+            
+            return UISwipeActionsConfiguration(actions: [doneAction])
         }
-        doneAction.backgroundColor = UIColor.doneColor
-        
-        return UISwipeActionsConfiguration(actions: [doneAction])
+        else {
+            return UISwipeActionsConfiguration.init()
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
-            self.view.viewRounded(cornerRadius: 10)
-            print("완료 취소")
+        
+        if indexPath.section == 1 {
+            let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
+                //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
+                //            cell.backView.backgroundColor = .lightGray
+                print("완료 취소")
+            }
+            cancelAction.backgroundColor = UIColor.doneColor
+            return UISwipeActionsConfiguration(actions: [cancelAction])
         }
-        cancelAction.backgroundColor = UIColor.doneColor
-        return UISwipeActionsConfiguration(actions: [cancelAction])
+        else {
+            return UISwipeActionsConfiguration.init()
+        }
     }
 }
