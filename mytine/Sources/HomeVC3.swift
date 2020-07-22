@@ -12,7 +12,7 @@ class HomeVC3: UIViewController {
     var array: NSArray?
     var index: IndexPath?
     var weekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    var routineList = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어", "허벅지 불타오르기", "오빠 괴롭히기"]
+    var routineList: [String] = []
     
     @IBOutlet var tableView: UITableView!
     
@@ -46,6 +46,13 @@ extension HomeVC3: UICollectionViewDelegate {
 
 extension HomeVC3: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 1 {
+            if routineList.count == 0 {
+                tableView.setEmptyView(message: "새로운 루틴을 함께\n등록하러 가볼까요?", label: "루틴 등록하기")
+            }else {
+                tableView.restore()
+            }
+        }
         return routineList.count
     }
     
