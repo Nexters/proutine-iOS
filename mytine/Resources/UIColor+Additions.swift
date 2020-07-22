@@ -24,4 +24,16 @@ extension UIColor {
     @nonobjc class var dropSelectColor: UIColor {
         return UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var borderColor: UIColor {
+        return UIColor(red: 182 / 255.0, green: 182 / 255.0, blue: 182 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var editBackColor: UIColor {
+           return UIColor(red: 236 / 255.0, green: 237 / 255.0, blue: 237 / 255.0, alpha: 1.0)
+       }
+    
+    @nonobjc class var weekSelectColor: UIColor {
+        return UIColor(red: 96 / 255.0, green: 96 / 255.0, blue: 96 / 255.0, alpha: 1.0)
+    }
 }
