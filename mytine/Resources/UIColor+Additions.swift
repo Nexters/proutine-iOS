@@ -20,4 +20,8 @@ extension UIColor {
     @nonobjc class var backColor: UIColor {
         return UIColor(red: 251 / 255.0, green: 252 / 255.0, blue: 253 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var dropSelectColor: UIColor {
+        return UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
+    }
 }
