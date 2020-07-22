@@ -7,21 +7,25 @@
 //
 
 import UIKit
+import DropDown
 
 class HomeVC3: UIViewController {
     var array: NSArray?
     var index: IndexPath?
+    var dropDown: DropDown?
     var weekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     var routineList: [String] = []
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var dropView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setListDropDown()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         let dvc = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as! HomePopVC
         dvc.modalPresentationStyle = .overFullScreen
         dvc.modalTransitionStyle = .crossDissolve
@@ -38,6 +42,23 @@ class HomeVC3: UIViewController {
     
     @IBAction func showCalendar(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func setListDropDown(){
+        var dropList : [String] = ["1주차", "2주차", "3주차", "4주차", "5주차"]
+        dropDown = DropDown()
+        dropDown?.anchorView = dropView
+        // self.dropDown?.width = 168
+        self.dropDown?.backgroundColor = UIColor.white
+        self.dropDown?.selectionBackgroundColor = UIColor.dropSelectColor
+        self.dropDown?.cellHeight = 36
+        self.dropDown?.viewBorder(borderColor: .lightGray, borderWidth: 1)
+        DropDown.appearance().setupCornerRadius(10)
+        dropDown?.dataSource = dropList
+        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
+        dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+            cell.optionLabel.textAlignment = .center
+        }
     }
 }
 extension HomeVC3: UICollectionViewDelegate {
