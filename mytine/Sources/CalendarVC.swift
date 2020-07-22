@@ -18,13 +18,14 @@ class CalendarVC: UIViewController {
         calendarCV.delegate = self
         calendarCV.dataSource = self
         calendarCV.allowsMultipleSelection = false
-        let dvc = self.storyboard?.instantiateViewController(identifier: "HomeVC3") as! HomeVC3
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17)!]
+        let dvc = self.storyboard?.instantiateViewController(identifier: "HomeVC") as! HomeVC
         self.navigationController?.pushViewController(dvc, animated: false)
     }
 }
 extension CalendarVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let dvc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC3") as! HomeVC3
+        let dvc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
         
         dvc.index = indexPath
         self.navigationController?.pushViewController(dvc, animated: true)
@@ -52,13 +53,19 @@ extension CalendarVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let rect = CGRect(x: 10, y: 10, width: 100, height: 100)
+        let view = UICollectionReusableView(frame: rect)
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CheckReusableView", for: indexPath) as! CheckReusableView
-            headerView.monthLabel.text = months[indexPath.row]
+            if indexPath.section == 0 {
+                headerView.monthLabel.text = months[0]
+            } else {
+                headerView.monthLabel.text = months[1]
+            }
             return headerView
         default:
-            assert(false, "응 아니야")
+            return view
         }
     }
 }
