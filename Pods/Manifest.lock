@@ -1,4 +1,5 @@
 PODS:
+  - DropDown (2.3.13)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -11,6 +12,7 @@ PODS:
   - Then (2.7.0)
 
 DEPENDENCIES:
+  - DropDown (~> 2.3.13)
   - FMDB (~> 2.7.5)
   - Kingfisher (~> 5.14.1)
   - lottie-ios (~> 3.1.8)
@@ -20,6 +22,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - DropDown
     - FMDB
     - Kingfisher
     - lottie-ios
@@ -28,6 +31,7 @@ SPEC REPOS:
     - Then
 
 SPEC CHECKSUMS:
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
@@ -35,6 +39,6 @@ SPEC CHECKSUMS:
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 03719ae814314b7ae42c26ff1a131ff8c8b2efce
+PODFILE CHECKSUM: f99f7278a59209e27b43b02030c5962d4f849ed9
 
 COCOAPODS: 1.9.1

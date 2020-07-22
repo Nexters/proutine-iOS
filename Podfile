@@ -12,4 +12,5 @@ target 'mytine' do
   pod 'SwiftLint'
   pod 'Then','~> 2.7.0'
   pod 'lottie-ios','~> 3.1.8'
+  pod 'DropDown','~> 2.3.13'
 end
