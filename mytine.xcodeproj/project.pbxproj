@@ -26,6 +26,8 @@
 		08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F45424C61B0A00201278 /* UIView+Extensions.swift */; };
 		08A3F45824C61B0A00201278 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F45524C61B0A00201278 /* UITableView+Extensions.swift */; };
 		08A5E5C824C845AB00AA7B61 /* AddEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08A5E5C724C845AB00AA7B61 /* AddEdit.storyboard */; };
+		08A5E5CB24C8526300AA7B61 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A5E5C924C8526300AA7B61 /* Montserrat-Bold.ttf */; };
+		08A5E5CC24C8526300AA7B61 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A5E5CA24C8526300AA7B61 /* Montserrat-Regular.ttf */; };
 		08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */; };
 		08D413A624C144830049BB44 /* CheckCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D413A524C144830049BB44 /* CheckCVCell.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +53,8 @@
 		08A3F45424C61B0A00201278 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		08A3F45524C61B0A00201278 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		08A5E5C724C845AB00AA7B61 /* AddEdit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEdit.storyboard; sourceTree = "<group>"; };
+		08A5E5C924C8526300AA7B61 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		08A5E5CA24C8526300AA7B61 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineTVCell.swift; sourceTree = "<group>"; };
 		08D413A524C144830049BB44 /* CheckCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCVCell.swift; sourceTree = "<group>"; };
 		568D2029B4D2C58F7F2D5318 /* Pods-mytine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.debug.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		08A3F45024C5F77B00201278 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				08A5E5C924C8526300AA7B61 /* Montserrat-Bold.ttf */,
+				08A5E5CA24C8526300AA7B61 /* Montserrat-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -241,6 +247,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08A5E5CC24C8526300AA7B61 /* Montserrat-Regular.ttf in Resources */,
+				08A5E5CB24C8526300AA7B61 /* Montserrat-Bold.ttf in Resources */,
 				0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */,
 				08A5E5C824C845AB00AA7B61 /* AddEdit.storyboard in Resources */,
 				0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */,
