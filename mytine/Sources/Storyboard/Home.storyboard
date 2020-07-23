@@ -496,7 +496,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sL4-Gf-953">
-                                            <rect key="frame" x="24" y="15" width="51.5" height="21"/>
+                                            <rect key="frame" x="24" y="15" width="44.5" height="21"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -557,7 +557,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay2-B9-NBZ">
                                                         <rect key="frame" x="8" y="10" width="44" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.92549019607843142" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
@@ -588,7 +588,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rVm-K3-UeZ">
                                                         <rect key="frame" x="8" y="9" width="311" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.92549019607843142" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
@@ -618,7 +618,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="루틴 달성을 위한 응원메세지를 적어주세요:)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GSX-RJ-Zag">
                                                         <rect key="frame" x="8" y="10" width="311" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.92549019607843142" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
@@ -657,7 +657,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Md-I9-RHD">
-                                                                    <rect key="frame" x="5.5" y="11.5" width="27.5" height="15"/>
+                                                                    <rect key="frame" x="7" y="12" width="24.5" height="14"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -740,10 +740,19 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="7us-1l-KtO">
                             <color key="tintColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="saveRootine:" destination="2wk-CE-Mcn" id="Dr2-ia-rxR"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="vUZ-tJ-Ju6" id="T4h-yS-tza"/>
+                        <outlet property="emojiMessage" destination="MDc-rj-j69" id="Taa-1F-SOd"/>
+                        <outlet property="emojiTextfield" destination="Ay2-B9-NBZ" id="5Ux-Cq-3QJ"/>
+                        <outlet property="goalTextfield" destination="GSX-RJ-Zag" id="Yk6-tE-JpU"/>
+                        <outlet property="nameMessage" destination="QGp-mM-kkf" id="F8l-gF-Rx7"/>
+                        <outlet property="nameTextfield" destination="rVm-K3-UeZ" id="6gG-pU-1jd"/>
+                        <outlet property="weekMessage" destination="FzV-oE-DvV" id="1gC-BN-ETt"/>
                         <outletCollection property="backView" destination="Hnl-8b-Gf9" collectionClass="NSMutableArray" id="vjE-tP-ufa"/>
                         <outletCollection property="backView" destination="Poc-xt-tyH" collectionClass="NSMutableArray" id="ngH-X7-rWk"/>
                         <outletCollection property="backView" destination="1dM-EL-YZM" collectionClass="NSMutableArray" id="Dks-bF-vXI"/>
