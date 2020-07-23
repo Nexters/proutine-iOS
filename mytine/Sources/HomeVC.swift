@@ -158,7 +158,6 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TabTVCell")
-            
             return cell
         }
         else {
