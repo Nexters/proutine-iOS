@@ -469,8 +469,8 @@
 			baseConfigurationReference = 568D2029B4D2C58F7F2D5318 /* Pods-mytine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 39X44DH4RN;
 				INFOPLIST_FILE = mytine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -480,7 +480,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine;
 				PRODUCT_NAME = mytine;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = mytine;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -491,8 +491,8 @@
 			baseConfigurationReference = 69B35999940CD37C423E5A5B /* Pods-mytine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 39X44DH4RN;
 				INFOPLIST_FILE = mytine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -502,7 +502,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine;
 				PRODUCT_NAME = mytine;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = mytine;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
