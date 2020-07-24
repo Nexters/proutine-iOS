@@ -14,6 +14,8 @@ class TabTVCell: UITableViewCell {
     @IBOutlet var reviewBtn: UIButton!
     @IBOutlet var barView: UIView!
     @IBOutlet var barwidth: NSLayoutConstraint!
+    var routine : (() -> ()) = {}
+    var retrospect : (() -> ()) = {}
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +23,7 @@ class TabTVCell: UITableViewCell {
     }
     
     @IBAction func clickRoutine(_ sender: UIButton) {
+        routine()
         self.barwidth.constant = self.routineBtn.frame.width
 //        self.barView.frame.size.width = self.routineBtn.frame.width
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
@@ -33,6 +36,7 @@ class TabTVCell: UITableViewCell {
     }
     
     @IBAction func clickReview(_ sender: UIButton) {
+        retrospect()
         self.barwidth.constant = self.reviewBtn.frame.width
 //        self.barView.frame.size.width = self.reviewBtn.frame.width
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
