@@ -47,6 +47,11 @@ class EditVC: UIViewController, UITextFieldDelegate {
                 emojiMessage.isHidden = false
                 backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            } else if textField.text?.isSingleEmoji == false {
+                emojiMessage.isHidden = false
+                emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
+                backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             } else {
                 emojiMessage.isHidden = true
                 nameTextfield.becomeFirstResponder()
@@ -66,16 +71,27 @@ class EditVC: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    @IBAction func deleteRootine(_ sender: UIButton) {
+        let alert = UIAlertController(title: "제목", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
+        
+        let delete = UIAlertAction(title: "삭제하기", style: .default) { (ok) in
+            //code
+        }
+        let cancel = UIAlertAction(title: "아니오", style: .cancel) { (cancel) in
+            //code
+        }
+        alert.addAction(cancel)
+        alert.addAction(delete)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func backHome(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func saveRootine(_ sender: UIBarButtonItem) {
-        if emojiTextfield.text?.isSingleEmoji == false {
-            print("하나의 이모지만 등록이 가능합니다.")
-        }else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.navigationController?.popViewController(animated: true)
     }
 }
 extension EditVC: UICollectionViewDelegate {
@@ -99,23 +115,23 @@ extension Character {
         guard let firstScalar = unicodeScalars.first else { return false }
         return firstScalar.properties.isEmoji && firstScalar.value > 0x238C
     }
-
+    
     /// Checks if the scalars will be merged into an emoji
     var isCombinedIntoEmoji: Bool { unicodeScalars.count > 1 && unicodeScalars.first?.properties.isEmoji ?? false }
-
+    
     var isEmoji: Bool { isSimpleEmoji || isCombinedIntoEmoji }
 }
 
 extension String {
     var isSingleEmoji: Bool { count == 1 && containsEmoji }
-
+    
     var containsEmoji: Bool { contains { $0.isEmoji } }
-
+    
     var containsOnlyEmoji: Bool { !isEmpty && !contains { !$0.isEmoji } }
-
+    
     var emojiString: String { emojis.map { String($0) }.reduce("", +) }
-
+    
     var emojis: [Character] { filter { $0.isEmoji } }
-
+    
     var emojiScalars: [UnicodeScalar] { filter { $0.isEmoji }.flatMap { $0.unicodeScalars } }
 }

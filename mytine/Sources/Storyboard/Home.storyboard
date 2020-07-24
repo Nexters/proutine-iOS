@@ -496,7 +496,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sL4-Gf-953">
-                                            <rect key="frame" x="24" y="15" width="44.5" height="21"/>
+                                            <rect key="frame" x="24" y="15" width="51.5" height="21"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -657,7 +657,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Md-I9-RHD">
-                                                                    <rect key="frame" x="7" y="12" width="24.5" height="14"/>
+                                                                    <rect key="frame" x="5.5" y="11.5" width="27.5" height="15"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -682,6 +682,19 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcI-ct-XmZ">
+                                                <rect key="frame" x="146" y="463" width="82" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="82" id="lOr-KT-ory"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <state key="normal" title="Delete">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="deleteRootine:" destination="2wk-CE-Mcn" eventType="touchUpInside" id="IDE-e6-KBw"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -699,6 +712,7 @@
                                             <constraint firstItem="3zq-oM-54M" firstAttribute="leading" secondItem="P8C-ao-4u1" secondAttribute="leading" constant="24" id="aRf-1q-Fi2"/>
                                             <constraint firstItem="bBw-hC-2gc" firstAttribute="top" secondItem="Poc-xt-tyH" secondAttribute="bottom" constant="30" id="aZ4-9l-U1S"/>
                                             <constraint firstItem="hGF-cc-so6" firstAttribute="leading" secondItem="P8C-ao-4u1" secondAttribute="leading" constant="24" id="auB-9l-8FM"/>
+                                            <constraint firstItem="DcI-ct-XmZ" firstAttribute="top" secondItem="vUZ-tJ-Ju6" secondAttribute="bottom" constant="51" id="ccc-OX-Lvw"/>
                                             <constraint firstItem="vUZ-tJ-Ju6" firstAttribute="top" secondItem="jtn-BN-O2g" secondAttribute="bottom" constant="8" id="d9h-5n-npx"/>
                                             <constraint firstItem="MDc-rj-j69" firstAttribute="leading" secondItem="Hnl-8b-Gf9" secondAttribute="leading" id="daM-Jn-V2K"/>
                                             <constraint firstItem="jtn-BN-O2g" firstAttribute="leading" secondItem="P8C-ao-4u1" secondAttribute="leading" constant="24" id="e3B-aU-Pgr"/>
@@ -707,6 +721,7 @@
                                             <constraint firstAttribute="trailing" secondItem="1dM-EL-YZM" secondAttribute="trailing" constant="24" id="hI8-U3-Ok5"/>
                                             <constraint firstItem="bBw-hC-2gc" firstAttribute="leading" secondItem="P8C-ao-4u1" secondAttribute="leading" constant="24" id="psT-iR-Ao4"/>
                                             <constraint firstItem="FzV-oE-DvV" firstAttribute="top" secondItem="vUZ-tJ-Ju6" secondAttribute="bottom" constant="5" id="toi-1f-T6P"/>
+                                            <constraint firstItem="DcI-ct-XmZ" firstAttribute="centerX" secondItem="P8C-ao-4u1" secondAttribute="centerX" id="xWN-9N-0ea"/>
                                             <constraint firstItem="Hnl-8b-Gf9" firstAttribute="top" secondItem="3zq-oM-54M" secondAttribute="bottom" constant="8" id="ycH-oW-kdV"/>
                                             <constraint firstAttribute="trailing" secondItem="vUZ-tJ-Ju6" secondAttribute="trailing" constant="24" id="yea-1b-NSe"/>
                                             <constraint firstItem="Poc-xt-tyH" firstAttribute="top" secondItem="hGF-cc-so6" secondAttribute="bottom" constant="8" id="zVA-Nw-gD5"/>
@@ -760,7 +775,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MDJ-VP-Bmh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3841" y="1489"/>
+            <point key="canvasLocation" x="3840.8000000000002" y="1488.305847076462"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xf0-CI-p1s">
