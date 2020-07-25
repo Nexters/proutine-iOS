@@ -49,7 +49,8 @@ class HomeVC: UIViewController {
     
     /// Right bar button Item
     @IBAction func addRoutine(_ sender: UIBarButtonItem) {
-        let dvc = self.storyboard?.instantiateViewController(identifier: "EditVC") as! EditVC
+        let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
+        let dvc = storyboard.instantiateViewController(identifier: "EditVC") as! EditVC
         self.navigationController?.pushViewController(dvc, animated: true)
     }
     

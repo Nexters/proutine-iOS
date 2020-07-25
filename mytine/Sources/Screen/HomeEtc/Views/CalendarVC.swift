@@ -19,13 +19,15 @@ class CalendarVC: UIViewController {
         calendarCV.dataSource = self
         calendarCV.allowsMultipleSelection = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17)!]
-        let dvc = self.storyboard?.instantiateViewController(identifier: "HomeVC") as! HomeVC
+        let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
+        let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
         self.navigationController?.pushViewController(dvc, animated: false)
     }
 }
 extension CalendarVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let dvc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+        let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
+        let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
         
         dvc.index = indexPath
         self.navigationController?.pushViewController(dvc, animated: true)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PxV-5s-hpk">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -268,6 +268,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="0pd-nE-vXp" id="FlH-QQ-A1m"/>
+                        <outlet property="emojiMessage" destination="q9r-Q9-vDS" id="fDa-qz-cSF"/>
+                        <outlet property="emojiTextfield" destination="2c3-1V-LlP" id="TO3-xx-3ra"/>
+                        <outlet property="goalTextfield" destination="u9M-lU-t1w" id="buX-r8-Zrt"/>
+                        <outlet property="nameMessage" destination="dPl-iZ-iEp" id="yjq-4D-GVO"/>
+                        <outlet property="nameTextfield" destination="aCB-G6-HLp" id="RYD-1R-KPT"/>
+                        <outlet property="weekMessage" destination="1Fa-Zr-VaW" id="jKj-dH-oh2"/>
                         <outletCollection property="backView" destination="NFs-pO-Ihp" collectionClass="NSMutableArray" id="5LF-6n-Z3Z"/>
                         <outletCollection property="backView" destination="EbQ-J8-oJr" collectionClass="NSMutableArray" id="Rel-MI-cFi"/>
                         <outletCollection property="backView" destination="TdG-yR-phS" collectionClass="NSMutableArray" id="SVR-xb-ni7"/>
