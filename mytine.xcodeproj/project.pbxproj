@@ -8,8 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0028C44641753489C46D550B /* Pods_mytine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDA17E344702CFAAB58362C /* Pods_mytine.framework */; };
+		0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */; };
+		0636992D24CC1D4F00C1C900 /* HomeRootineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */; };
+		0636993024CC1DAC00C1C900 /* HomeRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */; };
+		0636993124CC1DAC00C1C900 /* HomeRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */; };
+		0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */; };
+		0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */; };
+		0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */; };
+		0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */; };
 		0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D25524B84C5B002D2A12 /* AppDelegate.swift */; };
-		0804D25824B84C5B002D2A12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D25724B84C5B002D2A12 /* SceneDelegate.swift */; };
 		0804D25A24B84C5B002D2A12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D25924B84C5B002D2A12 /* ViewController.swift */; };
 		0804D25D24B84C5B002D2A12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D25B24B84C5B002D2A12 /* Main.storyboard */; };
 		0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0804D25E24B84C5D002D2A12 /* Assets.xcassets */; };
@@ -34,9 +41,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeRootine.storyboard; sourceTree = "<group>"; };
+		0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootineViewController.swift; sourceTree = "<group>"; };
+		0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootineCVCell.swift; sourceTree = "<group>"; };
+		0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeRootineCVCell.xib; sourceTree = "<group>"; };
+		0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRootineTVCell.swift; sourceTree = "<group>"; };
+		0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRootineTVCell.xib; sourceTree = "<group>"; };
+		0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRootineCVCell.swift; sourceTree = "<group>"; };
+		0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayRootineCVCell.xib; sourceTree = "<group>"; };
 		0804D25224B84C5B002D2A12 /* mytine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mytine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0804D25524B84C5B002D2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0804D25724B84C5B002D2A12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0804D25924B84C5B002D2A12 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0804D25C24B84C5B002D2A12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0804D25E24B84C5D002D2A12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,7 +114,6 @@
 				0804D26D24B85066002D2A12 /* Resources */,
 				0804D26924B84FA9002D2A12 /* Sources */,
 				0804D25524B84C5B002D2A12 /* AppDelegate.swift */,
-				0804D25724B84C5B002D2A12 /* SceneDelegate.swift */,
 				0804D25924B84C5B002D2A12 /* ViewController.swift */,
 				0804D25B24B84C5B002D2A12 /* Main.storyboard */,
 				0804D25E24B84C5D002D2A12 /* Assets.xcassets */,
@@ -120,6 +133,7 @@
 				08A5E5DF24C8644200AA7B61 /* EditVC.swift */,
 				08A3F42624C40CB300201278 /* HomeVC.swift */,
 				08A3F44C24C58AE400201278 /* HomePopVC.swift */,
+				0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -128,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				0804D26B24B84FD3002D2A12 /* Home.storyboard */,
+				0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -169,6 +184,12 @@
 				08A3F44E24C5D46300201278 /* TabTVCell.swift */,
 				08A3F45124C5FC3D00201278 /* CheckReusableView.swift */,
 				08A5E5E124C86BDC00AA7B61 /* EditWeekCVCell.swift */,
+				0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */,
+				0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */,
+				0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */,
+				0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */,
+				0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */,
+				0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -250,9 +271,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0636993124CC1DAC00C1C900 /* HomeRootineCVCell.xib in Resources */,
+				0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */,
+				0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */,
 				08A5E5DE24C85E0300AA7B61 /* Montserrat-Regular.ttf in Resources */,
 				08A5E5DD24C85E0300AA7B61 /* Montserrat-Bold.ttf in Resources */,
 				0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */,
+				0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */,
 				0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */,
 				0804D25D24B84C5B002D2A12 /* Main.storyboard in Resources */,
 				0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */,
@@ -312,18 +337,21 @@
 				08A5E5E224C86BDC00AA7B61 /* EditWeekCVCell.swift in Sources */,
 				08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */,
 				08A3F44924C57B1E00201278 /* WeekTVCell.swift in Sources */,
+				0636993024CC1DAC00C1C900 /* HomeRootineCVCell.swift in Sources */,
+				0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */,
 				08A3F45624C61B0A00201278 /* UIColor+Additions.swift in Sources */,
 				08A3F44F24C5D46300201278 /* TabTVCell.swift in Sources */,
 				0804D25A24B84C5B002D2A12 /* ViewController.swift in Sources */,
 				08A5E5E024C8644200AA7B61 /* EditVC.swift in Sources */,
 				08A3F44B24C57B8B00201278 /* WeekCVCell.swift in Sources */,
 				08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */,
+				0636992D24CC1D4F00C1C900 /* HomeRootineViewController.swift in Sources */,
+				0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */,
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
 				08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */,
 				08D413A624C144830049BB44 /* CheckCVCell.swift in Sources */,
 				08A3F42724C40CB300201278 /* HomeVC.swift in Sources */,
-				0804D25824B84C5B002D2A12 /* SceneDelegate.swift in Sources */,
 				08A3F45224C5FC3D00201278 /* CheckReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
