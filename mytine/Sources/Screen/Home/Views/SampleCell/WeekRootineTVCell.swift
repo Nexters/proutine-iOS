@@ -12,10 +12,11 @@ class WeekRootineTVCell: UITableViewCell {
     static let nibName = "WeekRootineTVCell"
     static let reuseIdentifier = "WeekRootineTVCell"
     
+    @IBOutlet var weekLabel: UILabel!
     @IBOutlet weak var dayCollectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        weekLabel.viewRounded(cornerRadius: 4)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,7 +35,6 @@ class WeekRootineTVCell: UITableViewCell {
     func bind() {
         setupCollectionView()
     }
-    
 }
 
 extension WeekRootineTVCell: UICollectionViewDataSource {

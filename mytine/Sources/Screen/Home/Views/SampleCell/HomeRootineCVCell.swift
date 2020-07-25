@@ -9,6 +9,7 @@
 import UIKit
 
 class HomeRootineCVCell: UICollectionViewCell {
+    let weekString = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     static let nibName = "HomeRootineCVCell"
     static let reuseIdentifier = "HomeRootineCVCell"
     
@@ -42,6 +43,7 @@ extension HomeRootineCVCell: UITableViewDataSource {
             return .init()
         }
         //TODO: 요일과 해당요일에 해당하는 데이터넣어주기
+        cell.weekLabel.text = weekString[indexPath.row]
         cell.bind()
         return cell
     }
@@ -50,6 +52,6 @@ extension HomeRootineCVCell: UITableViewDataSource {
 extension HomeRootineCVCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //TODO: 한주당 높이
-        return 50
+        return 44
     }
 }
