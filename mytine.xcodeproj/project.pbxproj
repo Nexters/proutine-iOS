@@ -198,6 +198,8 @@
 		08A7A65024CC3D8300D609E2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08A5E5DF24C8644200AA7B61 /* EditVC.swift */,
+				0804D26F24B850E3002D2A12 /* CalendarVC.swift */,
 				08A7A64F24CC3D7400D609E2 /* Storyboard */,
 			);
 			path = Views;
@@ -222,8 +224,6 @@
 				0804D26A24B84FB2002D2A12 /* Storyboard */,
 				08A7A65124CC3D9B00D609E2 /* SampleCell */,
 				08D4139A24BF4D2B0049BB44 /* Cell */,
-				0804D26F24B850E3002D2A12 /* CalendarVC.swift */,
-				08A5E5DF24C8644200AA7B61 /* EditVC.swift */,
 				08A3F42624C40CB300201278 /* HomeVC.swift */,
 				08A3F44C24C58AE400201278 /* HomePopVC.swift */,
 			);
