@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import AudioToolbox
 
-class EditVC: UIViewController {
-
+class EditVC: UIViewController, UITextFieldDelegate {
+    
     var weekList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     @IBOutlet var backView: [UIView]!
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var emojiTextfield: UITextField!
+    @IBOutlet var nameTextfield: UITextField!
+    @IBOutlet var goalTextfield: UITextField!
+    @IBOutlet var emojiMessage: UILabel!
+    @IBOutlet var nameMessage: UILabel!
+    @IBOutlet var weekMessage: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +33,64 @@ class EditVC: UIViewController {
     }
     
     func setUI() {
-        backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
-        backView[1].viewBorder(borderColor: .lightGray, borderWidth: 1)
         backView[0].viewRounded(cornerRadius: 10)
         backView[1].viewRounded(cornerRadius: 10)
         backView[2].viewRounded(cornerRadius: 10)
+        emojiMessage.isHidden = true
+        nameMessage.isHidden = true
+        weekMessage.isHidden = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emojiTextfield {
+            if textField.text == nil {
+                emojiMessage.isHidden = false
+                backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            } else if textField.text?.isSingleEmoji == false {
+                emojiMessage.isHidden = false
+                emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
+                backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            } else {
+                emojiMessage.isHidden = true
+                nameTextfield.becomeFirstResponder()
+            }
+        } else if textField == nameTextfield {
+            if textField.text == nil {
+                nameMessage.isHidden = false
+                backView[1].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            } else {
+                nameMessage.isHidden = true
+                goalTextfield.becomeFirstResponder()
+            }
+        } else if textField == goalTextfield {
+            goalTextfield.resignFirstResponder()
+        }
+        return true
+    }
+    
+    @IBAction func deleteRootine(_ sender: UIButton) {
+        let alert = UIAlertController(title: "제목", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
+        
+        let delete = UIAlertAction(title: "삭제하기", style: .default) { (ok) in
+            //code
+        }
+        let cancel = UIAlertAction(title: "아니오", style: .cancel) { (cancel) in
+            //code
+        }
+        alert.addAction(cancel)
+        alert.addAction(delete)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func backHome(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func saveRootine(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -51,4 +108,30 @@ extension EditVC: UICollectionViewDataSource {
         
         return cell
     }
+}
+extension Character {
+    /// A simple emoji is one scalar and presented to the user as an Emoji
+    var isSimpleEmoji: Bool {
+        guard let firstScalar = unicodeScalars.first else { return false }
+        return firstScalar.properties.isEmoji && firstScalar.value > 0x238C
+    }
+    
+    /// Checks if the scalars will be merged into an emoji
+    var isCombinedIntoEmoji: Bool { unicodeScalars.count > 1 && unicodeScalars.first?.properties.isEmoji ?? false }
+    
+    var isEmoji: Bool { isSimpleEmoji || isCombinedIntoEmoji }
+}
+
+extension String {
+    var isSingleEmoji: Bool { count == 1 && containsEmoji }
+    
+    var containsEmoji: Bool { contains { $0.isEmoji } }
+    
+    var containsOnlyEmoji: Bool { !isEmpty && !contains { !$0.isEmoji } }
+    
+    var emojiString: String { emojis.map { String($0) }.reduce("", +) }
+    
+    var emojis: [Character] { filter { $0.isEmoji } }
+    
+    var emojiScalars: [UnicodeScalar] { filter { $0.isEmoji }.flatMap { $0.unicodeScalars } }
 }

@@ -42,15 +42,18 @@ class HomeVC: UIViewController {
         }
     }
     
+    /// Left bar button Item
     @IBAction func showCalendar(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    /// Right bar button Item
     @IBAction func addRoutine(_ sender: UIBarButtonItem) {
         let dvc = self.storyboard?.instantiateViewController(identifier: "EditVC") as! EditVC
         self.navigationController?.pushViewController(dvc, animated: true)
     }
     
+    /// Drop down button
     func setupTableView() {
         let nib = UINib(nibName: HomeRootineCVCell.nibName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: HomeRootineCVCell.reuseIdentifier)
@@ -74,7 +77,6 @@ class HomeVC: UIViewController {
         ])
     }
     
-    // 지역 선택 버튼 클릭
     @objc func clickDownButton(){
         downButton.isSelected = !downButton.isSelected
         if downButton.isSelected == true {
@@ -83,7 +85,6 @@ class HomeVC: UIViewController {
         }
         else {
 //            UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
-//                // 투명하게 만들기
 //                self.downButton.transform = .identity
 //                self.view.layoutIfNeeded()
 //            })
@@ -106,10 +107,10 @@ class HomeVC: UIViewController {
         }
     }
 }
+// MARK:- 요일별 루틴 체크 collection view
 extension HomeVC: UICollectionViewDelegate {
     
 }
-
 extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 1 {
@@ -128,6 +129,7 @@ extension HomeVC: UICollectionViewDataSource {
         return cell
     }
 }
+// MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
     
 }
