@@ -22,10 +22,10 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        
         setDownButton()
         setListDropDown()
+        setupTableView()
         //      self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //      self.navigationController?.navigationBar.shadowImage = UIImage()
         let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as! HomePopVC
@@ -49,6 +49,13 @@ class HomeVC: UIViewController {
     @IBAction func addRoutine(_ sender: UIBarButtonItem) {
         let dvc = self.storyboard?.instantiateViewController(identifier: "EditVC") as! EditVC
         self.navigationController?.pushViewController(dvc, animated: true)
+    }
+    
+    func setupTableView() {
+        let nib = UINib(nibName: HomeRootineCVCell.nibName, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: HomeRootineCVCell.reuseIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func setDownButton() {
@@ -131,7 +138,7 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return weekList.count
+            return 1
         }else {
             return routineList.count
         }
@@ -139,9 +146,14 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell", for: indexPath) as! WeekTVCell
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell", for: indexPath) as! WeekTVCell
+//            cell.weekLabel.text = weekList[indexPath.row]
             
-            cell.weekLabel.text = weekList[indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell", for: indexPath) as? WeekTVCell else {
+                return .init()
+            }
+            cell.bind()
+            
             return cell
         }
         else {
@@ -203,6 +215,14 @@ extension HomeVC: UITableViewDataSource {
         }
         else {
             return UISwipeActionsConfiguration.init()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 400
+        } else {
+            return 75
         }
     }
 }

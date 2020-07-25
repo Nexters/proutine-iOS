@@ -36,8 +36,38 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="856"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WeekTVCell" rowHeight="55" id="UTp-bd-gYv" customClass="WeekTVCell" customModule="mytine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="55"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeekTVCell" rowHeight="232" id="JIL-nD-Wfa" customClass="WeekTVCell" customModule="mytine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="232"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JIL-nD-Wfa" id="xjC-yz-HAg">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AZE-oq-A8s">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KQJ-7I-ZUE">
+                                                        <size key="itemSize" width="128" height="128"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells/>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="AZE-oq-A8s" secondAttribute="bottom" id="8i9-PJ-BNN"/>
+                                                <constraint firstAttribute="trailing" secondItem="AZE-oq-A8s" secondAttribute="trailing" id="Cwy-6G-l9m"/>
+                                                <constraint firstItem="AZE-oq-A8s" firstAttribute="top" secondItem="xjC-yz-HAg" secondAttribute="top" id="Diq-Sa-JDy"/>
+                                                <constraint firstItem="AZE-oq-A8s" firstAttribute="leading" secondItem="xjC-yz-HAg" secondAttribute="leading" id="oSR-N4-Sda"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="homeCollectionView" destination="AZE-oq-A8s" id="keQ-pM-afL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="UTp-bd-gYv">
+                                        <rect key="frame" x="0.0" y="260" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UTp-bd-gYv" id="rES-CZ-o8u">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
@@ -99,7 +129,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TabTVCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TabTVCell" rowHeight="50" id="cQj-t5-BL2" customClass="TabTVCell" customModule="mytine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="83" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="315" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cQj-t5-BL2" id="iS5-Qj-JXs">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -176,7 +206,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoutineTVCell" rowHeight="75" id="FWL-3g-Dpp" customClass="RoutineTVCell" customModule="mytine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="133" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="365" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FWL-3g-Dpp" id="gf5-B0-mVf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -250,7 +280,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RetrospectTVCell" rowHeight="100" id="Bzx-79-6pt">
-                                        <rect key="frame" x="0.0" y="208" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="440" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bzx-79-6pt" id="Vsb-eJ-k0Q">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>

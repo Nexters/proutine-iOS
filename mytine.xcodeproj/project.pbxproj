@@ -198,13 +198,12 @@
 		08A7A65024CC3D8300D609E2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				08A7A65124CC3D9B00D609E2 /* Cell */,
 				08A7A64F24CC3D7400D609E2 /* Storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		08A7A65124CC3D9B00D609E2 /* Cell */ = {
+		08A7A65124CC3D9B00D609E2 /* SampleCell */ = {
 			isa = PBXGroup;
 			children = (
 				0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */,
@@ -214,13 +213,14 @@
 				0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */,
 				0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */,
 			);
-			path = Cell;
+			path = SampleCell;
 			sourceTree = "<group>";
 		};
 		08A7A65224CC3DA900D609E2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0804D26A24B84FB2002D2A12 /* Storyboard */,
+				08A7A65124CC3D9B00D609E2 /* SampleCell */,
 				08D4139A24BF4D2B0049BB44 /* Cell */,
 				0804D26F24B850E3002D2A12 /* CalendarVC.swift */,
 				08A5E5DF24C8644200AA7B61 /* EditVC.swift */,
