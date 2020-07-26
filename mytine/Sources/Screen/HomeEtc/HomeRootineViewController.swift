@@ -17,7 +17,15 @@ class HomeRootineViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupCollectionView()
         
-       
+        FMDBManager.shared.createTable()
+//        FMDBManager.shared.addWeek()
+        
+        print("select all------")
+        FMDBManager.shared.selectWeekRootine(week: 0)
+        print("update")
+        FMDBManager.shared.updateWeekRootine(rootinesList: [3,2,3,4], week: 2)
+        print("select------")
+        FMDBManager.shared.selectWeekRootine(week: 2)
     }
     
     func setupCollectionView() {

@@ -22,14 +22,12 @@ class FMDBManager {
                 return "DayRootine"
             case .rootine:
                 return "Rootine"
-            default:
-                return ""
             }
         }
     }
     static let shared = FMDBManager()
     private let database: FMDatabase
-    private let dbName = "Rootine.sqlite"
+    private let dbName = "test2.sqlite"
     private let weekTableName = "WeekRootine"
     private let dayTableName = "DayRootine"
     private let rootineTableName = "Rootine"
@@ -51,7 +49,7 @@ class FMDBManager {
         do {
             try database.executeUpdate("create table if not exists \(weekTableName)(week Integer Primary key AutoIncrement, rootinesIdx Text)", values: nil)
             
-            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes = Text, rootineRate Text)", values: nil)
+            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text, rootineRate Text)", values: nil)
             
             try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title, Text, goal Text, repeatDays Text, count Integer)", values: nil)
         } catch {
@@ -68,9 +66,8 @@ class FMDBManager {
             print("Unable to open database")
             return false
         }
-        
         do {
-            try database.executeUpdate("insert into \(weekTableName)", values: nil)
+            try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [""])
         } catch {
             print("failed: \(error.localizedDescription)")
             return false
@@ -80,6 +77,7 @@ class FMDBManager {
         return true
     }
     
+    // 0일때 모든 주차 조회
     func selectWeekRootine(week: Int) -> Bool {
         guard database.open() else {
             print("Unable to open database")
@@ -87,20 +85,20 @@ class FMDBManager {
         }
         
         do {
-            var weekNum: String
+            var queryString: String
             if week == 0 {
-                weekNum = "*"
+                queryString = "select * from \(weekTableName)"
             } else {
-                weekNum = "\(week)"
+                queryString = "select * from \(weekTableName) where week = \(week)"
             }
-            let rs = try database.executeQuery("select \(weekNum) from \(weekTableName)", values: nil)
+            let rs = try database.executeQuery(queryString, values: nil)
             
             while rs.next() {
-                let id: Int32 = rs.int(forColumn: "id")
-                let title: String = rs.string(forColumn: "title") ?? ""
+                let week: Int32 = rs.int(forColumn: "week")
+                let rootinesIdx: String = rs.string(forColumn: "rootinesIdx") ?? ""
                 
-                print("id \(id)")
-                print("title \(title)")
+                print("week \(week)")
+                print("rootinesIdx \(rootinesIdx)")
             }
            
         } catch {
@@ -117,10 +115,10 @@ class FMDBManager {
             print("Unable to open database")
             return false
         }
-        let rootines = rootinesList.reduce(into: "") {"\($0) \($1)"}
-        print("update \(rootines)")
+        let rootines = rootinesList.map {String($0)}
+        let rootineString = rootines.joined(separator: " ")
         do {
-            try database.executeUpdate("update \(weekTableName) set rootinesIdx = ? where week = ?", values: [rootines, week])
+            try database.executeUpdate("update \(weekTableName) set rootinesIdx = ? where week = ?", values: [rootineString, week])
         } catch {
             print("failed: \(error.localizedDescription)")
             return false
@@ -151,7 +149,6 @@ class FMDBManager {
  class WeekRootine {
    let rootinesIdx: [Int] = [1,3,4,9] //해당 루틴
    let week = 1 //주차, PK
-   let rootineRate = [0.3, 1, 1, .... 7개] // 달성률
  }
 
  class DayRootine {
