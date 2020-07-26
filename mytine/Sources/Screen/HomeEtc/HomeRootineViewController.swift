@@ -16,6 +16,8 @@ class HomeRootineViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupCollectionView()
+        
+       
     }
     
     func setupCollectionView() {

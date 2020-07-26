@@ -16,6 +16,7 @@
 		0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */; };
 		0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */; };
 		0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */; };
+		0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636994624CD73A500C1C900 /* FMDBManager.swift */; };
 		0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D25524B84C5B002D2A12 /* AppDelegate.swift */; };
 		0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0804D25E24B84C5D002D2A12 /* Assets.xcassets */; };
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
@@ -47,6 +48,7 @@
 		0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRootineTVCell.xib; sourceTree = "<group>"; };
 		0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRootineCVCell.swift; sourceTree = "<group>"; };
 		0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayRootineCVCell.xib; sourceTree = "<group>"; };
+		0636994624CD73A500C1C900 /* FMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBManager.swift; sourceTree = "<group>"; };
 		0804D25224B84C5B002D2A12 /* mytine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mytine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0804D25524B84C5B002D2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0804D25E24B84C5D002D2A12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0636994524CD738900C1C900 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0636994624CD73A500C1C900 /* FMDBManager.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		0804D24924B84C5B002D2A12 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 		0804D26D24B85066002D2A12 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0636994524CD738900C1C900 /* Helper */,
 				08A3F45024C5F77B00201278 /* Fonts */,
 				0804D27324B8594C002D2A12 /* Extensions */,
 			);
@@ -398,6 +409,7 @@
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
 				08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */,
+				0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */,
 				08D413A624C144830049BB44 /* CheckCVCell.swift in Sources */,
 				08A3F42724C40CB300201278 /* HomeVC.swift in Sources */,
 				08A3F45224C5FC3D00201278 /* CheckReusableView.swift in Sources */,

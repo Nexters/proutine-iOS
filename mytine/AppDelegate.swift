@@ -15,8 +15,8 @@ var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
-//        window?.rootViewController = sb.instantiateViewController(withIdentifier: "HomeRootineVC")
+        let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
+        window?.rootViewController = sb.instantiateViewController(withIdentifier: "HomeRootineVC")
         return true
     }
 
