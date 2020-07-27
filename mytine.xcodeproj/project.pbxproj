@@ -19,6 +19,7 @@
 		0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636994624CD73A500C1C900 /* FMDBManager.swift */; };
 		06A720A224CE9AA200ED31DC /* RootineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A124CE9AA200ED31DC /* RootineModel.swift */; };
 		06A720A424CE9C4700ED31DC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A324CE9C4700ED31DC /* Date+Extension.swift */; };
+		06A720AC24CED0CC00ED31DC /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720AB24CED0CC00ED31DC /* CalendarManager.swift */; };
 		0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D25524B84C5B002D2A12 /* AppDelegate.swift */; };
 		0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0804D25E24B84C5D002D2A12 /* Assets.xcassets */; };
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
@@ -53,6 +54,7 @@
 		0636994624CD73A500C1C900 /* FMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBManager.swift; sourceTree = "<group>"; };
 		06A720A124CE9AA200ED31DC /* RootineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootineModel.swift; sourceTree = "<group>"; };
 		06A720A324CE9C4700ED31DC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		06A720AB24CED0CC00ED31DC /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		0804D25224B84C5B002D2A12 /* mytine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mytine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0804D25524B84C5B002D2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0804D25E24B84C5D002D2A12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				0636994624CD73A500C1C900 /* FMDBManager.swift */,
+				06A720AB24CED0CC00ED31DC /* CalendarManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
 				08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */,
+				06A720AC24CED0CC00ED31DC /* CalendarManager.swift in Sources */,
 				0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */,
 				08D413A624C144830049BB44 /* CheckCVCell.swift in Sources */,
 				08A3F42724C40CB300201278 /* HomeVC.swift in Sources */,

@@ -29,41 +29,41 @@ class HomeRootineViewController: UIViewController {
 //        print("select------")
 //        FMDBManager.shared.selectWeekRootine(week: 2)
 //    }
-    
+//
 //    func testRootine() {
-        // 루틴생성
+//         루틴생성
 //        let mockRootine1 = Rootine(id: -1, emoji: "😳", title: "타이틀1", goal: "목표1", repeatDays: [1,1,0,0,0,0,0], count: 2)
 //        var mockRootine2 = Rootine(id: 2, emoji: "🏀", title: "타이틀2", goal: "목표2", repeatDays: [1,0,0,0,1,0,1], count: 0)
 //        FMDBManager.shared.createRootine(rootine: mockRootine1)
 //        FMDBManager.shared.createRootine(rootine: mockRootine2)
-        
-        // 루틴조회
+//
+//         루틴조회
 //        print("-----select---------")
 //        FMDBManager.shared.selectRootine(id: 0)
 //        mockRootine2.count = 0
-        
-        // 루틴수정
+//
+//         루틴수정
 //        print("------update--------")
 //        FMDBManager.shared.updateRootine(rootine: mockRootine2)
 //        print("-------select-------")
 //        FMDBManager.shared.selectRootine(id: 0)
-        
-        // 루틴제거
+//
+//         루틴제거
 //        print("------delete--------")
 //        FMDBManager.shared.deleteRootine(id: 1)
 //        print("-------select-------")
 //        FMDBManager.shared.selectRootine(id: 0)
 //    }
-    
+//
 //    func testDay() {
-        // 일루틴생성
+//         일루틴생성
 //        let mockDay1 = DayRootine(id: "20200721", retrospect: "회고를적기", week: 1, complete: [1,1,0])
 //        var mockDay2 = DayRootine(id: "20200723", retrospect: "회고를적기2", week: 2, complete: [1,0,0,0])
 //        FMDBManager.shared.createDayRootine(rootine: mockDay1)
 //        FMDBManager.shared.createDayRootine(rootine: mockDay2)
 //        FMDBManager.shared.selectDayRootine(week: 0)
-        
-        // 일루틴수정
+//
+//         일루틴수정
 //        print("-----update-----")
 //        mockDay2.complete = [1,1,1,0]
 //        FMDBManager.shared.updateDayRootine(rootine: mockDay2)

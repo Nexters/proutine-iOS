@@ -9,7 +9,7 @@
 import Foundation
 
 extension Date {
-    private func simpleDateFormatter(format: String) -> DateFormatter {
+    private static func simpleDateFormatter(format: String) -> DateFormatter {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko")
         formatter.timeZone = .current
@@ -18,9 +18,38 @@ extension Date {
     }
     
     func makeRootineId() -> String {
-        let formatter = simpleDateFormatter(format: "yyyyMMdd")
+        let formatter = Date.simpleDateFormatter(format: "yyyyMMdd")
         let dateString = formatter.string(from: self)
         
         return dateString
+    }
+    
+    // 월 시작요일 계산
+    static func startWeekday(year: String, month: String) -> Int {
+        let formatter = simpleDateFormatter(format: "yyyyMMdd")
+        let dateString = "\(year)\(month)01"
+        guard let date = formatter.date(from: dateString) else {
+            return -1
+        }
+        let weekday = Calendar.current.component(.weekday, from: date)
+        // sun:1 mon:2 tue:3 wed:4 thr:5 fri:6 sat:7
+        return weekday
+    }
+    
+    static func isLeapYear(_ year: Int) -> Bool {
+
+        let isLeapYear = ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
+
+        return isLeapYear
+    }
+    
+    func getMonth() -> Int {
+        let month = Calendar.current.component(.month, from: Date())
+        return month
+    }
+    
+    func getYear() -> Int {
+        let year = Calendar.current.component(.year, from: Date())
+        return year
     }
 }
