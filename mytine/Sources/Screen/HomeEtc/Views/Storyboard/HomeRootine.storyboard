@@ -270,8 +270,8 @@
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4iF-jC-g3k">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="5" id="BjE-Jf-xPo">
-                                    <size key="itemSize" width="128" height="128"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="BjE-Jf-xPo">
+                                    <size key="itemSize" width="40" height="58"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
@@ -306,11 +306,8 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="x5M-OL-t6r" firstAttribute="leading" secondItem="rxx-Sp-1LJ" secondAttribute="leading" id="2yp-nB-VBS"/>
-                                                <constraint firstAttribute="trailing" secondItem="x5M-OL-t6r" secondAttribute="trailing" id="4Hv-Pn-0dF"/>
-                                                <constraint firstAttribute="bottom" secondItem="Pon-HP-HXb" secondAttribute="bottom" id="4hH-UW-lky"/>
-                                                <constraint firstItem="Pon-HP-HXb" firstAttribute="leading" secondItem="rxx-Sp-1LJ" secondAttribute="leading" id="Igk-kq-heS"/>
-                                                <constraint firstAttribute="trailing" secondItem="Pon-HP-HXb" secondAttribute="trailing" id="K2A-gr-6bS"/>
+                                                <constraint firstItem="x5M-OL-t6r" firstAttribute="centerX" secondItem="rxx-Sp-1LJ" secondAttribute="centerX" id="bfe-3x-liw"/>
+                                                <constraint firstItem="Pon-HP-HXb" firstAttribute="centerX" secondItem="rxx-Sp-1LJ" secondAttribute="centerX" id="c8N-4V-6bi"/>
                                                 <constraint firstItem="Pon-HP-HXb" firstAttribute="top" secondItem="x5M-OL-t6r" secondAttribute="bottom" id="opU-Hc-fme"/>
                                                 <constraint firstItem="x5M-OL-t6r" firstAttribute="top" secondItem="rxx-Sp-1LJ" secondAttribute="top" id="vxN-gz-K9I"/>
                                             </constraints>
@@ -327,7 +324,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWc-oo-LCd">
-                                            <rect key="frame" x="24" y="15" width="44.5" height="21"/>
+                                            <rect key="frame" x="24" y="15" width="51.5" height="21"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
