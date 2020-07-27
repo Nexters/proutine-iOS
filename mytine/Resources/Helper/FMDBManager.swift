@@ -39,6 +39,8 @@ class FMDBManager {
         database = FMDatabase(url: fileURL)
     }
     
+    // MARK: DB Manager
+    
     func createTable() -> Bool {
         
         guard database.open() else {
@@ -49,11 +51,28 @@ class FMDBManager {
         do {
             try database.executeUpdate("create table if not exists \(weekTableName)(week Integer Primary key AutoIncrement, rootinesIdx Text)", values: nil)
             
-            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text, rootineRate Text)", values: nil)
+            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text)", values: nil)
             
             try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title, Text, goal Text, repeatDays Text, count Integer)", values: nil)
         } catch {
             print("create fail")
+            database.close()
+            return false
+        }
+        database.close()
+        return true
+    }
+    
+    func dropDB(type: TableType) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        do {
+            try database.executeUpdate("drop table \(type.tableName)", values: nil)
+        } catch {
+            print("failed: \(error.localizedDescription)")
+            database.close()
             return false
         }
         database.close()
@@ -70,6 +89,7 @@ class FMDBManager {
             try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [""])
         } catch {
             print("failed: \(error.localizedDescription)")
+            database.close()
             return false
         }
         
@@ -97,12 +117,12 @@ class FMDBManager {
                 let week: Int32 = rs.int(forColumn: "week")
                 let rootinesIdx: String = rs.string(forColumn: "rootinesIdx") ?? ""
                 
-                print("week \(week)")
-                print("rootinesIdx \(rootinesIdx)")
+                print("week \(week) ::::: rootinesIdx \(rootinesIdx)")
             }
            
         } catch {
             print("Unable to open database")
+            database.close()
             return false
         }
         
@@ -121,23 +141,79 @@ class FMDBManager {
             try database.executeUpdate("update \(weekTableName) set rootinesIdx = ? where week = ?", values: [rootineString, week])
         } catch {
             print("failed: \(error.localizedDescription)")
+            database.close()
             return false
         }
         database.close()
         return true
     }
     
-    
-    
-    func dropDB(type: TableType) -> Bool {
+    // MARK: DayRootine Manager
+    func createDayRootine(rootine: DayRootine) -> Bool {
         guard database.open() else {
             print("Unable to open database")
             return false
         }
         do {
-            try database.executeUpdate("drop table \(type.tableName)", values: nil)
+            try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, complete) values (?,?,?,?)",
+                values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete()])
         } catch {
             print("failed: \(error.localizedDescription)")
+            database.close()
+            return false
+        }
+        
+        database.close()
+        return true
+    }
+    
+    // 0이면 모두 조회
+    func selectDayRootine(week: Int) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        
+        do {
+            var queryString: String
+            if week == 0 {
+                queryString = "select * from \(dayTableName)"
+            } else {
+                queryString = "select * from \(dayTableName) where week = \(week)"
+            }
+            let rs = try database.executeQuery(queryString, values: nil)
+            
+            while rs.next() {
+                let id: String = rs.string(forColumn: "id") ?? ""
+                let retrospect: String = rs.string(forColumn: "retrospect") ?? ""
+                let week: Int32 = rs.int(forColumn: "week")
+                let completes: String = rs.string(forColumn: "completes") ?? ""
+                
+                print("id \(id) :::: week \(week) ::::: completes \(completes)")
+            }
+           
+        } catch {
+            print("Unable to open database")
+            database.close()
+            return false
+        }
+        
+        database.close()
+        return true
+    }
+    
+    func updateDayRootine(rootine: DayRootine) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        
+        do {
+            try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ?, where id = ?",
+                values: [rootine.retrospect, rootine.getComplete(), rootine.id])
+        } catch {
+            print("failed: \(error.localizedDescription)")
+            database.close()
             return false
         }
         database.close()

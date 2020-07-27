@@ -17,6 +17,8 @@
 		0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */; };
 		0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */; };
 		0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636994624CD73A500C1C900 /* FMDBManager.swift */; };
+		06A720A224CE9AA200ED31DC /* RootineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A124CE9AA200ED31DC /* RootineModel.swift */; };
+		06A720A424CE9C4700ED31DC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A324CE9C4700ED31DC /* Date+Extension.swift */; };
 		0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D25524B84C5B002D2A12 /* AppDelegate.swift */; };
 		0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0804D25E24B84C5D002D2A12 /* Assets.xcassets */; };
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
@@ -49,6 +51,8 @@
 		0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRootineCVCell.swift; sourceTree = "<group>"; };
 		0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayRootineCVCell.xib; sourceTree = "<group>"; };
 		0636994624CD73A500C1C900 /* FMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBManager.swift; sourceTree = "<group>"; };
+		06A720A124CE9AA200ED31DC /* RootineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootineModel.swift; sourceTree = "<group>"; };
+		06A720A324CE9C4700ED31DC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		0804D25224B84C5B002D2A12 /* mytine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mytine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0804D25524B84C5B002D2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0804D25E24B84C5D002D2A12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +98,14 @@
 				0636994624CD73A500C1C900 /* FMDBManager.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		06A720A024CE9A9500ED31DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06A720A124CE9AA200ED31DC /* RootineModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		0804D24924B84C5B002D2A12 = {
@@ -159,6 +171,7 @@
 				08A3F45324C61B0A00201278 /* UIColor+Additions.swift */,
 				08A3F45524C61B0A00201278 /* UITableView+Extensions.swift */,
 				08A3F45424C61B0A00201278 /* UIView+Extensions.swift */,
+				06A720A324CE9C4700ED31DC /* Date+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -192,6 +205,7 @@
 		08A7A64E24CC3CE500D609E2 /* HomeEtc */ = {
 			isa = PBXGroup;
 			children = (
+				06A720A024CE9A9500ED31DC /* Model */,
 				08A7A65024CC3D8300D609E2 /* Views */,
 				0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */,
 			);
@@ -394,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08A3F45824C61B0A00201278 /* UITableView+Extensions.swift in Sources */,
+				06A720A424CE9C4700ED31DC /* Date+Extension.swift in Sources */,
 				08A5E5E224C86BDC00AA7B61 /* EditWeekCVCell.swift in Sources */,
 				08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */,
 				08A3F44924C57B1E00201278 /* WeekTVCell.swift in Sources */,
@@ -401,6 +416,7 @@
 				0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */,
 				08A3F45624C61B0A00201278 /* UIColor+Additions.swift in Sources */,
 				08A3F44F24C5D46300201278 /* TabTVCell.swift in Sources */,
+				06A720A224CE9AA200ED31DC /* RootineModel.swift in Sources */,
 				08A5E5E024C8644200AA7B61 /* EditVC.swift in Sources */,
 				08A3F44B24C57B8B00201278 /* WeekCVCell.swift in Sources */,
 				08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */,
