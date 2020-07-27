@@ -11,6 +11,7 @@ import Foundation
 enum UserDefaultKeyName {
     case firstEnter
     case recentEnter
+    case recentWeek
     
     var getString: String {
         switch self {
@@ -18,6 +19,8 @@ enum UserDefaultKeyName {
             return "firstEnter"
         case .recentEnter:
             return "recentEnter"
+        case .recentWeek:
+            return "recentWeek"
         }
     }
 }

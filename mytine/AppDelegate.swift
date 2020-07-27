@@ -15,24 +15,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        checkWeek()
         let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
         window?.rootViewController = sb.instantiateViewController(withIdentifier: "CalendarNC")
         return true
     }
     
     func checkWeek() {
-        
-        if let firstDate = UserDefaults.standard.string(forKey: UserDefaultKeyName.firstEnter.getString) {
-            let beforeRecentDate = UserDefaults.standard.string(forKey: UserDefaultKeyName.recentEnter.getString)
+        // 첫번째접속이아닌경우
+        if let firstDate    // 처음접속날짜
+            = UserDefaults.standard.string(forKey: UserDefaultKeyName.firstEnter.getString),
+            let beforeRecentDate    // 최근접속날짜
+            = UserDefaults.standard.string(forKey: UserDefaultKeyName.recentEnter.getString) {
+            let beforeRecentWeek    // 최근주차
+                = UserDefaults.standard.integer(forKey: UserDefaultKeyName.recentWeek.getString)
             
+            let beforeRecentWeekDay = beforeRecentDate.simpleDateStringGetWeekDay()
+            let newRecentDate = Date().makeRootineId()
+            let week = firstDate.simpleDateStringCompareWeek(compare: newRecentDate,
+                                                                    weekDay: beforeRecentWeekDay)
+            
+            let distance = week - beforeRecentWeek
+            // 차이나는 주차만큼 WeekRootine생성
+            if distance > 0 {
+                let weekRootine = FMDBManager.shared.selectWeekRootine(week: beforeRecentWeek)
+                
+                // 주차 차이나는만큼 추가
+                for _ in 0..<distance {
+                    _ = FMDBManager.shared.addWeek(rootineIdx: weekRootine[0].rootinesIdx)
+                }
+            }
+            print("firstDate - \(firstDate)")
+            print("beforeRecentDate - \(beforeRecentDate)")
+            print("beforeRecentWeek - \(beforeRecentWeek)")
+            print("week - \(week)주차")
+            print("distance - \(distance)차이")
+            UserDefaults.standard.set(week,
+                                      forKey: UserDefaultKeyName.recentWeek.getString)
+            UserDefaults.standard.set(newRecentDate,
+                                      forKey: UserDefaultKeyName.recentEnter.getString)
         } else {
-            UserDefaults.standard.set(Date().makeRootineId(),
+            // 처음 들어올때 실행
+            let newRecentDate = Date().makeRootineId()
+            UserDefaults.standard.set(newRecentDate,
                                       forKey: UserDefaultKeyName.firstEnter.getString)
+            UserDefaults.standard.set(newRecentDate,
+                                      forKey: UserDefaultKeyName.recentEnter.getString)
+            UserDefaults.standard.set(1,
+                                      forKey: UserDefaultKeyName.recentWeek.getString)
+
+            _ = FMDBManager.shared.createTable()
+            _ = FMDBManager.shared.addWeek(rootineIdx: nil)
         }
         
-        let newRecentDate = Date().makeRootineId()
-                   UserDefaults.standard.set(newRecentDate,
-                                             forKey: UserDefaultKeyName.recentEnter.getString)
+        
+        
+
     }
     
 }

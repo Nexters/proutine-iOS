@@ -80,13 +80,17 @@ class FMDBManager {
     }
     
     // MARK: WeekRootine Manager
-    func addWeek() -> Bool {
+    func addWeek(rootineIdx: String?) -> Bool {
         guard database.open() else {
             print("Unable to open database")
             return false
         }
         do {
-            try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [""])
+            if let rootineIdx = rootineIdx {
+                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [rootineIdx])
+            } else {
+                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [""])
+            }
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -98,19 +102,21 @@ class FMDBManager {
     }
     
     // 0일때 모든 주차 조회
-    func selectWeekRootine(week: Int) -> Bool {
+    func selectWeekRootine(week: Int) -> [WeekRootine] {
         guard database.open() else {
             print("Unable to open database")
-            return false
+            return []
+        }
+        var list: [WeekRootine] = []
+        var queryString: String
+        if week == 0 {
+            queryString = "select * from \(weekTableName)"
+        } else {
+            queryString = "select * from \(weekTableName) where week = \(week)"
         }
         
         do {
-            var queryString: String
-            if week == 0 {
-                queryString = "select * from \(weekTableName)"
-            } else {
-                queryString = "select * from \(weekTableName) where week = \(week)"
-            }
+            
             let rs = try database.executeQuery(queryString, values: nil)
             
             while rs.next() {
@@ -118,16 +124,18 @@ class FMDBManager {
                 let rootinesIdx: String = rs.string(forColumn: "rootinesIdx") ?? ""
                 
                 print("week \(week) ::::: rootinesIdx \(rootinesIdx)")
+                let weekRootine = WeekRootine(week: Int(week), rootinesIdx: rootinesIdx)
+                list.append(weekRootine)
             }
            
         } catch {
             print("Unable to open database")
             database.close()
-            return false
+            return []
         }
         
         database.close()
-        return true
+        return list
     }
     
     func updateWeekRootine(rootinesList: [Int], week: Int) -> Bool {

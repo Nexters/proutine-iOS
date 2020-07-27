@@ -22,7 +22,7 @@ class CalendarVC: UIViewController {
         setupMonth()
         setupCollectionView()
         
-
+        FMDBManager.shared.selectWeekRootine(week: 0)
 //        testWeek()
 //        testDay()
     }
