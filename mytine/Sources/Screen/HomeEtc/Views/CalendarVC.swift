@@ -21,18 +21,28 @@ class CalendarVC: UIViewController {
 //        setupNavigation()
         setupMonth()
         setupCollectionView()
+        
+        let mockDate1 = "20200703"
+        let mockDate2 = "20200705"
+        let mockDate3 = "20200706"
+        let mockDate4 = "20200712"
+        let mockDate5 = "20200713"
+        let weekDay = mockDate1.simpleDateStringGetWeekDay()
+        mockDate1.simpleDateStringCompareWeek(compare: mockDate2, weekDay: weekDay)
+        mockDate1.simpleDateStringCompareWeek(compare: mockDate3, weekDay: weekDay)
+        mockDate1.simpleDateStringCompareWeek(compare: mockDate4, weekDay: weekDay)
+        mockDate1.simpleDateStringCompareWeek(compare: mockDate5, weekDay: weekDay)
     }
     
     func setupNavigation() {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17)!]
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
-        let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
-        self.navigationController?.pushViewController(dvc, animated: false)
+        let nextVC = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
     func setupMonth() {
-        emptyDayCount = Date.startWeekday(year: "2020", month: "07")-1
-        
+        emptyDayCount = Date.startWeekday(year: "2020", month: "07")-2
         dayCount = calendar.getDayOfMonth() + emptyDayCount
         calendarCV.reloadData()
     }
@@ -42,9 +52,12 @@ class CalendarVC: UIViewController {
         calendarCV.dataSource = self
         calendarCV.allowsMultipleSelection = false
     }
+    
+    
 }
 extension CalendarVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
         

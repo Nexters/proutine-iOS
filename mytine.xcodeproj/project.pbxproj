@@ -20,6 +20,8 @@
 		06A720A224CE9AA200ED31DC /* RootineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A124CE9AA200ED31DC /* RootineModel.swift */; };
 		06A720A424CE9C4700ED31DC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A324CE9C4700ED31DC /* Date+Extension.swift */; };
 		06A720AC24CED0CC00ED31DC /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720AB24CED0CC00ED31DC /* CalendarManager.swift */; };
+		06A720AE24CEF93300ED31DC /* UserDefaultKeyName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720AD24CEF93300ED31DC /* UserDefaultKeyName.swift */; };
+		06A720B024CEFB0800ED31DC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720AF24CEFB0800ED31DC /* String+Extension.swift */; };
 		0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D25524B84C5B002D2A12 /* AppDelegate.swift */; };
 		0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0804D25E24B84C5D002D2A12 /* Assets.xcassets */; };
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
@@ -55,6 +57,8 @@
 		06A720A124CE9AA200ED31DC /* RootineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootineModel.swift; sourceTree = "<group>"; };
 		06A720A324CE9C4700ED31DC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		06A720AB24CED0CC00ED31DC /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		06A720AD24CEF93300ED31DC /* UserDefaultKeyName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyName.swift; sourceTree = "<group>"; };
+		06A720AF24CEFB0800ED31DC /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0804D25224B84C5B002D2A12 /* mytine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mytine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0804D25524B84C5B002D2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0804D25E24B84C5D002D2A12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			children = (
 				0636994624CD73A500C1C900 /* FMDBManager.swift */,
 				06A720AB24CED0CC00ED31DC /* CalendarManager.swift */,
+				06A720AD24CEF93300ED31DC /* UserDefaultKeyName.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				08A3F45524C61B0A00201278 /* UITableView+Extensions.swift */,
 				08A3F45424C61B0A00201278 /* UIView+Extensions.swift */,
 				06A720A324CE9C4700ED31DC /* Date+Extension.swift */,
+				06A720AF24CEFB0800ED31DC /* String+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -210,7 +216,6 @@
 			children = (
 				06A720A024CE9A9500ED31DC /* Model */,
 				08A7A65024CC3D8300D609E2 /* Views */,
-				0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */,
 			);
 			path = HomeEtc;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 			children = (
 				08A5E5DF24C8644200AA7B61 /* EditVC.swift */,
 				0804D26F24B850E3002D2A12 /* CalendarVC.swift */,
+				0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */,
 				08A7A64F24CC3D7400D609E2 /* Storyboard */,
 			);
 			path = Views;
@@ -418,6 +424,7 @@
 				0636993024CC1DAC00C1C900 /* HomeRootineCVCell.swift in Sources */,
 				0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */,
 				08A3F45624C61B0A00201278 /* UIColor+Additions.swift in Sources */,
+				06A720B024CEFB0800ED31DC /* String+Extension.swift in Sources */,
 				08A3F44F24C5D46300201278 /* TabTVCell.swift in Sources */,
 				06A720A224CE9AA200ED31DC /* RootineModel.swift in Sources */,
 				08A5E5E024C8644200AA7B61 /* EditVC.swift in Sources */,
@@ -427,6 +434,7 @@
 				0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */,
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
+				06A720AE24CEF93300ED31DC /* UserDefaultKeyName.swift in Sources */,
 				08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */,
 				06A720AC24CED0CC00ED31DC /* CalendarManager.swift in Sources */,
 				0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */,
