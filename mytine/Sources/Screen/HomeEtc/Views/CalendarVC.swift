@@ -9,19 +9,38 @@
 import UIKit
 
 class CalendarVC: UIViewController {
-    var months = ["July", "August"]
-    var numOfDaysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
     @IBOutlet var calendarCV: UICollectionView!
+    
+    private let calendar = CalendarManager(date: Date())
+    private var dayCount = 0
+    private var emptyDayCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendarCV.delegate = self
-        calendarCV.dataSource = self
-        calendarCV.allowsMultipleSelection = false
+       
+//        setupNavigation()
+        setupMonth()
+        setupCollectionView()
+    }
+    
+    func setupNavigation() {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17)!]
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
         self.navigationController?.pushViewController(dvc, animated: false)
+    }
+    
+    func setupMonth() {
+        emptyDayCount = Date.startWeekday(year: "2020", month: "07")-1
+        
+        dayCount = calendar.getDayOfMonth() + emptyDayCount
+        calendarCV.reloadData()
+    }
+    
+    func setupCollectionView() {
+        calendarCV.delegate = self
+        calendarCV.dataSource = self
+        calendarCV.allowsMultipleSelection = false
     }
 }
 extension CalendarVC: UICollectionViewDelegate {
@@ -34,22 +53,22 @@ extension CalendarVC: UICollectionViewDelegate {
     }
 }
 extension CalendarVC: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return months.count
-    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 31
-        }else {
-            return 31
-        }
+        return dayCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckCVCell", for: indexPath) as! CheckCVCell
         
-        cell.dataLabel.text = String(indexPath.row+1)
-        cell.checkLabel.text = "🟢"
+        if indexPath.item > emptyDayCount-1 {
+            cell.checkLabel.text = "🟢"
+            let day = indexPath.item - emptyDayCount
+            cell.dateLabel.text = "\(day+1)"
+        } else {
+            cell.checkLabel.text = "⚪️"
+            cell.dateLabel.text = ""
+        }
+        
         
         return cell
     }
@@ -60,11 +79,7 @@ extension CalendarVC: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CheckReusableView", for: indexPath) as! CheckReusableView
-            if indexPath.section == 0 {
-                headerView.monthLabel.text = months[0]
-            } else {
-                headerView.monthLabel.text = months[1]
-            }
+                headerView.monthLabel.text = "7월"
             return headerView
         default:
             return view

@@ -22,9 +22,9 @@ class CalendarManager {
         }
     }
     
-    init() {
-        year = Date().getYear()
-        month = Date().getMonth()
+    init(date: Date) {
+        year = date.getYear()
+        month = date.getMonth()
         dayOfMonth = getDayOfMonth()
     }
     

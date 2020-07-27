@@ -10,7 +10,7 @@ import UIKit
 
 class CheckCVCell: UICollectionViewCell {
     
-    @IBOutlet var dataLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     @IBOutlet var checkLabel: UILabel!
     
     override func awakeFromNib() {
