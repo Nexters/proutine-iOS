@@ -18,6 +18,7 @@ struct DayRootine {
     var retrospect: String
     let week: Int
     var complete: [Int] // 1:완료루틴 0:미완료루틴
+    var rootinesState: [Int] // 루틴순서 (완료시 뒤로)
     
     func getComplete() -> String {
         let tempString = complete.map{ String($0) }.joined(separator: " ")
@@ -33,6 +34,11 @@ struct DayRootine {
         let completeCount = complete.filter{ $0 == 1 }.count
         let rate = Float(completeCount)/total
         return String(format: "%.1f", rate)
+    }
+    
+    func getRootineState() -> String {
+        let tempString = rootinesState.map{ String($0) }.joined(separator: " ")
+        return tempString
     }
 }
 

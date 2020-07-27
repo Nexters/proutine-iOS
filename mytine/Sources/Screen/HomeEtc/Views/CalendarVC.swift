@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//TODO: 달력 구현시 추가...
 class CalendarVC: UIViewController {
     @IBOutlet var calendarCV: UICollectionView!
     
@@ -22,6 +22,12 @@ class CalendarVC: UIViewController {
         setupMonth()
         setupCollectionView()
         
+
+//        testWeek()
+//        testDay()
+    }
+    
+    func testWeek() {
         let mockDate1 = "20200703"
         let mockDate2 = "20200705"
         let mockDate3 = "20200706"
@@ -32,6 +38,22 @@ class CalendarVC: UIViewController {
         mockDate1.simpleDateStringCompareWeek(compare: mockDate3, weekDay: weekDay)
         mockDate1.simpleDateStringCompareWeek(compare: mockDate4, weekDay: weekDay)
         mockDate1.simpleDateStringCompareWeek(compare: mockDate5, weekDay: weekDay)
+    }
+    
+    func testDay() {
+        //         일루틴생성
+        let mockDay1 = DayRootine(id: "20200721", retrospect: "회고를적기", week: 1, complete: [1,1,0], rootinesState: [1,3,4])
+        var mockDay2 = DayRootine(id: "20200723", retrospect: "회고를적기2", week: 2, complete: [1,0,0,0], rootinesState: [3,4,1])
+        FMDBManager.shared.createDayRootine(rootine: mockDay1)
+        FMDBManager.shared.createDayRootine(rootine: mockDay2)
+        FMDBManager.shared.selectDayRootine(week: 0)
+        
+        //         일루틴수정
+        print("-----update-----")
+        mockDay2.complete = [1,1,1,0]
+        mockDay2.rootinesState = [4,1,3]
+        FMDBManager.shared.updateDayRootine(rootine: mockDay2)
+        FMDBManager.shared.selectDayRootine(week: 0)
     }
     
     func setupNavigation() {

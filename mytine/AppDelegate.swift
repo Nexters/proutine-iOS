@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func checkWeek() {
         
-        
         if let firstDate = UserDefaults.standard.string(forKey: UserDefaultKeyName.firstEnter.getString) {
             let beforeRecentDate = UserDefaults.standard.string(forKey: UserDefaultKeyName.recentEnter.getString)
             

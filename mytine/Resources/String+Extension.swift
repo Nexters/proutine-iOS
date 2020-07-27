@@ -29,19 +29,16 @@ extension String {
         
         let week = 0
         if dateComponent.day! > remainWeek {
-            print(dateComponent.day!)
-            print(dateComponent.day! - remainWeek)
             let betweenDay = (dateComponent.day! - remainWeek)
             var week = betweenDay/7
             if betweenDay%7 != 0 {
                 week += 1
             }
-//            1~7 :1, 8~14: 2, 15~21: 3
             
-            print(week)
+            print("주차: \(week)")
         }
         
-        return 0
+        return week
     }
     
     func simpleDateStringGetWeekDay() -> Int {
