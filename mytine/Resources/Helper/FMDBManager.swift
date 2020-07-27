@@ -155,7 +155,7 @@ class FMDBManager {
             return false
         }
         do {
-            try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, complete) values (?,?,?,?)",
+            try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, completes) values (?,?,?,?)",
                 values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete()])
         } catch {
             print("failed: \(error.localizedDescription)")
@@ -209,7 +209,7 @@ class FMDBManager {
         }
         
         do {
-            try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ?, where id = ?",
+            try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ? where id = ?",
                 values: [rootine.retrospect, rootine.getComplete(), rootine.id])
         } catch {
             print("failed: \(error.localizedDescription)")
@@ -226,14 +226,87 @@ class FMDBManager {
             return false
         }
         do {
-            try database.executeUpdate("insert into \(dayTableName) (emoji, title, goal, repeatDays, count) values (?,?,?,?,?)",
-                values: [rootine.emoji, rootine.title, rootine.title, rootine.goal, rootine.getRepeatDay(), rootine.count])
+            try database.executeUpdate("insert into \(rootineTableName) (emoji, title, goal, repeatDays, count) values (?,?,?,?,?)",
+                values: [rootine.emoji, rootine.title, rootine.goal, rootine.getRepeatDay(), rootine.count])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
             return false
         }
         
+        database.close()
+        return true
+    }
+    
+    // 0이면 모두 조회
+    func selectRootine(id: Int) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        
+        do {
+            var queryString: String
+            if id == 0 {
+                queryString = "select * from \(rootineTableName)"
+            } else {
+                queryString = "select * from \(rootineTableName) where id = \(id)"
+            }
+            let rs = try database.executeQuery(queryString, values: nil)
+            
+            while rs.next() {
+                let id: Int32 = rs.int(forColumn: "id")
+                let emoji: String = rs.string(forColumn: "emoji") ?? ""
+                let title: String = rs.string(forColumn: "title") ?? ""
+                let goal: String = rs.string(forColumn: "goal") ?? ""
+                let repeatDays: String = rs.string(forColumn: "repeatDays") ?? ""
+                let count: Int32 = rs.int(forColumn: "count")
+                
+                
+                print("id \(id) :::: week \(emoji) ::::: completes \(repeatDays) ::::: count \(count)")
+            }
+           
+        } catch {
+            print("Unable to open database")
+            database.close()
+            return false
+        }
+        
+        database.close()
+        return true
+    }
+    
+    func updateRootine(rootine: Rootine) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        
+        do {
+            try database.executeUpdate("update \(rootineTableName) set emoji = ?, title = ?, goal = ?, repeatDays = ?, count = ? where id = ?",
+                values: [rootine.emoji, rootine.title, rootine.goal, rootine.getRepeatDay(), rootine.count, rootine.id])
+        } catch {
+            print("failed: \(error.localizedDescription)")
+            database.close()
+            return false
+        }
+        database.close()
+        return true
+    }
+    
+    func deleteRootine(id: Int) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        
+        do {
+            try database.executeUpdate("delete from \(rootineTableName) where id = ?", values: [id])
+        } catch {
+            print("failed: \(error.localizedDescription)")
+            database.close()
+            return false
+        }
         database.close()
         return true
     }

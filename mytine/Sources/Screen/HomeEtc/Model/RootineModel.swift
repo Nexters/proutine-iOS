@@ -10,14 +10,14 @@ import Foundation
 
 struct WeekRootine {
     let week: Int
-    let rootinesIdx: String
+    var rootinesIdx: String
 }
 
 struct DayRootine {
     let id: String
     var retrospect: String
     let week: Int
-    let complete: [Int]
+    var complete: [Int] // 1:완료루틴 0:미완료루틴
     
     func getComplete() -> String {
         let tempString = complete.map{ String($0) }.joined(separator: " ")
@@ -37,12 +37,12 @@ struct DayRootine {
 }
 
 struct Rootine {
-    let id = 1 //id, PK
-    let emoji: String //이모지
-    let title: String
-    let goal: String
-    let repeatDays: [Int]  //반복요일 1이면 반복요일해당 [월,화,수...토,일]
-    let count = 1 // 0일때 디비에서 삭제
+    let id: Int //id, PK
+    var emoji: String //이모지
+    var title: String
+    var goal: String
+    var repeatDays: [Int]  //반복요일 1이면 반복요일해당 [월,화,수...토,일] 7개 맞춰주기
+    var count: Int // 0일때 디비에서 삭제
     
     func getRepeatDay() -> String {
         let tempString = repeatDays.map{ String($0) }.joined(separator: " ")
