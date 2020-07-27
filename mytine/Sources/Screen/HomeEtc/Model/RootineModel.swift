@@ -20,9 +20,8 @@ struct DayRootine {
     let complete: [Int]
     
     func getComplete() -> String {
-        let tempString = complete.map{ String($0) }
-        let result = tempString.joined(separator: " ")
-        return result
+        let tempString = complete.map{ String($0) }.joined(separator: " ")
+        return tempString
     }
     
     func getRootineRate() -> String {
@@ -35,4 +34,19 @@ struct DayRootine {
         let rate = Float(completeCount)/total
         return String(format: "%.1f", rate)
     }
+}
+
+struct Rootine {
+    let id = 1 //id, PK
+    let emoji: String //이모지
+    let title: String
+    let goal: String
+    let repeatDays: [Int]  //반복요일 1이면 반복요일해당 [월,화,수...토,일]
+    let count = 1 // 0일때 디비에서 삭제
+    
+    func getRepeatDay() -> String {
+        let tempString = repeatDays.map{ String($0) }.joined(separator: " ")
+        return tempString
+    }
+    
 }

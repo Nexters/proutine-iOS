@@ -53,7 +53,7 @@ class FMDBManager {
             
             try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text)", values: nil)
             
-            try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title, Text, goal Text, repeatDays Text, count Integer)", values: nil)
+            try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title Text, goal Text, repeatDays Text, count Integer)", values: nil)
         } catch {
             print("create fail")
             database.close()
@@ -216,6 +216,24 @@ class FMDBManager {
             database.close()
             return false
         }
+        database.close()
+        return true
+    }
+    
+    func createRootine(rootine: Rootine) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        do {
+            try database.executeUpdate("insert into \(dayTableName) (emoji, title, goal, repeatDays, count) values (?,?,?,?,?)",
+                values: [rootine.emoji, rootine.title, rootine.title, rootine.goal, rootine.getRepeatDay(), rootine.count])
+        } catch {
+            print("failed: \(error.localizedDescription)")
+            database.close()
+            return false
+        }
+        
         database.close()
         return true
     }
