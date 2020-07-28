@@ -81,9 +81,18 @@ class EditVC: UIViewController {
     }
     
     func modifyRootine() {
-        guard let rootine = rootine else {
+        guard var rootine = rootine,
+            let emoji = emojiTextfield.text,
+            let title = nameTextfield.text,
+            let goal = goalTextfield.text else {
             return
         }
+        
+        rootine.emoji = emoji
+        rootine.title = title
+        rootine.goal = goal
+        rootine.repeatDays = selectWeek
+        
         if FMDBManager.shared.updateRootine(rootine: rootine) {
             navigationController?.popViewController(animated: true)
         }
@@ -118,7 +127,11 @@ class EditVC: UIViewController {
     }
     
     @IBAction func saveRootine(_ sender: Any) {
-        createRootine()
+        if rootine != nil {
+            modifyRootine()
+        } else {
+            createRootine()
+        }
     }
 }
 
