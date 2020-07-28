@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBk-0R-Xtx">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="547"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="534"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이모지*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IK6-2x-nJW">
                                                 <rect key="frame" x="24" y="16" width="43" height="18"/>
@@ -42,7 +42,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFs-pO-Ihp">
                                                 <rect key="frame" x="24" y="42" width="60" height="52"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="🏃‍♀️" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2c3-1V-LlP">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2c3-1V-LlP">
                                                         <rect key="frame" x="8" y="10" width="44" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -125,16 +125,19 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수행요일*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmi-eW-DAu">
-                                                <rect key="frame" x="24" y="340" width="55" height="17"/>
+                                                <rect key="frame" x="24" y="340" width="55" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="pKp-7n-jxb"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0pd-nE-vXp">
-                                                <rect key="frame" x="24" y="365" width="366" height="50"/>
+                                                <rect key="frame" x="24" y="366" width="366" height="36"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="thL-u2-vGi"/>
+                                                    <constraint firstAttribute="height" constant="36" id="thL-u2-vGi"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="0.0" id="ra6-4T-eg9">
                                                     <size key="itemSize" width="38" height="36"/>
@@ -144,7 +147,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditWeekCVCell" id="VXn-yW-Pct" customClass="EditWeekCVCell" customModule="mytine" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="7" width="38" height="36"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="36"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Zi-00-iWy">
                                                             <rect key="frame" x="0.0" y="0.0" width="38" height="36"/>
@@ -171,17 +174,20 @@
                                                 </cells>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1개 이상의 요일을 선택해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fa-Zr-VaW">
-                                                <rect key="frame" x="24" y="420" width="126.5" height="12"/>
+                                                <rect key="frame" x="24" y="407" width="126.5" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-RA-CU8">
-                                                <rect key="frame" x="183.5" y="465" width="47" height="32"/>
+                                                <rect key="frame" x="183.5" y="452" width="47" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="Delete">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="saveRootine:" destination="Edz-uK-JQx" eventType="touchUpInside" id="6fy-E3-OdP"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

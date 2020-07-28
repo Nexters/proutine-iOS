@@ -64,11 +64,18 @@ class EditVC: UIViewController {
     }
     
     func createRootine() {
+        guard emojiTextfield.hasText,
+            nameTextfield.hasText,
+            goalTextfield.hasText else {
+                return
+        }
+        
         guard let emoji = emojiTextfield.text,
             let title = nameTextfield.text,
             let goal = goalTextfield.text else {
                 return
         }
+        
         let rootine = Rootine(id: -1,
                               emoji: emoji,
                               title: title,
@@ -107,6 +114,19 @@ class EditVC: UIViewController {
         }
     }
     
+    func waringGeneratorAnimation(view: UILabel) {
+        view.transform = .init(translationX: 4, y: 0)
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.3,
+                       initialSpringVelocity: 0.5,
+                       options: [.allowUserInteraction],
+                       animations: {
+                        view.transform = .identity
+                        
+        })
+    }
+    
     @IBAction func deleteRootine(_ sender: UIButton) {
         let alert = UIAlertController(title: "확인",
                                       message: "정말로 삭제하시겠습니까?",
@@ -127,6 +147,12 @@ class EditVC: UIViewController {
     }
     
     @IBAction func saveRootine(_ sender: Any) {
+        if selectWeek.filter({$0==1}).count == 0 {
+            weekMessage.isHidden = false
+            notiGenerator.notificationOccurred(.error)
+            waringGeneratorAnimation(view: weekMessage)
+        }
+        
         if rootine != nil {
             modifyRootine()
         } else {
@@ -151,6 +177,7 @@ extension EditVC: UICollectionViewDataSource {
 extension EditVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectWeek[indexPath.item] = 1
+        weekMessage.isHidden = true
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -173,12 +200,14 @@ extension EditVC: UITextFieldDelegate {
                     emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
                     emojiMessage.isHidden = false
                     notiGenerator.notificationOccurred(.error)
+                    waringGeneratorAnimation(view: emojiMessage)
                 }
             } else {
                 emojiMessage.text = "루틴의 이모지가 등록되지 않았습니다."
                 emojiMessage.isHidden = false
                 backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
                 notiGenerator.notificationOccurred(.error)
+                waringGeneratorAnimation(view: emojiMessage)
             }
         } else if textField === nameTextfield {
             if textField.hasText {
@@ -189,6 +218,7 @@ extension EditVC: UITextFieldDelegate {
                 nameMessage.isHidden = false
                 backView[1].viewBorder(borderColor: .lightGray, borderWidth: 1)
                 notiGenerator.notificationOccurred(.error)
+                waringGeneratorAnimation(view: nameMessage)
             }
         } else if textField === goalTextfield {
             goalTextfield.resignFirstResponder()
