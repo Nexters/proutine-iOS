@@ -99,9 +99,11 @@ class EditVC: UIViewController {
     }
     
     @IBAction func deleteRootine(_ sender: UIButton) {
-        let alert = UIAlertController(title: "제목", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "확인",
+                                      message: "정말로 삭제하시겠습니까?",
+                                      preferredStyle: .alert)
         
-        let delete = UIAlertAction(title: "삭제하기", style: .default) { (ok) in
+        let delete = UIAlertAction(title: "삭제하기", style: .destructive) { (ok) in
             //code
         }
         let cancel = UIAlertAction(title: "아니오", style: .cancel)
