@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum EditMode {
+    case add, edit
+}
+
 class EditVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var backView: [UIView]!
@@ -18,11 +22,13 @@ class EditVC: UIViewController {
     @IBOutlet weak var emojiMessage: UILabel!
     @IBOutlet weak var nameMessage: UILabel!
     @IBOutlet weak var weekMessage: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
     
     private let weekList = ["월", "화", "수", "목", "금", "토", "일"]
     private var selectWeek = [0,0,0,0,0,0,0]
     private let notiGenerator = UINotificationFeedbackGenerator()
     var rootine: Rootine?
+    var editMode: EditMode = .add
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +38,12 @@ class EditVC: UIViewController {
     }
 
     func setUI() {
+        editMode = rootine == nil ? .add : .edit
+        
+        if editMode == .edit {
+            deleteButton.isHidden = false
+        }
+        
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
                                                    size: 17)!]
@@ -153,11 +165,7 @@ class EditVC: UIViewController {
             waringGeneratorAnimation(view: weekMessage)
         }
         
-        if rootine != nil {
-            modifyRootine()
-        } else {
-            createRootine()
-        }
+        editMode == .edit ? modifyRootine() : createRootine()
     }
 }
 

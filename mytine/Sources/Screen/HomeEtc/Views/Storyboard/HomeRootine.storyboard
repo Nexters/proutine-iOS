@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBk-0R-Xtx">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="534"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="552"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이모지*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IK6-2x-nJW">
                                                 <rect key="frame" x="24" y="16" width="43" height="18"/>
@@ -179,20 +179,16 @@
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-RA-CU8">
-                                                <rect key="frame" x="183.5" y="452" width="47" height="32"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-RA-CU8">
+                                                <rect key="frame" x="183.5" y="470" width="47" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="Delete">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="saveRootine:" destination="Edz-uK-JQx" eventType="touchUpInside" id="6fy-E3-OdP"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="QIL-RA-CU8" firstAttribute="top" secondItem="0pd-nE-vXp" secondAttribute="bottom" constant="50" id="0Bp-kE-3KE"/>
                                             <constraint firstAttribute="trailing" secondItem="EbQ-J8-oJr" secondAttribute="trailing" constant="24" id="0jJ-xy-Vnd"/>
                                             <constraint firstItem="1Fa-Zr-VaW" firstAttribute="leading" secondItem="0pd-nE-vXp" secondAttribute="leading" id="2hy-9L-Zbh"/>
                                             <constraint firstItem="1Fa-Zr-VaW" firstAttribute="top" secondItem="0pd-nE-vXp" secondAttribute="bottom" constant="5" id="3Zn-7P-Bcr"/>
@@ -220,6 +216,7 @@
                                             <constraint firstItem="TdG-yR-phS" firstAttribute="top" secondItem="HLC-VP-02u" secondAttribute="bottom" constant="8" id="gA4-41-6lT"/>
                                             <constraint firstItem="HLC-VP-02u" firstAttribute="top" secondItem="EbQ-J8-oJr" secondAttribute="bottom" constant="30" id="iIm-aY-niy"/>
                                             <constraint firstItem="8bp-CG-4yl" firstAttribute="leading" secondItem="IK6-2x-nJW" secondAttribute="leading" id="lye-3I-lWp"/>
+                                            <constraint firstAttribute="bottom" secondItem="0pd-nE-vXp" secondAttribute="bottom" constant="150" id="zn9-fB-cCP"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -249,6 +246,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="0pd-nE-vXp" id="FlH-QQ-A1m"/>
+                        <outlet property="deleteButton" destination="QIL-RA-CU8" id="6M4-vT-BSu"/>
                         <outlet property="emojiMessage" destination="q9r-Q9-vDS" id="fDa-qz-cSF"/>
                         <outlet property="emojiTextfield" destination="2c3-1V-LlP" id="TO3-xx-3ra"/>
                         <outlet property="goalTextfield" destination="u9M-lU-t1w" id="buX-r8-Zrt"/>
