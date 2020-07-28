@@ -21,7 +21,7 @@ class EditVC: UIViewController {
     @IBOutlet weak var weekMessage: UILabel!
     
     private let weekList = ["월", "화", "수", "목", "금", "토", "일"]
-    
+    private var selectWeek = [false,false,false,false,false,false,false,]
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -97,7 +97,13 @@ extension EditVC: UICollectionViewDataSource {
 }
 
 extension EditVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectWeek[indexPath.item] = true
+    }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        selectWeek[indexPath.item] = false
+    }
 }
 
 extension EditVC: UITextFieldDelegate {
