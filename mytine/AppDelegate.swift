@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         checkWeek()
+        print("현재 저장된 루틴::::::::")
+        FMDBManager.shared.selectRootine(id: 0)
+        
+        print(":::::::::::::::::::::::::::::")
+        print(":::::::::::::::::::::::::::::")
         let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
         window?.rootViewController = sb.instantiateViewController(withIdentifier: "EditVC")
         return true

@@ -21,7 +21,9 @@ class EditVC: UIViewController {
     @IBOutlet weak var weekMessage: UILabel!
     
     private let weekList = ["월", "화", "수", "목", "금", "토", "일"]
-    private var selectWeek = [false,false,false,false,false,false,false,]
+    private var selectWeek = [0,0,0,0,0,0,0]
+    var rootine: Rootine?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -61,6 +63,41 @@ class EditVC: UIViewController {
         collectionView.allowsMultipleSelection = true
     }
     
+    func createRootine() {
+        guard let emoji = emojiTextfield.text,
+            let title = nameTextfield.text,
+            let goal = goalTextfield.text else {
+                return
+        }
+        let rootine = Rootine(id: -1,
+                              emoji: emoji,
+                              title: title,
+                              goal: goal,
+                              repeatDays: selectWeek,
+                              count: 1)
+        if FMDBManager.shared.createRootine(rootine: rootine) {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func modifyRootine() {
+        guard let rootine = rootine else {
+            return
+        }
+        if FMDBManager.shared.updateRootine(rootine: rootine) {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func deleteRootine() {
+        guard let rootine = rootine else {
+            return
+        }
+        if FMDBManager.shared.deleteRootine(id: rootine.id) {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
     @IBAction func deleteRootine(_ sender: UIButton) {
         let alert = UIAlertController(title: "제목", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
         
@@ -78,8 +115,8 @@ class EditVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func saveRootine(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+    @IBAction func saveRootine(_ sender: Any) {
+        createRootine()
     }
 }
 
@@ -98,11 +135,11 @@ extension EditVC: UICollectionViewDataSource {
 
 extension EditVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectWeek[indexPath.item] = true
+        selectWeek[indexPath.item] = 1
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        selectWeek[indexPath.item] = false
+        selectWeek[indexPath.item] = 0
     }
 }
 
