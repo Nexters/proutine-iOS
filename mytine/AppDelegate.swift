@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         checkWeek()
         let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
-        window?.rootViewController = sb.instantiateViewController(withIdentifier: "CalendarNC")
+        window?.rootViewController = sb.instantiateViewController(withIdentifier: "EditVC")
         return true
     }
     

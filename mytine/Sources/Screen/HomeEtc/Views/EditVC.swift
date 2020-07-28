@@ -9,9 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class EditVC: UIViewController, UITextFieldDelegate {
-    
-    var weekList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+class EditVC: UIViewController {
     @IBOutlet var backView: [UIView]!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var emojiTextfield: UITextField!
@@ -21,54 +19,36 @@ class EditVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var nameMessage: UILabel!
     @IBOutlet var weekMessage: UILabel!
     
+    private let weekList = ["월", "화", "수", "목", "금", "토", "일"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.allowsMultipleSelection = true
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17)!]
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17.0)!], for: .normal)
+        setupCollectionView()
+       
     }
     
     func setUI() {
-        backView[0].viewRounded(cornerRadius: 10)
-        backView[1].viewRounded(cornerRadius: 10)
-        backView[2].viewRounded(cornerRadius: 10)
+        self.navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
+                                                   size: 17)!]
+        self.navigationItem.rightBarButtonItem?
+            .setTitleTextAttributes([ NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17.0)!],
+                                    for: .normal)
+        
+        backView.forEach{ $0.viewRounded(cornerRadius: 10) }
         emojiMessage.isHidden = true
         nameMessage.isHidden = true
         weekMessage.isHidden = true
+        emojiTextfield.delegate = self
+        goalTextfield.delegate = self
+        nameTextfield.delegate = self
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == emojiTextfield {
-            if textField.text == nil {
-                emojiMessage.isHidden = false
-                backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            } else if textField.text?.isSingleEmoji == false {
-                emojiMessage.isHidden = false
-                emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
-                backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            } else {
-                emojiMessage.isHidden = true
-                nameTextfield.becomeFirstResponder()
-            }
-        } else if textField == nameTextfield {
-            if textField.text == nil {
-                nameMessage.isHidden = false
-                backView[1].viewBorder(borderColor: .lightGray, borderWidth: 1)
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            } else {
-                nameMessage.isHidden = true
-                goalTextfield.becomeFirstResponder()
-            }
-        } else if textField == goalTextfield {
-            goalTextfield.resignFirstResponder()
-        }
-        return true
+    func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.allowsMultipleSelection = true
     }
     
     @IBAction func deleteRootine(_ sender: UIButton) {
@@ -77,29 +57,25 @@ class EditVC: UIViewController, UITextFieldDelegate {
         let delete = UIAlertAction(title: "삭제하기", style: .default) { (ok) in
             //code
         }
-        let cancel = UIAlertAction(title: "아니오", style: .cancel) { (cancel) in
-            //code
-        }
+        let cancel = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(cancel)
         alert.addAction(delete)
         
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func backHome(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func saveRootine(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
-extension EditVC: UICollectionViewDelegate {
-    
-}
+
 extension EditVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return weekList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,29 +85,46 @@ extension EditVC: UICollectionViewDataSource {
         return cell
     }
 }
-extension Character {
-    /// A simple emoji is one scalar and presented to the user as an Emoji
-    var isSimpleEmoji: Bool {
-        guard let firstScalar = unicodeScalars.first else { return false }
-        return firstScalar.properties.isEmoji && firstScalar.value > 0x238C
-    }
+
+extension EditVC: UICollectionViewDelegate {
     
-    /// Checks if the scalars will be merged into an emoji
-    var isCombinedIntoEmoji: Bool { unicodeScalars.count > 1 && unicodeScalars.first?.properties.isEmoji ?? false }
-    
-    var isEmoji: Bool { isSimpleEmoji || isCombinedIntoEmoji }
 }
 
-extension String {
-    var isSingleEmoji: Bool { count == 1 && containsEmoji }
+
+extension EditVC: UITextFieldDelegate {
     
-    var containsEmoji: Bool { contains { $0.isEmoji } }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField === emojiTextfield {
+            if let emojiText = textField.text {
+                if emojiText.isSingleEmoji {
+                    emojiMessage.isHidden = true
+                    backView[0].viewBorder(borderColor: .clear, borderWidth: 1)
+                    nameTextfield.becomeFirstResponder()
+                } else {
+                    textField.text = ""
+                    emojiMessage.isHidden = false
+                    emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                }
+            } else {
+                emojiMessage.isHidden = false
+                emojiMessage.text = "루틴의 이모지가 등록되지 않았습니다."
+                backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
+        } else if textField === nameTextfield {
+            
+        }
+    }
+        
+    }
     
-    var containsOnlyEmoji: Bool { !isEmpty && !contains { !$0.isEmoji } }
-    
-    var emojiString: String { emojis.map { String($0) }.reduce("", +) }
-    
-    var emojis: [Character] { filter { $0.isEmoji } }
-    
-    var emojiScalars: [UnicodeScalar] { filter { $0.isEmoji }.flatMap { $0.unicodeScalars } }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let curString = textField.text else { return false }
+        guard let stringRange = Range(range, in: curString) else { return false }
+        
+        let updateText = curString.replacingCharacters(in: stringRange, with: string)
+        return updateText.count < 2
+    }
 }
