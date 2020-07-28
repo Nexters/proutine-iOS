@@ -10,6 +10,7 @@ import UIKit
 import AudioToolbox
 
 class EditVC: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var backView: [UIView]!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var emojiTextfield: UITextField!
@@ -28,6 +29,10 @@ class EditVC: UIViewController {
        
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     func setUI() {
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
@@ -43,6 +48,14 @@ class EditVC: UIViewController {
         emojiTextfield.delegate = self
         goalTextfield.delegate = self
         nameTextfield.delegate = self
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.keyboardHide))
+        scrollView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc
+    func keyboardHide() {
+        view.endEditing(true)
     }
     
     func setupCollectionView() {
@@ -90,33 +103,54 @@ extension EditVC: UICollectionViewDelegate {
     
 }
 
-
 extension EditVC: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField === emojiTextfield {
-            if let emojiText = textField.text {
+            if textField.hasText,
+                let emojiText = textField.text {
                 if emojiText.isSingleEmoji {
                     emojiMessage.isHidden = true
                     backView[0].viewBorder(borderColor: .clear, borderWidth: 1)
                     nameTextfield.becomeFirstResponder()
                 } else {
                     textField.text = ""
-                    emojiMessage.isHidden = false
                     emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
+                    emojiMessage.isHidden = false
                     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                 }
             } else {
-                emojiMessage.isHidden = false
                 emojiMessage.text = "루틴의 이모지가 등록되지 않았습니다."
+                emojiMessage.isHidden = false
                 backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             }
         } else if textField === nameTextfield {
-            
+            if textField.hasText {
+                nameMessage.isHidden = true
+                backView[1].viewBorder(borderColor: .clear, borderWidth: 1)
+                goalTextfield.becomeFirstResponder()
+            } else {
+                nameMessage.isHidden = false
+                backView[1].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
+        } else if textField === goalTextfield {
+            goalTextfield.resignFirstResponder()
         }
-    }
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === emojiTextfield {
+            nameTextfield.becomeFirstResponder()
+        } else if textField === nameTextfield {
+            goalTextfield.becomeFirstResponder()
+        } else if textField === goalTextfield {
+            goalTextfield.resignFirstResponder()
+        }
+        
+        return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -125,6 +159,10 @@ extension EditVC: UITextFieldDelegate {
         guard let stringRange = Range(range, in: curString) else { return false }
         
         let updateText = curString.replacingCharacters(in: stringRange, with: string)
-        return updateText.count < 2
+        if textField === emojiTextfield {
+            return updateText.count < 2
+        } else {
+            return updateText.count < 18
+        }
     }
 }

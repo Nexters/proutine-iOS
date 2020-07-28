@@ -263,6 +263,7 @@
                         <outlet property="goalTextfield" destination="u9M-lU-t1w" id="buX-r8-Zrt"/>
                         <outlet property="nameMessage" destination="dPl-iZ-iEp" id="yjq-4D-GVO"/>
                         <outlet property="nameTextfield" destination="aCB-G6-HLp" id="RYD-1R-KPT"/>
+                        <outlet property="scrollView" destination="m4m-Gz-m9e" id="7W5-a7-BDz"/>
                         <outlet property="weekMessage" destination="1Fa-Zr-VaW" id="jKj-dH-oh2"/>
                         <outletCollection property="backView" destination="NFs-pO-Ihp" collectionClass="NSMutableArray" id="5LF-6n-Z3Z"/>
                         <outletCollection property="backView" destination="EbQ-J8-oJr" collectionClass="NSMutableArray" id="Rel-MI-cFi"/>
