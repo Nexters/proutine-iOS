@@ -12,13 +12,13 @@ import AudioToolbox
 class EditVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var backView: [UIView]!
-    @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var emojiTextfield: UITextField!
-    @IBOutlet var nameTextfield: UITextField!
-    @IBOutlet var goalTextfield: UITextField!
-    @IBOutlet var emojiMessage: UILabel!
-    @IBOutlet var nameMessage: UILabel!
-    @IBOutlet var weekMessage: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var emojiTextfield: UITextField!
+    @IBOutlet weak var nameTextfield: UITextField!
+    @IBOutlet weak var goalTextfield: UITextField!
+    @IBOutlet weak var emojiMessage: UILabel!
+    @IBOutlet weak var nameMessage: UILabel!
+    @IBOutlet weak var weekMessage: UILabel!
     
     private let weekList = ["월", "화", "수", "목", "금", "토", "일"]
     
@@ -28,11 +28,7 @@ class EditVC: UIViewController {
         setupCollectionView()
        
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
+
     func setUI() {
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
@@ -50,6 +46,7 @@ class EditVC: UIViewController {
         nameTextfield.delegate = self
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.keyboardHide))
+        tapGesture.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tapGesture)
     }
     
