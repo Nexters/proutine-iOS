@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("현재 저장된 루틴::::::::")
         FMDBManager.shared.selectRootine(id: 0)
         
-        print(":::::::::::::::::::::::::::::")
-        print(":::::::::::::::::::::::::::::")
+        print("::::::::::::App:::::::::::::::::")
+        print("::::::::::::Open::::::::::::::::")
         let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
         window?.rootViewController = sb.instantiateViewController(withIdentifier: "EditVC")
         return true

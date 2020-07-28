@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AudioToolbox
 
 class EditVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
@@ -22,6 +21,7 @@ class EditVC: UIViewController {
     
     private let weekList = ["월", "화", "수", "목", "금", "토", "일"]
     private var selectWeek = [0,0,0,0,0,0,0]
+    private let notiGenerator = UINotificationFeedbackGenerator()
     var rootine: Rootine?
     
     override func viewDidLoad() {
@@ -172,13 +172,13 @@ extension EditVC: UITextFieldDelegate {
                     textField.text = ""
                     emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
                     emojiMessage.isHidden = false
-                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    notiGenerator.notificationOccurred(.error)
                 }
             } else {
                 emojiMessage.text = "루틴의 이모지가 등록되지 않았습니다."
                 emojiMessage.isHidden = false
                 backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                notiGenerator.notificationOccurred(.error)
             }
         } else if textField === nameTextfield {
             if textField.hasText {
@@ -188,7 +188,7 @@ extension EditVC: UITextFieldDelegate {
             } else {
                 nameMessage.isHidden = false
                 backView[1].viewBorder(borderColor: .lightGray, borderWidth: 1)
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                notiGenerator.notificationOccurred(.error)
             }
         } else if textField === goalTextfield {
             goalTextfield.resignFirstResponder()
