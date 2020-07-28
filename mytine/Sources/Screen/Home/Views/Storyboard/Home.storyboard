@@ -293,6 +293,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="dropView" destination="sPI-Tf-LOi" id="KiU-mi-4Tq"/>
@@ -301,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xan-fr-dxG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3840.8000000000002" y="703.44827586206907"/>
+            <point key="canvasLocation" x="3962" y="1605"/>
         </scene>
         <!--Home PopVC-->
         <scene sceneID="Dv2-4g-PWH">
@@ -390,12 +391,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5N-fF-aWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4632.8000000000002" y="691.304347826087"/>
+            <point key="canvasLocation" x="4617" y="1500"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PZ5-Ea-6l5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fn2-sS-aK3" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RoutineNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fn2-sS-aK3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zNk-sF-BQT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -404,12 +405,28 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="n16-al-WaH" kind="relationship" relationship="rootViewController" id="HjI-w8-D7i"/>
+                        <segue destination="NXk-ns-XEt" kind="relationship" relationship="rootViewController" id="p3S-tu-KQl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hP0-5d-8Fc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2901.5999999999999" y="702.99850074962524"/>
+        </scene>
+        <!--루틴-->
+        <scene sceneID="gy8-UO-RES">
+            <objects>
+                <viewController id="NXk-ns-XEt" customClass="RoutineVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ci1-wq-qtv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="G0Q-Vb-BI2"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="루틴" id="R2n-3R-4zZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9vY-o2-Uqk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3664" y="704"/>
         </scene>
     </scenes>
 </document>
