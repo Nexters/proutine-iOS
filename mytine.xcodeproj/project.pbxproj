@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0028C44641753489C46D550B /* Pods_mytine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDA17E344702CFAAB58362C /* Pods_mytine.framework */; };
 		0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */; };
-		0636992D24CC1D4F00C1C900 /* HomeRootineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */; };
 		0636993024CC1DAC00C1C900 /* HomeRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */; };
 		0636993124CC1DAC00C1C900 /* HomeRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */; };
 		0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */; };
@@ -46,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeRootine.storyboard; sourceTree = "<group>"; };
-		0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootineViewController.swift; sourceTree = "<group>"; };
 		0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootineCVCell.swift; sourceTree = "<group>"; };
 		0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeRootineCVCell.xib; sourceTree = "<group>"; };
 		0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRootineTVCell.swift; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 			children = (
 				08A5E5DF24C8644200AA7B61 /* EditVC.swift */,
 				0804D26F24B850E3002D2A12 /* CalendarVC.swift */,
-				0636992C24CC1D4F00C1C900 /* HomeRootineViewController.swift */,
 				08A7A64F24CC3D7400D609E2 /* Storyboard */,
 			);
 			path = Views;
@@ -430,7 +427,6 @@
 				08A5E5E024C8644200AA7B61 /* EditVC.swift in Sources */,
 				08A3F44B24C57B8B00201278 /* WeekCVCell.swift in Sources */,
 				08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */,
-				0636992D24CC1D4F00C1C900 /* HomeRootineViewController.swift in Sources */,
 				0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */,
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
