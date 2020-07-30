@@ -247,12 +247,12 @@ class FMDBManager {
     }
     
     // 0이면 모두 조회
-    func selectRootine(id: Int) -> Bool {
+    func selectRootine(id: Int) -> [Rootine] {
         guard database.open() else {
             print("Unable to open database")
-            return false
+            return []
         }
-        
+        var routineList: [Rootine] = []
         do {
             var queryString: String
             if id == 0 {
@@ -262,6 +262,7 @@ class FMDBManager {
             }
             let rs = try database.executeQuery(queryString, values: nil)
             
+            
             while rs.next() {
                 let id: Int32 = rs.int(forColumn: "id")
                 let emoji: String = rs.string(forColumn: "emoji") ?? ""
@@ -269,19 +270,21 @@ class FMDBManager {
                 let goal: String = rs.string(forColumn: "goal") ?? ""
                 let repeatDays: String = rs.string(forColumn: "repeatDays") ?? ""
                 let count: Int32 = rs.int(forColumn: "count")
+                let intRepeatDays = repeatDays.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
+                let routine = Rootine(id: Int(id), emoji: emoji, title: title, goal: goal, repeatDays: intRepeatDays, count: Int(count))
                 
-                
+                routineList.append(routine)
                 print("id \(id) :::: week \(emoji) ::::: completes \(repeatDays) ::::: count \(count)")
             }
            
         } catch {
             print("Unable to open database")
             database.close()
-            return false
+            return []
         }
         
         database.close()
-        return true
+        return routineList
     }
     
     func updateRootine(rootine: Rootine) -> Bool {

@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print()
         print("::::::::::::App:::::::::::::::::")
         print("::::::::::::Open::::::::::::::::")
-        let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
-        window?.rootViewController = sb.instantiateViewController(withIdentifier: "CalendarVC")
+        let sb = UIStoryboard(name: "Home", bundle: .main)
+        window?.rootViewController = sb.instantiateViewController(withIdentifier: "HomeNav")
         return true
     }
     

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 import DropDown
 
 class HomeVC: UIViewController {
@@ -16,6 +19,7 @@ class HomeVC: UIViewController {
     private let downButton = UIButton()
     var weekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     var routineList: [String] = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어", "허벅지 불타오르기", "오빠 괴롭히기"]
+    let viewModel = HomeViewModel()
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var dropView: UIView!
@@ -26,11 +30,45 @@ class HomeVC: UIViewController {
         setDownButton()
         setListDropDown()
         setupTableView()
-
+        setupTableView(viewModel: viewModel)
+        viewModel.bind()
         let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as! HomePopVC
         popup.modalPresentationStyle = .overFullScreen
         popup.modalTransitionStyle = .crossDissolve
         present(popup, animated: true, completion: nil)
+    }
+    
+    func setupTableView(viewModel: HomeViewModel) {
+        viewModel
+            .weekCellModel
+            .bind(to: tableView.rx.items) { [weak self] (tableview, row, item) -> UITableViewCell in
+                print(row)
+                if row == 0 {
+                    //요일
+                    guard let cell = self?.tableView.dequeueReusableCell(withIdentifier: WeekRootineTVCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) else {
+                        return .init()
+                    }
+                    return cell
+                } else if row <= viewModel.weekCellModel.value.count {
+                    // 루틴
+                    guard let cell = self?.tableView.dequeueReusableCell(withIdentifier: CheckCVCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) else {
+                        return .init()
+                    }
+                    return cell
+                } else if row == viewModel.weekCellModel.value.count+1 {
+                    //TODO: 버튼, 회고/루틴
+                    guard let cell = self?.tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier, for: IndexPath(row: row, section: 1)) else {
+                        return .init()
+                    }
+                    return cell
+                } else {
+                    guard let cell = self?.tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: IndexPath(row: row, section: 1)) else {
+                        return .init()
+                    }
+                    return cell
+                }
+        }
+        .disposed(by: rx.disposeBag)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -55,10 +93,10 @@ class HomeVC: UIViewController {
     
     /// Drop down button
     func setupTableView() {
-        let nib = UINib(nibName: HomeRootineCVCell.nibName, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: HomeRootineCVCell.reuseIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
+        let nib = UINib(nibName: WeekRootineTVCell.nibName, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: WeekRootineTVCell.reuseIdentifier)
+//        tableView.delegate = self
+//        tableView.dataSource = self
     }
     
     func setDownButton() {
@@ -130,101 +168,101 @@ extension HomeVC: UICollectionViewDataSource {
     }
 }
 // MARK:- 일별 루틴 체크 table view
-extension HomeVC: UITableViewDelegate {
-    
-}
-extension HomeVC: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }else {
-            return routineList.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell", for: indexPath) as! WeekTVCell
-//            cell.weekLabel.text = weekList[indexPath.row]
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell", for: indexPath) as? WeekTVCell else {
-                return .init()
-            }
-            cell.bind()
-            
-            return cell
-        }
-        else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
-            
-            cell.viewRounded(cornerRadius: 10)
-            //            cell.timeLabel.text =
-            cell.listLabel.text = routineList[indexPath.row]
-            //            cell.iconLabel.text =
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TabTVCell")
-            return cell
-        }
-        else {
-            let rect = CGRect(x: 0, y: 0, width: 0, height: 0)
-            let myView = UIView(frame: rect)
-            return myView
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
-            return 50
-        }
-        else {
-            return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 1 {
-            let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
-                print("루틴 완료")
-            }
-            doneAction.backgroundColor = UIColor.doneColor
-            
-            return UISwipeActionsConfiguration(actions: [doneAction])
-        }
-        else {
-            return UISwipeActionsConfiguration.init()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        if indexPath.section == 1 {
-            let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
-                //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
-                //            cell.backView.backgroundColor = .lightGray
-                print("완료 취소")
-            }
-            cancelAction.backgroundColor = UIColor.doneColor
-            return UISwipeActionsConfiguration(actions: [cancelAction])
-        }
-        else {
-            return UISwipeActionsConfiguration.init()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 400
-        } else {
-            return 75
-        }
-    }
-}
+//extension HomeVC: UITableViewDelegate {
+//
+//}
+//extension HomeVC: UITableViewDataSource {
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 2
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if section == 0 {
+//            return 1
+//        }else {
+//            return routineList.count
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if indexPath.section == 0 {
+////            let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell", for: indexPath) as! WeekTVCell
+////            cell.weekLabel.text = weekList[indexPath.row]
+//
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeekTVCell", for: indexPath) as? WeekTVCell else {
+//                return .init()
+//            }
+//            cell.bind()
+//
+//            return cell
+//        }
+//        else {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
+//
+//            cell.viewRounded(cornerRadius: 10)
+//            //            cell.timeLabel.text =
+//            cell.listLabel.text = routineList[indexPath.row]
+//            //            cell.iconLabel.text =
+//            return cell
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == 1 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "TabTVCell")
+//            return cell
+//        }
+//        else {
+//            let rect = CGRect(x: 0, y: 0, width: 0, height: 0)
+//            let myView = UIView(frame: rect)
+//            return myView
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if section == 1 {
+//            return 50
+//        }
+//        else {
+//            return 0
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        if indexPath.section == 1 {
+//            let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
+//                print("루틴 완료")
+//            }
+//            doneAction.backgroundColor = UIColor.doneColor
+//
+//            return UISwipeActionsConfiguration(actions: [doneAction])
+//        }
+//        else {
+//            return UISwipeActionsConfiguration.init()
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//
+//        if indexPath.section == 1 {
+//            let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
+//                //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
+//                //            cell.backView.backgroundColor = .lightGray
+//                print("완료 취소")
+//            }
+//            cancelAction.backgroundColor = UIColor.doneColor
+//            return UISwipeActionsConfiguration(actions: [cancelAction])
+//        }
+//        else {
+//            return UISwipeActionsConfiguration.init()
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.section == 0 {
+//            return 400
+//        } else {
+//            return 75
+//        }
+//    }
+//}

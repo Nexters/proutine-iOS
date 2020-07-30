@@ -16,18 +16,7 @@ class RoutineTVCell: UITableViewCell {
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var iconLabel: UILabel!
     @IBOutlet var listLabel: UILabel!
-    
-    var item: Routine? {
-        didSet {
-            guard let item = item else {
-                return
-            }
-            iconLabel?.text = item.emoji
-            timeLabel?.text = item.goal
-            listLabel?.text = item.title
-        }
-    }
-    
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backView.viewRounded(cornerRadius: 10)
@@ -38,5 +27,4 @@ class RoutineTVCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fn2-sS-aK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VvJ-qK-ojV">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -391,72 +391,9 @@
             <point key="canvasLocation" x="5556" y="1499.1004497751126"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="PZ5-Ea-6l5">
-            <objects>
-                <navigationController storyboardIdentifier="RoutineNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fn2-sS-aK3" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zNk-sF-BQT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="NXk-ns-XEt" kind="relationship" relationship="rootViewController" id="p3S-tu-KQl"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hP0-5d-8Fc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2901.5999999999999" y="702.99850074962524"/>
-        </scene>
-        <!--루틴 목록-->
-        <scene sceneID="gy8-UO-RES">
-            <objects>
-                <viewController storyboardIdentifier="RoutineVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NXk-ns-XEt" customClass="RoutineVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ci1-wq-qtv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ovS-kZ-BMc">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="HfQ-la-iKq">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HfQ-la-iKq" id="GdK-VU-H0w">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="G0Q-Vb-BI2" firstAttribute="bottom" secondItem="ovS-kZ-BMc" secondAttribute="bottom" id="20K-RZ-1A0"/>
-                            <constraint firstItem="ovS-kZ-BMc" firstAttribute="top" secondItem="G0Q-Vb-BI2" secondAttribute="top" id="JtA-2P-whs"/>
-                            <constraint firstItem="G0Q-Vb-BI2" firstAttribute="trailing" secondItem="ovS-kZ-BMc" secondAttribute="trailing" id="MIX-IO-Kgx"/>
-                            <constraint firstItem="ovS-kZ-BMc" firstAttribute="leading" secondItem="G0Q-Vb-BI2" secondAttribute="leading" id="xqn-wf-i6E"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="G0Q-Vb-BI2"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="루틴 목록" id="R2n-3R-4zZ">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="Wt0-Kc-ebZ"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="editButton" destination="Wt0-Kc-ebZ" id="ZSo-0W-SqF"/>
-                        <outlet property="routineTableView" destination="ovS-kZ-BMc" id="RFU-7f-dW8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9vY-o2-Uqk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3664" y="704"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="62d-Bj-iE0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VvJ-qK-ojV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VvJ-qK-ojV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NYP-ov-8I2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
