@@ -15,4 +15,5 @@ target 'mytine' do
   pod 'DropDown','~> 2.3.13'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'NSObject+Rx'
 end

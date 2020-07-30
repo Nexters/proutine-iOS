@@ -7,6 +7,8 @@ PODS:
     - Kingfisher/Core (= 5.14.1)
   - Kingfisher/Core (5.14.1)
   - lottie-ios (3.1.8)
+  - "NSObject+Rx (5.1.0)":
+    - RxSwift (~> 5.1)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -22,6 +24,7 @@ DEPENDENCIES:
   - FMDB (~> 2.7.5)
   - Kingfisher (~> 5.14.1)
   - lottie-ios (~> 3.1.8)
+  - "NSObject+Rx"
   - RxCocoa
   - RxSwift
   - SnapKit (~> 5.0.1)
@@ -34,6 +37,7 @@ SPEC REPOS:
     - FMDB
     - Kingfisher
     - lottie-ios
+    - "NSObject+Rx"
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -46,6 +50,7 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
@@ -53,6 +58,6 @@ SPEC CHECKSUMS:
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 9c167572a16331d7f5173768deaaacbcd92abf2e
+PODFILE CHECKSUM: 7ab24272f9e858ae73714958ca0a035a73edaebb
 
 COCOAPODS: 1.9.1
