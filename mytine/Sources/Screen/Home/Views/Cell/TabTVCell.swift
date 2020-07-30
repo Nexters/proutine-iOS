@@ -9,13 +9,16 @@
 import UIKit
 
 class TabTVCell: UITableViewCell {
+    static let nibName = "TabTVCell"
+    static let reuseIdentifier = "TabTVCell"
+    
+    var routine : (() -> ()) = {}
+    var retrospect : (() -> ()) = {}
     
     @IBOutlet var routineBtn: UIButton!
     @IBOutlet var reviewBtn: UIButton!
     @IBOutlet var barView: UIView!
     @IBOutlet var barwidth: NSLayoutConstraint!
-    var routine : (() -> ()) = {}
-    var retrospect : (() -> ()) = {}
     
     override func awakeFromNib() {
         super.awakeFromNib()
