@@ -28,16 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print()
         print("::::::::::::App:::::::::::::::::")
         print("::::::::::::Open::::::::::::::::")
-//        let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
-//        window?.rootViewController = sb.instantiateViewController(withIdentifier: "CalendarVC")
-//        return true
-        
-        let storage = MemoryStorage()
-        let coordinator = SceneCoordinator(window: window!)
-        let listViewModel = RoutineListViewModel(title: "July.19-25", sceneCoordinator: coordinator, storage: storage)
-        let listScene = Scene.list(listViewModel)
-        coordinator.transition(to: listScene, using: .root, animated: false)
-
+        let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
+        window?.rootViewController = sb.instantiateViewController(withIdentifier: "CalendarVC")
         return true
     }
     
