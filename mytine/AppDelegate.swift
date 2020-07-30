@@ -18,7 +18,14 @@ var window: UIWindow?
         let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
         window?.rootViewController = sb.instantiateViewController(withIdentifier: "CalendarNC")
         return true
+        
+//        let storage = MemoryStorage()
+//        let coordinator = SceneCoordinator(window: window!)
+//        let listViewModel = RoutineListViewModel(title: "July.19-25", sceneCoordinator: coordinator, storage: storage)
+//        let listScene = Scene.list(listViewModel)
+//        coordinator.transition(to: listScene, using: .root, animated: false)
+//
+//        return true
     }
-
 }
 

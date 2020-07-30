@@ -7,7 +7,11 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
-class RoutineListViewModel {
-    
+class RoutineListViewModel: CommonViewModel {
+    var routineList: Observable<[Routine]> {
+        return storage.routineList()
+    }
 }
