@@ -16,6 +16,7 @@ class CalendarManager {
             print(month)
         }
     }
+    
     var year: Int {
         didSet {
             print(year)
@@ -60,5 +61,4 @@ class CalendarManager {
             year -= 1
         }
     }
-    
 }

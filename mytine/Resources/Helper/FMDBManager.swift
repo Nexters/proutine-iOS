@@ -261,8 +261,6 @@ class FMDBManager {
                 queryString = "select * from \(rootineTableName) where id = \(id)"
             }
             let rs = try database.executeQuery(queryString, values: nil)
-            
-            
             while rs.next() {
                 let id: Int32 = rs.int(forColumn: "id")
                 let emoji: String = rs.string(forColumn: "emoji") ?? ""

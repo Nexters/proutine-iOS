@@ -11,6 +11,7 @@ import UIKit
 class HomeRootineCVCell: UICollectionViewCell {
     static let nibName = "HomeRootineCVCell"
     static let reuseIdentifier = "HomeRootineCVCell"
+    
     @IBOutlet var weekLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     

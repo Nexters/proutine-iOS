@@ -59,7 +59,7 @@ class CalendarVC: UIViewController {
     func setupNavigation() {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17)!]
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
+        guard let nextVC = storyboard.instantiateViewController(identifier: "HomeVC") as? HomeVC else { return }
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
@@ -74,15 +74,12 @@ class CalendarVC: UIViewController {
         calendarCV.dataSource = self
         calendarCV.allowsMultipleSelection = false
     }
-    
-    
 }
 extension CalendarVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
-        let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
-        
+        guard let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as? HomeVC else { return }
         dvc.index = indexPath
         self.navigationController?.pushViewController(dvc, animated: true)
     }
@@ -93,7 +90,7 @@ extension CalendarVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckCVCell", for: indexPath) as! CheckCVCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckCVCell", for: indexPath) as? CheckCVCell else { return .init() }
         
         if indexPath.item > emptyDayCount-1 {
             cell.checkLabel.text = "🟢"
@@ -103,8 +100,6 @@ extension CalendarVC: UICollectionViewDataSource {
             cell.checkLabel.text = "⚪️"
             cell.dateLabel.text = ""
         }
-        
-        
         return cell
     }
     
@@ -113,7 +108,7 @@ extension CalendarVC: UICollectionViewDataSource {
         let view = UICollectionReusableView(frame: rect)
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CheckReusableView", for: indexPath) as! CheckReusableView
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CheckReusableView", for: indexPath) as? CheckReusableView else { return .init()}
                 headerView.monthLabel.text = "7월"
             return headerView
         default:

@@ -12,8 +12,8 @@ class TabTVCell: UITableViewCell {
     static let nibName = "TabTVCell"
     static let reuseIdentifier = "TabTVCell"
     
-    var routine : (() -> ()) = {}
-    var retrospect : (() -> ()) = {}
+//    var routine : (() -> ()) = {}
+//    var retrospect : (() -> ()) = {}
     
     @IBOutlet var routineBtn: UIButton!
     @IBOutlet var reviewBtn: UIButton!
@@ -26,7 +26,7 @@ class TabTVCell: UITableViewCell {
     }
     
     @IBAction func clickRoutine(_ sender: UIButton) {
-        routine()
+//      routine()
         self.barwidth.constant = self.routineBtn.frame.width
 //        self.barView.frame.size.width = self.routineBtn.frame.width
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
@@ -39,7 +39,7 @@ class TabTVCell: UITableViewCell {
     }
     
     @IBAction func clickReview(_ sender: UIButton) {
-        retrospect()
+//      retrospect()
         self.barwidth.constant = self.reviewBtn.frame.width
 //        self.barView.frame.size.width = self.reviewBtn.frame.width
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {

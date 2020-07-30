@@ -5,12 +5,14 @@ PODS:
   - FMDB/standard (2.7.5)
   - lottie-ios (3.1.8)
   - SnapKit (5.0.1)
+  - SwiftLint (0.39.2)
 
 DEPENDENCIES:
   - DropDown (~> 2.3.13)
   - FMDB (~> 2.7.5)
   - lottie-ios (~> 3.1.8)
   - SnapKit (~> 5.0.1)
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
@@ -18,13 +20,15 @@ SPEC REPOS:
     - FMDB
     - lottie-ios
     - SnapKit
+    - SwiftLint
 
 SPEC CHECKSUMS:
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: e6c2aa535ef8658919da9f51b0332698928fbac6
+PODFILE CHECKSUM: b50595565264019b821fb31c71002b418b76aee1
 
 COCOAPODS: 1.9.1

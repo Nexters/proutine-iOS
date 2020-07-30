@@ -10,6 +10,9 @@ import UIKit
 import DropDown
 
 class HomeVC: UIViewController {
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var dropView: UIView!
+    
     var array: NSArray?
     var index: IndexPath?
     var dropDown: DropDown?
@@ -17,16 +20,12 @@ class HomeVC: UIViewController {
     var weekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     var routineList: [String] = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어", "허벅지 불타오르기", "오빠 괴롭히기"]
     
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var dropView: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setDownButton()
         setListDropDown()
         setupTableView()
-        let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as! HomePopVC
+        guard let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as? HomePopVC else { return }
         popup.modalPresentationStyle = .overFullScreen
         popup.modalTransitionStyle = .crossDissolve
         present(popup, animated: true, completion: nil)
@@ -34,22 +33,9 @@ class HomeVC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: index, animated: true)
         }
-    }
-    
-    /// Left bar button Item
-    @IBAction func showCalendar(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    /// Right bar button Item
-    @IBAction func addRoutine(_ sender: UIBarButtonItem) {
-        let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
-        let dvc = storyboard.instantiateViewController(identifier: "EditVC") as! EditVC
-        self.navigationController?.pushViewController(dvc, animated: true)
     }
     
     /// Drop down button
@@ -72,26 +58,25 @@ class HomeVC: UIViewController {
             downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 45),
             downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
             downButton.widthAnchor.constraint(equalToConstant: 24),
-            downButton.heightAnchor.constraint(equalToConstant: 24),
+            downButton.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     
-    @objc func clickDownButton(){
+    @objc func clickDownButton() {
         downButton.isSelected = !downButton.isSelected
         if downButton.isSelected == true {
             self.dropDown?.reloadAllComponents()
             dropDown?.show()
-        }
-        else {
-//            UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
-//                self.downButton.transform = .identity
-//                self.view.layoutIfNeeded()
-//            })
+        } else {
+            //            UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
+            //                self.downButton.transform = .identity
+            //                self.view.layoutIfNeeded()
+            //            })
         }
     }
     
-    func setListDropDown(){
-        let dropList : [String] = ["July.3-10", "July.11-18", "July.19-25"]
+    func setListDropDown() {
+        let dropList: [String] = ["July.3-10", "July.11-18", "July.19-25"]
         dropDown = DropDown()
         dropDown?.anchorView = dropView
         self.dropDown?.cellHeight = 36
@@ -99,38 +84,51 @@ class HomeVC: UIViewController {
         self.dropDown?.selectionBackgroundColor = UIColor.dropSelectColor
         DropDown.appearance().setupCornerRadius(10)
         dropDown?.dataSource = dropList
-        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
+        dropDown?.bottomOffset = CGPoint(x: 0, y: (dropDown?.anchorView?.plainView.bounds.height)!+6)
         dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
             cell.optionLabel.textAlignment = .center
             cell.optionLabel.font = UIFont(name: "Montserrat-Bold", size: 17)
         }
     }
+    
+    /// Left bar button Item
+    @IBAction func showCalendar(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    /// Right bar button Item
+    @IBAction func addRoutine(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
+        guard let dvc = storyboard.instantiateViewController(identifier: "EditVC") as? EditVC else { return }
+        self.navigationController?.pushViewController(dvc, animated: true)
+    }
 }
-// MARK:- 일별 루틴 체크 table view
+//MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
-
+    
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         routineList.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekRootineTVCell.reuseIdentifier, for: indexPath) as? WeekRootineTVCell else {
                 return .init()
             }
             cell.bind()
-
+            
             return cell
-        }
-        else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as! RoutineTVCell
-
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
+                return .init()
+            }
+            
             cell.viewRounded(cornerRadius: 10)
             //            cell.timeLabel.text =
             cell.listLabel.text = routineList[indexPath.row]
@@ -138,39 +136,40 @@ extension HomeVC: UITableViewDataSource {
             return cell
         }
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WeekTVCell.reuseIdentifier) as! WeekTVCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekTVCell.reuseIdentifier) as? WeekTVCell else {
+                return .init()
+            }
             return cell
-        }
-        else if section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as! TabTVCell
+        } else if section == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
+                return .init()
+            }
             return cell
-        }
-        else {
+        } else {
             let rect = CGRect(x: 0, y: 0, width: 0, height: 0)
             let myView = UIView(frame: rect)
             return myView
         }
     }
-
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 1 {
             let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
                 print("루틴 완료")
             }
             doneAction.backgroundColor = UIColor.doneColor
-
+            
             return UISwipeActionsConfiguration(actions: [doneAction])
-        }
-        else {
+        } else {
             return UISwipeActionsConfiguration.init()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+        
         if indexPath.section == 1 {
             let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
                 //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
@@ -179,17 +178,15 @@ extension HomeVC: UITableViewDataSource {
             }
             cancelAction.backgroundColor = UIColor.doneColor
             return UISwipeActionsConfiguration(actions: [cancelAction])
-        }
-        else {
+        } else {
             return UISwipeActionsConfiguration.init()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 65
-        }
-        else {
+        } else {
             return 50
         }
     }

@@ -20,7 +20,6 @@ extension Date {
     func makeRootineId() -> String {
         let formatter = Date.simpleDateFormatter(format: "yyyyMMdd")
         let dateString = formatter.string(from: self)
-        
         return dateString
     }
     

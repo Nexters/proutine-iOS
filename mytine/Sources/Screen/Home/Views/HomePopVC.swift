@@ -9,10 +9,10 @@
 import UIKit
 
 class HomePopVC: UIViewController {
-
     @IBOutlet var backView: UIView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var editBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         backView.viewRounded(cornerRadius: 10)

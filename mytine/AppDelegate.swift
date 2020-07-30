@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print()
         print("::::::::::::App:::::::::::::::::")
         print("::::::::::::Open::::::::::::::::")
-        let sb = UIStoryboard(name: "Home", bundle: .main)
-        window?.rootViewController = sb.instantiateViewController(withIdentifier: "HomeNav")
+        let storyboard = UIStoryboard(name: "Home", bundle: .main)
+        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeNav")
         return true
     }
     
@@ -51,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 차이나는 주차만큼 WeekRootine생성
             if distance > 0 {
                 let weekRootine = FMDBManager.shared.selectWeekRootine(week: beforeRecentWeek)
-                
                 // 주차 차이나는만큼 추가
                 for _ in 0..<distance {
                     _ = FMDBManager.shared.addWeek(rootineIdx: weekRootine[0].rootinesIdx)
@@ -79,11 +78,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             _ = FMDBManager.shared.createTable()
             _ = FMDBManager.shared.addWeek(rootineIdx: nil)
         }
-        
-        
-        
-
     }
-    
 }
-

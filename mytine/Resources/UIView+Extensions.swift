@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func viewRounded(cornerRadius : CGFloat?){
-        if let cornerRadius_ = cornerRadius {
-            self.layer.cornerRadius = cornerRadius_
-        }  else {
+    func viewRounded(cornerRadius: CGFloat?) {
+        if let cornerRadius = cornerRadius {
+            self.layer.cornerRadius = cornerRadius
+        } else {
             self.layer.cornerRadius = self.layer.frame.height / 2
         }
         self.layer.masksToBounds = true
     }
     
-    func viewRoundedCustom(cornerRadius : Double, borderColor : UIColor, firstCorner : UIRectCorner, secondCorner : UIRectCorner){
+    func viewRoundedCustom(cornerRadius: Double, borderColor: UIColor, firstCorner: UIRectCorner, secondCorner: UIRectCorner) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [firstCorner, secondCorner], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         let maskLayer = CAShapeLayer()
         
@@ -37,10 +37,10 @@ extension UIView {
         self.layer.addSublayer(borderShape)
     }
     
-    func viewBorder(borderColor : UIColor, borderWidth : CGFloat?) {
+    func viewBorder(borderColor: UIColor, borderWidth: CGFloat?) {
         self.layer.borderColor = borderColor.cgColor
-        if let borderWidth_ = borderWidth {
-            self.layer.borderWidth = borderWidth_
+        if let borderWidth = borderWidth {
+            self.layer.borderWidth = borderWidth
         } else {
             self.layer.borderWidth = 1.0
         }
