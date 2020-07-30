@@ -9,53 +9,23 @@
 import UIKit
 
 class WeekTVCell: UITableViewCell {
-//    @IBOutlet var weekLabel: UILabel!
-//    @IBOutlet var weekCV: UICollectionView!
+    static let reuseIdentifier = "WeekTVCell"
+    let weekString = ["월", "화", "수", "목", "금", "토", "일"]
     
-    @IBOutlet var homeCollectionView: UICollectionView!
+    @IBOutlet var weekView: [UIView]!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-//        weekLabel.viewRounded(cornerRadius: 4)
+        weekView[0].viewRounded(cornerRadius: 8)
+        weekView[1].viewRounded(cornerRadius: 8)
+        weekView[2].viewRounded(cornerRadius: 8)
+        weekView[3].viewRounded(cornerRadius: 8)
+        weekView[4].viewRounded(cornerRadius: 8)
+        weekView[5].viewRounded(cornerRadius: 8)
+        weekView[6].viewRounded(cornerRadius: 8)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-    func bind() {
-        setupCollectionView()
-    }
-    
-    func setupCollectionView() {
-        let nib = UINib(nibName: HomeRootineCVCell.nibName, bundle: nil)
-        homeCollectionView.register(nib, forCellWithReuseIdentifier: HomeRootineCVCell.reuseIdentifier)
-        homeCollectionView.dataSource = self
-        homeCollectionView.delegate = self
-    }
-
-}
-
-extension WeekTVCell: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRootineCVCell.reuseIdentifier, for: indexPath) as? HomeRootineCVCell else {
-            return .init()
-        }
-        cell.bind()
-        return cell
-    }
-    
-}
-
-extension WeekTVCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //TODO: 요일넓이 + 루틴갯수 * 루틴한칸넓이
-        return CGSize(width: 600, height: 400)
     }
 }

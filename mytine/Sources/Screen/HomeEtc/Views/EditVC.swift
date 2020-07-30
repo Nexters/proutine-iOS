@@ -144,7 +144,7 @@ class EditVC: UIViewController {
                                       message: "정말로 삭제하시겠습니까?",
                                       preferredStyle: .alert)
         
-        let delete = UIAlertAction(title: "삭제하기", style: .destructive) { (ok) in
+        let delete = UIAlertAction(title: "삭제하기", style: .destructive) { (action) in
             //code
         }
         let cancel = UIAlertAction(title: "아니오", style: .cancel)
@@ -175,7 +175,7 @@ extension EditVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditWeekCVCell", for: indexPath) as! EditWeekCVCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditWeekCVCell", for: indexPath) as? EditWeekCVCell else { return .init()}
         cell.weekLabel.text = weekList[indexPath.row]
         
         return cell

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UITableView {
-    func setEmptyView(message: String, label: String){
+    func setEmptyView(message: String, label: String) {
         let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
 
         let addBtn: UIButton = {
@@ -24,7 +24,7 @@ extension UITableView {
         let messageLabel: UILabel = {
             let label = UILabel()
             label.text = message
-            label.font = UIFont(name:"AppleSDGothicNeo-Bold", size: 16.0)
+            label.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16.0)
             label.textAlignment = NSTextAlignment.center
             label.numberOfLines = 0
             label.textColor = .gray

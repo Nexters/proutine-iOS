@@ -20,8 +20,10 @@ class WeekRootineTVCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+    }
+    
+    func bind() {
+        setupCollectionView()
     }
     
     func setupCollectionView() {
@@ -30,16 +32,11 @@ class WeekRootineTVCell: UITableViewCell {
         dayCollectionView.dataSource = self
         dayCollectionView.delegate = self
     }
-    
-    func bind() {
-        setupCollectionView()
-    }
 }
 
 extension WeekRootineTVCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //TODO: 루틴갯수
-        return 10
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -47,7 +44,7 @@ extension WeekRootineTVCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayRootineCVCell.reuseIdentifier, for: indexPath) as? DayRootineCVCell else {
             return .init()
         }
-        //TODO: 해당루틴에 대한 정보
+        //TODO: 해당루틴에 대한 정보 0,1,0,1,0,1,1...
         cell.bind()
         return cell
     }
