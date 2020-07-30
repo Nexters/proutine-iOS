@@ -20,8 +20,10 @@ class WeekRootineTVCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+    }
+    
+    func bind() {
+        setupCollectionView()
     }
     
     func setupCollectionView() {
@@ -30,15 +32,10 @@ class WeekRootineTVCell: UITableViewCell {
         dayCollectionView.dataSource = self
         dayCollectionView.delegate = self
     }
-    
-    func bind() {
-        setupCollectionView()
-    }
 }
 
 extension WeekRootineTVCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //TODO: 1주일
         return 7
     }
     

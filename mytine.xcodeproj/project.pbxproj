@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0028C44641753489C46D550B /* Pods_mytine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDA17E344702CFAAB58362C /* Pods_mytine.framework */; };
 		0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */; };
-		0636993024CC1DAC00C1C900 /* HomeRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */; };
-		0636993124CC1DAC00C1C900 /* HomeRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */; };
 		0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */; };
 		0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */; };
 		0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */; };
@@ -45,8 +43,6 @@
 
 /* Begin PBXFileReference section */
 		0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeRootine.storyboard; sourceTree = "<group>"; };
-		0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootineCVCell.swift; sourceTree = "<group>"; };
-		0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeRootineCVCell.xib; sourceTree = "<group>"; };
 		0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRootineTVCell.swift; sourceTree = "<group>"; };
 		0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRootineTVCell.xib; sourceTree = "<group>"; };
 		0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRootineCVCell.swift; sourceTree = "<group>"; };
@@ -251,8 +247,6 @@
 		08A7A65124CC3D9B00D609E2 /* SampleCell */ = {
 			isa = PBXGroup;
 			children = (
-				0636992E24CC1DAC00C1C900 /* HomeRootineCVCell.swift */,
-				0636992F24CC1DAC00C1C900 /* HomeRootineCVCell.xib */,
 				0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */,
 				0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */,
 				0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */,
@@ -362,7 +356,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0833EC7124D34BAC00DE5518 /* .swiftlint.yml in Resources */,
-				0636993124CC1DAC00C1C900 /* HomeRootineCVCell.xib in Resources */,
 				0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */,
 				0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */,
 				08A5E5DE24C85E0300AA7B61 /* Montserrat-Regular.ttf in Resources */,
@@ -446,7 +439,6 @@
 				08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */,
 				08A3F44924C57B1E00201278 /* WeekTVCell.swift in Sources */,
 				0833EC6D24D3455500DE5518 /* CheckCVCell.swift in Sources */,
-				0636993024CC1DAC00C1C900 /* HomeRootineCVCell.swift in Sources */,
 				0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */,
 				08A3F45624C61B0A00201278 /* UIColor+Additions.swift in Sources */,
 				06A720B024CEFB0800ED31DC /* String+Extension.swift in Sources */,
