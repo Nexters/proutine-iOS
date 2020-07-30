@@ -43,7 +43,7 @@ extension HomeRootineCVCell: UITableViewDataSource {
             return .init()
         }
         //TODO: 요일과 해당요일에 해당하는 데이터넣어주기
-        cell.weekLabel.text = weekString[indexPath.row]
+        // cell.weekLabel.text = weekString[indexPath.row]
         cell.bind()
         return cell
     }
