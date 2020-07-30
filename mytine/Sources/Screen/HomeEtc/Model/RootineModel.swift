@@ -54,5 +54,5 @@ struct Rootine {
         let tempString = repeatDays.map{ String($0) }.joined(separator: " ")
         return tempString
     }
-    
+
 }
