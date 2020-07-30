@@ -44,12 +44,17 @@ extension Date {
     }
     
     func getMonth() -> Int {
-        let month = Calendar.current.component(.month, from: Date())
+        let month = Calendar.current.component(.month, from: self)
         return month
     }
     
     func getYear() -> Int {
-        let year = Calendar.current.component(.year, from: Date())
+        let year = Calendar.current.component(.year, from: self)
         return year
+    }
+    
+    func getWeekday() -> Int {
+        let weekDay = Calendar.current.component(.weekday, from: self)
+        return weekDay
     }
 }

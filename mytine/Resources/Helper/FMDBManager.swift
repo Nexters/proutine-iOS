@@ -51,7 +51,7 @@ class FMDBManager {
         do {
             try database.executeUpdate("create table if not exists \(weekTableName)(week Integer Primary key AutoIncrement, rootinesIdx Text)", values: nil)
             
-            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text)", values: nil)
+            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text, rootinesState Text)", values: nil)
             
             try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title Text, goal Text, repeatDays Text, count Integer)", values: nil)
         } catch {
@@ -80,13 +80,17 @@ class FMDBManager {
     }
     
     // MARK: WeekRootine Manager
-    func addWeek() -> Bool {
+    func addWeek(rootineIdx: String?) -> Bool {
         guard database.open() else {
             print("Unable to open database")
             return false
         }
         do {
-            try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [""])
+            if let rootineIdx = rootineIdx {
+                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [rootineIdx])
+            } else {
+                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [""])
+            }
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -98,19 +102,21 @@ class FMDBManager {
     }
     
     // 0일때 모든 주차 조회
-    func selectWeekRootine(week: Int) -> Bool {
+    func selectWeekRootine(week: Int) -> [WeekRootine] {
         guard database.open() else {
             print("Unable to open database")
-            return false
+            return []
+        }
+        var list: [WeekRootine] = []
+        var queryString: String
+        if week == 0 {
+            queryString = "select * from \(weekTableName)"
+        } else {
+            queryString = "select * from \(weekTableName) where week = \(week)"
         }
         
         do {
-            var queryString: String
-            if week == 0 {
-                queryString = "select * from \(weekTableName)"
-            } else {
-                queryString = "select * from \(weekTableName) where week = \(week)"
-            }
+            
             let rs = try database.executeQuery(queryString, values: nil)
             
             while rs.next() {
@@ -118,16 +124,18 @@ class FMDBManager {
                 let rootinesIdx: String = rs.string(forColumn: "rootinesIdx") ?? ""
                 
                 print("week \(week) ::::: rootinesIdx \(rootinesIdx)")
+                let weekRootine = WeekRootine(week: Int(week), rootinesIdx: rootinesIdx)
+                list.append(weekRootine)
             }
            
         } catch {
             print("Unable to open database")
             database.close()
-            return false
+            return []
         }
         
         database.close()
-        return true
+        return list
     }
     
     func updateWeekRootine(rootinesList: [Int], week: Int) -> Bool {
@@ -155,8 +163,8 @@ class FMDBManager {
             return false
         }
         do {
-            try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, completes) values (?,?,?,?)",
-                values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete()])
+            try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, completes, rootinesState) values (?,?,?,?,?)",
+                values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete(), rootine.getRootineState()])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -188,8 +196,8 @@ class FMDBManager {
                 let retrospect: String = rs.string(forColumn: "retrospect") ?? ""
                 let week: Int32 = rs.int(forColumn: "week")
                 let completes: String = rs.string(forColumn: "completes") ?? ""
-                
-                print("id \(id) :::: week \(week) ::::: completes \(completes)")
+                let rootinesState: String = rs.string(forColumn: "rootinesState") ?? ""
+                print("id \(id) :::: week \(week) ::::: completes \(completes) :::::: rootinesState \(rootinesState)")
             }
            
         } catch {
@@ -209,8 +217,8 @@ class FMDBManager {
         }
         
         do {
-            try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ? where id = ?",
-                values: [rootine.retrospect, rootine.getComplete(), rootine.id])
+            try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ?, rootinesState = ? where id = ?",
+                values: [rootine.retrospect, rootine.getComplete(), rootine.getRootineState(), rootine.id])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -314,7 +322,7 @@ class FMDBManager {
 
 /*
  class WeekRootine {
-   let rootinesIdx: [Int] = [1,3,4,9] //해당 루틴
+   let rootinesIdx: [Int] = [1,3,4,9] //주차별 해당 루틴
    let week = 1 //주차, PK
  }
 
@@ -323,6 +331,7 @@ class FMDBManager {
    let retrospect: String = "회고를 적어따" //회고
    let week = 1 // 주차구분을위한
    let complete = [true, false, true, false] //완료여부 - WeekRootine과 매칭 1완료
+   let rootinesState: [Int] = [4,9,1,3] //일별 루틴 (완료시 순서뒤로)
  }
 
  //////////
