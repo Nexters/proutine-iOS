@@ -7,13 +7,7 @@ target 'mytine' do
 
   # Pods for mytine
   pod 'FMDB','~> 2.7.5'
-  pod 'Kingfisher','~> 5.14.1'
   pod 'SnapKit','~> 5.0.1'
-  pod 'SwiftLint'
-  pod 'Then','~> 2.7.0'
   pod 'lottie-ios','~> 3.1.8'
   pod 'DropDown','~> 2.3.13'
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'NSObject+Rx'
 end
