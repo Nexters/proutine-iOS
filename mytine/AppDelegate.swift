@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("::::::::::::App:::::::::::::::::")
         print("::::::::::::Open::::::::::::::::")
         let sb = UIStoryboard(name: "HomeRootine", bundle: .main)
-        window?.rootViewController = sb.instantiateViewController(withIdentifier: "EditVC")
+        window?.rootViewController = sb.instantiateViewController(withIdentifier: "CalendarVC")
         return true
     }
     
