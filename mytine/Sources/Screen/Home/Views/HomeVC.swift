@@ -26,8 +26,7 @@ class HomeVC: UIViewController {
         setDownButton()
         setListDropDown()
         setupTableView()
-        //      self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //      self.navigationController?.navigationBar.shadowImage = UIImage()
+
         let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as! HomePopVC
         popup.modalPresentationStyle = .overFullScreen
         popup.modalTransitionStyle = .crossDissolve
