@@ -9,7 +9,7 @@
 import UIKit
 
 class CheckCVCell: UICollectionViewCell {
-    
+    static let reuseIdentifier = " WeekCellViewModel"
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var checkLabel: UILabel!
     

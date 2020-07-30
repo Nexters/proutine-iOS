@@ -26,9 +26,9 @@
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
 		0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26B24B84FD3002D2A12 /* Home.storyboard */; };
 		0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D26F24B850E3002D2A12 /* CalendarVC.swift */; };
-		0833EC4D24D08F6300DE5518 /* RoutineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC4C24D08F6300DE5518 /* RoutineVC.swift */; };
 		0833EC4F24D090B600DE5518 /* ViewModelBindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC4E24D090B600DE5518 /* ViewModelBindableType.swift */; };
 		0833EC5224D091CB00DE5518 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC5124D091CB00DE5518 /* HomeViewModel.swift */; };
+		0833EC6724D2DBB800DE5518 /* WeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6624D2DBB800DE5518 /* WeekCellViewModel.swift */; };
 		08A3F42724C40CB300201278 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F42624C40CB300201278 /* HomeVC.swift */; };
 		08A3F44924C57B1E00201278 /* WeekTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44824C57B1E00201278 /* WeekTVCell.swift */; };
 		08A3F44B24C57B8B00201278 /* WeekCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44A24C57B8B00201278 /* WeekCVCell.swift */; };
@@ -67,9 +67,9 @@
 		0804D26324B84C5D002D2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0804D26B24B84FD3002D2A12 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0804D26F24B850E3002D2A12 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
-		0833EC4C24D08F6300DE5518 /* RoutineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineVC.swift; sourceTree = "<group>"; };
 		0833EC4E24D090B600DE5518 /* ViewModelBindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBindableType.swift; sourceTree = "<group>"; };
 		0833EC5124D091CB00DE5518 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0833EC6624D2DBB800DE5518 /* WeekCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellViewModel.swift; sourceTree = "<group>"; };
 		08A3F42624C40CB300201278 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		08A3F44824C57B1E00201278 /* WeekTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTVCell.swift; sourceTree = "<group>"; };
 		08A3F44A24C57B8B00201278 /* WeekCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCVCell.swift; sourceTree = "<group>"; };
@@ -193,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				0833EC5124D091CB00DE5518 /* HomeViewModel.swift */,
+				0833EC6624D2DBB800DE5518 /* WeekCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -271,7 +272,6 @@
 				08A7A65124CC3D9B00D609E2 /* SampleCell */,
 				08D4139A24BF4D2B0049BB44 /* Cell */,
 				08A3F42624C40CB300201278 /* HomeVC.swift */,
-				0833EC4C24D08F6300DE5518 /* RoutineVC.swift */,
 				0833EC4E24D090B600DE5518 /* ViewModelBindableType.swift */,
 				08A3F44C24C58AE400201278 /* HomePopVC.swift */,
 			);
@@ -431,7 +431,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08A3F45824C61B0A00201278 /* UITableView+Extensions.swift in Sources */,
-				0833EC4D24D08F6300DE5518 /* RoutineVC.swift in Sources */,
 				06A720A424CE9C4700ED31DC /* Date+Extension.swift in Sources */,
 				08A5E5E224C86BDC00AA7B61 /* EditWeekCVCell.swift in Sources */,
 				08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */,
@@ -452,6 +451,7 @@
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
 				06A720AE24CEF93300ED31DC /* UserDefaultKeyName.swift in Sources */,
 				08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */,
+				0833EC6724D2DBB800DE5518 /* WeekCellViewModel.swift in Sources */,
 				06A720AC24CED0CC00ED31DC /* CalendarManager.swift in Sources */,
 				0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */,
 				08D413A624C144830049BB44 /* CheckCVCell.swift in Sources */,
