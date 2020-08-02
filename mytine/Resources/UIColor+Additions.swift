@@ -9,31 +9,15 @@
 import UIKit
 extension UIColor {
     
-    @nonobjc class var mainGreen: UIColor {
-        return UIColor(red: 0 / 255.0, green: 226 / 255.0, blue: 119 / 255.0, alpha: 1.0)
+    @nonobjc class var mainBlue: UIColor {
+        return UIColor(red: 59.0 / 255.0, green: 118.0 / 255.0, blue: 239.0 / 255.0, alpha: 1.0)
     }
     
-    @nonobjc class var doneColor: UIColor {
-        return UIColor(red: 166 / 255.0, green: 166 / 255.0, blue: 166 / 255.0, alpha: 1.0)
+    @nonobjc class var mainFont: UIColor {
+      return UIColor(red: 89.0 / 255.0, green: 116.0 / 255.0, blue: 138.0 / 255.0, alpha: 1.0)
     }
-    
-    @nonobjc class var backColor: UIColor {
-        return UIColor(red: 251 / 255.0, green: 252 / 255.0, blue: 253 / 255.0, alpha: 1.0)
-    }
-    
-    @nonobjc class var dropSelectColor: UIColor {
-        return UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
-    }
-    
-    @nonobjc class var borderColor: UIColor {
-        return UIColor(red: 182 / 255.0, green: 182 / 255.0, blue: 182 / 255.0, alpha: 1.0)
-    }
-    
-    @nonobjc class var editBackColor: UIColor {
-           return UIColor(red: 236 / 255.0, green: 237 / 255.0, blue: 237 / 255.0, alpha: 1.0)
-       }
-    
-    @nonobjc class var weekSelectColor: UIColor {
-        return UIColor(red: 96 / 255.0, green: 96 / 255.0, blue: 96 / 255.0, alpha: 1.0)
+
+    @nonobjc class var subFont: UIColor {
+      return UIColor(red: 147.0 / 255.0, green: 176.0 / 255.0, blue: 200.0 / 255.0, alpha: 1.0)
     }
 }
