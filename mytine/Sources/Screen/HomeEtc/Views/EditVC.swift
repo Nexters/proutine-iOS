@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 enum EditMode {
     case add, edit
@@ -37,10 +38,26 @@ class EditVC: UIViewController {
         rootine = mock
         
         setupCollectionView()
+        setUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setUI()
+       fetchRoutine()
+        alertBulider()
+    }
+    
+    func fetchRoutine() {
+        if let rootine = rootine {
+            emojiTextfield.text = rootine.emoji
+            nameTextfield.text = rootine.title
+            goalTextfield.text = rootine.goal
+            rootine.repeatDays.enumerated().forEach {
+                if $1 == 1 {
+                    let indexPath = IndexPath(row: $0, section: 0)
+                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
+                }
+            }
+        }
     }
 
     func setUI() {
@@ -48,26 +65,17 @@ class EditVC: UIViewController {
         
         if editMode == .edit {
             deleteButton.isHidden = false
-            
-            if let rootine = rootine {
-                emojiTextfield.text = rootine.emoji
-                nameTextfield.text = rootine.title
-                goalTextfield.text = rootine.goal
-                rootine.repeatDays.enumerated().forEach {
-                    if $1 == 1 {
-                        let indexPath = IndexPath(row: $0, section: 0)
-                        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
-                    }
-                }
-            }
         }
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
                                                    size: 17)!]
+        
+        
         self.navigationItem.rightBarButtonItem?
             .setTitleTextAttributes([ NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17.0)!],
                                     for: .normal)
+        self.navigationItem.rightBarButtonItem?.action = #selector(self.saveRootine(_:))
         
         backView.forEach{ $0.viewRounded(cornerRadius: 10) }
         emojiMessage.isHidden = true
@@ -157,6 +165,91 @@ class EditVC: UIViewController {
         })
     }
     
+    @objc
+    func saveRootine(_ sender: Any) {
+        if selectWeek.filter({$0==1}).count == 0 {
+            weekMessage.isHidden = false
+            notiGenerator.notificationOccurred(.error)
+            waringGeneratorAnimation(view: weekMessage)
+            return
+        }
+        
+        editMode == .edit ? modifyRootine() : createRootine()
+    }
+
+    func alertBulider() {
+        let effect = UIBlurEffect(style: .dark)
+        let containView = UIVisualEffectView(effect: effect)
+        containView.alpha = 0.85
+        containView.frame = UIScreen.main.bounds
+        containView.isUserInteractionEnabled = false
+        navigationController?.navigationBar.addSubview(containView)
+        containView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(-44)
+            $0.bottom.right.left.equalTo(view)
+        }
+        
+        let alert: UIView = {
+            let view = UIView()
+            view.backgroundColor = .white
+            view.viewRounded(cornerRadius: 12)
+            navigationController?.navigationBar.addSubview(view)
+            view.snp.makeConstraints {
+                $0.width.equalTo(312)
+                $0.height.equalTo(128)
+                $0.center.equalTo(self.view.snp.center)
+            }
+            return view
+        }()
+        
+        let okButton: UIButton = {
+            let button = UIButton(type: .system)
+            button.addTarget(self, action: #selector(self.alertOkAction), for: .touchUpInside)
+            button.setTitle("확인", for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .mainBlue
+            button.viewRounded(cornerRadius: 12)
+            alert.addSubview(button)
+            
+            button.snp.makeConstraints {
+                $0.width.equalTo(55)
+                $0.height.equalTo(30)
+                $0.right.equalToSuperview().offset(-20)
+                $0.bottom.equalToSuperview().offset(-20)
+            }
+            return button
+        }()
+        
+        let _: UIButton = {
+            let button = UIButton(type: .system)
+            button.addTarget(self, action: #selector(self.alertCancelAction), for: .touchUpInside)
+            button.setTitle("취소", for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
+            button.setTitleColor(.subFont, for: .normal)
+            alert.addSubview(button)
+            
+            button.snp.makeConstraints {
+                $0.width.equalTo(55)
+                $0.height.equalTo(30)
+                $0.right.equalTo(okButton.snp.left).offset(-20)
+                $0.bottom.equalToSuperview().offset(-20)
+            }
+            return button
+        }()
+     
+    }
+    
+    @objc
+    func alertCancelAction() {
+        print("cancel")
+    }
+    
+    @objc
+    func alertOkAction() {
+        print("ok")
+    }
+    
     @IBAction func deleteRootine(_ sender: UIButton) {
         let alert = UIAlertController(title: "확인",
                                       message: "정말로 삭제하시겠습니까?",
@@ -173,18 +266,11 @@ class EditVC: UIViewController {
     }
     
     @IBAction func backHome(_ sender: UIBarButtonItem) {
+        
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func saveRootine(_ sender: Any) {
-        if selectWeek.filter({$0==1}).count == 0 {
-            weekMessage.isHidden = false
-            notiGenerator.notificationOccurred(.error)
-            waringGeneratorAnimation(view: weekMessage)
-        }
-        
-        editMode == .edit ? modifyRootine() : createRootine()
-    }
+    
 }
 
 extension EditVC: UICollectionViewDataSource {
