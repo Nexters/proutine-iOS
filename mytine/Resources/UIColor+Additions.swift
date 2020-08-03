@@ -20,4 +20,17 @@ extension UIColor {
     @nonobjc class var subFont: UIColor {
       return UIColor(red: 147.0 / 255.0, green: 176.0 / 255.0, blue: 200.0 / 255.0, alpha: 1.0)
     }
+    
+    /// 이제 필요 없는 컬러들
+    @nonobjc class var backColor: UIColor {
+           return UIColor(red: 251 / 255.0, green: 252 / 255.0, blue: 253 / 255.0, alpha: 1.0)
+       }
+    
+    @nonobjc class var editBackColor: UIColor {
+           return UIColor(red: 236 / 255.0, green: 237 / 255.0, blue: 237 / 255.0, alpha: 1.0)
+       }
+    
+    @nonobjc class var weekSelectColor: UIColor {
+        return UIColor(red: 96 / 255.0, green: 96 / 255.0, blue: 96 / 255.0, alpha: 1.0)
+    }
 }

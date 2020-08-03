@@ -529,15 +529,13 @@ private extension DropDown {
 	func setupUI() {
 		super.backgroundColor = dimmedBackgroundColor
 
-//		tableViewContainer.layer.masksToBounds = false
-//		tableViewContainer.layer.cornerRadius = cornerRadius
-//		tableViewContainer.layer.shadowColor = shadowColor.cgColor
-//		tableViewContainer.layer.shadowOffset = shadowOffset
-//		tableViewContainer.layer.shadowOpacity = shadowOpacity
-//		tableViewContainer.layer.shadowRadius = shadowRadius
-        tableViewContainer.layer.borderWidth = 1
-        tableViewContainer.layer.borderColor = UIColor.lightGray.cgColor
-        tableViewContainer.layer.masksToBounds = true
+		tableViewContainer.layer.masksToBounds = false
+		tableViewContainer.layer.cornerRadius = cornerRadius
+		tableViewContainer.layer.shadowColor = shadowColor.cgColor
+		tableViewContainer.layer.shadowOffset = shadowOffset
+		tableViewContainer.layer.shadowOpacity = shadowOpacity
+		tableViewContainer.layer.shadowRadius = shadowRadius
+
 		tableView.backgroundColor = tableViewBackgroundColor
 		tableView.separatorColor = separatorColor
 		tableView.layer.cornerRadius = cornerRadius
