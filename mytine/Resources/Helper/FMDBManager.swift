@@ -176,12 +176,12 @@ class FMDBManager {
     }
     
     // 0이면 모두 조회
-    func selectDayRootine(week: Int) -> Bool {
+    func selectDayRootine(week: Int) -> [DayRootine] {
         guard database.open() else {
             print("Unable to open database")
-            return false
+            return []
         }
-        
+        var dayRootines: [DayRootine] = []
         do {
             var queryString: String
             if week == 0 {
@@ -191,6 +191,7 @@ class FMDBManager {
             }
             let rs = try database.executeQuery(queryString, values: nil)
             
+            
             while rs.next() {
                 let id: String = rs.string(forColumn: "id") ?? ""
                 let retrospect: String = rs.string(forColumn: "retrospect") ?? ""
@@ -198,16 +199,23 @@ class FMDBManager {
                 let completes: String = rs.string(forColumn: "completes") ?? ""
                 let rootinesState: String = rs.string(forColumn: "rootinesState") ?? ""
                 print("id \(id) :::: week \(week) ::::: completes \(completes) :::::: rootinesState \(rootinesState)")
+                let completeList = completes.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
+                let rootinesList = rootinesState.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
+                dayRootines.append(DayRootine(id: id,
+                                              retrospect: retrospect,
+                                              week: Int(week),
+                                              complete: completeList,
+                                              rootinesState: rootinesList))
             }
            
         } catch {
             print("Unable to open database")
             database.close()
-            return false
+            return []
         }
         
         database.close()
-        return true
+        return dayRootines
     }
     
     func updateDayRootine(rootine: DayRootine) -> Bool {

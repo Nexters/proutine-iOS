@@ -28,8 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print()
         print("::::::::::::App:::::::::::::::::")
         print("::::::::::::Open::::::::::::::::")
+
         let storyboard = UIStoryboard(name: "Home", bundle: .main)
         window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeNav")
+
         return true
     }
     

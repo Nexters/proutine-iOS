@@ -32,9 +32,17 @@ class EditVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
+        
+        let mock = Rootine(id: -1, emoji: "ㅎ", title: "호호호호", goal: "하하하하", repeatDays: [0,0,1,0,0,1,0], count: 1)
+        rootine = mock
+        
         setupCollectionView()
+        
        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setUI()
     }
 
     func setUI() {
@@ -42,6 +50,18 @@ class EditVC: UIViewController {
         
         if editMode == .edit {
             deleteButton.isHidden = false
+            
+            if let rootine = rootine {
+                emojiTextfield.text = rootine.emoji
+                nameTextfield.text = rootine.title
+                goalTextfield.text = rootine.goal
+                rootine.repeatDays.enumerated().forEach {
+                    if $1 == 1 {
+                        let indexPath = IndexPath(row: $0, section: 0)
+                        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
+                    }
+                }
+            }
         }
         
         self.navigationController?.navigationBar.titleTextAttributes
