@@ -224,7 +224,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="6J3-M0-pRH" secondAttribute="bottom" constant="5" id="pWA-ex-jra"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outletCollection property="weekView" destination="Xg8-em-4ZB" collectionClass="NSMutableArray" id="A4v-FG-Xfa"/>
                                             <outletCollection property="weekView" destination="PEH-I5-F1L" collectionClass="NSMutableArray" id="lQP-f8-mwC"/>
