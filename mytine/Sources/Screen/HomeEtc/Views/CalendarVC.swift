@@ -80,7 +80,6 @@ extension CalendarVC: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         guard let dvc = storyboard.instantiateViewController(identifier: "HomeVC") as? HomeVC else { return }
-        dvc.index = indexPath
         self.navigationController?.pushViewController(dvc, animated: true)
     }
 }

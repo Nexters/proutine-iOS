@@ -37,8 +37,6 @@ class EditVC: UIViewController {
         rootine = mock
         
         setupCollectionView()
-        
-       
     }
     
     override func viewDidAppear(_ animated: Bool) {

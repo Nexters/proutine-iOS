@@ -14,21 +14,20 @@ class HomeVC: UIViewController {
     @IBOutlet var dropView: UIView!
     
     var array: NSArray?
-    var index: IndexPath?
     var dropDown: DropDown?
     private let downButton = UIButton()
-    var weekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    var routineList: [String] = ["혜연 케어", "애리 케어", "재환 케어", "승희 케어", "유진 케어", "수빈 케어", "남수 케어", "허벅지 불타오르기", "오빠 괴롭히기"]
+    var weekRoutineList: [WeekRootine] = []
+    var dayRoutineList: [DayRootine] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setDownButton()
         setListDropDown()
         setupTableView()
-        guard let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as? HomePopVC else { return }
-        popup.modalPresentationStyle = .overFullScreen
-        popup.modalTransitionStyle = .crossDissolve
-        present(popup, animated: true, completion: nil)
+        let user = UserDefaults.standard
+        let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
+        weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
+        dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -36,6 +35,13 @@ class HomeVC: UIViewController {
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: index, animated: true)
         }
+    }
+    
+    func presentPopup() {
+        guard let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as? HomePopVC else { return }
+        popup.modalPresentationStyle = .overFullScreen
+        popup.modalTransitionStyle = .crossDissolve
+        present(popup, animated: true, completion: nil)
     }
     
     /// Drop down button
@@ -76,18 +82,18 @@ class HomeVC: UIViewController {
     }
     
     func setListDropDown() {
-        let dropList: [String] = ["July.3-10", "July.11-18", "July.19-25"]
+        let dropList: [String] = ["7월 13일 - 7월 19일", "7월 20일 - 7월 26일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일"]
         dropDown = DropDown()
         dropDown?.anchorView = dropView
-        self.dropDown?.cellHeight = 36
+        self.dropDown?.cellHeight = 40
         self.dropDown?.backgroundColor = UIColor.white
-        self.dropDown?.selectionBackgroundColor = UIColor.dropSelectColor
+        self.dropDown?.selectionBackgroundColor = UIColor.subFont
         DropDown.appearance().setupCornerRadius(10)
         dropDown?.dataSource = dropList
         dropDown?.bottomOffset = CGPoint(x: 0, y: (dropDown?.anchorView?.plainView.bounds.height)!+6)
         dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
             cell.optionLabel.textAlignment = .center
-            cell.optionLabel.font = UIFont(name: "Montserrat-Bold", size: 17)
+            cell.optionLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17)
         }
     }
     
@@ -109,11 +115,15 @@ extension HomeVC: UITableViewDelegate {
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        routineList.count
+        if section == 1 {
+            return 1
+        } else {
+            return dayRoutineList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,15 +134,20 @@ extension HomeVC: UITableViewDataSource {
             cell.bind()
             
             return cell
-        } else {
+        } else if indexPath.section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
                 return .init()
             }
             
             cell.viewRounded(cornerRadius: 10)
             //            cell.timeLabel.text =
-            cell.listLabel.text = routineList[indexPath.row]
+            // cell.listLabel.text = dayRoutineList[indexPath.row].
             //            cell.iconLabel.text =
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TouchCell") else {
+                return .init()
+            }
             return cell
         }
     }
@@ -143,7 +158,7 @@ extension HomeVC: UITableViewDataSource {
                 return .init()
             }
             return cell
-        } else if section == 1 {
+        } else if section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
                 return .init()
             }
@@ -156,11 +171,11 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
                 print("루틴 완료")
             }
-            doneAction.backgroundColor = UIColor.doneColor
+            doneAction.backgroundColor = UIColor.subFont
             
             return UISwipeActionsConfiguration(actions: [doneAction])
         } else {
@@ -170,13 +185,13 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
                 //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
                 //            cell.backView.backgroundColor = .lightGray
                 print("완료 취소")
             }
-            cancelAction.backgroundColor = UIColor.doneColor
+            cancelAction.backgroundColor = UIColor.subFont
             return UISwipeActionsConfiguration(actions: [cancelAction])
         } else {
             return UISwipeActionsConfiguration.init()
@@ -186,16 +201,20 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 65
-        } else {
+        } else if section == 2{
             return 50
+        } else {
+            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 30
-        } else {
+        } else if indexPath.section == 2 {
             return 75
+        } else {
+            return 20
         }
     }
 }
