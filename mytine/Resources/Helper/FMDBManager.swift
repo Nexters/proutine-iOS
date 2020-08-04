@@ -51,9 +51,9 @@ class FMDBManager {
         do {
             try database.executeUpdate("create table if not exists \(weekTableName)(week Integer Primary key AutoIncrement, rootinesIdx Text)", values: nil)
             
-            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text, rootinesState Text)", values: nil)
+            try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text)", values: nil)
             
-            try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title Text, goal Text, repeatDays Text, count Integer)", values: nil)
+            try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title Text, goal Text, repeatDays Text)", values: nil)
         } catch {
             print("create fail")
             database.close()
@@ -163,8 +163,8 @@ class FMDBManager {
             return false
         }
         do {
-            try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, completes, rootinesState) values (?,?,?,?,?)",
-                values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete(), rootine.getRootineState()])
+            try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, completes) values (?,?,?,?)",
+                values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete()])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -193,19 +193,18 @@ class FMDBManager {
             
             
             while rs.next() {
-                let id: String = rs.string(forColumn: "id") ?? ""
+                let id: Int32 = rs.int(forColumn: "id")
                 let retrospect: String = rs.string(forColumn: "retrospect") ?? ""
                 let week: Int32 = rs.int(forColumn: "week")
                 let completes: String = rs.string(forColumn: "completes") ?? ""
-                let rootinesState: String = rs.string(forColumn: "rootinesState") ?? ""
-                print("id \(id) :::: week \(week) ::::: completes \(completes) :::::: rootinesState \(rootinesState)")
+                print("id \(id) :::: week \(week) ::::: completes \(completes)")
                 let completeList = completes.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
-                let rootinesList = rootinesState.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
-                dayRootines.append(DayRootine(id: id,
+                
+                dayRootines.append(DayRootine(id: Int(id),
                                               retrospect: retrospect,
                                               week: Int(week),
-                                              complete: completeList,
-                                              rootinesState: rootinesList))
+                                              complete: completeList
+                                              ))
             }
            
         } catch {
@@ -225,8 +224,8 @@ class FMDBManager {
         }
         
         do {
-            try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ?, rootinesState = ? where id = ?",
-                values: [rootine.retrospect, rootine.getComplete(), rootine.getRootineState(), rootine.id])
+            try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ? where id = ?",
+                values: [rootine.retrospect, rootine.getComplete(), rootine.id])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -242,8 +241,8 @@ class FMDBManager {
             return false
         }
         do {
-            try database.executeUpdate("insert into \(rootineTableName) (emoji, title, goal, repeatDays, count) values (?,?,?,?,?)",
-                values: [rootine.emoji, rootine.title, rootine.goal, rootine.getRepeatDay(), rootine.count])
+            try database.executeUpdate("insert into \(rootineTableName) (emoji, title, goal, repeatDays) values (?,?,?,?)",
+                values: [rootine.emoji, rootine.title, rootine.goal, rootine.getRepeatDay()])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -275,12 +274,11 @@ class FMDBManager {
                 let title: String = rs.string(forColumn: "title") ?? ""
                 let goal: String = rs.string(forColumn: "goal") ?? ""
                 let repeatDays: String = rs.string(forColumn: "repeatDays") ?? ""
-                let count: Int32 = rs.int(forColumn: "count")
                 let intRepeatDays = repeatDays.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
-                let routine = Rootine(id: Int(id), emoji: emoji, title: title, goal: goal, repeatDays: intRepeatDays, count: Int(count))
+                let routine = Rootine(id: Int(id), emoji: emoji, title: title, goal: goal, repeatDays: intRepeatDays)
                 
                 routineList.append(routine)
-                print("id \(id) :::: week \(emoji) ::::: completes \(repeatDays) ::::: count \(count)")
+                print("id \(id) :::: week \(emoji) ::::: completes \(repeatDays)")
             }
            
         } catch {
@@ -300,8 +298,8 @@ class FMDBManager {
         }
         
         do {
-            try database.executeUpdate("update \(rootineTableName) set emoji = ?, title = ?, goal = ?, repeatDays = ?, count = ? where id = ?",
-                values: [rootine.emoji, rootine.title, rootine.goal, rootine.getRepeatDay(), rootine.count, rootine.id])
+            try database.executeUpdate("update \(rootineTableName) set emoji = ?, title = ?, goal = ?, repeatDays = ? where id = ?",
+                values: [rootine.emoji, rootine.title, rootine.goal, rootine.getRepeatDay(), rootine.id])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()

@@ -126,8 +126,7 @@ class EditVC: UIViewController {
                               emoji: emoji,
                               title: title,
                               goal: goal,
-                              repeatDays: selectWeek,
-                              count: 1)
+                              repeatDays: selectWeek)
         if FMDBManager.shared.createRootine(rootine: rootine) {
             navigationController?.popViewController(animated: true)
         }
@@ -150,7 +149,6 @@ class EditVC: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
-    
     
     func warningBackAlert() {
         let alert = CustomAlertView(text: "이전 화면으로 돌아가시겠습니까?\n미 저장시, 작성중인 루틴은 저장되지 않습니다.") { [weak self] in
