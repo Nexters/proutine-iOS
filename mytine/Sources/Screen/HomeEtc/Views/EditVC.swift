@@ -42,8 +42,7 @@ class EditVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       fetchRoutine()
-        alertBulider()
+        fetchRoutine()
     }
     
     func fetchRoutine() {
@@ -176,78 +175,16 @@ class EditVC: UIViewController {
         
         editMode == .edit ? modifyRootine() : createRootine()
     }
-
-    func alertBulider() {
-        let effect = UIBlurEffect(style: .dark)
-        let containView = UIVisualEffectView(effect: effect)
-        containView.alpha = 0.85
-        containView.frame = UIScreen.main.bounds
-        containView.isUserInteractionEnabled = false
-        navigationController?.navigationBar.addSubview(containView)
-        containView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-44)
-            $0.bottom.right.left.equalTo(view)
+    
+    func showAlert() {
+        let alert = CustomAlertView(text: "이전 화면으로 돌아가시겠습니까?\n미 저장시, 작성중인 루틴은 저장되지 않습니다.") { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }
         
-        let alert: UIView = {
-            let view = UIView()
-            view.backgroundColor = .white
-            view.viewRounded(cornerRadius: 12)
-            navigationController?.navigationBar.addSubview(view)
-            view.snp.makeConstraints {
-                $0.width.equalTo(312)
-                $0.height.equalTo(128)
-                $0.center.equalTo(self.view.snp.center)
-            }
-            return view
-        }()
-        
-        let okButton: UIButton = {
-            let button = UIButton(type: .system)
-            button.addTarget(self, action: #selector(self.alertOkAction), for: .touchUpInside)
-            button.setTitle("확인", for: .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
-            button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = .mainBlue
-            button.viewRounded(cornerRadius: 12)
-            alert.addSubview(button)
-            
-            button.snp.makeConstraints {
-                $0.width.equalTo(55)
-                $0.height.equalTo(30)
-                $0.right.equalToSuperview().offset(-20)
-                $0.bottom.equalToSuperview().offset(-20)
-            }
-            return button
-        }()
-        
-        let _: UIButton = {
-            let button = UIButton(type: .system)
-            button.addTarget(self, action: #selector(self.alertCancelAction), for: .touchUpInside)
-            button.setTitle("취소", for: .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
-            button.setTitleColor(.subFont, for: .normal)
-            alert.addSubview(button)
-            
-            button.snp.makeConstraints {
-                $0.width.equalTo(55)
-                $0.height.equalTo(30)
-                $0.right.equalTo(okButton.snp.left).offset(-20)
-                $0.bottom.equalToSuperview().offset(-20)
-            }
-            return button
-        }()
-     
-    }
-    
-    @objc
-    func alertCancelAction() {
-        print("cancel")
-    }
-    
-    @objc
-    func alertOkAction() {
-        print("ok")
+        navigationController?.view.addSubview(alert)
+        alert.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
     }
     
     @IBAction func deleteRootine(_ sender: UIButton) {
