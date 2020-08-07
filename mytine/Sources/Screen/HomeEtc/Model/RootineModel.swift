@@ -14,32 +14,17 @@ struct WeekRootine {
 }
 
 struct DayRootine {
-    let id: String
+    let id: Int
     var retrospect: String
     let week: Int
-    var complete: [Int] // 1:완료루틴 0:미완료루틴
-    var rootinesState: [Int] // 루틴순서 (완료시 뒤로)
+    var complete: [Int] // 완료루틴 Index
+    // 완료 루틴index면 정렬시 뒤로빼기
     
     func getComplete() -> String {
         let tempString = complete.map{ String($0) }.joined(separator: " ")
         return tempString
     }
-    
-    func getRootineRate() -> String {
-        let total: Float = Float(complete.count)
-        if total == 0 {
-            return "0.0"
-        }
-        
-        let completeCount = complete.filter{ $0 == 1 }.count
-        let rate = Float(completeCount)/total
-        return String(format: "%.1f", rate)
-    }
-    
-    func getRootineState() -> String {
-        let tempString = rootinesState.map{ String($0) }.joined(separator: " ")
-        return tempString
-    }
+
 }
 
 struct Rootine {
@@ -48,7 +33,6 @@ struct Rootine {
     var title: String
     var goal: String
     var repeatDays: [Int]  //반복요일 1이면 반복요일해당 [월,화,수...토,일] 7개 맞춰주기
-    var count: Int // 0일때 디비에서 삭제
     
     func getRepeatDay() -> String {
         let tempString = repeatDays.map{ String($0) }.joined(separator: " ")

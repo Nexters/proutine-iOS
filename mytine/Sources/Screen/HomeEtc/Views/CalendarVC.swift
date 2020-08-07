@@ -42,8 +42,8 @@ class CalendarVC: UIViewController {
     
     func testDay() {
         //         일루틴생성
-        let mockDay1 = DayRootine(id: "20200721", retrospect: "회고를적기", week: 1, complete: [1,1,0], rootinesState: [1,3,4])
-        var mockDay2 = DayRootine(id: "20200723", retrospect: "회고를적기2", week: 2, complete: [1,0,0,0], rootinesState: [3,4,1])
+        let mockDay1 = DayRootine(id: 20200721, retrospect: "회고를적기", week: 1, complete: [1,2,3])
+        var mockDay2 = DayRootine(id: 20200723, retrospect: "회고를적기2", week: 2, complete: [1])
         FMDBManager.shared.createDayRootine(rootine: mockDay1)
         FMDBManager.shared.createDayRootine(rootine: mockDay2)
         FMDBManager.shared.selectDayRootine(week: 0)
@@ -51,7 +51,6 @@ class CalendarVC: UIViewController {
         //         일루틴수정
         print("-----update-----")
         mockDay2.complete = [1,1,1,0]
-        mockDay2.rootinesState = [4,1,3]
         FMDBManager.shared.updateDayRootine(rootine: mockDay2)
         FMDBManager.shared.selectDayRootine(week: 0)
     }

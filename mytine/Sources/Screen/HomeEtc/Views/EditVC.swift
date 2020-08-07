@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 enum EditMode {
     case add, edit
@@ -33,14 +34,26 @@ class EditVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let mock = Rootine(id: -1, emoji: "ㅎ", title: "호호호호", goal: "하하하하", repeatDays: [0,0,1,0,0,1,0], count: 1)
-        rootine = mock
-        
         setupCollectionView()
+        setUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setUI()
+        fetchRoutine()
+    }
+    
+    func fetchRoutine() {
+        if let rootine = rootine {
+            emojiTextfield.text = rootine.emoji
+            nameTextfield.text = rootine.title
+            goalTextfield.text = rootine.goal
+            rootine.repeatDays.enumerated().forEach {
+                if $1 == 1 {
+                    let indexPath = IndexPath(row: $0, section: 0)
+                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
+                }
+            }
+        }
     }
 
     func setUI() {
@@ -48,26 +61,17 @@ class EditVC: UIViewController {
         
         if editMode == .edit {
             deleteButton.isHidden = false
-            
-            if let rootine = rootine {
-                emojiTextfield.text = rootine.emoji
-                nameTextfield.text = rootine.title
-                goalTextfield.text = rootine.goal
-                rootine.repeatDays.enumerated().forEach {
-                    if $1 == 1 {
-                        let indexPath = IndexPath(row: $0, section: 0)
-                        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
-                    }
-                }
-            }
         }
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
                                                    size: 17)!]
+        self.navigationItem.leftBarButtonItem?.action = #selector(self.backClick(_:))
+        
         self.navigationItem.rightBarButtonItem?
             .setTitleTextAttributes([ NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17.0)!],
                                     for: .normal)
+        self.navigationItem.rightBarButtonItem?.action = #selector(self.saveRootine(_:))
         
         backView.forEach{ $0.viewRounded(cornerRadius: 10) }
         emojiMessage.isHidden = true
@@ -93,6 +97,18 @@ class EditVC: UIViewController {
         collectionView.allowsMultipleSelection = true
     }
     
+    @objc
+    func saveRootine(_ sender: Any) {
+        if selectWeek.filter({$0==1}).count == 0 {
+            weekMessage.isHidden = false
+            notiGenerator.notificationOccurred(.error)
+            waringGeneratorAnimation(view: weekMessage)
+            return
+        }
+        
+        editMode == .edit ? modifyRootine() : createRootine()
+    }
+    
     func createRootine() {
         guard emojiTextfield.hasText,
             nameTextfield.hasText,
@@ -110,8 +126,7 @@ class EditVC: UIViewController {
                               emoji: emoji,
                               title: title,
                               goal: goal,
-                              repeatDays: selectWeek,
-                              count: 1)
+                              repeatDays: selectWeek)
         if FMDBManager.shared.createRootine(rootine: rootine) {
             navigationController?.popViewController(animated: true)
         }
@@ -135,6 +150,17 @@ class EditVC: UIViewController {
         }
     }
     
+    func warningBackAlert() {
+        let alert = CustomAlertView(text: "이전 화면으로 돌아가시겠습니까?\n미 저장시, 작성중인 루틴은 저장되지 않습니다.") { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        navigationController?.view.addSubview(alert)
+        alert.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+    }
+    
     func deleteRootine() {
         guard let rootine = rootine else {
             return
@@ -142,19 +168,6 @@ class EditVC: UIViewController {
         if FMDBManager.shared.deleteRootine(id: rootine.id) {
             navigationController?.popViewController(animated: true)
         }
-    }
-    
-    func waringGeneratorAnimation(view: UILabel) {
-        view.transform = .init(translationX: 4, y: 0)
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       usingSpringWithDamping: 0.3,
-                       initialSpringVelocity: 0.5,
-                       options: [.allowUserInteraction],
-                       animations: {
-                        view.transform = .identity
-                        
-        })
     }
     
     @IBAction func deleteRootine(_ sender: UIButton) {
@@ -172,18 +185,22 @@ class EditVC: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func backHome(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+    @objc
+    func backClick(_ sender: UIBarButtonItem) {
+        warningBackAlert()
     }
     
-    @IBAction func saveRootine(_ sender: Any) {
-        if selectWeek.filter({$0==1}).count == 0 {
-            weekMessage.isHidden = false
-            notiGenerator.notificationOccurred(.error)
-            waringGeneratorAnimation(view: weekMessage)
-        }
-        
-        editMode == .edit ? modifyRootine() : createRootine()
+    func waringGeneratorAnimation(view: UILabel) {
+        view.transform = .init(translationX: 4, y: 0)
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.3,
+                       initialSpringVelocity: 0.5,
+                       options: [.allowUserInteraction],
+                       animations: {
+                        view.transform = .identity
+                        
+        })
     }
 }
 

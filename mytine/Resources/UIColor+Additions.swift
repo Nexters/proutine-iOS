@@ -33,4 +33,8 @@ extension UIColor {
     @nonobjc class var weekSelectColor: UIColor {
         return UIColor(red: 96 / 255.0, green: 96 / 255.0, blue: 96 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var repeatDayUnselectColor: UIColor {
+        return UIColor(red: 196 / 255.0, green: 208 / 255.0, blue: 232 / 255.0, alpha: 1.0)
+    }
 }
