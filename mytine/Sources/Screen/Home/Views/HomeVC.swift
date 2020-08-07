@@ -28,6 +28,8 @@ class HomeVC: UIViewController {
         let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
         weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
         dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -153,12 +155,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekTVCell.reuseIdentifier) as? WeekTVCell else {
-                return .init()
-            }
-            return cell
-        } else if section == 2 {
+        if section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
                 return .init()
             }
@@ -199,9 +196,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 65
-        } else if section == 2{
+        if section == 2{
             return 50
         } else {
             return 0
