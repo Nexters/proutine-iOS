@@ -63,7 +63,7 @@ class HomeVC: UIViewController {
         downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 45),
+            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 65),
             downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
             downButton.widthAnchor.constraint(equalToConstant: 24),
             downButton.heightAnchor.constraint(equalToConstant: 24)
@@ -124,6 +124,11 @@ extension HomeVC: UITableViewDataSource {
         if section == 1 {
             return 1
         } else {
+            if self.dayRoutineList.count == 0 {
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "icDownArrow")
+            } else {
+                tableView.restore()
+            }
             return dayRoutineList.count
         }
     }

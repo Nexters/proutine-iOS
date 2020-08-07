@@ -10,48 +10,45 @@ import Foundation
 import UIKit
 
 extension UITableView {
-    func setEmptyView(message: String, label: String) {
-        let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
-
-        let addBtn: UIButton = {
-            let button = UIButton()
-            button.setTitle(label, for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = UIColor.darkGray
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
-        let messageLabel: UILabel = {
-            let label = UILabel()
-            label.text = message
-            label.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16.0)
-            label.textAlignment = NSTextAlignment.center
-            label.numberOfLines = 0
-            label.textColor = .gray
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-
-        addBtn.addSubview(messageLabel)
-        messageLabel.topAnchor.constraint(equalTo: addBtn.topAnchor, constant: -62).isActive = true
-        messageLabel.leftAnchor.constraint(equalTo: addBtn.leftAnchor, constant: 72).isActive = true
-        messageLabel.rightAnchor.constraint(equalTo: addBtn.rightAnchor, constant: -72).isActive = true
-
-        emptyView.addSubview(addBtn)
-        addBtn.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 48).isActive = true
-        addBtn.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -48).isActive = true
-        addBtn.topAnchor.constraint(equalTo: emptyView.topAnchor, constant: 220).isActive = true
-        addBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    func setEmptyView(message: String, image: String){
+            let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+            
+            let picImage: UIImageView = {
+                let imageView = UIImageView()
+                let image = UIImage(named: image)
+                imageView.image = image
+                imageView.contentMode = .scaleAspectFill
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                return imageView
+            }()
+            let messageLabel: UILabel = {
+                let label = UILabel()
+                label.text = message
+                label.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 15.0)
+                label.textAlignment = NSTextAlignment.center
+                label.numberOfLines = 0
+                label.textColor = .mainFont
+                label.translatesAutoresizingMaskIntoConstraints = false
+                return label
+            }()
+            
+            picImage.addSubview(messageLabel)
+            messageLabel.bottomAnchor.constraint(equalTo: picImage.bottomAnchor, constant: 13).isActive = true
+            messageLabel.leftAnchor.constraint(equalTo: picImage.leftAnchor, constant: 15).isActive = true
+            messageLabel.rightAnchor.constraint(equalTo: picImage.rightAnchor, constant: -15).isActive = true
+            
+            emptyView.addSubview(picImage)
+            picImage.translatesAutoresizingMaskIntoConstraints = false
+            picImage.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 35).isActive = true
+            picImage.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -35).isActive = true
+            picImage.topAnchor.constraint(equalTo: emptyView.topAnchor, constant: 15).isActive = true
+            
+            self.backgroundView = emptyView
+            self.separatorStyle = .none
+        }
         
-        emptyView.backgroundColor = .backColor
-        self.backgroundColor = .backColor
-        self.backgroundView?.backgroundColor = .backColor
-        self.backgroundView = emptyView
-        self.separatorStyle = .none
+        func restore() {
+            self.backgroundView = nil
+            self.separatorStyle = .none
+        }
     }
-
-    func restore() {
-        self.backgroundView = nil
-        self.separatorStyle = .none
-    }
-}
