@@ -25,6 +25,7 @@
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
 		0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26B24B84FD3002D2A12 /* Home.storyboard */; };
 		0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D26F24B850E3002D2A12 /* CalendarVC.swift */; };
+		0823BE8F24DED60800AC5D54 /* RetrospectTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823BE8E24DED60800AC5D54 /* RetrospectTVCell.swift */; };
 		0833EC6C24D3455500DE5518 /* EditWeekCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6924D3455500DE5518 /* EditWeekCVCell.swift */; };
 		0833EC6D24D3455500DE5518 /* CheckCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6A24D3455500DE5518 /* CheckCVCell.swift */; };
 		0833EC6E24D3455500DE5518 /* CheckReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6B24D3455500DE5518 /* CheckReusableView.swift */; };
@@ -62,6 +63,7 @@
 		0804D26324B84C5D002D2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0804D26B24B84FD3002D2A12 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0804D26F24B850E3002D2A12 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
+		0823BE8E24DED60800AC5D54 /* RetrospectTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectTVCell.swift; sourceTree = "<group>"; };
 		0833EC6924D3455500DE5518 /* EditWeekCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWeekCVCell.swift; sourceTree = "<group>"; };
 		0833EC6A24D3455500DE5518 /* CheckCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCVCell.swift; sourceTree = "<group>"; };
 		0833EC6B24D3455500DE5518 /* CheckReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckReusableView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */,
 				08A3F44824C57B1E00201278 /* WeekTVCell.swift */,
 				08A3F44E24C5D46300201278 /* TabTVCell.swift */,
+				0823BE8E24DED60800AC5D54 /* RetrospectTVCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				08A5E5E024C8644200AA7B61 /* EditVC.swift in Sources */,
 				08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */,
 				0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */,
+				0823BE8F24DED60800AC5D54 /* RetrospectTVCell.swift in Sources */,
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
 				0833EC6E24D3455500DE5518 /* CheckReusableView.swift in Sources */,

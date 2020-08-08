@@ -28,6 +28,8 @@ class HomeVC: UIViewController {
         let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
         weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
         dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -61,7 +63,7 @@ class HomeVC: UIViewController {
         downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 45),
+            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 65),
             downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
             downButton.widthAnchor.constraint(equalToConstant: 24),
             downButton.heightAnchor.constraint(equalToConstant: 24)
@@ -122,6 +124,11 @@ extension HomeVC: UITableViewDataSource {
         if section == 1 {
             return 1
         } else {
+            if self.dayRoutineList.count == 0 {
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "icDownArrow")
+            } else {
+                tableView.restore()
+            }
             return dayRoutineList.count
         }
     }
@@ -153,12 +160,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekTVCell.reuseIdentifier) as? WeekTVCell else {
-                return .init()
-            }
-            return cell
-        } else if section == 2 {
+        if section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
                 return .init()
             }
@@ -199,9 +201,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 65
-        } else if section == 2{
+        if section == 2{
             return 50
         } else {
             return 0

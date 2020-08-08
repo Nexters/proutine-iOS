@@ -20,6 +20,7 @@ class RoutineTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backView.viewRounded(cornerRadius: 10)
+        self.iconLabel.viewRounded(cornerRadius: 10)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
