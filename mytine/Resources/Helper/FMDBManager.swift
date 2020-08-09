@@ -278,7 +278,7 @@ class FMDBManager {
                 let routine = Rootine(id: Int(id), emoji: emoji, title: title, goal: goal, repeatDays: intRepeatDays)
                 
                 routineList.append(routine)
-                print("id \(id) :::: week \(emoji) ::::: completes \(repeatDays)")
+                print("id \(id) :::: emoji \(emoji) ::::: completes \(repeatDays)")
             }
            
         } catch {

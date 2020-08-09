@@ -21,9 +21,9 @@ class EditWeekCVCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.contentView.backgroundColor = .mainBlue
-                self.contentView.layer.borderColor = UIColor.clear.cgColor
-                self.weekLabel.textColor = UIColor.white
+                self.contentView.backgroundColor = .white
+                self.contentView.layer.borderColor = UIColor.mainBlue.cgColor
+                self.weekLabel.textColor = .mainBlue
             } else {
                 self.contentView.backgroundColor = .clear
                 self.contentView.layer.borderColor = UIColor.repeatDayUnselectColor.cgColor
