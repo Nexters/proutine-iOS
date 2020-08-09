@@ -242,13 +242,14 @@ extension EditVC: UITextFieldDelegate {
                     textField.text = ""
                     emojiMessage.text = "하나의 이모지만 등록이 가능합니다."
                     emojiMessage.isHidden = false
+                    backView[0].viewBorder(borderColor: .macaroniAndCheese, borderWidth: 1)
                     notiGenerator.notificationOccurred(.error)
                     waringGeneratorAnimation(view: emojiMessage)
                 }
             } else {
                 emojiMessage.text = "루틴의 이모지가 등록되지 않았습니다."
                 emojiMessage.isHidden = false
-                backView[0].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                backView[0].viewBorder(borderColor: .macaroniAndCheese, borderWidth: 1)
                 notiGenerator.notificationOccurred(.error)
                 waringGeneratorAnimation(view: emojiMessage)
             }
@@ -259,7 +260,7 @@ extension EditVC: UITextFieldDelegate {
                 goalTextfield.becomeFirstResponder()
             } else {
                 nameMessage.isHidden = false
-                backView[1].viewBorder(borderColor: .lightGray, borderWidth: 1)
+                backView[1].viewBorder(borderColor: .macaroniAndCheese, borderWidth: 1)
                 notiGenerator.notificationOccurred(.error)
                 waringGeneratorAnimation(view: nameMessage)
             }
