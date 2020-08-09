@@ -27,7 +27,7 @@ class FMDBManager {
     }
     static let shared = FMDBManager()
     private let database: FMDatabase
-    private let dbName = "test2.sqlite"
+    private let dbName = "routine.sqlite"
     private let weekTableName = "WeekRootine"
     private let dayTableName = "DayRootine"
     private let rootineTableName = "Rootine"
