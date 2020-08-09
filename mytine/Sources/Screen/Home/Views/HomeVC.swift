@@ -24,10 +24,7 @@ class HomeVC: UIViewController {
         setDownButton()
         setListDropDown()
         setupTableView()
-        let user = UserDefaults.standard
-        let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
-        weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
-        dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
+        loadRoutineDB()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -37,6 +34,16 @@ class HomeVC: UIViewController {
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: index, animated: true)
         }
+    }
+    
+    func loadRoutineDB() {
+        let user = UserDefaults.standard
+        let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
+        weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
+        dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
+        
+        print("****** thisWeek: \(thisWeek)")
+        print("****** dayRoutineList: \(dayRoutineList)")
     }
     
     func presentPopup() {
@@ -177,8 +184,8 @@ extension HomeVC: UITableViewDataSource {
             let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
                 print("루틴 완료")
             }
+            // doneAction.image = UIImage(named: <#T##String#>)
             doneAction.backgroundColor = UIColor.subFont
-            
             return UISwipeActionsConfiguration(actions: [doneAction])
         } else {
             return UISwipeActionsConfiguration.init()
@@ -193,6 +200,7 @@ extension HomeVC: UITableViewDataSource {
                 //            cell.backView.backgroundColor = .lightGray
                 print("완료 취소")
             }
+            // cancelAction.image = UIImage(named: <#T##String#>)
             cancelAction.backgroundColor = UIColor.subFont
             return UISwipeActionsConfiguration(actions: [cancelAction])
         } else {
