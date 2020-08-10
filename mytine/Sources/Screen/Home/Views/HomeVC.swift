@@ -9,7 +9,14 @@
 import UIKit
 import DropDown
 
+struct WeekRootineModel {
+    let week: Int
+    var rootinesIdx: String
+    var dayRoutine: [DayRootine]
+}
+
 class HomeVC: UIViewController {
+    @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var dropView: UIView!
     
@@ -24,6 +31,7 @@ class HomeVC: UIViewController {
         setDownButton()
         setListDropDown()
         setupTableView()
+        setupCollectionView()
         loadRoutineDB()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -43,7 +51,7 @@ class HomeVC: UIViewController {
         dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
         
         print("****** thisWeek: \(thisWeek)")
-        print("****** dayRoutineList: \(dayRoutineList)")
+        print("****** weekRoutineList: \(weekRoutineList)")
     }
     
     func presentPopup() {
@@ -59,6 +67,11 @@ class HomeVC: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: WeekRootineTVCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     func setDownButton() {
@@ -118,6 +131,24 @@ class HomeVC: UIViewController {
         self.navigationController?.pushViewController(dvc, animated: true)
     }
 }
+//MARK:- 월 화 수 목 금 토 일 collection view
+extension HomeVC: UICollectionViewDelegate {
+    
+}
+
+extension HomeVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCVCell.reuseIdentifier, for: indexPath) as? WeekCVCell else {
+            return .init()
+        }
+        return cell
+    }
+}
+
 //MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
     
