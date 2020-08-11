@@ -18,10 +18,11 @@ class HomeVC: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var dropView: UIView!
-    
+    var isExpanded = true
     var array: NSArray?
     private let downButton = UIButton()
-    var testList = ["가", "나", "다", "라", "마", "바", "가", "나", "다", "라", "마", "바","가", "나", "다", "라", "마", "바"]
+    var weekList = ["가", "나", "다", "라", "마", "바"]
+    var dayList = ["가", "나", "다", "라", "마", "바", "가", "나", "다", "라", "마", "바","가", "나", "다", "라", "마", "바"]
     var weekRoutineList: [WeekRootine] = []
     var dayRoutineList: [DayRootine] = []
     var routineList: [Rootine] = []
@@ -35,7 +36,7 @@ class HomeVC: UIViewController {
         loadRoutineDB()
         dropView.layer.cornerRadius = 12
         dropView.layer.shadowColor = UIColor.darkGray.cgColor
-        dropView.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
+        dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         dropView.layer.shadowRadius = 4.0
         dropView.layer.shadowOpacity = 0.5
         // dropView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: 12).cgPath
@@ -52,8 +53,8 @@ class HomeVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes =
-        [NSAttributedString.Key.foregroundColor: UIColor.mainFont,
-         NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 17)!]
+            [NSAttributedString.Key.foregroundColor: UIColor.mainFont,
+             NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 17)!]
     }
     
     func setDownButton() {
@@ -115,6 +116,24 @@ class HomeVC: UIViewController {
         }
     }
     
+    @objc
+    func handleExpandClose(button: UIButton) {
+        var indexPaths = [IndexPath]()
+        for row in weekList.indices {
+            let indexPath = IndexPath(row: row, section: 0)
+            indexPaths.append(indexPath)
+        }
+        
+        isExpanded = !isExpanded
+        
+        if !isExpanded {
+            print("wanna delete \(isExpanded)")
+            print(indexPaths)
+            tableView.deleteRows(at: indexPaths, with: .bottom)
+        } else {
+            print("wanna insert \(isExpanded)")
+            tableView.insertRows(at: indexPaths, with: .top)
+        }
     }
     
     /// Left bar button Item
@@ -158,12 +177,16 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            if self.testList.count == 0 {
+        if section == 0 {
+            return (isExpanded) ? weekList.count : 0
+        } else {
+            if self.dayList.count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
-            return testList.count
+            return dayList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -181,23 +204,18 @@ extension HomeVC: UITableViewDataSource {
             
             cell.viewRounded(cornerRadius: 10)
             //            cell.timeLabel.text =
-            cell.listLabel.text = testList[indexPath.row]
+            cell.listLabel.text = dayList[indexPath.row]
             //            cell.iconLabel.text =
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
-                return .init()
-            }
-            return cell
-        } else {
-            let rect = CGRect(x: 0, y: 0, width: 0, height: 0)
-            let myView = UIView(frame: rect)
-            return myView
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
+            return .init()
         }
+        cell.expandBtn.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -230,11 +248,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
-            return 75
-        } else {
-            return 0
-        }
+        return (section == 0) ? 0 : 75
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
