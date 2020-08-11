@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kod-sq-6Cv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="5" width="320" height="34"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="5" id="cHh-80-MN3">
                             <size key="itemSize" width="128" height="128"/>
@@ -29,8 +29,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="kod-sq-6Cv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="37e-40-boq"/>
-                    <constraint firstItem="kod-sq-6Cv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ACy-b1-bTA"/>
-                    <constraint firstAttribute="bottom" secondItem="kod-sq-6Cv" secondAttribute="bottom" id="EIy-Lp-6BX"/>
+                    <constraint firstItem="kod-sq-6Cv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ACy-b1-bTA"/>
+                    <constraint firstAttribute="bottom" secondItem="kod-sq-6Cv" secondAttribute="bottom" constant="5" id="EIy-Lp-6BX"/>
                     <constraint firstAttribute="trailing" secondItem="kod-sq-6Cv" secondAttribute="trailing" id="idV-Pj-LkK"/>
                 </constraints>
             </tableViewCellContentView>

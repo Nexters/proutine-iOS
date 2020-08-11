@@ -7,29 +7,39 @@
 //
 
 import UIKit
-import DropDown
+
+struct WeekRootineModel {
+    let week: Int
+    var rootinesIdx: String
+    var dayRoutine: [DayRootine]
+}
 
 class HomeVC: UIViewController {
+    @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var dropView: UIView!
-    
+    var isExpanded = true
     var array: NSArray?
-    var dropDown: DropDown?
     private let downButton = UIButton()
+    var weekList = ["가", "나", "다", "라", "마", "바"]
+    var dayList = ["가", "나", "다", "라", "마", "바", "가", "나", "다", "라", "마", "바","가", "나", "다", "라", "마", "바"]
     var weekRoutineList: [WeekRootine] = []
     var dayRoutineList: [DayRootine] = []
+    var routineList: [Rootine] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
         setDownButton()
-        setListDropDown()
         setupTableView()
-        let user = UserDefaults.standard
-        let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
-        weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
-        dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        setupCollectionView()
+        loadRoutineDB()
+        dropView.layer.cornerRadius = 12
+        dropView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        dropView.layer.shadowRadius = 4.0
+        dropView.layer.shadowOpacity = 0.5
+        // dropView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: 12).cgPath
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -37,6 +47,43 @@ class HomeVC: UIViewController {
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: index, animated: true)
         }
+    }
+    
+    func setNavigationBar() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: UIColor.mainFont,
+             NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 17)!]
+    }
+    
+    func setDownButton() {
+        self.navigationController?.navigationBar.addSubview(downButton)
+        downButton.setImage(UIImage(named: "dropdown"), for: .normal)
+        downButton.clipsToBounds = true
+        downButton.translatesAutoresizingMaskIntoConstraints = false
+        downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 65),
+            downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
+            downButton.widthAnchor.constraint(equalToConstant: 24),
+            downButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        dropView.isHidden = true
+    }
+    
+    func loadRoutineDB() {
+        let user = UserDefaults.standard
+        let today = user.integer(forKey: UserDefaultKeyName.recentEnter.getString)
+        let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
+        weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
+        dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
+        routineList = FMDBManager.shared.selectRootine(id: 0)
+        
+        print("****** thisWeek: \(thisWeek)")
+        print("****** weekRoutineList: \(weekRoutineList)")
+        print("****** routineList: \(routineList)")
     }
     
     func presentPopup() {
@@ -54,48 +101,38 @@ class HomeVC: UIViewController {
         tableView.dataSource = self
     }
     
-    func setDownButton() {
-        self.navigationController?.navigationBar.addSubview(downButton)
-        downButton.setImage(UIImage(named: "icDownArrow"), for: .selected)
-        downButton.setImage(UIImage(named: "icUpArrow"), for: .normal)
-        downButton.clipsToBounds = true
-        downButton.translatesAutoresizingMaskIntoConstraints = false
-        downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
-        
-        NSLayoutConstraint.activate([
-            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 65),
-            downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
-            downButton.widthAnchor.constraint(equalToConstant: 24),
-            downButton.heightAnchor.constraint(equalToConstant: 24)
-        ])
+    func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
-    @objc func clickDownButton() {
+    @objc
+    func clickDownButton() {
         downButton.isSelected = !downButton.isSelected
         if downButton.isSelected == true {
-            self.dropDown?.reloadAllComponents()
-            dropDown?.show()
+            dropView.isHidden = true
         } else {
-            //            UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
-            //                self.downButton.transform = .identity
-            //                self.view.layoutIfNeeded()
-            //            })
+            dropView.isHidden = false
         }
     }
     
-    func setListDropDown() {
-        let dropList: [String] = ["7월 13일 - 7월 19일", "7월 20일 - 7월 26일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일"]
-        dropDown = DropDown()
-        dropDown?.anchorView = dropView
-        self.dropDown?.cellHeight = 40
-        self.dropDown?.backgroundColor = UIColor.white
-        self.dropDown?.selectionBackgroundColor = UIColor.subFont
-        DropDown.appearance().setupCornerRadius(10)
-        dropDown?.dataSource = dropList
-        dropDown?.bottomOffset = CGPoint(x: 0, y: (dropDown?.anchorView?.plainView.bounds.height)!+6)
-        dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
-            cell.optionLabel.textAlignment = .center
-            cell.optionLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17)
+    @objc
+    func handleExpandClose(button: UIButton) {
+        var indexPaths = [IndexPath]()
+        for row in weekList.indices {
+            let indexPath = IndexPath(row: row, section: 0)
+            indexPaths.append(indexPath)
+        }
+        
+        isExpanded = !isExpanded
+        
+        if !isExpanded {
+            print("wanna delete \(isExpanded)")
+            print(indexPaths)
+            tableView.deleteRows(at: indexPaths, with: .bottom)
+        } else {
+            print("wanna insert \(isExpanded)")
+            tableView.insertRows(at: indexPaths, with: .top)
         }
     }
     
@@ -111,25 +148,44 @@ class HomeVC: UIViewController {
         self.navigationController?.pushViewController(dvc, animated: true)
     }
 }
+//MARK:- 월 화 수 목 금 토 일 collection view
+extension HomeVC: UICollectionViewDelegate {
+    
+}
+
+extension HomeVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCVCell.reuseIdentifier, for: indexPath) as? WeekCVCell else {
+            return .init()
+        }
+        cell.weekLabel.text = WeekCVCell.weekList[indexPath.row]
+        return cell
+    }
+}
+
 //MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
     
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 {
-            return 1
+        if section == 0 {
+            return (isExpanded) ? weekList.count : 0
         } else {
-            if self.dayRoutineList.count == 0 {
-                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "icDownArrow")
+            if self.dayList.count == 0 {
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
-            return dayRoutineList.count
+            return dayList.count
         }
     }
     
@@ -141,44 +197,34 @@ extension HomeVC: UITableViewDataSource {
             cell.bind()
             
             return cell
-        } else if indexPath.section == 2 {
+        } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
                 return .init()
             }
             
             cell.viewRounded(cornerRadius: 10)
             //            cell.timeLabel.text =
-            // cell.listLabel.text = dayRoutineList[indexPath.row].
+            cell.listLabel.text = dayList[indexPath.row]
             //            cell.iconLabel.text =
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TouchCell") else {
-                return .init()
-            }
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 2 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
-                return .init()
-            }
-            return cell
-        } else {
-            let rect = CGRect(x: 0, y: 0, width: 0, height: 0)
-            let myView = UIView(frame: rect)
-            return myView
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
+            return .init()
         }
+        cell.expandBtn.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 2 {
-            let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
+        if indexPath.section == 1 {
+            let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("루틴 완료")
             }
-            doneAction.backgroundColor = UIColor.subFont
-            
+            doneAction.image = UIImage(named: "addBtn")
+            doneAction.backgroundColor = UIColor.subBlue
             return UISwipeActionsConfiguration(actions: [doneAction])
         } else {
             return UISwipeActionsConfiguration.init()
@@ -187,13 +233,12 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if indexPath.section == 2 {
-            let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
-                //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
-                //            cell.backView.backgroundColor = .lightGray
+        if indexPath.section == 1 {
+            let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("완료 취소")
             }
-            cancelAction.backgroundColor = UIColor.subFont
+            cancelAction.image = UIImage(named: "addBtn")
+            cancelAction.backgroundColor = UIColor.subBlue
             return UISwipeActionsConfiguration(actions: [cancelAction])
         } else {
             return UISwipeActionsConfiguration.init()
@@ -201,20 +246,14 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2{
-            return 50
-        } else {
-            return 0
-        }
+        return (section == 0) ? 0 : 75
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 30
-        } else if indexPath.section == 2 {
-            return 75
         } else {
-            return 20
+            return 75
         }
     }
 }

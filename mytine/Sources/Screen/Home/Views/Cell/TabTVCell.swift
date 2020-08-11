@@ -15,6 +15,7 @@ class TabTVCell: UITableViewCell {
 //    var routine : (() -> ()) = {}
 //    var retrospect : (() -> ()) = {}
     
+    @IBOutlet var expandBtn: UIButton!
     @IBOutlet var routineBtn: UIButton!
     @IBOutlet var reviewBtn: UIButton!
     @IBOutlet var barView: UIView!
