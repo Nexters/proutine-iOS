@@ -23,18 +23,18 @@ class HomeVC: UIViewController {
     var array: NSArray?
     var dropDown: DropDown?
     private let downButton = UIButton()
+    var testList = ["가", "나", "다", "라", "마", "바", "가", "나", "다", "라", "마", "바","가", "나", "다", "라", "마", "바"]
     var weekRoutineList: [WeekRootine] = []
     var dayRoutineList: [DayRootine] = []
+    var routineList: [Rootine] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
         setDownButton()
-        setListDropDown()
         setupTableView()
         setupCollectionView()
         loadRoutineDB()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -44,14 +44,42 @@ class HomeVC: UIViewController {
         }
     }
     
+    func setNavigationBar() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes =
+        [NSAttributedString.Key.foregroundColor: UIColor.mainFont,
+         NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 17)!]
+    }
+    
+    func setDownButton() {
+        self.navigationController?.navigationBar.addSubview(downButton)
+        downButton.setImage(UIImage(named: "dropdown"), for: .normal)
+        downButton.clipsToBounds = true
+        downButton.translatesAutoresizingMaskIntoConstraints = false
+        downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 65),
+            downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
+            downButton.widthAnchor.constraint(equalToConstant: 24),
+            downButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        dropView.viewRounded(cornerRadius: 12)
+        dropView.isHidden = true
+    }
+    
     func loadRoutineDB() {
         let user = UserDefaults.standard
+        let today = user.integer(forKey: UserDefaultKeyName.recentEnter.getString)
         let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
         weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
         dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
+        routineList = FMDBManager.shared.selectRootine(id: 0)
         
         print("****** thisWeek: \(thisWeek)")
         print("****** weekRoutineList: \(weekRoutineList)")
+        print("****** routineList: \(routineList)")
     }
     
     func presentPopup() {
@@ -74,49 +102,16 @@ class HomeVC: UIViewController {
         collectionView.dataSource = self
     }
     
-    func setDownButton() {
-        self.navigationController?.navigationBar.addSubview(downButton)
-        downButton.setImage(UIImage(named: "icDownArrow"), for: .selected)
-        downButton.setImage(UIImage(named: "icUpArrow"), for: .normal)
-        downButton.clipsToBounds = true
-        downButton.translatesAutoresizingMaskIntoConstraints = false
-        downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
-        
-        NSLayoutConstraint.activate([
-            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 65),
-            downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
-            downButton.widthAnchor.constraint(equalToConstant: 24),
-            downButton.heightAnchor.constraint(equalToConstant: 24)
-        ])
-    }
-    
-    @objc func clickDownButton() {
+    @objc
+    func clickDownButton() {
         downButton.isSelected = !downButton.isSelected
         if downButton.isSelected == true {
-            self.dropDown?.reloadAllComponents()
-            dropDown?.show()
+            dropView.isHidden = true
         } else {
-            //            UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
-            //                self.downButton.transform = .identity
-            //                self.view.layoutIfNeeded()
-            //            })
+            dropView.isHidden = false
         }
     }
     
-    func setListDropDown() {
-        let dropList: [String] = ["7월 13일 - 7월 19일", "7월 20일 - 7월 26일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일", "7월 27일 - 8월 2일"]
-        dropDown = DropDown()
-        dropDown?.anchorView = dropView
-        self.dropDown?.cellHeight = 40
-        self.dropDown?.backgroundColor = UIColor.white
-        self.dropDown?.selectionBackgroundColor = UIColor.subFont
-        DropDown.appearance().setupCornerRadius(10)
-        dropDown?.dataSource = dropList
-        dropDown?.bottomOffset = CGPoint(x: 0, y: (dropDown?.anchorView?.plainView.bounds.height)!+6)
-        dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
-            cell.optionLabel.textAlignment = .center
-            cell.optionLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17)
-        }
     }
     
     /// Left bar button Item
@@ -145,6 +140,7 @@ extension HomeVC: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCVCell.reuseIdentifier, for: indexPath) as? WeekCVCell else {
             return .init()
         }
+        cell.weekLabel.text = WeekCVCell.weekList[indexPath.row]
         return cell
     }
 }
@@ -155,20 +151,16 @@ extension HomeVC: UITableViewDelegate {
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 {
-            return 1
-        } else {
-            if self.dayRoutineList.count == 0 {
-                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "icDownArrow")
+            if self.testList.count == 0 {
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
-            return dayRoutineList.count
-        }
+            return testList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,26 +171,21 @@ extension HomeVC: UITableViewDataSource {
             cell.bind()
             
             return cell
-        } else if indexPath.section == 2 {
+        } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
                 return .init()
             }
             
             cell.viewRounded(cornerRadius: 10)
             //            cell.timeLabel.text =
-            // cell.listLabel.text = dayRoutineList[indexPath.row].
+            cell.listLabel.text = testList[indexPath.row]
             //            cell.iconLabel.text =
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TouchCell") else {
-                return .init()
-            }
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 2 {
+        if section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
                 return .init()
             }
@@ -211,7 +198,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 2 {
+        if indexPath.section == 1 {
             let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
                 print("루틴 완료")
             }
@@ -225,7 +212,7 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if indexPath.section == 2 {
+        if indexPath.section == 1 {
             let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
                 //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
                 //            cell.backView.backgroundColor = .lightGray
@@ -240,8 +227,8 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2{
-            return 50
+        if section == 1 {
+            return 75
         } else {
             return 0
         }
@@ -250,10 +237,8 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 30
-        } else if indexPath.section == 2 {
-            return 75
         } else {
-            return 20
+            return 75
         }
     }
 }
