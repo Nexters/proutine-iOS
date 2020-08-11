@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 
 struct WeekRootineModel {
     let week: Int
@@ -21,7 +20,6 @@ class HomeVC: UIViewController {
     @IBOutlet var dropView: UIView!
     
     var array: NSArray?
-    var dropDown: DropDown?
     private let downButton = UIButton()
     var testList = ["가", "나", "다", "라", "마", "바", "가", "나", "다", "라", "마", "바","가", "나", "다", "라", "마", "바"]
     var weekRoutineList: [WeekRootine] = []
@@ -35,6 +33,12 @@ class HomeVC: UIViewController {
         setupTableView()
         setupCollectionView()
         loadRoutineDB()
+        dropView.layer.cornerRadius = 12
+        dropView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropView.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
+        dropView.layer.shadowRadius = 4.0
+        dropView.layer.shadowOpacity = 0.5
+        // dropView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: 12).cgPath
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -65,7 +69,6 @@ class HomeVC: UIViewController {
             downButton.widthAnchor.constraint(equalToConstant: 24),
             downButton.heightAnchor.constraint(equalToConstant: 24)
         ])
-        dropView.viewRounded(cornerRadius: 12)
         dropView.isHidden = true
     }
     

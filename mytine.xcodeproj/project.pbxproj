@@ -30,6 +30,8 @@
 		0833EC6D24D3455500DE5518 /* CheckCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6A24D3455500DE5518 /* CheckCVCell.swift */; };
 		0833EC6E24D3455500DE5518 /* CheckReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6B24D3455500DE5518 /* CheckReusableView.swift */; };
 		0833EC7124D34BAC00DE5518 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0833EC7024D34BAC00DE5518 /* .swiftlint.yml */; };
+		088E029F24E2A7F400B87CAA /* DropDownTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E029E24E2A7F400B87CAA /* DropDownTVC.swift */; };
+		088E02A124E2BAE700B87CAA /* DropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E02A024E2BAE700B87CAA /* DropdownCell.swift */; };
 		08A3F42724C40CB300201278 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F42624C40CB300201278 /* HomeVC.swift */; };
 		08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44C24C58AE400201278 /* HomePopVC.swift */; };
 		08A3F44F24C5D46300201278 /* TabTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F44E24C5D46300201278 /* TabTVCell.swift */; };
@@ -68,6 +70,8 @@
 		0833EC6A24D3455500DE5518 /* CheckCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCVCell.swift; sourceTree = "<group>"; };
 		0833EC6B24D3455500DE5518 /* CheckReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckReusableView.swift; sourceTree = "<group>"; };
 		0833EC7024D34BAC00DE5518 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		088E029E24E2A7F400B87CAA /* DropDownTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTVC.swift; sourceTree = "<group>"; };
+		088E02A024E2BAE700B87CAA /* DropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownCell.swift; sourceTree = "<group>"; };
 		08A3F42624C40CB300201278 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		08A3F44C24C58AE400201278 /* HomePopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopVC.swift; sourceTree = "<group>"; };
 		08A3F44E24C5D46300201278 /* TabTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTVCell.swift; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 				08D4139A24BF4D2B0049BB44 /* Cell */,
 				08A3F42624C40CB300201278 /* HomeVC.swift */,
 				08A3F44C24C58AE400201278 /* HomePopVC.swift */,
+				088E029E24E2A7F400B87CAA /* DropDownTVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				08A3F44E24C5D46300201278 /* TabTVCell.swift */,
 				0823BE8E24DED60800AC5D54 /* RetrospectTVCell.swift */,
 				08BA3D5E24E03DAB0015A217 /* WeekCVCell.swift */,
+				088E02A024E2BAE700B87CAA /* DropdownCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -462,6 +468,7 @@
 				08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */,
 				0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */,
 				0823BE8F24DED60800AC5D54 /* RetrospectTVCell.swift in Sources */,
+				088E029F24E2A7F400B87CAA /* DropDownTVC.swift in Sources */,
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
 				0833EC6E24D3455500DE5518 /* CheckReusableView.swift in Sources */,
@@ -470,6 +477,7 @@
 				06A720AC24CED0CC00ED31DC /* CalendarManager.swift in Sources */,
 				06BCB6F624D87497005D8B3D /* CustomAlertView.swift in Sources */,
 				0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */,
+				088E02A124E2BAE700B87CAA /* DropdownCell.swift in Sources */,
 				08A3F42724C40CB300201278 /* HomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
