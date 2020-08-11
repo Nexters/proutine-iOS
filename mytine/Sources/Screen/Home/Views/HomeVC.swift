@@ -220,11 +220,11 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 1 {
-            let doneAction = UIContextualAction(style: .normal, title: "함") { (action, view, bool) in
+            let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("루틴 완료")
             }
-            // doneAction.image = UIImage(named: <#T##String#>)
-            doneAction.backgroundColor = UIColor.subFont
+            doneAction.image = UIImage(named: "addBtn")
+            doneAction.backgroundColor = UIColor.subBlue
             return UISwipeActionsConfiguration(actions: [doneAction])
         } else {
             return UISwipeActionsConfiguration.init()
@@ -234,13 +234,11 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         if indexPath.section == 1 {
-            let cancelAction = UIContextualAction(style: .normal, title: "취소") { (action, view, bool) in
-                //            let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineTVCell", for: indexPath) as! RoutineTVCell
-                //            cell.backView.backgroundColor = .lightGray
+            let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("완료 취소")
             }
-            // cancelAction.image = UIImage(named: <#T##String#>)
-            cancelAction.backgroundColor = UIColor.subFont
+            cancelAction.image = UIImage(named: "addBtn")
+            cancelAction.backgroundColor = UIColor.subBlue
             return UISwipeActionsConfiguration(actions: [cancelAction])
         } else {
             return UISwipeActionsConfiguration.init()
