@@ -38,17 +38,11 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupRoutine()
         setNavigationBar()
         setDownButton()
-        setupRoutine()
         setupTableView()
         setupCollectionView()
-        dropView.layer.cornerRadius = 12
-        dropView.layer.shadowColor = UIColor.darkGray.cgColor
-        dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
-        dropView.layer.shadowRadius = 4.0
-        dropView.layer.shadowOpacity = 0.5
-        // dropView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: 12).cgPath
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -64,9 +58,17 @@ class HomeVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.foregroundColor: UIColor.mainFont,
              NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 17)!]
+        self.navigationItem.title = allWeekRoutine.last?.weekString
     }
     
     func setDownButton() {
+        dropView.layer.cornerRadius = 12
+        dropView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        dropView.layer.shadowRadius = 4.0
+        dropView.layer.shadowOpacity = 0.5
+        // dropView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: 12).cgPath
+        
         self.navigationController?.navigationBar.addSubview(downButton)
         downButton.setImage(UIImage(named: "dropdown"), for: .normal)
         downButton.clipsToBounds = true
@@ -74,7 +76,7 @@ class HomeVC: UIViewController {
         downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 65),
+            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 85),
             downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
             downButton.widthAnchor.constraint(equalToConstant: 24),
             downButton.heightAnchor.constraint(equalToConstant: 24)
@@ -128,12 +130,12 @@ class HomeVC: UIViewController {
             UIView.animate(withDuration: 0.3) {
                 self.downButton.transform = CGAffineTransform(rotationAngle: .pi)
             }
-            dropView.isHidden = true
+            dropView.isHidden = false
         } else {
             UIView.animate(withDuration: 0.3) {
                 self.downButton.transform = .identity
             }
-            dropView.isHidden = false
+            dropView.isHidden = true
         }
     }
     
