@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum CellType {
+    case routine, retrospect
+}
+
 struct WeekRootineModel {
     var weekRoutine: WeekRootine
     var dayRoutine: [DayRootine]
@@ -25,6 +29,11 @@ class HomeVC: UIViewController {
     private var curWeekRoutineModel: WeekRootineModel?
     // cell reload시 cellIndex 0으로 다시 초기화해주기
     private var dayRoutineCellIndex: Int = 0
+    private var cellType: CellType = .routine {
+        didSet {
+            tableView.reloadSections(.init(integer: 2), with: .automatic)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -265,20 +274,23 @@ extension HomeVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
                 return .init()
             }
+            cell.homeDelegate = self
             cell.expandBtn.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
-                return .init()
+            if cellType == .routine {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
+                    return .init()
+                }
+                cell.bind()
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
+                    return .init(style: .default, reuseIdentifier: "")
+                }
+                cell.bind()
+                return cell
             }
-            
-            cell.viewRounded(cornerRadius: 10)
-            
-            let routineList = selectRoutine
-            cell.timeLabel.text = routineList[indexPath.row].goal
-            cell.listLabel.text = routineList[indexPath.row].title
-            cell.iconLabel.text = routineList[indexPath.row].emoji
-            return cell
         }
     }
     
@@ -317,5 +329,15 @@ extension HomeVC: UITableViewDataSource {
         } else {
             return 75
         }
+    }
+}
+
+extension HomeVC: HomeTabCellTypeDelegate {
+    func clickRoutine() {
+        self.cellType = .routine
+    }
+    
+    func clickRetrospect() {
+        self.cellType = .retrospect
     }
 }

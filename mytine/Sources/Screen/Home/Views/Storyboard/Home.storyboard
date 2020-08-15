@@ -308,7 +308,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="backView" destination="67p-QH-k7X" id="2mn-3K-cWI"/>
                                             <outlet property="saveBtn" destination="1Hl-aC-mWW" id="FCw-fg-ro4"/>
                                         </connections>
                                     </tableViewCell>

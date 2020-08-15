@@ -17,6 +17,7 @@ class TabTVCell: UITableViewCell {
     @IBOutlet var reviewBtn: UIButton!
     @IBOutlet var barView: UIView!
     @IBOutlet var barwidth: NSLayoutConstraint!
+    var homeDelegate: HomeTabCellTypeDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +31,7 @@ class TabTVCell: UITableViewCell {
             self.barView.frame.size.width = self.routineBtn.frame.width
             self.barView.transform = CGAffineTransform(translationX: 0, y: 0)
         })
+        homeDelegate?.clickRoutine()
         self.layoutIfNeeded()
     }
     
@@ -41,6 +43,12 @@ class TabTVCell: UITableViewCell {
             self.barView.transform = CGAffineTransform(translationX: sender.frame.width+16
                 , y: 0)
         })
+        homeDelegate?.clickRetrospect()
         self.layoutIfNeeded()
     }
+}
+
+protocol HomeTabCellTypeDelegate {
+    func clickRoutine()
+    func clickRetrospect()
 }
