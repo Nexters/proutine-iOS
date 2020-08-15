@@ -125,19 +125,8 @@ class HomeVC: UIViewController {
     
     @objc
     func handleExpandClose(button: UIButton) {
-        
-        let indexPaths = (0...5).map { IndexPath(row: $0, section: 0) }
         isExpanded = !isExpanded
-        
-        if !isExpanded {
-//            self.weekRoutineList.removeAll()
-            tableView.deleteRows(at: indexPaths, with: .bottom)
-        } else {
-            print("wanna insert \(isExpanded)")
-            // TODO: weekRoutineList의 전역 데이터 선언한 뒤 바꿔줄 것
-            // self.weekRoutineList = self.weekOriginalList
-            tableView.insertRows(at: indexPaths, with: .top)
-        }
+        tableView.reloadSections(.init(integer: 0), with: .automatic)
     }
     
     /// Left bar button Item
