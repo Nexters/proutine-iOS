@@ -14,6 +14,8 @@ class WeekRootineTVCell: UITableViewCell {
     
     @IBOutlet weak var dayCollectionView: UICollectionView!
     
+    private var model: Rootine?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -22,8 +24,9 @@ class WeekRootineTVCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func bind() {
+    func bind(model: Rootine?, index: Int) {
         setupCollectionView()
+        self.model = model
     }
     
     func setupCollectionView() {
@@ -44,15 +47,17 @@ extension WeekRootineTVCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayRootineCVCell.reuseIdentifier, for: indexPath) as? DayRootineCVCell else {
             return .init()
         }
-        //TODO: 해당루틴에 대한 정보 0,1,0,1,0,1,1...
-        cell.bind()
+        
+        let isActive = model?.repeatDays[indexPath.row] == 1 ? true : false
+        let emoji = model?.emoji
+        cell.bind(emoji: emoji ?? "", isActive: isActive)
         return cell
     }
 }
 
 extension WeekRootineTVCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //TODO: 루틴 한칸사이즈
+        // 루틴 한칸사이즈
         return CGSize(width: 44, height: 44)
     }
 }

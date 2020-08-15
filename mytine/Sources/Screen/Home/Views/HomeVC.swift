@@ -91,7 +91,6 @@ class HomeVC: UIViewController {
                                                dayRoutine: dayRoutine,
                                                routine: routines)
         
-        print(curWeekRoutineModel)
     }
     
     func presentPopup() {
@@ -240,7 +239,7 @@ extension HomeVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekRootineTVCell.reuseIdentifier, for: indexPath) as? WeekRootineTVCell else {
                 return .init()
             }
-            cell.bind()
+            cell.bind(model: curWeekRoutineModel?.routine[indexPath.row], index: indexPath.row)
             
             return cell
         } else if indexPath.section == 1 {
@@ -293,7 +292,7 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 30
+            return 54
         } else {
             return 75
         }

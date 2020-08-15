@@ -11,12 +11,23 @@ import UIKit
 class DayRootineCVCell: UICollectionViewCell {
     static let nibName = "DayRootineCVCell"
     static let reuseIdentifier = "DayRootineCVCell"
+    @IBOutlet weak var emojiLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        contentView.viewRounded(cornerRadius: 4)
     }
     
-    func bind() {
-        backgroundColor = .lightGray
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentView.backgroundColor = .white
+    }
+    
+    func bind(emoji: String, isActive: Bool) {
+        if !isActive {
+            contentView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9529411765, blue: 0.968627451, alpha: 1)
+        } else {
+            emojiLabel.text = emoji
+        }
     }
 }
