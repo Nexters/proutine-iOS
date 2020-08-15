@@ -21,6 +21,7 @@ class HomeVC: UIViewController {
     var isExpanded = true
     private let downButton = UIButton()
     private var allWeekRoutine: [WeekRootine] = []
+    private var selectRoutine: [Rootine] = []
     private var curWeekRoutineModel: WeekRootineModel?
     // cell reload시 cellIndex 0으로 다시 초기화해주기
     private var dayRoutineCellIndex: Int = 0
@@ -133,11 +134,6 @@ class HomeVC: UIViewController {
         tableView.reloadSections(.init(integer: 0), with: .automatic)
     }
     
-    /// Left bar button Item
-    @IBAction func showCalendar(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     /// Right bar button Item
     @IBAction func addRoutine(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
@@ -148,7 +144,30 @@ class HomeVC: UIViewController {
 }
 //MARK:- 월 화 수 목 금 토 일 collection view
 extension HomeVC: UICollectionViewDelegate {
-    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard var curWeekRoutine = curWeekRoutineModel else {
+            return
+        }
+        
+        print("dayRoutine", curWeekRoutine.dayRoutine[indexPath.row])
+        let completeList = curWeekRoutine.dayRoutine[indexPath.row].complete
+        if !completeList.isEmpty {
+            var tempList: [Rootine] = []
+            
+            for index in completeList.indices {
+                if completeList.contains(curWeekRoutine.routine[index].id) {
+                    // 만약 완료 루틴이라면
+                    tempList.append(curWeekRoutine.routine[index])
+                    curWeekRoutine.routine.remove(at: index)
+                }
+            }
+            selectRoutine = tempList + curWeekRoutine.routine
+        } else {
+            selectRoutine = curWeekRoutine.routine
+        }
+    }
 }
 
 extension HomeVC: UICollectionViewDataSource {
@@ -225,12 +244,12 @@ extension HomeVC: UITableViewDataSource {
         } else if section == 1 {
             return 1
         } else {
-            if curWeekRoutine.weekRoutine.rootines().count == 0 {
+            if selectRoutine.count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
-            return curWeekRoutine.weekRoutine.rootines().count
+            return selectRoutine.count
         }
     }
     
@@ -254,9 +273,11 @@ extension HomeVC: UITableViewDataSource {
             }
             
             cell.viewRounded(cornerRadius: 10)
-//            cell.timeLabel.text = routineList[indexPath.row].goal
-//            cell.listLabel.text = routineList[indexPath.row].title
-//            cell.iconLabel.text = routineList[indexPath.row].emoji
+            
+            let routineList = selectRoutine
+            cell.timeLabel.text = routineList[indexPath.row].goal
+            cell.listLabel.text = routineList[indexPath.row].title
+            cell.iconLabel.text = routineList[indexPath.row].emoji
             return cell
         }
     }
@@ -265,10 +286,11 @@ extension HomeVC: UITableViewDataSource {
         if indexPath.section == 2 {
             let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("루틴 완료")
+                // 오늘(day) 루틴의 complete에 routineList[indexPath.row].id 값 append
+                // if 이미 append 되어 있다면 completion(false) 시킬 것
             }
             doneAction.image = UIImage(named: "complete")
             doneAction.backgroundColor = UIColor.subBlue
-            view.alpha = 0.5
             return UISwipeActionsConfiguration(actions: [doneAction])
         } else {
             return UISwipeActionsConfiguration.init()
@@ -276,14 +298,13 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         if indexPath.section == 2 {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("완료 취소")
+                // self.curWeekRoutineModel?.dayRoutine[indexPath.row].complete.append(curWeekRoutin)
             }
             cancelAction.image = UIImage(named: "undo")
             cancelAction.backgroundColor = UIColor.subBlue
-            view.alpha = 1.0
             return UISwipeActionsConfiguration(actions: [cancelAction])
         } else {
             return UISwipeActionsConfiguration.init()

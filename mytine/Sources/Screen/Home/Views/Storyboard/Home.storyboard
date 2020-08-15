@@ -340,11 +340,6 @@
                         <viewLayoutGuide key="safeArea" id="ZaD-Xf-PXv"/>
                     </view>
                     <navigationItem key="navigationItem" title="8월 3일 - 8월 9일" id="31e-sd-YdS">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="1N5-ZZ-Nnp">
-                            <connections>
-                                <action selector="showCalendar:" destination="n16-al-WaH" id="fmX-t6-d7U"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="addBtn" id="CfQ-Iw-RvF">
                             <color key="tintColor" red="0.23137254901960785" green="0.46274509803921571" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
