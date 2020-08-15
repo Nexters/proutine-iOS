@@ -139,7 +139,7 @@ class HomeVC: UIViewController {
     @objc
     func handleExpandClose(button: UIButton) {
         isExpanded = !isExpanded
-        tableView.reloadSections(.init(integer: 0), with: .automatic)
+        tableView.reloadSections(.init(integer: 0), with: .bottom)
     }
     
     /// Left bar button Item

@@ -115,16 +115,10 @@ class EditVC: UIViewController {
                               goal: goal,
                               repeatDays: selectWeek)
         
-        // 루틴생성, 데이루틴생성, 주차루틴 수정
+        // 루틴생성, 주차루틴 수정
         if FMDBManager.shared.createRootine(rootine: rootine) {
             guard let curWeekRoutine = curWeekRoutine else {
                 return
-            }
-            if curWeekRoutine.dayRoutine.isEmpty {
-                _ = FMDBManager.shared.createDayRootine(rootine: DayRootine(id: Int(Date().makeRootineId())!,
-                                                                        retrospect: "",
-                                                                        week: curWeekRoutine.weekRoutine.week,
-                                                                        complete: []))
             }
             let count = FMDBManager.shared.searchRoutineCount()
             var newArr = curWeekRoutine.weekRoutine.rootines()
