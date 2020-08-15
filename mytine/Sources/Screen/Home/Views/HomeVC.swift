@@ -235,7 +235,7 @@ extension HomeVC: UITableViewDataSource {
             let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("루틴 완료")
             }
-            doneAction.image = UIImage(named: "addBtn")
+            doneAction.image = UIImage(named: "complete")
             doneAction.backgroundColor = UIColor.subBlue
             view.alpha = 0.5
             return UISwipeActionsConfiguration(actions: [doneAction])
@@ -250,7 +250,7 @@ extension HomeVC: UITableViewDataSource {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("완료 취소")
             }
-            cancelAction.image = UIImage(named: "addBtn")
+            cancelAction.image = UIImage(named: "undo")
             cancelAction.backgroundColor = UIColor.subBlue
             view.alpha = 1.0
             return UISwipeActionsConfiguration(actions: [cancelAction])
