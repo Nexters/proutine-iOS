@@ -199,8 +199,12 @@ class FMDBManager {
                 let week: Int32 = rs.int(forColumn: "week")
                 let completes: String = rs.string(forColumn: "completes") ?? ""
                 print("id \(id) :::: week \(week) ::::: completes \(completes)")
-                let completeList = completes.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
-                
+                let completeList: [Int]
+                if completes.isEmpty {
+                    completeList = []
+                } else {
+                    completeList = completes.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
+                }
                 dayRootines.append(DayRootine(id: Int(id),
                                               retrospect: retrospect,
                                               week: Int(week),
@@ -290,6 +294,32 @@ class FMDBManager {
         
         database.close()
         return routineList
+    }
+    
+    func searchRoutineCount() -> Int {
+        guard database.open() else {
+            print("Unable to open database")
+            return 0
+        }
+        var totalCount = 0
+        do {
+            let queryString = "select count(*) from \(rootineTableName)"
+            let rs = try database.executeQuery(queryString, values: nil)
+            
+            while rs.next() {
+                totalCount = Int(rs.int(forColumn: "count(*)"))
+                
+                print("count \(totalCount)")
+            }
+           
+        } catch {
+            print("Unable to open database")
+            database.close()
+            return 0
+        }
+        
+        database.close()
+        return totalCount
     }
     
     func updateRootine(rootine: Rootine) -> Bool {

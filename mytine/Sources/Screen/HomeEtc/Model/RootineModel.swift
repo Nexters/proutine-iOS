@@ -26,6 +26,10 @@ struct DayRootine {
     // 완료 루틴index면 정렬시 뒤로빼기
     
     func completeString() -> String {
+        if complete.isEmpty {
+            return ""
+        }
+        
         let tempString = complete.map{ String($0) }.joined(separator: " ")
         return tempString
     }

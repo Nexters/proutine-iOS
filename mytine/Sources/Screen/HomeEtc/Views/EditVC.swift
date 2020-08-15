@@ -31,6 +31,7 @@ class EditVC: UIViewController {
     private let notiGenerator = UINotificationFeedbackGenerator()
     var rootine: Rootine?
     var editMode: EditMode = .add
+    var curWeekRoutine: WeekRootineModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +115,23 @@ class EditVC: UIViewController {
                               title: title,
                               goal: goal,
                               repeatDays: selectWeek)
+        
+        // 루틴생성, 데이루틴생성, 주차루틴 수정
         if FMDBManager.shared.createRootine(rootine: rootine) {
+            guard let curWeekRoutine = curWeekRoutine else {
+                return
+            }
+            if curWeekRoutine.dayRoutine.isEmpty {
+                _ = FMDBManager.shared.createDayRootine(rootine: DayRootine(id: Int(Date().makeRootineId())!,
+                                                                        retrospect: "",
+                                                                        week: curWeekRoutine.weekRoutine.week,
+                                                                        complete: []))
+            }
+            let count = FMDBManager.shared.searchRoutineCount()
+            var newArr = curWeekRoutine.weekRoutine.rootines()
+            newArr.append(count)
+            _ = FMDBManager.shared.updateWeekRootine(rootinesList: newArr, week: curWeekRoutine.weekRoutine.week)
+            
             navigationController?.popViewController(animated: true)
         }
     }
@@ -131,7 +148,7 @@ class EditVC: UIViewController {
         rootine.title = title
         rootine.goal = goal
         rootine.repeatDays = selectWeek
-        
+        // 루틴업데이트
         if FMDBManager.shared.updateRootine(rootine: rootine) {
             navigationController?.popViewController(animated: true)
         }

@@ -25,7 +25,12 @@ class WeekCVCell: UICollectionViewCell {
     }
     
     func bind(model: DayRootine, dayRoutineCount: Float, index: Int) {
-        let rate = Float(model.complete.count) / dayRoutineCount
+        let rate: Float
+        if dayRoutineCount == 0 {
+            rate = Float(model.complete.count) / 1 * 100
+        } else {
+            rate = Float(model.complete.count) / dayRoutineCount * 100
+        }
         if rate < 50 {
             rateCheckView.backgroundColor = colors[0]
         } else if rate < 80 {

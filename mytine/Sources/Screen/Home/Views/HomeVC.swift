@@ -9,9 +9,7 @@
 import UIKit
 
 struct WeekRootineModel {
-    let week: Int
-    var rootinesIdx: [Int]
-    var weekSting: String
+    var weekRoutine: WeekRootine
     var dayRoutine: [DayRootine]
     var routine: [Rootine]
 }
@@ -89,11 +87,11 @@ class HomeVC: UIViewController {
         let dayRoutine = FMDBManager.shared.selectDayRootine(week: week)
         let routines = weekRoutine.rootines().map{ FMDBManager.shared.selectRootine(id: $0)[0] }
         
-        curWeekRoutineModel = WeekRootineModel(week: weekRoutine.week,
-                                               rootinesIdx: weekRoutine.rootines(),
-                                               weekSting: weekRoutine.weekString,
+        curWeekRoutineModel = WeekRootineModel(weekRoutine: weekRoutine,
                                                dayRoutine: dayRoutine,
                                                routine: routines)
+        
+        print(curWeekRoutineModel)
     }
     
     func presentPopup() {
@@ -152,6 +150,7 @@ class HomeVC: UIViewController {
     @IBAction func addRoutine(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
         guard let dvc = storyboard.instantiateViewController(identifier: "EditVC") as? EditVC else { return }
+        dvc.curWeekRoutine = curWeekRoutineModel
         self.navigationController?.pushViewController(dvc, animated: true)
     }
 }
@@ -174,7 +173,7 @@ extension HomeVC: UICollectionViewDataSource {
             return .init()
         }
         
-        let startDay = curWeekRoutine.weekSting.components(separatedBy: " - ")[0]
+        let startDay = curWeekRoutine.weekRoutine.weekString.components(separatedBy: " - ")[0]
         if !curWeekRoutine.dayRoutine.isEmpty {
             let curDayRoutine = curWeekRoutine.dayRoutine[dayRoutineCellIndex]
             if String(curDayRoutine.id) ==  startDay.afterDayString(addDay: indexPath.item) {
@@ -188,7 +187,7 @@ extension HomeVC: UICollectionViewDataSource {
                     .afterDayString(addDay: indexPath.item))
                 cell.bind(model: DayRootine(id: dayId!,
                                             retrospect: "",
-                                            week: curWeekRoutine.week,
+                                            week: curWeekRoutine.weekRoutine.week,
                                             complete: []),
                           dayRoutineCount: Float(curWeekRoutine.routine.count),
                           index: indexPath.item)
@@ -199,7 +198,7 @@ extension HomeVC: UICollectionViewDataSource {
                 .afterDayString(addDay: indexPath.item))
             cell.bind(model: DayRootine(id: dayId!,
                                         retrospect: "",
-                                        week: curWeekRoutine.week,
+                                        week: curWeekRoutine.weekRoutine.week,
                                         complete: []),
                       dayRoutineCount: Float(curWeekRoutine.routine.count),
                       index: indexPath.item)
@@ -223,16 +222,16 @@ extension HomeVC: UITableViewDataSource {
         }
         
         if section == 0 {
-            return (isExpanded) ? curWeekRoutine.rootinesIdx.count : 0
+            return (isExpanded) ? curWeekRoutine.weekRoutine.rootines().count : 0
         } else if section == 1 {
             return 1
         } else {
-            if curWeekRoutine.rootinesIdx.count == 0 {
+            if curWeekRoutine.weekRoutine.rootines().count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
-            return curWeekRoutine.rootinesIdx.count
+            return curWeekRoutine.weekRoutine.rootines().count
         }
     }
     
