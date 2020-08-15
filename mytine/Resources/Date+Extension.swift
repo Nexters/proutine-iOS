@@ -56,4 +56,9 @@ extension Date {
         let weekDay = Calendar.current.component(.weekday, from: self)
         return weekDay
     }
+    
+    func getDay() -> Int {
+        let day = Calendar.current.component(.day, from: self)
+        return day
+    }
 }

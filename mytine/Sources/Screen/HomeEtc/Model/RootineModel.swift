@@ -11,6 +11,7 @@ import Foundation
 struct WeekRootine {
     let week: Int
     var rootinesIdx: String
+    var weekString: String
     
     func rootines() -> [Int] {
         return rootinesIdx.components(separatedBy: .whitespaces).compactMap{ Int($0) }

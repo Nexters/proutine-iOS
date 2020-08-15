@@ -16,7 +16,7 @@ class CalendarManager {
             print(month)
         }
     }
-    
+    var day: Int = 0
     var year: Int {
         didSet {
             print(year)
@@ -27,6 +27,7 @@ class CalendarManager {
         year = date.getYear()
         month = date.getMonth()
         dayOfMonth = getDayOfMonth()
+        day = date.getDay()
     }
     
     func getDayOfMonth() -> Int {

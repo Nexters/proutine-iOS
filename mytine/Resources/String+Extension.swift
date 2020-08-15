@@ -48,6 +48,45 @@ extension String {
         let weekDay = date.getWeekday()
         return weekDay
     }
+    // 해당날짜가 포함된 그주의 처음과 끝날짜
+    func weekFirstToEnd() -> String {
+        let weekDay = self.simpleDateStringGetWeekDay()-2
+        
+        let before: Int
+        let after: Int
+        // 일요일
+        if weekDay < 0 {
+            before = 6
+            after = 0
+        } else {
+            before = weekDay
+            after = 6-weekDay
+        }
+        let formatter = simpleDateFormatter(format: "yyyyMMdd")
+        guard let date = formatter.date(from: self),
+            let startCalendar = Calendar.current.date(byAdding: .day, value: -before, to: date),
+            let endCalendar = Calendar.current.date(byAdding: .day, value: after, to: date) else {
+            return ""
+        }
+        formatter.dateFormat = "MM월 dd일"
+        print("주차시작날짜:::: \(startCalendar)")
+        print("주차끝날짜::::: \(endCalendar)")
+        let startDay = formatter.string(from: startCalendar)
+        let endDay = formatter.string(from: endCalendar)
+        return "\(startDay) - \(endDay)"
+        
+    }
+    
+    // 1주후
+    func afterWeekString() -> String {
+        let formatter = simpleDateFormatter(format: "yyyyMMdd")
+        guard let date = formatter.date(from: self),
+        let weekCalendar = Calendar.current.date(byAdding: .day, value: 7, to: date) else {
+            return ""
+        }
+        
+        return formatter.string(from: weekCalendar)
+    }
 }
 
 extension Character {

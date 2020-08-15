@@ -49,7 +49,7 @@ class FMDBManager {
         }
         
         do {
-            try database.executeUpdate("create table if not exists \(weekTableName)(week Integer Primary key AutoIncrement, rootinesIdx Text)", values: nil)
+            try database.executeUpdate("create table if not exists \(weekTableName)(week Integer Primary key AutoIncrement, rootinesIdx Text, weekString Text)", values: nil)
             
             try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text)", values: nil)
             
@@ -80,16 +80,16 @@ class FMDBManager {
     }
     
     // MARK: WeekRootine Manager
-    func addWeek(rootineIdx: String?) -> Bool {
+    func addWeek(rootineIdx: String?, weekString: String) -> Bool {
         guard database.open() else {
             print("Unable to open database")
             return false
         }
         do {
             if let rootineIdx = rootineIdx {
-                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [rootineIdx])
+                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx, weekString) values (?, ?)", values: [rootineIdx, weekString])
             } else {
-                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx) values (?)", values: [""])
+                try database.executeUpdate("insert into \(weekTableName) (rootinesIdx, weekString) values (?, ?)", values: ["", weekString])
             }
         } catch {
             print("failed: \(error.localizedDescription)")
@@ -122,9 +122,10 @@ class FMDBManager {
             while rs.next() {
                 let week: Int32 = rs.int(forColumn: "week")
                 let rootinesIdx: String = rs.string(forColumn: "rootinesIdx") ?? ""
+                let weekString: String = rs.string(forColumn: "weekString") ?? ""
+                print("week \(week) ::::: rootinesIdx \(rootinesIdx) ::::: weekString \(weekString)")
                 
-                print("week \(week) ::::: rootinesIdx \(rootinesIdx)")
-                let weekRootine = WeekRootine(week: Int(week), rootinesIdx: rootinesIdx)
+                let weekRootine = WeekRootine(week: Int(week), rootinesIdx: rootinesIdx, weekString: weekString)
                 list.append(weekRootine)
             }
            

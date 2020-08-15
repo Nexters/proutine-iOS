@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("현재 저장된 날::::::::")
         FMDBManager.shared.selectDayRootine(week: 0)
         
-        print()
         print("::::::::::::App:::::::::::::::::")
         print("::::::::::::Open::::::::::::::::")
 
@@ -54,8 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if distance > 0 {
                 let weekRootine = FMDBManager.shared.selectWeekRootine(week: beforeRecentWeek)
                 // 주차 차이나는만큼 추가
+                var weekDate = beforeRecentDate
                 for _ in 0..<distance {
-                    _ = FMDBManager.shared.addWeek(rootineIdx: weekRootine[0].rootinesIdx)
+                    weekDate = weekDate.afterWeekString()
+                    _ = FMDBManager.shared.addWeek(rootineIdx: weekRootine[0].rootinesIdx, weekString: weekDate.weekFirstToEnd())
                 }
             }
             print("firstDate - \(firstDate)")
@@ -78,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                       forKey: UserDefaultKeyName.recentWeek.getString)
 
             _ = FMDBManager.shared.createTable()
-            _ = FMDBManager.shared.addWeek(rootineIdx: nil)
+            _ = FMDBManager.shared.addWeek(rootineIdx: nil, weekString: newRecentDate.weekFirstToEnd())
         }
     }
 }
