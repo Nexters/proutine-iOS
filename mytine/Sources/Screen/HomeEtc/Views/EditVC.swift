@@ -24,6 +24,7 @@ class EditVC: UIViewController {
     @IBOutlet weak var nameMessage: UILabel!
     @IBOutlet weak var weekMessage: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     private let weekList = ["월", "화", "수", "목", "금", "토", "일"]
     private var selectWeek = [0,0,0,0,0,0,0]
@@ -68,12 +69,10 @@ class EditVC: UIViewController {
                                                    size: 17)!]
         self.navigationItem.leftBarButtonItem?.action = #selector(self.backClick(_:))
         
-        self.navigationItem.rightBarButtonItem?
-            .setTitleTextAttributes([ NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 17.0)!],
-                                    for: .normal)
-        self.navigationItem.rightBarButtonItem?.action = #selector(self.saveRootine(_:))
-        
         backView.forEach{ $0.viewRounded(cornerRadius: 10) }
+        saveButton.viewRounded(cornerRadius: 12)
+        deleteButton.viewRounded(cornerRadius: 12)
+        
         emojiMessage.isHidden = true
         nameMessage.isHidden = true
         weekMessage.isHidden = true
@@ -95,18 +94,6 @@ class EditVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
-    }
-    
-    @objc
-    func saveRootine(_ sender: Any) {
-        if selectWeek.filter({$0==1}).count == 0 {
-            weekMessage.isHidden = false
-            notiGenerator.notificationOccurred(.error)
-            waringGeneratorAnimation(view: weekMessage)
-            return
-        }
-        
-        editMode == .edit ? modifyRootine() : createRootine()
     }
     
     func createRootine() {
@@ -170,21 +157,6 @@ class EditVC: UIViewController {
         }
     }
     
-    @IBAction func deleteRootine(_ sender: UIButton) {
-        let alert = UIAlertController(title: "확인",
-                                      message: "정말로 삭제하시겠습니까?",
-                                      preferredStyle: .alert)
-        
-        let delete = UIAlertAction(title: "삭제하기", style: .destructive) { (action) in
-            //code
-        }
-        let cancel = UIAlertAction(title: "아니오", style: .cancel)
-        alert.addAction(cancel)
-        alert.addAction(delete)
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
     @objc
     func backClick(_ sender: UIBarButtonItem) {
         warningBackAlert()
@@ -202,6 +174,33 @@ class EditVC: UIViewController {
                         
         })
     }
+    
+    @IBAction func deleteRootine(_ sender: UIButton) {
+        let alert = UIAlertController(title: "확인",
+                                      message: "정말로 삭제하시겠습니까?",
+                                      preferredStyle: .alert)
+        
+        let delete = UIAlertAction(title: "삭제하기", style: .destructive) { (action) in
+            //code
+        }
+        let cancel = UIAlertAction(title: "아니오", style: .cancel)
+        alert.addAction(cancel)
+        alert.addAction(delete)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func saveClick(_ sender: Any) {
+        if selectWeek.filter({$0==1}).count == 0 {
+            weekMessage.isHidden = false
+            notiGenerator.notificationOccurred(.error)
+            waringGeneratorAnimation(view: weekMessage)
+            return
+        }
+        
+        editMode == .edit ? modifyRootine() : createRootine()
+    }
+    
 }
 
 extension EditVC: UICollectionViewDataSource {
