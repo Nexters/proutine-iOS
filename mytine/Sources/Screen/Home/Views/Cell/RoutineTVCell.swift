@@ -21,9 +21,16 @@ class RoutineTVCell: UITableViewCell {
         super.awakeFromNib()
         self.backView.viewRounded(cornerRadius: 10)
         self.iconLabel.viewRounded(cornerRadius: 10)
+        self.viewRounded(cornerRadius: 10)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func bind(_ routine: Rootine) {
+        self.timeLabel.text = routine.goal
+        self.listLabel.text = routine.title
+        self.iconLabel.text = routine.emoji
     }
 }

@@ -75,9 +75,6 @@ class HomeVC: UIViewController {
     }
     
     func loadRoutineDB() {
-        let user = UserDefaults.standard
-        // let today = user.integer(forKey: UserDefaultKeyName.recentEnter.getString)
-    
         // 1. 전체 주간 루틴 리스트 불러오기
         weekRoutineList = FMDBManager.shared.selectWeekRootine(week: 0)
         
@@ -123,8 +120,14 @@ class HomeVC: UIViewController {
     func clickDownButton() {
         downButton.isSelected = !downButton.isSelected
         if downButton.isSelected == true {
+            UIView.animate(withDuration: 0.3) {
+                self.downButton.transform = CGAffineTransform(rotationAngle: .pi)
+            }
             dropView.isHidden = true
         } else {
+            UIView.animate(withDuration: 0.3) {
+                self.downButton.transform = .identity
+            }
             dropView.isHidden = false
         }
     }
@@ -179,7 +182,12 @@ extension HomeVC: UICollectionViewDataSource {
 
 //MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
+        guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
+        dvc.rootine = routineList[indexPath.row]
+        self.navigationController?.pushViewController(dvc, animated: true)
+    }
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -207,7 +215,6 @@ extension HomeVC: UITableViewDataSource {
                 return .init()
             }
             cell.bind()
-            
             return cell
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
@@ -219,11 +226,6 @@ extension HomeVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
                 return .init()
             }
-            
-            cell.viewRounded(cornerRadius: 10)
-            cell.timeLabel.text = routineList[indexPath.row].goal
-            cell.listLabel.text = routineList[indexPath.row].title
-            cell.iconLabel.text = routineList[indexPath.row].emoji
             return cell
         }
     }
@@ -233,7 +235,7 @@ extension HomeVC: UITableViewDataSource {
             let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("루틴 완료")
             }
-            doneAction.image = UIImage(named: "addBtn")
+            doneAction.image = UIImage(named: "complete")
             doneAction.backgroundColor = UIColor.subBlue
             view.alpha = 0.5
             return UISwipeActionsConfiguration(actions: [doneAction])
@@ -248,7 +250,7 @@ extension HomeVC: UITableViewDataSource {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("완료 취소")
             }
-            cancelAction.image = UIImage(named: "addBtn")
+            cancelAction.image = UIImage(named: "undo")
             cancelAction.backgroundColor = UIColor.subBlue
             view.alpha = 1.0
             return UISwipeActionsConfiguration(actions: [cancelAction])

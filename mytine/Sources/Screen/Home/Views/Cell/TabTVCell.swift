@@ -12,9 +12,6 @@ class TabTVCell: UITableViewCell {
     static let nibName = "TabTVCell"
     static let reuseIdentifier = "TabTVCell"
     
-//    var routine : (() -> ()) = {}
-//    var retrospect : (() -> ()) = {}
-    
     @IBOutlet var expandBtn: UIButton!
     @IBOutlet var routineBtn: UIButton!
     @IBOutlet var reviewBtn: UIButton!
@@ -27,8 +24,6 @@ class TabTVCell: UITableViewCell {
     }
     
     @IBAction func clickRoutine(_ sender: UIButton) {
-//      routine()
-        self.barwidth.constant = self.routineBtn.frame.width
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
             self.routineBtn.isSelected = true
             self.reviewBtn.isSelected = false
@@ -39,9 +34,6 @@ class TabTVCell: UITableViewCell {
     }
     
     @IBAction func clickReview(_ sender: UIButton) {
-//      retrospect()
-        self.barwidth.constant = self.reviewBtn.frame.width
-//        self.barView.frame.size.width = self.reviewBtn.frame.width
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
             self.routineBtn.isSelected = false
             self.reviewBtn.isSelected = true
@@ -49,7 +41,6 @@ class TabTVCell: UITableViewCell {
             self.barView.transform = CGAffineTransform(translationX: sender.frame.width+16
                 , y: 0)
         })
-        
         self.layoutIfNeeded()
     }
 }
