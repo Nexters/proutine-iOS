@@ -210,7 +210,6 @@ extension HomeVC: UITableViewDataSource {
                 return .init()
             }
             cell.bind()
-            
             return cell
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
@@ -222,11 +221,6 @@ extension HomeVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
                 return .init()
             }
-            
-            cell.viewRounded(cornerRadius: 10)
-            cell.timeLabel.text = routineList[indexPath.row].goal
-            cell.listLabel.text = routineList[indexPath.row].title
-            cell.iconLabel.text = routineList[indexPath.row].emoji
             return cell
         }
     }
