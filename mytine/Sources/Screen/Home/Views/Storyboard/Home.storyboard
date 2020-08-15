@@ -771,6 +771,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="backView" destination="gCG-92-gzg" id="GMk-z3-68Y"/>
                                     <outlet property="label" destination="ZyF-QC-3tf" id="nkP-nv-esV"/>
                                 </connections>
                             </tableViewCell>

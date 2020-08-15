@@ -75,9 +75,6 @@ class HomeVC: UIViewController {
     }
     
     func loadRoutineDB() {
-        let user = UserDefaults.standard
-        // let today = user.integer(forKey: UserDefaultKeyName.recentEnter.getString)
-    
         // 1. 전체 주간 루틴 리스트 불러오기
         weekRoutineList = FMDBManager.shared.selectWeekRootine(week: 0)
         
@@ -123,8 +120,14 @@ class HomeVC: UIViewController {
     func clickDownButton() {
         downButton.isSelected = !downButton.isSelected
         if downButton.isSelected == true {
+            UIView.animate(withDuration: 0.3) {
+                self.downButton.transform = CGAffineTransform(rotationAngle: .pi)
+            }
             dropView.isHidden = true
         } else {
+            UIView.animate(withDuration: 0.3) {
+                self.downButton.transform = .identity
+            }
             dropView.isHidden = false
         }
     }
