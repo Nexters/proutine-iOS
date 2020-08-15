@@ -41,7 +41,7 @@ extension UITableView {
             picImage.translatesAutoresizingMaskIntoConstraints = false
             picImage.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 35).isActive = true
             picImage.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -35).isActive = true
-            picImage.topAnchor.constraint(equalTo: emptyView.topAnchor, constant: 15).isActive = true
+            picImage.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
             
             self.backgroundView = emptyView
             self.separatorStyle = .none
