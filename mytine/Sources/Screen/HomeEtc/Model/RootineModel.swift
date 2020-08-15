@@ -11,6 +11,10 @@ import Foundation
 struct WeekRootine {
     let week: Int
     var rootinesIdx: String
+    
+    func rootines() -> [Int] {
+        return rootinesIdx.components(separatedBy: .whitespaces).compactMap{ Int($0) }
+    }
 }
 
 struct DayRootine {
@@ -20,11 +24,10 @@ struct DayRootine {
     var complete: [Int] // 완료루틴 Index
     // 완료 루틴index면 정렬시 뒤로빼기
     
-    func getComplete() -> String {
+    func completeString() -> String {
         let tempString = complete.map{ String($0) }.joined(separator: " ")
         return tempString
     }
-
 }
 
 struct Rootine {

@@ -164,7 +164,7 @@ class FMDBManager {
         }
         do {
             try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, completes) values (?,?,?,?)",
-                values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete()])
+                values: [rootine.id, rootine.retrospect, rootine.week, rootine.completeString()])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -225,7 +225,7 @@ class FMDBManager {
         
         do {
             try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ? where id = ?",
-                values: [rootine.retrospect, rootine.getComplete(), rootine.id])
+                values: [rootine.retrospect, rootine.completeString(), rootine.id])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
