@@ -10,7 +10,7 @@ import UIKit
 
 struct WeekRootineModel {
     let week: Int
-    var rootinesIdx: String
+    var rootinesIdx: [Int]
     var dayRoutine: [DayRootine]
 }
 
@@ -19,11 +19,11 @@ class HomeVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var dropView: UIView!
     var isExpanded = true
+    var weekRootineModel: WeekRootineModel!
     var array: NSArray?
     private let downButton = UIButton()
     var weekList = ["가", "나", "다", "라", "마", "바"]
     var weekOriginalList = ["가", "나", "다", "라", "마", "바"]
-    var dayList = ["가", "나", "다", "라", "마", "바", "가", "나", "다", "라", "마", "바","가", "나", "다", "라", "마", "바"]
     var weekRoutineList: [WeekRootine] = []
     var dayRoutineList: [DayRootine] = []
     var routineList: [Rootine] = []
@@ -76,16 +76,27 @@ class HomeVC: UIViewController {
     
     func loadRoutineDB() {
         let user = UserDefaults.standard
-        let today = user.integer(forKey: UserDefaultKeyName.recentEnter.getString)
-        let thisWeek = user.integer(forKey: UserDefaultKeyName.recentWeek.getString)
-        weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
-        dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
-        routineList = FMDBManager.shared.selectRootine(id: 0)
-//        WeekRootineModel(week: weekRoutineList[0].week, rootinesIdx: <#T##String#>, dayRoutine: <#T##[DayRootine]#>)
+        // let today = user.integer(forKey: UserDefaultKeyName.recentEnter.getString)
+    
+        // 1. 전체 주간 루틴 리스트 불러오기
+        weekRoutineList = FMDBManager.shared.selectWeekRootine(week: 0)
         
-        print("****** thisWeek: \(thisWeek)")
-        print("****** weekRoutineList: \(weekRoutineList)")
-        print("****** routineList: \(routineList)")
+        // 2. 가장 최신 주차로 해당 주차 불러오기
+        guard let thisWeek = weekRoutineList.last else { return }
+        
+        weekRootineModel = WeekRootineModel(week: thisWeek.week, rootinesIdx: thisWeek.rootines(), dayRoutine: dayRoutineList)
+        
+        if thisWeek.week == 1 {
+            // 2-1. 만약 이번주가 처음이라면 다 빈칸으로 띄우기
+            
+        } else if dayRoutineList.count == 0 {
+            // 2-2. 처음은 아닌데 데이루틴이 없다면 rootinesIdx로 Rootine 리스트 불러오기
+            dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek.week)
+            for id in weekRootineModel.rootinesIdx {
+                let rootine = FMDBManager.shared.selectRootine(id: id)
+                routineList.append(contentsOf: rootine)
+            }
+        }
     }
     
     func presentPopup() {
@@ -121,15 +132,16 @@ class HomeVC: UIViewController {
     @objc
     func handleExpandClose(button: UIButton) {
         
-        let indexPaths = (0...5).map { IndexPath(row: $0, section:0) }
+        let indexPaths = (0...5).map { IndexPath(row: $0, section: 0) }
         isExpanded = !isExpanded
         
         if !isExpanded {
-            self.weekList.removeAll()
+            self.weekRoutineList.removeAll()
             tableView.deleteRows(at: indexPaths, with: .bottom)
         } else {
             print("wanna insert \(isExpanded)")
-            self.weekList = self.weekOriginalList
+            // TODO: weekRoutineList의 전역 데이터 선언한 뒤 바꿔줄 것
+            // self.weekRoutineList = self.weekOriginalList
             tableView.insertRows(at: indexPaths, with: .top)
         }
     }
@@ -176,16 +188,16 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return (isExpanded) ? weekList.count : 0
+            return (isExpanded) ? weekRoutineList.count : 0
         } else if section == 1 {
             return 1
         } else {
-            if self.dayList.count == 0 {
+            if self.routineList.count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
-            return dayList.count
+            return routineList.count
         }
     }
     
@@ -209,9 +221,9 @@ extension HomeVC: UITableViewDataSource {
             }
             
             cell.viewRounded(cornerRadius: 10)
-            //            cell.timeLabel.text =
-            cell.listLabel.text = dayList[indexPath.row]
-            //            cell.iconLabel.text =
+            cell.timeLabel.text = routineList[indexPath.row].goal
+            cell.listLabel.text = routineList[indexPath.row].title
+            cell.iconLabel.text = routineList[indexPath.row].emoji
             return cell
         }
     }
@@ -223,6 +235,7 @@ extension HomeVC: UITableViewDataSource {
             }
             doneAction.image = UIImage(named: "addBtn")
             doneAction.backgroundColor = UIColor.subBlue
+            view.alpha = 0.5
             return UISwipeActionsConfiguration(actions: [doneAction])
         } else {
             return UISwipeActionsConfiguration.init()
@@ -237,6 +250,7 @@ extension HomeVC: UITableViewDataSource {
             }
             cancelAction.image = UIImage(named: "addBtn")
             cancelAction.backgroundColor = UIColor.subBlue
+            view.alpha = 1.0
             return UISwipeActionsConfiguration(actions: [cancelAction])
         } else {
             return UISwipeActionsConfiguration.init()
