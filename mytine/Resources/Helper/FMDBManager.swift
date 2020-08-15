@@ -222,6 +222,30 @@ class FMDBManager {
         return dayRootines
     }
     
+    func isDayRoutine(id: Int) -> Bool {
+        guard database.open() else {
+            print("Unable to open database")
+            return false
+        }
+        var totalCount = 0
+        do {
+            let queryString = "select count(*) from \(dayTableName) where id = \(id)"
+            let rs = try database.executeQuery(queryString, values: nil)
+            
+            while rs.next() {
+                totalCount = Int(rs.int(forColumn: "count(*)"))
+                
+                print("dayCount \(totalCount)")
+            }
+        } catch {
+            print("Unable to open database")
+            database.close()
+            return false
+        }
+        
+        return totalCount == 0 ? false: true
+    }
+    
     func updateDayRootine(rootine: DayRootine) -> Bool {
         guard database.open() else {
             print("Unable to open database")
