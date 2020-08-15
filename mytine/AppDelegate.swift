@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // 주차 차이나는만큼 추가
                 var weekDate = beforeRecentDate
                 for _ in 0..<distance {
-                    weekDate = weekDate.afterWeekString()
+                    weekDate = weekDate.afterDayString(addDay: 7)
                     _ = FMDBManager.shared.addWeek(rootineIdx: weekRootine[0].rootinesIdx, weekString: weekDate.weekFirstToEnd())
                 }
             }

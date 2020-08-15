@@ -77,11 +77,11 @@ extension String {
         
     }
     
-    // 1주후
-    func afterWeekString() -> String {
+    // addDay일후
+    func afterDayString(addDay: Int) -> String {
         let formatter = simpleDateFormatter(format: "yyyyMMdd")
         guard let date = formatter.date(from: self),
-        let weekCalendar = Calendar.current.date(byAdding: .day, value: 7, to: date) else {
+        let weekCalendar = Calendar.current.date(byAdding: .day, value: addDay, to: date) else {
             return ""
         }
         
