@@ -39,6 +39,11 @@ extension UIColor {
     }
     
     @nonobjc class var repeatDayUnselectColor: UIColor {
-        return UIColor(red: 196 / 255.0, green: 208 / 255.0, blue: 232 / 255.0, alpha: 1.0)
+        return UIColor(red: 227 / 255.0, green: 232 / 255.0, blue: 242 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var macaroniAndCheese: UIColor {
+      return UIColor(red: 1.0, green: 189.0 / 255.0, blue: 44.0 / 255.0, alpha: 1.0)
+    }
+
 }

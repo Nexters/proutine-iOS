@@ -27,7 +27,7 @@ class FMDBManager {
     }
     static let shared = FMDBManager()
     private let database: FMDatabase
-    private let dbName = "test2.sqlite"
+    private let dbName = "routine.sqlite"
     private let weekTableName = "WeekRootine"
     private let dayTableName = "DayRootine"
     private let rootineTableName = "Rootine"
@@ -164,7 +164,7 @@ class FMDBManager {
         }
         do {
             try database.executeUpdate("insert into \(dayTableName) (id, retrospect, week, completes) values (?,?,?,?)",
-                values: [rootine.id, rootine.retrospect, rootine.week, rootine.getComplete()])
+                values: [rootine.id, rootine.retrospect, rootine.week, rootine.completeString()])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -225,7 +225,7 @@ class FMDBManager {
         
         do {
             try database.executeUpdate("update \(dayTableName) set retrospect = ?, completes = ? where id = ?",
-                values: [rootine.retrospect, rootine.getComplete(), rootine.id])
+                values: [rootine.retrospect, rootine.completeString(), rootine.id])
         } catch {
             print("failed: \(error.localizedDescription)")
             database.close()
@@ -278,7 +278,7 @@ class FMDBManager {
                 let routine = Rootine(id: Int(id), emoji: emoji, title: title, goal: goal, repeatDays: intRepeatDays)
                 
                 routineList.append(routine)
-                print("id \(id) :::: week \(emoji) ::::: completes \(repeatDays)")
+                print("id \(id) :::: emoji \(emoji) ::::: completes \(repeatDays)")
             }
            
         } catch {
