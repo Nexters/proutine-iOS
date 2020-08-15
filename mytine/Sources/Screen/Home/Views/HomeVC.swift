@@ -22,6 +22,7 @@ class HomeVC: UIViewController {
     var array: NSArray?
     private let downButton = UIButton()
     var weekList = ["가", "나", "다", "라", "마", "바"]
+    var weekOriginalList = ["가", "나", "다", "라", "마", "바"]
     var dayList = ["가", "나", "다", "라", "마", "바", "가", "나", "다", "라", "마", "바","가", "나", "다", "라", "마", "바"]
     var weekRoutineList: [WeekRootine] = []
     var dayRoutineList: [DayRootine] = []
@@ -80,6 +81,7 @@ class HomeVC: UIViewController {
         weekRoutineList = FMDBManager.shared.selectWeekRootine(week: thisWeek)
         dayRoutineList = FMDBManager.shared.selectDayRootine(week: thisWeek)
         routineList = FMDBManager.shared.selectRootine(id: 0)
+//        WeekRootineModel(week: weekRoutineList[0].week, rootinesIdx: <#T##String#>, dayRoutine: <#T##[DayRootine]#>)
         
         print("****** thisWeek: \(thisWeek)")
         print("****** weekRoutineList: \(weekRoutineList)")
@@ -118,20 +120,16 @@ class HomeVC: UIViewController {
     
     @objc
     func handleExpandClose(button: UIButton) {
-        var indexPaths = [IndexPath]()
-        for row in weekList.indices {
-            let indexPath = IndexPath(row: row, section: 0)
-            indexPaths.append(indexPath)
-        }
         
+        let indexPaths = (0...5).map { IndexPath(row: $0, section:0) }
         isExpanded = !isExpanded
         
         if !isExpanded {
-            print("wanna delete \(isExpanded)")
-            print(indexPaths)
+            self.weekList.removeAll()
             tableView.deleteRows(at: indexPaths, with: .bottom)
         } else {
             print("wanna insert \(isExpanded)")
+            self.weekList = self.weekOriginalList
             tableView.insertRows(at: indexPaths, with: .top)
         }
     }
@@ -173,12 +171,14 @@ extension HomeVC: UITableViewDelegate {
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return (isExpanded) ? weekList.count : 0
+        } else if section == 1 {
+            return 1
         } else {
             if self.dayList.count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
@@ -197,6 +197,12 @@ extension HomeVC: UITableViewDataSource {
             cell.bind()
             
             return cell
+        } else if indexPath.section == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
+                return .init()
+            }
+            cell.expandBtn.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+            return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
                 return .init()
@@ -210,16 +216,8 @@ extension HomeVC: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
-            return .init()
-        }
-        cell.expandBtn.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
-        return cell
-    }
-    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("루틴 완료")
             }
@@ -233,7 +231,7 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 print("완료 취소")
             }
@@ -243,10 +241,6 @@ extension HomeVC: UITableViewDataSource {
         } else {
             return UISwipeActionsConfiguration.init()
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == 0) ? 0 : 75
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
