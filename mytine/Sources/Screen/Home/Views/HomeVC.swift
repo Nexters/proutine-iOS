@@ -182,7 +182,12 @@ extension HomeVC: UICollectionViewDataSource {
 
 //MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
+        guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
+        dvc.rootine = routineList[indexPath.row]
+        self.navigationController?.pushViewController(dvc, animated: true)
+    }
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
