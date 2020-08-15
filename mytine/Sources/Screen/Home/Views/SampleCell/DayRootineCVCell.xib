@@ -15,8 +15,25 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdP-ds-2Uy">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
             </view>
+            <constraints>
+                <constraint firstItem="xdP-ds-2Uy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="6yX-Yh-Zkh"/>
+                <constraint firstItem="xdP-ds-2Uy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RzK-TD-rEt"/>
+                <constraint firstAttribute="bottom" secondItem="xdP-ds-2Uy" secondAttribute="bottom" id="Udc-aH-NBi"/>
+                <constraint firstAttribute="trailing" secondItem="xdP-ds-2Uy" secondAttribute="trailing" id="cwL-CU-ddO"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="emojiLabel" destination="xdP-ds-2Uy" id="zYq-aR-IVr"/>
+            </connections>
             <point key="canvasLocation" x="139" y="106"/>
         </collectionViewCell>
     </objects>
