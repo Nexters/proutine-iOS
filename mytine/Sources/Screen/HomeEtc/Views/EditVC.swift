@@ -99,8 +99,7 @@ class EditVC: UIViewController {
     
     func createRootine() {
         guard emojiTextfield.hasText,
-            nameTextfield.hasText,
-            goalTextfield.hasText else {
+            nameTextfield.hasText else {
                 return
         }
         

@@ -234,8 +234,6 @@ class FMDBManager {
             
             while rs.next() {
                 totalCount = Int(rs.int(forColumn: "count(*)"))
-                
-                print("dayCount \(totalCount)")
             }
         } catch {
             print("Unable to open database")
