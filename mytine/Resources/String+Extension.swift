@@ -87,6 +87,15 @@ extension String {
         
         return formatter.string(from: weekCalendar)
     }
+    // 주차 -> dayId
+    func weekConvertToDayRoutineId() -> String {
+        let formatter = simpleDateFormatter(format: "MM월 dd일")
+        guard let date = formatter.date(from: self) else {
+            return ""
+        }
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.string(from: date)
+    }
 }
 
 extension Character {
