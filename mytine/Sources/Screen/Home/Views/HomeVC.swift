@@ -46,14 +46,14 @@ class HomeVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         setNavigationBar()
         setupRoutine()
         tableView.reloadData()
+        registerRoutinesNotifications()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        unregisterRoutinesNotifications()
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: index, animated: true)
         }
@@ -112,10 +112,54 @@ class HomeVC: UIViewController {
         collectionView.dataSource = self
     }
     
+    func registerRoutinesNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(routineComplete(_:)), name: .routineComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(routineUnComplete(_:)), name: .routineUnComplete, object: nil)
+    }
+    
+    func unregisterRoutinesNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .routineComplete, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .routineUnComplete, object: nil)
+    }
+    
     @objc
     func handleExpandClose(button: UIButton) {
         isExpanded = !isExpanded
         tableView.reloadSections(.init(integer: 0), with: .bottom)
+    }
+    
+    @objc
+    func routineComplete(_ notification: NSNotification) {
+        UIView.animate(withDuration: 0.3, animations: {
+            let cell = notification.object as! RoutineTVCell
+            cell.contentView.alpha = 0.5
+        })
+        
+        guard var curWeekRoutine = self.curWeekRoutineModel else {
+            return
+        }
+        let userInfo : [String:Int] = notification.userInfo as! [String:Int]
+        let index = userInfo["routineIndex"]
+        curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(self.selectRoutine[index!].0.id)
+        _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
+        self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+    }
+    
+    @objc
+    func routineUnComplete(_ notification: NSNotification) {
+        UIView.animate(withDuration: 0.3, animations: {
+            let cell = notification.object as! RoutineTVCell
+            cell.contentView.alpha = 1.0
+        })
+        
+        guard var curWeekRoutine = self.curWeekRoutineModel else {
+            return
+        }
+        let userInfo : [String:Int] = notification.userInfo as! [String:Int]
+        let index = userInfo["shouldRemoveIndex"]
+        curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index!)
+        _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
+        self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
     }
     
     @IBAction func clickDownButton(_ sender: UIButton) {
@@ -146,7 +190,7 @@ class HomeVC: UIViewController {
 }
 //MARK:- 월 화 수 목 금 토 일 collection view
 extension HomeVC: UICollectionViewDelegate {
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectRoutine.removeAll()
         selectedIdx = indexPath.row
@@ -295,22 +339,15 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 2 {
             let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
-                guard var curWeekRoutine = self.curWeekRoutineModel else {
+                guard let curWeekRoutine = self.curWeekRoutineModel else {
                     return
                 }
-                
                 guard let cell = tableView.cellForRow(at: indexPath) as? RoutineTVCell else {
                     return
                 }
-                
                 let completeList = curWeekRoutine.dayRoutine[self.selectedIdx].complete
                 if !completeList.contains(self.selectRoutine[indexPath.row].0.id) {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        cell.contentView.alpha = 0.5
-                    })
-                    curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(self.selectRoutine[indexPath.row].0.id)
-                    FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-                    self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+                    NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row])
                 }
             }
             doneAction.image = UIImage(named: "complete")
@@ -324,22 +361,15 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 2 {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
-                guard var curWeekRoutine = self.curWeekRoutineModel else {
+                guard let curWeekRoutine = self.curWeekRoutineModel else {
                     return
                 }
-                
                 guard let cell = tableView.cellForRow(at: indexPath) as? RoutineTVCell else {
                     return
                 }
-                
                 let completeList = curWeekRoutine.dayRoutine[self.selectedIdx].complete
                 if let index = completeList.firstIndex(of: self.selectRoutine[indexPath.row].0.id) {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        cell.contentView.alpha = 1.0
-                    })
-                    curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index)
-                    FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-                    self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+                    NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": index])
                 }
             }
             cancelAction.image = UIImage(named: "undo")
