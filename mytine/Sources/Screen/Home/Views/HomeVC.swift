@@ -23,6 +23,9 @@ class HomeVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var dropView: UIView!
     var isExpanded = true
+    var dropdownIdx: Int = 0
+    private var selectedIdx: Int = 0
+    private var dayRoutineCellIndex: Int = 0    // cell reload시 cellIndex 0으로 다시 초기화해주기
     private let downButton = UIButton()
     private var allWeekRoutine: [WeekRootine] = []
     private var selectRoutine: [Rootine] = []
@@ -67,7 +70,6 @@ class HomeVC: UIViewController {
         dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         dropView.layer.shadowRadius = 4.0
         dropView.layer.shadowOpacity = 0.5
-        // dropView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: 12).cgPath
         
         self.navigationController?.navigationBar.addSubview(downButton)
         downButton.setImage(UIImage(named: "dropdown"), for: .normal)
@@ -90,6 +92,7 @@ class HomeVC: UIViewController {
             return
         }
         
+        dropdownIdx = weekRoutine.week
         loadRoutineDB(week: weekRoutine.week)
     }
     
@@ -136,6 +139,9 @@ class HomeVC: UIViewController {
                 self.downButton.transform = .identity
             }
             dropView.isHidden = true
+            loadRoutineDB(week: dropdownIdx)
+            dayRoutineCellIndex = 0
+            tableView.reloadData()
         }
     }
     
