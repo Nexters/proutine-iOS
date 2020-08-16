@@ -23,11 +23,18 @@ class DayRootineCVCell: UICollectionViewCell {
         contentView.backgroundColor = .white
     }
     
-    func bind(emoji: String, isActive: Bool) {
+    func bind(dayId : Int?, routineId rId: Int?, emoji: String, isActive: Bool) {
         if !isActive {
             contentView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9529411765, blue: 0.968627451, alpha: 1)
         } else {
-            emojiLabel.text = emoji
+            guard let dayId = dayId,
+                let rId = rId,
+                let dayRoutine = FMDBManager.shared.selectDayRootineWithId(id: dayId) else {
+                    return
+            }
+            if dayRoutine.complete.contains(rId) {
+                emojiLabel.text = emoji
+            }
         }
     }
 }

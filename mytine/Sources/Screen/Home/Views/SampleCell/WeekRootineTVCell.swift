@@ -15,6 +15,7 @@ class WeekRootineTVCell: UITableViewCell {
     @IBOutlet weak var dayCollectionView: UICollectionView!
     
     private var model: Rootine?
+    private var dayRoutineId: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,9 +25,10 @@ class WeekRootineTVCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func bind(model: Rootine?, index: Int) {
+    func bind(model: Rootine?, index: Int, dayId: Int?) {
         setupCollectionView()
         self.model = model
+        self.dayRoutineId = dayId
     }
     
     func setupCollectionView() {
@@ -50,7 +52,7 @@ extension WeekRootineTVCell: UICollectionViewDataSource {
         
         let isActive = model?.repeatDays[indexPath.row] == 1 ? true : false
         let emoji = model?.emoji
-        cell.bind(emoji: emoji ?? "", isActive: isActive)
+        cell.bind(dayId: dayRoutineId, routineId: model?.id, emoji: emoji ?? "", isActive: isActive)
         return cell
     }
 }

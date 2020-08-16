@@ -222,6 +222,45 @@ class FMDBManager {
         return dayRootines
     }
     
+    func selectDayRootineWithId(id: Int) -> DayRootine? {
+        guard database.open() else {
+            print("Unable to open database")
+            return nil
+        }
+        var dayRoutine = DayRootine(id: -1, retrospect: "", week: -1, complete: [])
+        do {
+            let queryString = "select * from \(dayTableName) where id = \(id)"
+            
+            let rs = try database.executeQuery(queryString, values: nil)
+            
+            while rs.next() {
+                let id: Int32 = rs.int(forColumn: "id")
+                let retrospect: String = rs.string(forColumn: "retrospect") ?? ""
+                let week: Int32 = rs.int(forColumn: "week")
+                let completes: String = rs.string(forColumn: "completes") ?? ""
+                print("id \(id) :::: week \(week) ::::: completes \(completes)")
+                let completeList: [Int]
+                if completes.isEmpty {
+                    completeList = []
+                } else {
+                    completeList = completes.components(separatedBy: .whitespacesAndNewlines).map{Int($0)!}
+                }
+                dayRoutine = DayRootine(id: Int(id),
+                                        retrospect: retrospect,
+                                        week: Int(week),
+                                        complete: completeList)
+            }
+            
+        } catch {
+            print("Unable to open database")
+            database.close()
+            return nil
+        }
+        
+        database.close()
+        return dayRoutine
+    }
+    
     func isDayRoutine(id: Int) -> Bool {
         guard database.open() else {
             print("Unable to open database")
