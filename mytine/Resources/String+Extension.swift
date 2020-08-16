@@ -84,7 +84,6 @@ extension String {
         let weekCalendar = Calendar.current.date(byAdding: .day, value: addDay, to: date) else {
             return ""
         }
-        
         return formatter.string(from: weekCalendar)
     }
     // 주차 -> dayId
@@ -93,8 +92,10 @@ extension String {
         guard let date = formatter.date(from: self) else {
             return ""
         }
-        formatter.dateFormat = "yyyyMMdd"
-        return formatter.string(from: date)
+        formatter.dateFormat = "MMdd"
+        let curYear = Date().getYear()
+        let mmdd = formatter.string(from: date)
+        return "\(curYear)\(mmdd)"
     }
 }
 
