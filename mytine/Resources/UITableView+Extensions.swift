@@ -24,10 +24,10 @@ extension UITableView {
             let messageLabel: UILabel = {
                 let label = UILabel()
                 label.text = message
-                label.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 15.0)
+                label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
                 label.textAlignment = NSTextAlignment.center
                 label.numberOfLines = 0
-                label.textColor = .mainFont
+                label.textColor = .dusk
                 label.translatesAutoresizingMaskIntoConstraints = false
                 return label
             }()

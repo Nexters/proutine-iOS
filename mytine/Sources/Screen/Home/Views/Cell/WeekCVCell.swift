@@ -11,6 +11,7 @@ import UIKit
 class WeekCVCell: UICollectionViewCell {
     static let reuseIdentifier = "WeekCVCell"
     
+    @IBOutlet var backView: UIView!
     @IBOutlet var rateCheckView: UIView!
     @IBOutlet var weekLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
@@ -21,7 +22,24 @@ class WeekCVCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backView.viewRounded(cornerRadius: 4)
         routineCheckView.viewRounded(cornerRadius: 3)
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                backView.backgroundColor = .mainBlue
+                routineCheckView.backgroundColor = .white
+                weekLabel.textColor = .white
+                dateLabel.textColor = .white
+            } else {
+                backView.backgroundColor = .white
+                routineCheckView.backgroundColor = .mainBlue
+                weekLabel.textColor = .subFont
+                dateLabel.textColor = .mainFont
+            }
+        }
     }
     
     func bind(model: DayRootine, dayRoutineCount: Float, index: Int) {

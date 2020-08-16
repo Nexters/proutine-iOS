@@ -25,23 +25,18 @@ extension UIColor {
       return UIColor(red: 244.0 / 255.0, green: 244.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0)
     }
     
-    /// 이제 필요 없는 컬러들
-    @nonobjc class var backColor: UIColor {
-           return UIColor(red: 251 / 255.0, green: 252 / 255.0, blue: 253 / 255.0, alpha: 1.0)
-       }
-    
-    @nonobjc class var editBackColor: UIColor {
-           return UIColor(red: 236 / 255.0, green: 237 / 255.0, blue: 237 / 255.0, alpha: 1.0)
-       }
-    
-    @nonobjc class var weekSelectColor: UIColor {
-        return UIColor(red: 96 / 255.0, green: 96 / 255.0, blue: 96 / 255.0, alpha: 1.0)
+    @nonobjc class var dimEffect: UIColor {
+      return UIColor(red: 250 / 255.0, green: 250 / 255.0, blue: 252 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var dusk: UIColor {
+         return UIColor(red: 69 / 255.0, green: 89 / 255.0, blue: 129 / 255.0, alpha: 1.0)
+       }
     
     @nonobjc class var repeatDayUnselectColor: UIColor {
         return UIColor(red: 227 / 255.0, green: 232 / 255.0, blue: 242 / 255.0, alpha: 1.0)
     }
-    
+
     @nonobjc class var macaroniAndCheese: UIColor {
       return UIColor(red: 1.0, green: 189.0 / 255.0, blue: 44.0 / 255.0, alpha: 1.0)
     }
