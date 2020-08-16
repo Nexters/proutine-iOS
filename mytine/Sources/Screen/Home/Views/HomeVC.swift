@@ -19,19 +19,19 @@ struct WeekRootineModel {
 }
 
 class HomeVC: UIViewController {
+    @IBOutlet var navigationView: UIView!
+    @IBOutlet var navigationTitle: UILabel!
+    @IBOutlet var dropView: UIView!
+    @IBOutlet var downButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var dropView: UIView!
     var isExpanded = true
     var dropdownIdx: Int = 0
     private var selectedIdx: Int = 0
     private var dayRoutineCellIndex: Int = 0    // cell reload시 cellIndex 0으로 다시 초기화해주기
-    private let downButton = UIButton()
     private var allWeekRoutine: [WeekRootine] = []
-    private var selectRoutine: [Rootine] = []
+    private var selectRoutine: [(Rootine, Bool)] = []
     private var curWeekRoutineModel: WeekRootineModel?
-    // cell reload시 cellIndex 0으로 다시 초기화해주기
-    private var dayRoutineCellIndex: Int = 0
     private var cellType: CellType = .routine {
         didSet {
             tableView.reloadSections(.init(integer: 2), with: .automatic)
@@ -40,12 +40,16 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupRoutine()
-        setNavigationBar()
-        setDownButton()
+        setDropView()
         setupTableView()
         setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setNavigationBar()
+        setupRoutine()
+        tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -56,33 +60,15 @@ class HomeVC: UIViewController {
     }
     
     func setNavigationBar() {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.titleTextAttributes =
-            [NSAttributedString.Key.foregroundColor: UIColor.mainFont,
-             NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 17)!]
-        self.navigationItem.title = allWeekRoutine.last?.weekString
+        self.navigationController?.isNavigationBarHidden = true
     }
     
-    func setDownButton() {
+    func setDropView() {
         dropView.layer.cornerRadius = 12
         dropView.layer.shadowColor = UIColor.darkGray.cgColor
         dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         dropView.layer.shadowRadius = 4.0
         dropView.layer.shadowOpacity = 0.5
-        
-        self.navigationController?.navigationBar.addSubview(downButton)
-        downButton.setImage(UIImage(named: "dropdown"), for: .normal)
-        downButton.clipsToBounds = true
-        downButton.translatesAutoresizingMaskIntoConstraints = false
-        downButton.addTarget(self, action: #selector(clickDownButton), for: .touchUpInside)
-        
-        NSLayoutConstraint.activate([
-            downButton.leftAnchor.constraint(equalTo: (self.navigationController?.navigationBar.centerXAnchor)!, constant: 85),
-            downButton.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: -10),
-            downButton.widthAnchor.constraint(equalToConstant: 24),
-            downButton.heightAnchor.constraint(equalToConstant: 24)
-        ])
         dropView.isHidden = true
     }
     
@@ -91,7 +77,7 @@ class HomeVC: UIViewController {
         guard let weekRoutine = allWeekRoutine.last else {
             return
         }
-        
+        self.navigationTitle.text = allWeekRoutine.last?.weekString
         dropdownIdx = weekRoutine.week
         loadRoutineDB(week: weekRoutine.week)
     }
@@ -127,7 +113,12 @@ class HomeVC: UIViewController {
     }
     
     @objc
-    func clickDownButton() {
+    func handleExpandClose(button: UIButton) {
+        isExpanded = !isExpanded
+        tableView.reloadSections(.init(integer: 0), with: .bottom)
+    }
+    
+    @IBAction func clickDownButton(_ sender: UIButton) {
         downButton.isSelected = !downButton.isSelected
         if downButton.isSelected == true {
             UIView.animate(withDuration: 0.3) {
@@ -145,14 +136,8 @@ class HomeVC: UIViewController {
         }
     }
     
-    @objc
-    func handleExpandClose(button: UIButton) {
-        isExpanded = !isExpanded
-        tableView.reloadSections(.init(integer: 0), with: .bottom)
-    }
-    
     /// Right bar button Item
-    @IBAction func addRoutine(_ sender: UIBarButtonItem) {
+    @IBAction func addRoutine(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
         guard let dvc = storyboard.instantiateViewController(identifier: "EditVC") as? EditVC else { return }
         dvc.curWeekRoutine = curWeekRoutineModel
