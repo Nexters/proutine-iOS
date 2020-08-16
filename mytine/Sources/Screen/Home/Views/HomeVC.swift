@@ -138,7 +138,7 @@ class HomeVC: UIViewController {
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
-        let userInfo : [String:Int] = notification.userInfo as! [String:Int]
+        let userInfo = notification.userInfo as! [String:Int]
         let index = userInfo["routineIndex"]
         curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(self.selectRoutine[index!].0.id)
         _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
@@ -155,7 +155,7 @@ class HomeVC: UIViewController {
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
-        let userInfo : [String:Int] = notification.userInfo as! [String:Int]
+        let userInfo = notification.userInfo as! [String:Int]
         let index = userInfo["shouldRemoveIndex"]
         curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index!)
         _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
