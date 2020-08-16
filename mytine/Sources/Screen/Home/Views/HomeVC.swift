@@ -61,6 +61,7 @@ class HomeVC: UIViewController {
     
     func setNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
+        dropView.isHidden = true
     }
     
     func setDropView() {
@@ -69,7 +70,6 @@ class HomeVC: UIViewController {
         dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         dropView.layer.shadowRadius = 4.0
         dropView.layer.shadowOpacity = 0.5
-        dropView.isHidden = true
     }
     
     func setupRoutine() {
@@ -148,27 +148,32 @@ class HomeVC: UIViewController {
 extension HomeVC: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        guard var curWeekRoutine = curWeekRoutineModel else {
+        selectRoutine.removeAll()
+        selectedIdx = indexPath.row
+        guard let curWeekRoutine = curWeekRoutineModel else {
             return
         }
         
-        print("dayRoutine", curWeekRoutine.dayRoutine[indexPath.row])
-        let completeList = curWeekRoutine.dayRoutine[indexPath.row].complete
-        if !completeList.isEmpty {
-            var tempList: [Rootine] = []
-            
-            for index in completeList.indices {
-                if completeList.contains(curWeekRoutine.routine[index].id) {
-                    // 만약 완료 루틴이라면
-                    tempList.append(curWeekRoutine.routine[index])
-                    curWeekRoutine.routine.remove(at: index)
-                }
+        // 1이면 반복, 0이면 반복 X
+        for index in curWeekRoutine.routine.indices {
+            if curWeekRoutine.routine[index].repeatDays[indexPath.row] == 1 {
+                selectRoutine.append((curWeekRoutine.routine[index], false))
             }
-            selectRoutine = tempList + curWeekRoutine.routine
-        } else {
-            selectRoutine = curWeekRoutine.routine
+            let completeList = curWeekRoutine.dayRoutine[indexPath.row].complete
+            if !completeList.isEmpty {
+                var tempList: [(Rootine, Bool)] = []
+                
+                for index in completeList.indices {
+                    if completeList.contains(selectRoutine[index].0.id) {
+                        tempList.append((selectRoutine[index].0, true))  // 완료한 루틴들
+                        selectRoutine.remove(at: index)        // 완료하지 않은 루틴들만 남음
+                    }
+                }
+                selectRoutine += tempList
+            }
         }
+        print("selectRoutine", selectRoutine)
+        tableView.reloadData()
     }
 }
 
@@ -247,7 +252,7 @@ extension HomeVC: UITableViewDataSource {
             return 1
         } else {
             if selectRoutine.count == 0 {
-                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "")
             } else {
                 tableView.restore()
             }
@@ -275,24 +280,38 @@ extension HomeVC: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
                     return .init()
                 }
-                cell.bind()
+                let model = selectRoutine[indexPath.row]
+                cell.bind(routine: model.0, isCompleted: model.1)
                 return cell
             } else {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
                     return .init(style: .default, reuseIdentifier: "")
                 }
-                cell.bind()
                 return cell
             }
         }
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 2 {
             let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
-                print("루틴 완료")
-                // 오늘(day) 루틴의 complete에 routineList[indexPath.row].id 값 append
-                // if 이미 append 되어 있다면 completion(false) 시킬 것
+                guard var curWeekRoutine = self.curWeekRoutineModel else {
+                    return
+                }
+                
+                guard let cell = tableView.cellForRow(at: indexPath) as? RoutineTVCell else {
+                    return
+                }
+                
+                let completeList = curWeekRoutine.dayRoutine[self.selectedIdx].complete
+                if !completeList.contains(self.selectRoutine[indexPath.row].0.id) {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        cell.contentView.alpha = 0.5
+                    })
+                    curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(self.selectRoutine[indexPath.row].0.id)
+                    FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
+                    self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+                }
             }
             doneAction.image = UIImage(named: "complete")
             doneAction.backgroundColor = UIColor.subBlue
@@ -302,11 +321,26 @@ extension HomeVC: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 2 {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
-                print("완료 취소")
-                // self.curWeekRoutineModel?.dayRoutine[indexPath.row].complete.append(curWeekRoutin)
+                guard var curWeekRoutine = self.curWeekRoutineModel else {
+                    return
+                }
+                
+                guard let cell = tableView.cellForRow(at: indexPath) as? RoutineTVCell else {
+                    return
+                }
+                
+                let completeList = curWeekRoutine.dayRoutine[self.selectedIdx].complete
+                if let index = completeList.firstIndex(of: self.selectRoutine[indexPath.row].0.id) {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        cell.contentView.alpha = 1.0
+                    })
+                    curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index)
+                    FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
+                    self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+                }
             }
             cancelAction.image = UIImage(named: "undo")
             cancelAction.backgroundColor = UIColor.subBlue
