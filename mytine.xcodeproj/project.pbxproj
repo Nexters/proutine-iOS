@@ -59,7 +59,7 @@
 		06A720AD24CEF93300ED31DC /* UserDefaultKeyName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyName.swift; sourceTree = "<group>"; };
 		06A720AF24CEFB0800ED31DC /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		06BCB6F524D87497005D8B3D /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
-		0804D25224B84C5B002D2A12 /* Proutine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proutine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0804D25224B84C5B002D2A12 /* 프루틴.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "프루틴.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0804D25524B84C5B002D2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0804D25E24B84C5D002D2A12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0804D26124B84C5D002D2A12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 		0804D25324B84C5B002D2A12 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0804D25224B84C5B002D2A12 /* Proutine.app */,
+				0804D25224B84C5B002D2A12 /* 프루틴.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 			);
 			name = mytine;
 			productName = mytine;
-			productReference = 0804D25224B84C5B002D2A12 /* Proutine.app */;
+			productReference = 0804D25224B84C5B002D2A12 /* 프루틴.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -630,7 +630,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine;
-				PRODUCT_NAME = Proutine;
+				PRODUCT_NAME = "프루틴";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -653,7 +653,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nexters.mytine;
-				PRODUCT_NAME = Proutine;
+				PRODUCT_NAME = "프루틴";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
