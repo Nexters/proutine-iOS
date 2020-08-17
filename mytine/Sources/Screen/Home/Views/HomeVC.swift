@@ -52,7 +52,9 @@ class HomeVC: UIViewController {
         registerRoutinesNotifications()
         
         let todayIndex = Date().getWeekday() - 2
-        collectionView.selectItem(at: .init(item: todayIndex, section: 0), animated: false, scrollPosition: .left)
+        let selectIndexPath = IndexPath(item: todayIndex, section: 0)
+        collectionView.selectItem(at: selectIndexPath, animated: false, scrollPosition: .left)
+        collectionView(collectionView, didSelectItemAt: selectIndexPath)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
