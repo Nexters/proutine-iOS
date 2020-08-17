@@ -16,6 +16,7 @@ class WeekRootineTVCell: UITableViewCell {
     
     private var model: Rootine?
     private var dayRoutineId: Int?
+    private var index: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +30,7 @@ class WeekRootineTVCell: UITableViewCell {
         setupCollectionView()
         self.model = model
         self.dayRoutineId = dayId
+        self.index = index
     }
     
     func setupCollectionView() {
@@ -57,7 +59,7 @@ extension WeekRootineTVCell: UICollectionViewDataSource {
         if let dayRoutineId = dayRoutineId {
             dayId = Int(String(dayRoutineId).afterDayString(addDay: indexPath.item)) ?? -1
         }
-        cell.bind(dayId: dayId, routineId: model?.id, emoji: emoji ?? "", isActive: isActive)
+        cell.bind(dayId: dayId, routineId: model?.id, emoji: emoji ?? "", isActive: isActive, index: index)
         return cell
     }
 }
