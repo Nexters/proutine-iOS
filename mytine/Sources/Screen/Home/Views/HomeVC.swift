@@ -215,26 +215,18 @@ extension HomeVC: UICollectionViewDelegate {
             return
         }
         
-        let completeList = curWeekRoutine.dayRoutine[indexPath.row].complete
+        var tempList: [(Rootine, Bool)] = []
         
         // 1이면 반복, 0이면 반복 X
-        // index는 루틴의 index. for문으로 검사
-        for index in curWeekRoutine.routine.indices {
-            if curWeekRoutine.routine[index].repeatDays[indexPath.row] == 1 {
+        for index in curWeekRoutine.routine.indices where curWeekRoutine.routine[index].repeatDays[indexPath.row] == 1 {
+            if (!curWeekRoutine.dayRoutine[indexPath.row].complete.isEmpty) && (curWeekRoutine.dayRoutine[indexPath.row].complete.contains(curWeekRoutine.routine[index].id)) {
+                // 만약 완료 됐다면
+                tempList.append((curWeekRoutine.routine[index], true))
+            } else {
                 selectRoutine.append((curWeekRoutine.routine[index], false))
             }
         }
-        
-        for index in selectRoutine.indices {
-            if completeList.contains(selectRoutine[index].0.id) {
-                var tempList: [(Rootine, Bool)] = []
-                tempList.append((selectRoutine[index].0, true))  // 완료한 루틴들
-                selectRoutine.remove(at: index)        // 완료하지 않은 루틴들만 남음
-
-                selectRoutine += tempList
-            }
-        }
-        print("selectRoutine", selectRoutine)
+        selectRoutine += tempList
         tableView.reloadData()
     }
 }
@@ -320,7 +312,7 @@ extension HomeVC: UITableViewDataSource {
             return 1
         } else {
             if selectRoutine.count == 0 {
-                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "")
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
@@ -370,8 +362,7 @@ extension HomeVC: UITableViewDataSource {
                     return
                 }
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
-                NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row, "dayId": dayRoutine.id])
-                tableView.reloadRows(at: [indexPath], with: .automatic)
+                NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": self.selectRoutine[indexPath.row].0.id, "dayId": dayRoutine.id])
                 self.collectionView.reloadData()
             }
             doneAction.image = UIImage(named: "complete")
@@ -393,7 +384,6 @@ extension HomeVC: UITableViewDataSource {
                 }
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
                 NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": self.selectRoutine[indexPath.row].0.id, "dayId": dayRoutine.id])
-                tableView.reloadRows(at: [indexPath], with: .automatic)
                 self.collectionView.reloadData()
             }
             cancelAction.image = UIImage(named: "undo")
