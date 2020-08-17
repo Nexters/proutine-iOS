@@ -15,7 +15,7 @@ class DayRootineCVCell: UICollectionViewCell {
     
     private var dayId = -1
     private var emoji = ""
-    private var index: Int?
+    private var routineId = -1
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,13 +39,11 @@ class DayRootineCVCell: UICollectionViewCell {
     @objc
     func complete(notification: Notification) {
         guard let dayId = notification.userInfo?["dayId"] as? Int,
-            let index = notification.userInfo?["routineIndex"] as? Int else {
+            let rId = notification.userInfo?["routineIndex"] as? Int else {
             return
         }
-        print("========")
-        print(self.index)
-        print(index)
-        if dayId == self.dayId && index == self.index {
+        
+        if dayId == self.dayId && rId == self.routineId {
             emojiLabel.text = emoji
         }
     }
@@ -53,17 +51,16 @@ class DayRootineCVCell: UICollectionViewCell {
     @objc
     func uncomplete(notification: Notification) {
         guard let dayId = notification.userInfo?["dayId"] as? Int,
-        let index = notification.userInfo?["shouldRemoveIndex"] as? Int else {
+        let rId = notification.userInfo?["shouldRemoveIndex"] as? Int else {
             return
         }
         
-        if dayId == self.dayId && index == self.index {
+        if dayId == self.dayId && rId == self.routineId {
             emojiLabel.text = ""
         }
     }
     
-    func bind(dayId: Int?, routineId rId: Int?, emoji: String, isActive: Bool, index: Int?) {
-        self.index = index
+    func bind(dayId: Int?, routineId rId: Int?, emoji: String, isActive: Bool) {
         if !isActive {
             contentView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9529411765, blue: 0.968627451, alpha: 1)
         } else {
@@ -72,6 +69,7 @@ class DayRootineCVCell: UICollectionViewCell {
                 let dayRoutine = FMDBManager.shared.selectDayRootineWithId(id: dayId) else {
                     return
             }
+            self.routineId = rId
             self.dayId = dayId
             self.emoji = emoji
             if dayRoutine.complete.contains(rId) {
