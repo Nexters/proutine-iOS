@@ -29,7 +29,6 @@ class CustomAlertView: UIView {
     }
     
     func alertBulider() {
-        
         let effect = UIBlurEffect(style: .dark)
         let containView = UIVisualEffectView(effect: effect)
         containView.alpha = 0.85
@@ -102,7 +101,6 @@ class CustomAlertView: UIView {
             }
             return button
         }()
-     
     }
     
     @objc

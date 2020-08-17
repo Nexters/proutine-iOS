@@ -65,6 +65,9 @@ class EditVC: UIViewController {
             deleteButton.isHidden = false
         }
         
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
                                                    size: 17)!]

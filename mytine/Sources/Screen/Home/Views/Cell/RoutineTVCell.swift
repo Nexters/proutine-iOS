@@ -10,7 +10,6 @@ import UIKit
 
 class RoutineTVCell: UITableViewCell {
     static let reuseIdentifier = "RoutineTVCell"
-    
     @IBOutlet var backView: UIView!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var iconLabel: UILabel!
@@ -18,15 +17,19 @@ class RoutineTVCell: UITableViewCell {
   
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.iconLabel.viewRounded(cornerRadius: 10)
-        self.viewRounded(cornerRadius: 10)
+        iconLabel.viewRounded(cornerRadius: 10)
+        backView.viewRounded(cornerRadius: 10)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func bind() {
+    func bind(routine: Rootine, isCompleted: Bool) {
         self.backgroundColor = .mainFont
+        timeLabel.text = routine.goal
+        iconLabel.text = routine.emoji
+        listLabel.text = routine.title
+        self.contentView.layer.opacity = isCompleted ? 0.5 : 1.0
     }
 }
