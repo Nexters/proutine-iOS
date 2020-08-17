@@ -342,7 +342,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 2 {
+        if indexPath.section == 2 && cellType == .routine {
             let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 guard let curWeekRoutine = self.curWeekRoutineModel else {
                     return
@@ -359,7 +359,7 @@ extension HomeVC: UITableViewDataSource {
             doneAction.backgroundColor = UIColor.subBlue
             return UISwipeActionsConfiguration(actions: [doneAction])
         } else {
-            return UISwipeActionsConfiguration.init()
+            return nil
         }
     }
     
@@ -381,7 +381,7 @@ extension HomeVC: UITableViewDataSource {
             cancelAction.backgroundColor = UIColor.subBlue
             return UISwipeActionsConfiguration(actions: [cancelAction])
         } else {
-            return UISwipeActionsConfiguration.init()
+            return nil
         }
     }
     
