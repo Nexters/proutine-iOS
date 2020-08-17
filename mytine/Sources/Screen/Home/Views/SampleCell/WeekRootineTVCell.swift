@@ -52,7 +52,12 @@ extension WeekRootineTVCell: UICollectionViewDataSource {
         
         let isActive = model?.repeatDays[indexPath.row] == 1 ? true : false
         let emoji = model?.emoji
-        cell.bind(dayId: dayRoutineId, routineId: model?.id, emoji: emoji ?? "", isActive: isActive)
+        
+        var dayId = -1
+        if let dayRoutineId = dayRoutineId {
+            dayId = Int(String(dayRoutineId).afterDayString(addDay: indexPath.item)) ?? -1
+        }
+        cell.bind(dayId: dayId, routineId: model?.id, emoji: emoji ?? "", isActive: isActive)
         return cell
     }
 }

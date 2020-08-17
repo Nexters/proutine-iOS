@@ -326,7 +326,7 @@ extension HomeVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekRootineTVCell.reuseIdentifier, for: indexPath) as? WeekRootineTVCell else {
                 return .init()
             }
-            cell.bind(model: curWeekRoutineModel?.routine[indexPath.row], index: indexPath.row, dayId: curWeekRoutineModel?.dayRoutine[indexPath.row].id)
+            cell.bind(model: curWeekRoutineModel?.routine[indexPath.row], index: indexPath.row, dayId: curWeekRoutineModel?.dayRoutine[0].id)
             
             return cell
         } else if indexPath.section == 1 {

@@ -40,6 +40,7 @@ class DayRootineCVCell: UICollectionViewCell {
         guard let dayId = notification.userInfo?["dayId"] as? Int else {
             return
         }
+        
         if dayId == self.dayId {
             emojiLabel.text = emoji
         }
@@ -50,6 +51,7 @@ class DayRootineCVCell: UICollectionViewCell {
         guard let dayId = notification.userInfo?["dayId"] as? Int else {
             return
         }
+        
         if dayId == self.dayId {
             emojiLabel.text = ""
         }
