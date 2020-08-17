@@ -150,10 +150,13 @@ class HomeVC: UIViewController {
             return
         }
         let userInfo = notification.userInfo as! [String: Int]
-        let index = userInfo["routineIndex"]
-        curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(self.selectRoutine[index!].0.id)
-        _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-        self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+        let routineId = userInfo["routineIndex"]
+        
+        if !curWeekRoutine.dayRoutine[self.selectedIdx].complete.contains(routineId!) {
+            curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(routineId!)
+            _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
+            self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+        }
     }
     
     @objc
@@ -167,10 +170,13 @@ class HomeVC: UIViewController {
             return
         }
         let userInfo = notification.userInfo as! [String: Int]
-        let index = userInfo["shouldRemoveIndex"]
-        curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index!)
-        _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-        self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+        let routineId = userInfo["shouldRemoveIndex"]
+        
+        if let index = curWeekRoutine.dayRoutine[self.selectedIdx].complete.firstIndex(of: routineId!) {
+            curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index)
+            _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
+            self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+        }
     }
     
     @IBAction func clickDownButton(_ sender: UIButton) {
@@ -209,21 +215,22 @@ extension HomeVC: UICollectionViewDelegate {
             return
         }
         
+        let completeList = curWeekRoutine.dayRoutine[indexPath.row].complete
+        
         // 1이면 반복, 0이면 반복 X
+        // index는 루틴의 index. for문으로 검사
         for index in curWeekRoutine.routine.indices {
             if curWeekRoutine.routine[index].repeatDays[indexPath.row] == 1 {
                 selectRoutine.append((curWeekRoutine.routine[index], false))
             }
-            let completeList = curWeekRoutine.dayRoutine[indexPath.row].complete
-            if !completeList.isEmpty {
+        }
+        
+        for index in selectRoutine.indices {
+            if completeList.contains(selectRoutine[index].0.id) {
                 var tempList: [(Rootine, Bool)] = []
-                
-                for index in completeList.indices {
-                    if completeList.contains(selectRoutine[index].0.id) {
-                        tempList.append((selectRoutine[index].0, true))  // 완료한 루틴들
-                        selectRoutine.remove(at: index)        // 완료하지 않은 루틴들만 남음
-                    }
-                }
+                tempList.append((selectRoutine[index].0, true))  // 완료한 루틴들
+                selectRoutine.remove(at: index)        // 완료하지 않은 루틴들만 남음
+
                 selectRoutine += tempList
             }
         }
@@ -363,9 +370,7 @@ extension HomeVC: UITableViewDataSource {
                     return
                 }
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
-                if !dayRoutine.complete.contains(self.selectRoutine[indexPath.row].0.id) {
-                    NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row, "dayId": dayRoutine.id])
-                }
+                NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row, "dayId": dayRoutine.id])
                 tableView.reloadRows(at: [indexPath], with: .automatic)
                 self.collectionView.reloadData()
             }
@@ -387,9 +392,7 @@ extension HomeVC: UITableViewDataSource {
                     return
                 }
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
-                if let index = dayRoutine.complete.firstIndex(of: self.selectRoutine[indexPath.row].0.id) {
-                    NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": index, "dayId": dayRoutine.id])
-                }
+                NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": self.selectRoutine[indexPath.row].0.id, "dayId": dayRoutine.id])
                 tableView.reloadRows(at: [indexPath], with: .automatic)
                 self.collectionView.reloadData()
             }
