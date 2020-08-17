@@ -50,6 +50,9 @@ class HomeVC: UIViewController {
         setupRoutine()
         tableView.reloadData()
         registerRoutinesNotifications()
+        
+        let todayIndex = Date().getWeekday() - 2
+        collectionView.selectItem(at: .init(item: todayIndex, section: 0), animated: false, scrollPosition: .left)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
