@@ -198,7 +198,7 @@ class FMDBManager {
                 let retrospect: String = rs.string(forColumn: "retrospect") ?? ""
                 let week: Int32 = rs.int(forColumn: "week")
                 let completes: String = rs.string(forColumn: "completes") ?? ""
-                print("id \(id) :::: week \(week) ::::: completes \(completes)")
+                print("count - id \(id) :::: week \(week) ::::: completes \(completes)")
                 let completeList: [Int]
                 if completes.isEmpty {
                     completeList = []
@@ -238,7 +238,7 @@ class FMDBManager {
                 let retrospect: String = rs.string(forColumn: "retrospect") ?? ""
                 let week: Int32 = rs.int(forColumn: "week")
                 let completes: String = rs.string(forColumn: "completes") ?? ""
-                print("id \(id) :::: week \(week) ::::: completes \(completes)")
+                print("withid - id \(id) :::: week \(week) ::::: completes \(completes)")
                 let completeList: [Int]
                 if completes.isEmpty {
                     completeList = []
@@ -344,7 +344,7 @@ class FMDBManager {
                 let routine = Rootine(id: Int(id), emoji: emoji, title: title, goal: goal, repeatDays: intRepeatDays)
                 
                 routineList.append(routine)
-                print("id \(id) :::: emoji \(emoji) ::::: repeatDays \(repeatDays)")
+                print("all - id \(id) :::: emoji \(emoji) ::::: repeatDays \(repeatDays)")
             }
            
         } catch {

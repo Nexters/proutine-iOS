@@ -28,7 +28,13 @@ class HomeVC: UIViewController {
     var isExpanded = true
     var dropdownIdx: Int = 0
     private var selectedIdx: Int = 0
-    private var dayRoutineCellIndex: Int = 0    // cell reload시 cellIndex 0으로 다시 초기화해주기
+    private var dayRoutineCellIndex: Int = 0  {
+        didSet {
+            if oldValue == 6 {
+                self.dayRoutineCellIndex = 0
+            }
+        }
+    }  // cell reload시 cellIndex 0으로 다시 초기화해주기
     private var allWeekRoutine: [WeekRootine] = []
     private var selectRoutine: [(Rootine, Bool)] = []
     private var curWeekRoutineModel: WeekRootineModel?
@@ -239,15 +245,20 @@ extension HomeVC: UICollectionViewDataSource {
         guard let curWeekRoutine = curWeekRoutineModel else {
             return .init()
         }
+        var dayCount = 0
+        curWeekRoutine.routine.forEach {
+            if $0.repeatDays[indexPath.item] == 1 {
+                dayCount += 1
+            }
+        }
         
         let startDay = curWeekRoutine.weekRoutine.weekString.components(separatedBy: " - ")[0]
         if !curWeekRoutine.dayRoutine.isEmpty {
             let curDayRoutine = curWeekRoutine.dayRoutine[dayRoutineCellIndex]
-            if String(curDayRoutine.id) ==  startDay.afterDayString(addDay: indexPath.item) {
+            if String(curDayRoutine.id) == startDay.weekConvertToDayRoutineId().afterDayString(addDay: indexPath.item) {
                 cell.bind(model: curDayRoutine,
-                          dayRoutineCount: Float(curWeekRoutine.routine.count),
+                          dayRoutineCount: Float(dayCount),
                           index: indexPath.item)
-                dayRoutineCellIndex += 1
             } else {
                 let dayId = Int(startDay
                     .weekConvertToDayRoutineId()
@@ -256,7 +267,7 @@ extension HomeVC: UICollectionViewDataSource {
                                             retrospect: "",
                                             week: curWeekRoutine.weekRoutine.week,
                                             complete: []),
-                          dayRoutineCount: Float(curWeekRoutine.routine.count),
+                          dayRoutineCount: Float(dayCount),
                           index: indexPath.item)
             }
         } else {
@@ -267,9 +278,10 @@ extension HomeVC: UICollectionViewDataSource {
                                         retrospect: "",
                                         week: curWeekRoutine.weekRoutine.week,
                                         complete: []),
-                      dayRoutineCount: Float(curWeekRoutine.routine.count),
+                      dayRoutineCount: Float(dayCount),
                       index: indexPath.item)
         }
+        dayRoutineCellIndex += 1
         return cell
     }
 }
@@ -354,6 +366,7 @@ extension HomeVC: UITableViewDataSource {
                 if !completeList.contains(self.selectRoutine[indexPath.row].0.id) {
                     NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row])
                 }
+                self.collectionView.reloadData()
             }
             doneAction.image = UIImage(named: "complete")
             doneAction.backgroundColor = UIColor.subBlue
@@ -376,6 +389,7 @@ extension HomeVC: UITableViewDataSource {
                 if let index = completeList.firstIndex(of: self.selectRoutine[indexPath.row].0.id) {
                     NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": index])
                 }
+                self.collectionView.reloadData()
             }
             cancelAction.image = UIImage(named: "undo")
             cancelAction.backgroundColor = UIColor.subBlue
