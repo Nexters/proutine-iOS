@@ -143,13 +143,13 @@ class HomeVC: UIViewController {
     func routineComplete(_ notification: NSNotification) {
         UIView.animate(withDuration: 0.3, animations: {
             let cell = notification.object as! RoutineTVCell
-            cell.contentView.alpha = 0.5
+            cell.dimEffect()
         })
         
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
-        let userInfo = notification.userInfo as! [String:Int]
+        let userInfo = notification.userInfo as! [String: Int]
         let index = userInfo["routineIndex"]
         curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(self.selectRoutine[index!].0.id)
         _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
@@ -160,13 +160,13 @@ class HomeVC: UIViewController {
     func routineUnComplete(_ notification: NSNotification) {
         UIView.animate(withDuration: 0.3, animations: {
             let cell = notification.object as! RoutineTVCell
-            cell.contentView.alpha = 1.0
+            cell.reset()
         })
         
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
-        let userInfo = notification.userInfo as! [String:Int]
+        let userInfo = notification.userInfo as! [String: Int]
         let index = userInfo["shouldRemoveIndex"]
         curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index!)
         _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
@@ -362,9 +362,9 @@ extension HomeVC: UITableViewDataSource {
                 guard let cell = tableView.cellForRow(at: indexPath) as? RoutineTVCell else {
                     return
                 }
-                let completeList = curWeekRoutine.dayRoutine[self.selectedIdx].complete
-                if !completeList.contains(self.selectRoutine[indexPath.row].0.id) {
-                    NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row])
+                let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
+                if !dayRoutine.complete.contains(self.selectRoutine[indexPath.row].0.id) {
+                    NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row, "dayId": dayRoutine.id])
                 }
                 self.collectionView.reloadData()
             }
@@ -385,9 +385,9 @@ extension HomeVC: UITableViewDataSource {
                 guard let cell = tableView.cellForRow(at: indexPath) as? RoutineTVCell else {
                     return
                 }
-                let completeList = curWeekRoutine.dayRoutine[self.selectedIdx].complete
-                if let index = completeList.firstIndex(of: self.selectRoutine[indexPath.row].0.id) {
-                    NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": index])
+                let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
+                if let index = dayRoutine.complete.firstIndex(of: self.selectRoutine[indexPath.row].0.id) {
+                    NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": index, "dayId": dayRoutine.id])
                 }
                 self.collectionView.reloadData()
             }

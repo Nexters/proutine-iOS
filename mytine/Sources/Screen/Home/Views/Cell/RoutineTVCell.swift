@@ -30,6 +30,20 @@ class RoutineTVCell: UITableViewCell {
         timeLabel.text = routine.goal
         iconLabel.text = routine.emoji
         listLabel.text = routine.title
-        self.contentView.layer.opacity = isCompleted ? 0.5 : 1.0
+        isCompleted ? dimEffect() : reset()
+    }
+    
+    func dimEffect() {
+        backView.alpha = 0.5
+        timeLabel.alpha = 0.32
+        iconLabel.alpha = 0.5
+        listLabel.alpha = 0.5
+    }
+    
+    func reset() {
+        backView.alpha = 1.0
+        timeLabel.alpha = 1.0
+        iconLabel.alpha = 1.0
+        listLabel.alpha = 1.0
     }
 }
