@@ -366,6 +366,7 @@ extension HomeVC: UITableViewDataSource {
                 if !dayRoutine.complete.contains(self.selectRoutine[indexPath.row].0.id) {
                     NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": indexPath.row, "dayId": dayRoutine.id])
                 }
+                tableView.reloadRows(at: [indexPath], with: .automatic)
                 self.collectionView.reloadData()
             }
             doneAction.image = UIImage(named: "complete")
@@ -389,6 +390,7 @@ extension HomeVC: UITableViewDataSource {
                 if let index = dayRoutine.complete.firstIndex(of: self.selectRoutine[indexPath.row].0.id) {
                     NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": index, "dayId": dayRoutine.id])
                 }
+                tableView.reloadRows(at: [indexPath], with: .automatic)
                 self.collectionView.reloadData()
             }
             cancelAction.image = UIImage(named: "undo")
