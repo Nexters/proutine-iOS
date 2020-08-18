@@ -117,6 +117,9 @@ class HomeVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.keyboardHide))
+        tapGesture.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGesture)
     }
     
     func setupCollectionView() {
@@ -132,6 +135,11 @@ class HomeVC: UIViewController {
     func unregisterRoutinesNotifications() {
         NotificationCenter.default.removeObserver(self, name: .routineComplete, object: nil)
         NotificationCenter.default.removeObserver(self, name: .routineUnComplete, object: nil)
+    }
+    
+    @objc
+    func keyboardHide() {
+        view.endEditing(true)
     }
     
     @objc
