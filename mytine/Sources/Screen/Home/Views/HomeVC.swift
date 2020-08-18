@@ -315,7 +315,11 @@ extension HomeVC: UITableViewDataSource {
             } else {
                 tableView.restore()
             }
-            return selectRoutine.count
+            if cellType == .routine {
+                return selectRoutine.count
+            } else {
+                return 1
+            }
         }
     }
     
