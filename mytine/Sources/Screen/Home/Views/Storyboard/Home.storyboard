@@ -19,7 +19,7 @@
         <!--HomeVC-->
         <scene sceneID="yjt-IO-Oow">
             <objects>
-                <viewController storyboardIdentifier="HomeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n16-al-WaH" customClass="HomeVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n16-al-WaH" customClass="HomeVC" customModule="프루틴" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9C9-JI-pU9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,7 +81,7 @@
                                     <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekCVCell" id="hdS-jU-h6b" customClass="WeekCVCell" customModule="mytine" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeekCVCell" id="hdS-jU-h6b" customClass="WeekCVCell" customModule="프루틴" customModuleProvider="target">
                                         <rect key="frame" x="5" y="0.0" width="42" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kL1-iP-NOO">
@@ -155,7 +155,7 @@
                                 <rect key="frame" x="0.0" y="109" width="375" height="791"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TabTVCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TabTVCell" rowHeight="80" id="cQj-t5-BL2" customClass="TabTVCell" customModule="mytine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TabTVCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TabTVCell" rowHeight="80" id="cQj-t5-BL2" customClass="TabTVCell" customModule="프루틴" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cQj-t5-BL2" id="iS5-Qj-JXs">
@@ -239,7 +239,7 @@
                                             <outlet property="routineBtn" destination="Fm2-58-f8p" id="anD-D5-GjK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoutineTVCell" rowHeight="86" id="FWL-3g-Dpp" customClass="RoutineTVCell" customModule="mytine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoutineTVCell" rowHeight="86" id="FWL-3g-Dpp" customClass="RoutineTVCell" customModule="프루틴" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="375" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FWL-3g-Dpp" id="gf5-B0-mVf">
@@ -303,7 +303,7 @@
                                             <outlet property="timeLabel" destination="XGS-E8-GPt" id="5MQ-9u-rL3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RetrospectTVCell" rowHeight="100" id="Bzx-79-6pt" customClass="RetrospectTVCell" customModule="mytine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RetrospectTVCell" rowHeight="100" id="Bzx-79-6pt" customClass="RetrospectTVCell" customModule="프루틴" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="194" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bzx-79-6pt" id="Vsb-eJ-k0Q">
@@ -313,6 +313,11 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67p-QH-k7X">
                                                     <rect key="frame" x="20" y="5" width="335" height="49"/>
                                                     <subviews>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwl-j3-j5o">
+                                                            <rect key="frame" x="8" y="8" width="319" height="33"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DcU-qB-d7p">
                                                             <rect key="frame" x="8" y="8" width="319" height="33"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,10 +329,19 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="DcU-qB-d7p" firstAttribute="leading" secondItem="67p-QH-k7X" secondAttribute="leading" constant="8" id="2G3-Gy-06A"/>
+                                                        <constraint firstAttribute="bottom" secondItem="dwl-j3-j5o" secondAttribute="bottom" constant="8" id="Ts2-ep-d3v"/>
                                                         <constraint firstAttribute="bottom" secondItem="DcU-qB-d7p" secondAttribute="bottom" constant="8" id="WN7-hU-68U"/>
+                                                        <constraint firstItem="dwl-j3-j5o" firstAttribute="top" secondItem="67p-QH-k7X" secondAttribute="top" constant="8" id="b4l-zi-nUf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dwl-j3-j5o" secondAttribute="trailing" constant="8" id="cdF-JC-c0w"/>
+                                                        <constraint firstItem="dwl-j3-j5o" firstAttribute="leading" secondItem="67p-QH-k7X" secondAttribute="leading" constant="8" id="eb0-Zr-k5w"/>
                                                         <constraint firstAttribute="trailing" secondItem="DcU-qB-d7p" secondAttribute="trailing" constant="8" id="rPG-TN-QaD"/>
                                                         <constraint firstItem="DcU-qB-d7p" firstAttribute="top" secondItem="67p-QH-k7X" secondAttribute="top" constant="8" id="vcu-Ga-Tqk"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="subviews">
+                                                            <exclude reference="DcU-qB-d7p"/>
+                                                        </mask>
+                                                    </variation>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hl-aC-mWW">
                                                     <rect key="frame" x="291" y="69" width="64" height="31"/>
@@ -405,7 +419,7 @@
         <!--Home PopVC-->
         <scene sceneID="Dv2-4g-PWH">
             <objects>
-                <viewController storyboardIdentifier="HomePopVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vHv-v1-vyZ" customClass="HomePopVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePopVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vHv-v1-vyZ" customClass="HomePopVC" customModule="프루틴" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K7w-4F-lNu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -494,13 +508,13 @@
         <!--Drop DownTVC-->
         <scene sceneID="mr1-fg-m0y">
             <objects>
-                <tableViewController storyboardIdentifier="DropDownTVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="b8Q-E3-ioP" customClass="DropDownTVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DropDownTVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="b8Q-E3-ioP" customClass="DropDownTVC" customModule="프루틴" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WeM-Rq-2HD">
                         <rect key="frame" x="0.0" y="0.0" width="176" height="168"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DropdownCell" id="ijy-Qm-zsh" customClass="DropdownCell" customModule="mytine" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DropdownCell" id="ijy-Qm-zsh" customClass="DropdownCell" customModule="프루틴" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="176" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ijy-Qm-zsh" id="Xh9-KI-sF6">

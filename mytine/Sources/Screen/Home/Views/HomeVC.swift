@@ -288,7 +288,7 @@ extension HomeVC: UICollectionViewDataSource {
 //MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 2 && cellType == .routine {
             let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
             guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
             dvc.rootine = curWeekRoutineModel?.routine[indexPath.row]
@@ -397,6 +397,8 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 54
+        } else if indexPath.section == 2 && cellType == .retrospect {
+            return 100
         } else {
             return 75
         }
