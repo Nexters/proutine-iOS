@@ -291,8 +291,8 @@
 		08D4139A24BF4D2B0049BB44 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */,
 				08A3F44E24C5D46300201278 /* TabTVCell.swift */,
+				08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */,
 				0823BE8E24DED60800AC5D54 /* RetrospectTVCell.swift */,
 				08BA3D5E24E03DAB0015A217 /* WeekCVCell.swift */,
 				088E02A024E2BAE700B87CAA /* DropdownCell.swift */,

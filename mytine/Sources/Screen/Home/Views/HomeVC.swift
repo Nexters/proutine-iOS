@@ -116,6 +116,7 @@ class HomeVC: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: WeekRootineTVCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     func setupCollectionView() {
@@ -217,7 +218,6 @@ extension HomeVC: UICollectionViewDelegate {
         
         var tempList: [(Rootine, Bool)] = []
         
-        // 1이면 반복, 0이면 반복 X
         for index in curWeekRoutine.routine.indices where curWeekRoutine.routine[index].repeatDays[indexPath.row] == 1 {
             if (!curWeekRoutine.dayRoutine[indexPath.row].complete.isEmpty) && (curWeekRoutine.dayRoutine[indexPath.row].complete.contains(curWeekRoutine.routine[index].id)) {
                 // 만약 완료 됐다면
@@ -288,7 +288,7 @@ extension HomeVC: UICollectionViewDataSource {
 //MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 2 && cellType == .routine {
             let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
             guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
             dvc.rootine = curWeekRoutineModel?.routine[indexPath.row]
@@ -311,12 +311,16 @@ extension HomeVC: UITableViewDataSource {
         } else if section == 1 {
             return 1
         } else {
-            if selectRoutine.count == 0 {
+            if curWeekRoutine.weekRoutine.rootines().count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
             }
-            return selectRoutine.count
+            if cellType == .routine {
+                return selectRoutine.count
+            } else {
+                return 1
+            }
         }
     }
     
@@ -326,7 +330,6 @@ extension HomeVC: UITableViewDataSource {
                 return .init()
             }
             cell.bind(model: curWeekRoutineModel?.routine[indexPath.row], dayId: curWeekRoutineModel?.dayRoutine[0].id)
-            
             return cell
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
@@ -347,6 +350,9 @@ extension HomeVC: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
                     return .init(style: .default, reuseIdentifier: "")
                 }
+                cell.textView.delegate = self
+                cell.bind(content: curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect ?? "")
+                textViewDidChange(cell.textView)
                 return cell
             }
         }
@@ -393,14 +399,6 @@ extension HomeVC: UITableViewDataSource {
             return nil
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 54
-        } else {
-            return 75
-        }
-    }
 }
 
 extension HomeVC: HomeTabCellTypeDelegate {
@@ -410,5 +408,27 @@ extension HomeVC: HomeTabCellTypeDelegate {
     
     func clickRetrospect() {
         self.cellType = .retrospect
+    }
+}
+
+extension HomeVC: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if var dayRoutine = curWeekRoutineModel?.dayRoutine[selectedIdx] {
+            dayRoutine.retrospect = textView.text
+            FMDBManager.shared.updateDayRootine(rootine: dayRoutine)
+        }
+        textView.resignFirstResponder()
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: view.frame.width-32, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+        }
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
     }
 }
