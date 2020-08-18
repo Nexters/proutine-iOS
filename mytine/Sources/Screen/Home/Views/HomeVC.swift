@@ -217,7 +217,6 @@ extension HomeVC: UICollectionViewDelegate {
         
         var tempList: [(Rootine, Bool)] = []
         
-        // 1이면 반복, 0이면 반복 X
         for index in curWeekRoutine.routine.indices where curWeekRoutine.routine[index].repeatDays[indexPath.row] == 1 {
             if (!curWeekRoutine.dayRoutine[indexPath.row].complete.isEmpty) && (curWeekRoutine.dayRoutine[indexPath.row].complete.contains(curWeekRoutine.routine[index].id)) {
                 // 만약 완료 됐다면
@@ -311,7 +310,7 @@ extension HomeVC: UITableViewDataSource {
         } else if section == 1 {
             return 1
         } else {
-            if selectRoutine.count == 0 {
+            if curWeekRoutine.weekRoutine.rootines().count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
             } else {
                 tableView.restore()
