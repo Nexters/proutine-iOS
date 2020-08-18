@@ -10,24 +10,18 @@ import UIKit
 
 class RetrospectTVCell: UITableViewCell {
     static let reuseIdentifier = "RetrospectTVCell"
-    
+    @IBOutlet var textView: UITextView!
     @IBOutlet var saveBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         saveBtn.viewRounded(cornerRadius: 8)
-        self.viewRounded(cornerRadius: 10)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        textView.viewRounded(cornerRadius: 10)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
-    func bind() {
+    func bind(content: String) {
         self.backgroundColor = .mainBlue
+        textView.text = content
     }
-    
 }

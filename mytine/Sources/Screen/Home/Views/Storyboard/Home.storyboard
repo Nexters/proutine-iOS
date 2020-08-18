@@ -310,39 +310,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67p-QH-k7X">
-                                                    <rect key="frame" x="20" y="5" width="335" height="49"/>
-                                                    <subviews>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwl-j3-j5o">
-                                                            <rect key="frame" x="8" y="8" width="319" height="33"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
-                                                        </textField>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DcU-qB-d7p">
-                                                            <rect key="frame" x="8" y="8" width="319" height="33"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
-                                                    </subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcU-qB-d7p">
+                                                    <rect key="frame" x="8" y="8" width="359" height="84"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="DcU-qB-d7p" firstAttribute="leading" secondItem="67p-QH-k7X" secondAttribute="leading" constant="8" id="2G3-Gy-06A"/>
-                                                        <constraint firstAttribute="bottom" secondItem="dwl-j3-j5o" secondAttribute="bottom" constant="8" id="Ts2-ep-d3v"/>
-                                                        <constraint firstAttribute="bottom" secondItem="DcU-qB-d7p" secondAttribute="bottom" constant="8" id="WN7-hU-68U"/>
-                                                        <constraint firstItem="dwl-j3-j5o" firstAttribute="top" secondItem="67p-QH-k7X" secondAttribute="top" constant="8" id="b4l-zi-nUf"/>
-                                                        <constraint firstAttribute="trailing" secondItem="dwl-j3-j5o" secondAttribute="trailing" constant="8" id="cdF-JC-c0w"/>
-                                                        <constraint firstItem="dwl-j3-j5o" firstAttribute="leading" secondItem="67p-QH-k7X" secondAttribute="leading" constant="8" id="eb0-Zr-k5w"/>
-                                                        <constraint firstAttribute="trailing" secondItem="DcU-qB-d7p" secondAttribute="trailing" constant="8" id="rPG-TN-QaD"/>
-                                                        <constraint firstItem="DcU-qB-d7p" firstAttribute="top" secondItem="67p-QH-k7X" secondAttribute="top" constant="8" id="vcu-Ga-Tqk"/>
+                                                        <constraint firstAttribute="height" priority="750" constant="33" id="XQh-OY-o25"/>
                                                     </constraints>
-                                                    <variation key="default">
-                                                        <mask key="subviews">
-                                                            <exclude reference="DcU-qB-d7p"/>
-                                                        </mask>
-                                                    </variation>
-                                                </view>
+                                                    <color key="textColor" red="0.27058823529999998" green="0.34901960780000002" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hl-aC-mWW">
                                                     <rect key="frame" x="291" y="69" width="64" height="31"/>
                                                     <color key="backgroundColor" red="0.27058823529411763" green="0.34901960784313724" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -360,14 +337,15 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="1Hl-aC-mWW" secondAttribute="bottom" id="4E9-iI-U1j"/>
                                                 <constraint firstAttribute="trailing" secondItem="1Hl-aC-mWW" secondAttribute="trailing" constant="20" id="4aO-dY-qeN"/>
-                                                <constraint firstItem="67p-QH-k7X" firstAttribute="top" secondItem="Vsb-eJ-k0Q" secondAttribute="top" constant="5" id="DaH-jm-ocL"/>
-                                                <constraint firstAttribute="trailing" secondItem="67p-QH-k7X" secondAttribute="trailing" constant="20" id="HmW-Hk-WPL"/>
-                                                <constraint firstItem="1Hl-aC-mWW" firstAttribute="top" secondItem="67p-QH-k7X" secondAttribute="bottom" constant="15" id="Yra-oZ-XFQ"/>
-                                                <constraint firstItem="67p-QH-k7X" firstAttribute="leading" secondItem="Vsb-eJ-k0Q" secondAttribute="leading" constant="20" id="opq-ko-jr5"/>
+                                                <constraint firstItem="DcU-qB-d7p" firstAttribute="top" secondItem="Vsb-eJ-k0Q" secondAttribute="top" constant="8" id="L7l-td-jb6"/>
+                                                <constraint firstAttribute="trailing" secondItem="DcU-qB-d7p" secondAttribute="trailing" constant="8" id="YeL-6c-NOE"/>
+                                                <constraint firstAttribute="bottom" secondItem="DcU-qB-d7p" secondAttribute="bottom" constant="8" id="YuP-9N-ti3"/>
+                                                <constraint firstItem="DcU-qB-d7p" firstAttribute="leading" secondItem="Vsb-eJ-k0Q" secondAttribute="leading" constant="8" id="hIZ-lL-BeD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="saveBtn" destination="1Hl-aC-mWW" id="FCw-fg-ro4"/>
+                                            <outlet property="textView" destination="DcU-qB-d7p" id="cMY-Ym-BeO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

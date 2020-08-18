@@ -116,6 +116,7 @@ class HomeVC: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: WeekRootineTVCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     func setupCollectionView() {
@@ -329,7 +330,6 @@ extension HomeVC: UITableViewDataSource {
                 return .init()
             }
             cell.bind(model: curWeekRoutineModel?.routine[indexPath.row], dayId: curWeekRoutineModel?.dayRoutine[0].id)
-            
             return cell
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
@@ -350,6 +350,9 @@ extension HomeVC: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
                     return .init(style: .default, reuseIdentifier: "")
                 }
+                cell.textView.delegate = self
+                cell.bind(content: curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect ?? "")
+                textViewDidChange(cell.textView)
                 return cell
             }
         }
@@ -396,16 +399,6 @@ extension HomeVC: UITableViewDataSource {
             return nil
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 54
-        } else if indexPath.section == 2 && cellType == .retrospect {
-            return 100
-        } else {
-            return 75
-        }
-    }
 }
 
 extension HomeVC: HomeTabCellTypeDelegate {
@@ -415,5 +408,27 @@ extension HomeVC: HomeTabCellTypeDelegate {
     
     func clickRetrospect() {
         self.cellType = .retrospect
+    }
+}
+
+extension HomeVC: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if var dayRoutine = curWeekRoutineModel?.dayRoutine[selectedIdx] {
+            dayRoutine.retrospect = textView.text
+            FMDBManager.shared.updateDayRootine(rootine: dayRoutine)
+        }
+        textView.resignFirstResponder()
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: view.frame.width-32, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+        }
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
     }
 }
