@@ -311,7 +311,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcU-qB-d7p">
-                                                    <rect key="frame" x="8" y="8" width="359" height="84"/>
+                                                    <rect key="frame" x="20" y="8" width="335" height="84"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="33" id="XQh-OY-o25"/>
@@ -338,9 +338,9 @@
                                                 <constraint firstAttribute="bottom" secondItem="1Hl-aC-mWW" secondAttribute="bottom" id="4E9-iI-U1j"/>
                                                 <constraint firstAttribute="trailing" secondItem="1Hl-aC-mWW" secondAttribute="trailing" constant="20" id="4aO-dY-qeN"/>
                                                 <constraint firstItem="DcU-qB-d7p" firstAttribute="top" secondItem="Vsb-eJ-k0Q" secondAttribute="top" constant="8" id="L7l-td-jb6"/>
-                                                <constraint firstAttribute="trailing" secondItem="DcU-qB-d7p" secondAttribute="trailing" constant="8" id="YeL-6c-NOE"/>
+                                                <constraint firstAttribute="trailing" secondItem="DcU-qB-d7p" secondAttribute="trailing" constant="20" id="YeL-6c-NOE"/>
                                                 <constraint firstAttribute="bottom" secondItem="DcU-qB-d7p" secondAttribute="bottom" constant="8" id="YuP-9N-ti3"/>
-                                                <constraint firstItem="DcU-qB-d7p" firstAttribute="leading" secondItem="Vsb-eJ-k0Q" secondAttribute="leading" constant="8" id="hIZ-lL-BeD"/>
+                                                <constraint firstItem="DcU-qB-d7p" firstAttribute="leading" secondItem="Vsb-eJ-k0Q" secondAttribute="leading" constant="20" id="hIZ-lL-BeD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
