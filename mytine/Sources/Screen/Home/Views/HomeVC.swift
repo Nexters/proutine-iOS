@@ -111,13 +111,15 @@ class HomeVC: UIViewController {
         present(popup, animated: true, completion: nil)
     }
     
-    /// Drop down button
     func setupTableView() {
         let nib = UINib(nibName: WeekRootineTVCell.nibName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: WeekRootineTVCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.keyboardHide))
+        tapGesture.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGesture)
     }
     
     func setupCollectionView() {
@@ -133,6 +135,11 @@ class HomeVC: UIViewController {
     func unregisterRoutinesNotifications() {
         NotificationCenter.default.removeObserver(self, name: .routineComplete, object: nil)
         NotificationCenter.default.removeObserver(self, name: .routineUnComplete, object: nil)
+    }
+    
+    @objc
+    func keyboardHide() {
+        view.endEditing(true)
     }
     
     @objc
@@ -292,7 +299,7 @@ extension HomeVC: UITableViewDelegate {
         if indexPath.section == 2 && cellType == .routine {
             let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
             guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
-            dvc.rootine = curWeekRoutineModel?.routine[indexPath.row]
+            dvc.rootine = selectRoutine[indexPath.row].0
             dvc.curWeekRoutine = curWeekRoutineModel
             self.navigationController?.pushViewController(dvc, animated: true)
         }
