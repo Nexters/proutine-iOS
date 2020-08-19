@@ -49,6 +49,7 @@ class EditVC: UIViewController {
             emojiTextfield.text = rootine.emoji
             nameTextfield.text = rootine.title
             goalTextfield.text = rootine.goal
+            selectWeek = rootine.repeatDays
             rootine.repeatDays.enumerated().forEach {
                 if $1 == 1 {
                     let indexPath = IndexPath(row: $0, section: 0)
@@ -194,7 +195,12 @@ class EditVC: UIViewController {
                                       preferredStyle: .alert)
         
         let delete = UIAlertAction(title: "삭제하기", style: .destructive) { (action) in
-            //code
+            if let model = self.curWeekRoutine,
+                let rId = self.rootine?.id {
+                let newValue = model.weekRoutine.rootines().filter{ $0 != rId }.map{ $0 }
+                _ = FMDBManager.shared.updateWeekRootine(rootinesList: newValue, week: model.weekRoutine.week)
+            }
+            self.navigationController?.popViewController(animated: true)
         }
         let cancel = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(cancel)
