@@ -55,6 +55,7 @@ class HomeVC: UIViewController {
         setNavigationBar()
         setupRoutine()
         tableView.reloadData()
+        collectionView.reloadData()
         registerRoutinesNotifications()
         
         let todayIndex = Date().getWeekday() - 2
@@ -292,6 +293,7 @@ extension HomeVC: UITableViewDelegate {
             let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
             guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
             dvc.rootine = curWeekRoutineModel?.routine[indexPath.row]
+            dvc.curWeekRoutine = curWeekRoutineModel
             self.navigationController?.pushViewController(dvc, animated: true)
         }
     }

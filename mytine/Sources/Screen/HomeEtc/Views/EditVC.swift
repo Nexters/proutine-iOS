@@ -162,15 +162,6 @@ class EditVC: UIViewController {
         }
     }
     
-    func deleteRootine() {
-        guard let rootine = rootine else {
-            return
-        }
-        if FMDBManager.shared.deleteRootine(id: rootine.id) {
-            navigationController?.popViewController(animated: true)
-        }
-    }
-    
     @objc
     func backClick(_ sender: UIBarButtonItem) {
         warningBackAlert()
