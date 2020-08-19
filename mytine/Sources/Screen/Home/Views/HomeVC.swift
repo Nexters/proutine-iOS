@@ -55,6 +55,7 @@ class HomeVC: UIViewController {
         setNavigationBar()
         setupRoutine()
         tableView.reloadData()
+        collectionView.reloadData()
         registerRoutinesNotifications()
         
         let todayIndex = Date().getWeekday() - 2
@@ -300,6 +301,7 @@ extension HomeVC: UITableViewDelegate {
             let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
             guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
             dvc.rootine = curWeekRoutineModel?.routine[indexPath.row]
+            dvc.curWeekRoutine = curWeekRoutineModel
             self.navigationController?.pushViewController(dvc, animated: true)
         }
     }
@@ -378,6 +380,7 @@ extension HomeVC: UITableViewDataSource {
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
                 NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": self.selectRoutine[indexPath.row].0.id, "dayId": dayRoutine.id])
                 self.collectionView.reloadData()
+                tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             doneAction.image = UIImage(named: "complete")
             doneAction.backgroundColor = UIColor.subBlue
@@ -399,6 +402,7 @@ extension HomeVC: UITableViewDataSource {
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
                 NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": self.selectRoutine[indexPath.row].0.id, "dayId": dayRoutine.id])
                 self.collectionView.reloadData()
+                tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             cancelAction.image = UIImage(named: "undo")
             cancelAction.backgroundColor = UIColor.subBlue
