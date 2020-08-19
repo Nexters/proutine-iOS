@@ -370,6 +370,7 @@ extension HomeVC: UITableViewDataSource {
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
                 NotificationCenter.default.post(name: .routineComplete, object: cell, userInfo: ["routineIndex": self.selectRoutine[indexPath.row].0.id, "dayId": dayRoutine.id])
                 self.collectionView.reloadData()
+                tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             doneAction.image = UIImage(named: "complete")
             doneAction.backgroundColor = UIColor.subBlue
@@ -391,6 +392,7 @@ extension HomeVC: UITableViewDataSource {
                 let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
                 NotificationCenter.default.post(name: .routineUnComplete, object: cell, userInfo: ["shouldRemoveIndex": self.selectRoutine[indexPath.row].0.id, "dayId": dayRoutine.id])
                 self.collectionView.reloadData()
+                tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             cancelAction.image = UIImage(named: "undo")
             cancelAction.backgroundColor = UIColor.subBlue
