@@ -313,17 +313,16 @@ extension HomeVC: UITableViewDataSource {
             return (isExpanded) ? curWeekRoutine.weekRoutine.rootines().count : 0
         } else if section == 1 {
             return 1
-        } else {
+        } else if cellType == .routine {
             if curWeekRoutine.weekRoutine.rootines().count == 0 {
                 tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "homeNullImage")
             } else {
                 tableView.restore()
             }
-            if cellType == .routine {
-                return selectRoutine.count
-            } else {
-                return 1
-            }
+            return selectRoutine.count
+        } else {
+            tableView.setEmptyView()
+            return 1
         }
     }
     
@@ -347,6 +346,9 @@ extension HomeVC: UITableViewDataSource {
                     return .init()
                 }
                 let model = selectRoutine[indexPath.row]
+                if model.0.goal == "" {
+                    cell.centerConstraint.constant = 0
+                }
                 cell.bind(routine: model.0, isCompleted: model.1)
                 return cell
             } else {
