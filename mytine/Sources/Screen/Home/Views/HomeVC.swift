@@ -46,14 +46,15 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRoutine()
         setDropView()
         setupTableView()
         setupCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        reloadRoutineDB()
         setNavigationBar()
-        setupRoutine()
         tableView.reloadData()
         collectionView.reloadData()
         registerRoutinesNotifications()
@@ -73,10 +74,10 @@ class HomeVC: UIViewController {
     
     func setNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
-        dropView.isHidden = true
     }
     
     func setDropView() {
+        dropView.isHidden = true
         dropView.layer.cornerRadius = 12
         dropView.layer.shadowColor = UIColor.darkGray.cgColor
         dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
@@ -89,7 +90,6 @@ class HomeVC: UIViewController {
         guard let weekRoutine = allWeekRoutine.last else {
             return
         }
-        self.navigationTitle.text = allWeekRoutine.last?.weekString
         dropdownIdx = weekRoutine.week
         loadRoutineDB(week: weekRoutine.week)
     }
@@ -102,6 +102,16 @@ class HomeVC: UIViewController {
         curWeekRoutineModel = WeekRootineModel(weekRoutine: weekRoutine,
                                                dayRoutine: dayRoutine,
                                                routine: routines)
+        
+        self.navigationTitle.text = weekRoutine.weekString
+    }
+    
+    func reloadRoutineDB() {
+        allWeekRoutine = FMDBManager.shared.selectWeekRootine(week: 0)
+        guard let curWeekRoutine = self.curWeekRoutineModel else {
+            return
+        }
+        loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
     }
     
     func presentPopup() {
@@ -162,7 +172,7 @@ class HomeVC: UIViewController {
             selectRoutine[indexPath!].1 = true
             curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(routineId!)
             _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-            self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+            reloadRoutineDB()
         }
     }
     
@@ -180,7 +190,7 @@ class HomeVC: UIViewController {
             selectRoutine[indexPath!].1 = false
             curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index)
             _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-            self.loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
+            reloadRoutineDB()
         }
     }
     
