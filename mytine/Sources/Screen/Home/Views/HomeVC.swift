@@ -209,10 +209,10 @@ class HomeVC: UIViewController {
             loadRoutineDB(week: dropdownIdx)
             dayRoutineCellIndex = 0
             tableView.reloadData()
+            collectionView.reloadData()
         }
     }
     
-    /// Right bar button Item
     @IBAction func addRoutine(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
         guard let dvc = storyboard.instantiateViewController(identifier: "EditVC") as? EditVC else { return }
@@ -234,7 +234,6 @@ extension HomeVC: UICollectionViewDelegate {
         
         for index in curWeekRoutine.routine.indices where curWeekRoutine.routine[index].repeatDays[indexPath.row] == 1 {
             if (!curWeekRoutine.dayRoutine[indexPath.row].complete.isEmpty) && (curWeekRoutine.dayRoutine[indexPath.row].complete.contains(curWeekRoutine.routine[index].id)) {
-                // 만약 완료 됐다면
                 tempList.append((curWeekRoutine.routine[index], true))
             } else {
                 selectRoutine.append((curWeekRoutine.routine[index], false))
