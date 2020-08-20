@@ -25,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("현재 저장된 날::::::::")
         FMDBManager.shared.selectDayRootine(week: 0)
         
-        print("::::::::::::App:::::::::::::::::")
-        print("::::::::::::Open::::::::::::::::")
+        print("::::::::::::App Open:::::::::::::::::")
 
         let storyboard = UIStoryboard(name: "Home", bundle: .main)
         window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeNav")

@@ -28,13 +28,7 @@ class HomeVC: UIViewController {
     var isExpanded = true
     var dropdownIdx: Int = 0
     private var selectedIdx: Int = 0
-    private var dayRoutineCellIndex: Int = 0  {
-        didSet {
-            if oldValue == 6 {
-                self.dayRoutineCellIndex = 0
-            }
-        }
-    }  // cell reload시 cellIndex 0으로 다시 초기화해주기
+    
     private var allWeekRoutine: [WeekRootine] = []
     private var selectRoutine: [(Rootine, Bool)] = []
     private var curWeekRoutineModel: WeekRootineModel?
@@ -194,7 +188,6 @@ class HomeVC: UIViewController {
             }
             dropView.isHidden = true
             loadRoutineDB(week: dropdownIdx)
-            dayRoutineCellIndex = 0
             tableView.reloadData()
         }
     }
@@ -254,7 +247,9 @@ extension HomeVC: UICollectionViewDataSource {
         cell.bind(model: curWeekRoutine.dayRoutine[indexPath.item],
                   dayRoutineCount: Float(dayCount),
                   index: indexPath.item)
-        
+        if selectedIdx == indexPath.item {
+            cell.isSelected = true
+        }
         return cell
     }
 }
