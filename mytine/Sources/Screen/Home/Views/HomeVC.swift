@@ -251,37 +251,10 @@ extension HomeVC: UICollectionViewDataSource {
                 dayCount += 1
             }
         }
+        cell.bind(model: curWeekRoutine.dayRoutine[indexPath.item],
+                  dayRoutineCount: Float(dayCount),
+                  index: indexPath.item)
         
-        let startDay = curWeekRoutine.weekRoutine.weekString.components(separatedBy: " - ")[0]
-        if !curWeekRoutine.dayRoutine.isEmpty {
-            let curDayRoutine = curWeekRoutine.dayRoutine[dayRoutineCellIndex]
-            if String(curDayRoutine.id) == startDay.weekConvertToDayRoutineId().afterDayString(addDay: indexPath.item) {
-                cell.bind(model: curDayRoutine,
-                          dayRoutineCount: Float(dayCount),
-                          index: indexPath.item)
-            } else {
-                let dayId = Int(startDay
-                    .weekConvertToDayRoutineId()
-                    .afterDayString(addDay: indexPath.item))
-                cell.bind(model: DayRootine(id: dayId!,
-                                            retrospect: "",
-                                            week: curWeekRoutine.weekRoutine.week,
-                                            complete: []),
-                          dayRoutineCount: Float(dayCount),
-                          index: indexPath.item)
-            }
-        } else {
-            let dayId = Int(startDay
-                .weekConvertToDayRoutineId()
-                .afterDayString(addDay: indexPath.item))
-            cell.bind(model: DayRootine(id: dayId!,
-                                        retrospect: "",
-                                        week: curWeekRoutine.weekRoutine.week,
-                                        complete: []),
-                      dayRoutineCount: Float(dayCount),
-                      index: indexPath.item)
-        }
-        dayRoutineCellIndex += 1
         return cell
     }
 }

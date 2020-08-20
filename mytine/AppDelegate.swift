@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let weekRootine = FMDBManager.shared.selectWeekRootine(week: beforeRecentWeek)
                 // 주차 차이나는만큼 추가
                 var weekDate = beforeRecentDate
-                for i in 0..<distance {
+                for index in 0..<distance {
                     weekDate = weekDate.afterDayString(addDay: 7)
                     _ = FMDBManager.shared.addWeek(rootineIdx: weekRootine[0].rootinesIdx, weekString: weekDate.weekFirstToEnd())
                     
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 .afterDayString(addDay: $0)
                         let emptyDayRoutine = DayRootine(id: Int(dayId)!,
                                                          retrospect: "",
-                                                         week: beforeRecentWeek+i+1,
+                                                         week: beforeRecentWeek+index+1,
                                                          complete: [])
                         _ = FMDBManager.shared.createDayRootine(rootine: emptyDayRoutine)
                     }
