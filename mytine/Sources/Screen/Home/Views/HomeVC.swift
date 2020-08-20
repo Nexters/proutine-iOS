@@ -315,7 +315,7 @@ extension HomeVC: UITableViewDataSource {
             return 1
         } else {
             if curWeekRoutine.weekRoutine.rootines().count == 0 {
-                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "homeNullImage")
             } else {
                 tableView.restore()
             }
