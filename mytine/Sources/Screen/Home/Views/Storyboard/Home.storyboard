@@ -154,7 +154,7 @@
                                 <rect key="frame" x="0.0" y="109" width="375" height="791"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TabTVCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TabTVCell" rowHeight="80" id="cQj-t5-BL2" customClass="TabTVCell" customModule="프루틴" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TabTVCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TabTVCell" rowHeight="80" id="cQj-t5-BL2" customClass="TabTVCell" customModule="Proutine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cQj-t5-BL2" id="iS5-Qj-JXs">
@@ -238,7 +238,7 @@
                                             <outlet property="routineBtn" destination="Fm2-58-f8p" id="anD-D5-GjK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoutineTVCell" rowHeight="86" id="FWL-3g-Dpp" customClass="RoutineTVCell" customModule="프루틴" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoutineTVCell" rowHeight="86" id="FWL-3g-Dpp" customClass="RoutineTVCell" customModule="Proutine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="375" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FWL-3g-Dpp" id="gf5-B0-mVf">
@@ -302,7 +302,7 @@
                                             <outlet property="timeLabel" destination="XGS-E8-GPt" id="5MQ-9u-rL3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RetrospectTVCell" rowHeight="100" id="Bzx-79-6pt" customClass="RetrospectTVCell" customModule="프루틴" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RetrospectTVCell" rowHeight="100" id="Bzx-79-6pt" customClass="RetrospectTVCell" customModule="Proutine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="194" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bzx-79-6pt" id="Vsb-eJ-k0Q">
@@ -381,7 +381,7 @@
         <!--Home PopVC-->
         <scene sceneID="Dv2-4g-PWH">
             <objects>
-                <viewController storyboardIdentifier="HomePopVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vHv-v1-vyZ" customClass="HomePopVC" customModule="프루틴" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePopVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vHv-v1-vyZ" customClass="HomePopVC" customModule="Proutine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K7w-4F-lNu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -470,27 +470,27 @@
         <!--Drop DownTVC-->
         <scene sceneID="mr1-fg-m0y">
             <objects>
-                <tableViewController storyboardIdentifier="DropDownTVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="b8Q-E3-ioP" customClass="DropDownTVC" customModule="프루틴" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DropDownTVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="b8Q-E3-ioP" customClass="DropDownTVC" customModule="Proutine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WeM-Rq-2HD">
                         <rect key="frame" x="0.0" y="0.0" width="176" height="168"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DropdownCell" id="ijy-Qm-zsh" customClass="DropdownCell" customModule="프루틴" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="176" height="56"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DropdownCell" id="ijy-Qm-zsh" customClass="DropdownCell" customModule="Proutine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="176" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ijy-Qm-zsh" id="Xh9-KI-sF6">
-                                    <rect key="frame" x="0.0" y="0.0" width="176" height="56"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="176" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCG-92-gzg">
-                                            <rect key="frame" x="8" y="4" width="160" height="48"/>
+                                            <rect key="frame" x="8" y="4" width="160" height="47"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZyF-QC-3tf">
-                                            <rect key="frame" x="16" y="19" width="144" height="18"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <color key="textColor" red="0.34901960780000002" green="0.4549019608" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <rect key="frame" x="16" y="19" width="144" height="17"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                            <color key="textColor" red="0.27058823529411763" green="0.34901960784313724" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
