@@ -13,10 +13,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Add Routine-->
+        <!--EditVC-->
         <scene sceneID="UdO-iT-ArL">
             <objects>
-                <viewController storyboardIdentifier="EditVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Edz-uK-JQx" customClass="EditVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Edz-uK-JQx" customClass="EditVC" customModule="Proutine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8wk-z8-vQq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,7 +145,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditWeekCVCell" id="VXn-yW-Pct" customClass="EditWeekCVCell" customModule="mytine" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditWeekCVCell" id="VXn-yW-Pct" customClass="EditWeekCVCell" customModule="Proutine" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Zi-00-iWy">
@@ -284,7 +284,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0q8-gs-oxT"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Routine" id="XfP-8X-Dkf">
+                    <navigationItem key="navigationItem" id="XfP-8X-Dkf">
                         <barButtonItem key="leftBarButtonItem" image="back" id="9qN-SA-Q2Y">
                             <connections>
                                 <action selector="backHome:" destination="Edz-uK-JQx" id="B5Z-XA-ofl"/>
@@ -315,7 +315,7 @@
         <!--2020.July-->
         <scene sceneID="j8w-Xg-Mp8">
             <objects>
-                <viewController storyboardIdentifier="CalendarVC" id="BsZ-Wg-Ven" customClass="CalendarVC" customModule="mytine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarVC" id="BsZ-Wg-Ven" customClass="CalendarVC" customModule="Proutine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7fN-9M-Jb6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -330,7 +330,7 @@
                                     <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckCVCell" id="h7P-Pr-zIJ" customClass="CheckCVCell" customModule="mytine" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckCVCell" id="h7P-Pr-zIJ" customClass="CheckCVCell" customModule="Proutine" customModuleProvider="target">
                                         <rect key="frame" x="20" y="50" width="40" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rxx-Sp-1LJ">
@@ -372,12 +372,12 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckReusableView" id="bav-9T-cHQ" customClass="CheckReusableView" customModule="mytine" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckReusableView" id="bav-9T-cHQ" customClass="CheckReusableView" customModule="Proutine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWc-oo-LCd">
-                                            <rect key="frame" x="24" y="15" width="44.5" height="21"/>
+                                            <rect key="frame" x="24" y="15" width="51.5" height="21"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>

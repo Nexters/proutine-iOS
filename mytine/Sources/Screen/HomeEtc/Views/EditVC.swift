@@ -63,15 +63,19 @@ class EditVC: UIViewController {
         editMode = rootine == nil ? .add : .edit
         
         if editMode == .edit {
+            self.title = "루틴 수정하기"
             deleteButton.isHidden = false
+        } else {
+            self.title = "루틴 생성하기"
         }
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes
-            = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold",
-                                                   size: 17)!]
+            = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold),
+               NSAttributedString.Key.foregroundColor: UIColor.mainFont
+        ]
         self.navigationItem.leftBarButtonItem?.action = #selector(self.backClick(_:))
         
         backView.forEach{ $0.viewRounded(cornerRadius: 10) }
