@@ -385,7 +385,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 2 {
+        if indexPath.section == 2 && cellType == .routine {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 guard let curWeekRoutine = self.curWeekRoutineModel else {
                     return
