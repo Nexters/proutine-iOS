@@ -217,6 +217,9 @@ class HomeVC: UIViewController {
 extension HomeVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: .init(item: selectedIdx, section: 0))
+        cell?.isSelected = false
+        
         selectRoutine.removeAll()
         selectedIdx = indexPath.row
         guard let curWeekRoutine = curWeekRoutineModel else {
@@ -235,6 +238,7 @@ extension HomeVC: UICollectionViewDelegate {
         selectRoutine += tempList
         tableView.reloadData()
     }
+    
 }
 
 extension HomeVC: UICollectionViewDataSource {
