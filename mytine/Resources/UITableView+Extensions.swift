@@ -33,15 +33,15 @@ extension UITableView {
             }()
             
             picImage.addSubview(messageLabel)
-            messageLabel.bottomAnchor.constraint(equalTo: picImage.bottomAnchor, constant: 13).isActive = true
-            messageLabel.leftAnchor.constraint(equalTo: picImage.leftAnchor, constant: 15).isActive = true
-            messageLabel.rightAnchor.constraint(equalTo: picImage.rightAnchor, constant: -15).isActive = true
+            messageLabel.bottomAnchor.constraint(equalTo: picImage.bottomAnchor, constant: 50).isActive = true
+            messageLabel.leftAnchor.constraint(equalTo: picImage.leftAnchor, constant: -30).isActive = true
+            messageLabel.rightAnchor.constraint(equalTo: picImage.rightAnchor, constant: 50).isActive = true
             
             emptyView.addSubview(picImage)
             picImage.translatesAutoresizingMaskIntoConstraints = false
-            picImage.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 35).isActive = true
-            picImage.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -35).isActive = true
-            picImage.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
+            picImage.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 100).isActive = true
+            picImage.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -120).isActive = true
+            picImage.topAnchor.constraint(equalTo: emptyView.topAnchor, constant: 150).isActive = true
             
             self.backgroundView = emptyView
             self.separatorStyle = .none
