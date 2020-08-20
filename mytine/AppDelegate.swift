@@ -25,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("현재 저장된 날::::::::")
         FMDBManager.shared.selectDayRootine(week: 0)
         
-        print("::::::::::::App:::::::::::::::::")
-        print("::::::::::::Open::::::::::::::::")
+        print("::::::::::::App Open:::::::::::::::::")
 
         let storyboard = UIStoryboard(name: "Home", bundle: .main)
         window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeNav")
@@ -54,9 +53,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let weekRootine = FMDBManager.shared.selectWeekRootine(week: beforeRecentWeek)
                 // 주차 차이나는만큼 추가
                 var weekDate = beforeRecentDate
-                for _ in 0..<distance {
+                for index in 0..<distance {
                     weekDate = weekDate.afterDayString(addDay: 7)
                     _ = FMDBManager.shared.addWeek(rootineIdx: weekRootine[0].rootinesIdx, weekString: weekDate.weekFirstToEnd())
+                    
+                    (0...6).forEach {
+                            let dayId = weekDate
+                                .weekFirstToEnd()
+                                .components(separatedBy: " - ")[0]
+                                .weekConvertToDayRoutineId()
+                                .afterDayString(addDay: $0)
+                        let emptyDayRoutine = DayRootine(id: Int(dayId)!,
+                                                         retrospect: "",
+                                                         week: beforeRecentWeek+index+1,
+                                                         complete: [])
+                        _ = FMDBManager.shared.createDayRootine(rootine: emptyDayRoutine)
+                    }
                 }
             }
             print("firstDate - \(firstDate)")
@@ -80,6 +92,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             _ = FMDBManager.shared.createTable()
             _ = FMDBManager.shared.addWeek(rootineIdx: nil, weekString: newRecentDate.weekFirstToEnd())
+            
+            // 데이루틴 생성
+            (0...6).forEach {
+                let dayId = newRecentDate
+                    .weekFirstToEnd()
+                    .components(separatedBy: " - ")[0]
+                    .weekConvertToDayRoutineId()
+                    .afterDayString(addDay: $0)
+                let emptyDayRoutine = DayRootine(id: Int(dayId)!, retrospect: "", week: 1, complete: [])
+                _ = FMDBManager.shared.createDayRootine(rootine: emptyDayRoutine)
+            }
         }
     }
 }

@@ -43,16 +43,12 @@ class WeekCVCell: UICollectionViewCell {
     }
     
     func bind(model: DayRootine, dayRoutineCount: Float, index: Int) {
-        print(model)
-        print("dayCount:::: \(dayRoutineCount)")
-        print("modelCount:::: \(model.complete.count)")
         let rate: Float
         if dayRoutineCount == 0 {
             rate = Float(model.complete.count) / 1 * 100
         } else {
             rate = Float(model.complete.count) / dayRoutineCount * 100
         }
-        print("rate:::: \(rate)")
         
         if rate < 50 {
             rateCheckView.backgroundColor = colors[0]
@@ -63,9 +59,7 @@ class WeekCVCell: UICollectionViewCell {
         }
         weekLabel.text = weekList[index]
         dateLabel.text = String(model.id % 100)
-        if !FMDBManager.shared.isDayRoutine(id: model.id) {
-            _ = FMDBManager.shared.createDayRootine(rootine: model)
-        }
+        
         routineCheckView.isHidden = model.retrospect.isEmpty ? true : false
     }
 }
