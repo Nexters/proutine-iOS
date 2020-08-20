@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     var isExpanded = true
     var dropdownIdx: Int = 0
+    private var messageLabel: UILabel!
     private var selectedIdx: Int = 0
     
     private var allWeekRoutine: [WeekRootine] = []
@@ -40,6 +41,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
         setupRoutine()
         setDropView()
         setupTableView()
@@ -68,6 +70,19 @@ class HomeVC: UIViewController {
     
     func setNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    func setUI() {
+        messageLabel = {
+            let label = UILabel()
+            label.tag = 100
+            label.text = "회고가 저장되었습니다."
+            label.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 10)
+            label.textAlignment = NSTextAlignment.center
+            label.textColor = .mainBlue
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
     }
     
     func setDropView() {
@@ -236,7 +251,9 @@ extension HomeVC: UICollectionViewDelegate {
             }
         }
         selectRoutine += tempList
+        print("selectRoutine", selectRoutine)
         tableView.reloadData()
+        messageLabel.isHidden = true
     }
     
 }
@@ -336,8 +353,11 @@ extension HomeVC: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
                     return .init(style: .default, reuseIdentifier: "")
                 }
+                guard let retrospect = curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect else {
+                    return .init()
+                }
                 cell.textView.delegate = self
-                cell.bind(content: curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect ?? "")
+                cell.bind(content: retrospect)
                 textViewDidChange(cell.textView)
                 return cell
             }
@@ -388,6 +408,7 @@ extension HomeVC: UITableViewDataSource {
 extension HomeVC: HomeTabCellTypeDelegate {
     func clickRoutine() {
         self.cellType = .routine
+        messageLabel.isHidden = true
     }
     
     func clickRetrospect() {
@@ -396,18 +417,31 @@ extension HomeVC: HomeTabCellTypeDelegate {
 }
 
 extension HomeVC: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if messageLabel.tag == 100 {
+            messageLabel.removeFromSuperview()
+        }
+    }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if var dayRoutine = curWeekRoutineModel?.dayRoutine[selectedIdx] {
             dayRoutine.retrospect = textView.text
             FMDBManager.shared.updateDayRootine(rootine: dayRoutine)
             reloadRoutineDB()
             collectionView.reloadData()
+            collectionView(collectionView, didSelectItemAt: IndexPath(item: selectedIdx, section: 0))
+            
+            view.addSubview(messageLabel)
+            messageLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 4).isActive = true
+            messageLabel.trailingAnchor.constraint(equalTo: textView.trailingAnchor).isActive = true
+            messageLabel.isHidden = false
         }
         textView.resignFirstResponder()
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: view.frame.width-32, height: .infinity)
+        let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         textView.constraints.forEach { (constraint) in
             if constraint.firstAttribute == .height {
