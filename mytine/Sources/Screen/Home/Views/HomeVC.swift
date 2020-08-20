@@ -419,6 +419,8 @@ extension HomeVC: UITextViewDelegate {
         if var dayRoutine = curWeekRoutineModel?.dayRoutine[selectedIdx] {
             dayRoutine.retrospect = textView.text
             FMDBManager.shared.updateDayRootine(rootine: dayRoutine)
+            reloadRoutineDB()
+            collectionView.reloadData()
         }
         textView.resignFirstResponder()
     }
