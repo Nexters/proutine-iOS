@@ -28,13 +28,7 @@ class HomeVC: UIViewController {
     var isExpanded = true
     var dropdownIdx: Int = 0
     private var selectedIdx: Int = 0
-    private var dayRoutineCellIndex: Int = 0  {
-        didSet {
-            if oldValue == 6 {
-                self.dayRoutineCellIndex = 0
-            }
-        }
-    }  // cell reload시 cellIndex 0으로 다시 초기화해주기
+    
     private var allWeekRoutine: [WeekRootine] = []
     private var selectRoutine: [(Rootine, Bool)] = []
     private var curWeekRoutineModel: WeekRootineModel?
@@ -207,7 +201,6 @@ class HomeVC: UIViewController {
             }
             dropView.isHidden = true
             loadRoutineDB(week: dropdownIdx)
-            dayRoutineCellIndex = 0
             tableView.reloadData()
             collectionView.reloadData()
         }
@@ -263,37 +256,12 @@ extension HomeVC: UICollectionViewDataSource {
                 dayCount += 1
             }
         }
-        
-        let startDay = curWeekRoutine.weekRoutine.weekString.components(separatedBy: " - ")[0]
-        if !curWeekRoutine.dayRoutine.isEmpty {
-            let curDayRoutine = curWeekRoutine.dayRoutine[dayRoutineCellIndex]
-            if String(curDayRoutine.id) == startDay.weekConvertToDayRoutineId().afterDayString(addDay: indexPath.item) {
-                cell.bind(model: curDayRoutine,
-                          dayRoutineCount: Float(dayCount),
-                          index: indexPath.item)
-            } else {
-                let dayId = Int(startDay
-                    .weekConvertToDayRoutineId()
-                    .afterDayString(addDay: indexPath.item))
-                cell.bind(model: DayRootine(id: dayId!,
-                                            retrospect: "",
-                                            week: curWeekRoutine.weekRoutine.week,
-                                            complete: []),
-                          dayRoutineCount: Float(dayCount),
-                          index: indexPath.item)
-            }
-        } else {
-            let dayId = Int(startDay
-                .weekConvertToDayRoutineId()
-                .afterDayString(addDay: indexPath.item))
-            cell.bind(model: DayRootine(id: dayId!,
-                                        retrospect: "",
-                                        week: curWeekRoutine.weekRoutine.week,
-                                        complete: []),
-                      dayRoutineCount: Float(dayCount),
-                      index: indexPath.item)
+        cell.bind(model: curWeekRoutine.dayRoutine[indexPath.item],
+                  dayRoutineCount: Float(dayCount),
+                  index: indexPath.item)
+        if selectedIdx == indexPath.item {
+            cell.isSelected = true
         }
-        dayRoutineCellIndex += 1
         return cell
     }
 }
