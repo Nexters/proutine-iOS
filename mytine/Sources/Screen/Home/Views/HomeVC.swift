@@ -346,6 +346,9 @@ extension HomeVC: UITableViewDataSource {
                     return .init()
                 }
                 let model = selectRoutine[indexPath.row]
+                if model.0.goal == "" {
+                    cell.centerConstraint.constant = 0
+                }
                 cell.bind(routine: model.0, isCompleted: model.1)
                 return cell
             } else {

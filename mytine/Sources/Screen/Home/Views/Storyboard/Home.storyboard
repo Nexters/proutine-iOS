@@ -249,13 +249,13 @@
                                                     <rect key="frame" x="20" y="3" width="335" height="80"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간시간시간시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGS-E8-GPt">
-                                                            <rect key="frame" x="76" y="8" width="235" height="20"/>
+                                                            <rect key="frame" x="76" y="13" width="235" height="22.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <color key="textColor" red="0.34901960784313724" green="0.45490196078431372" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbW-5y-Wc7">
-                                                            <rect key="frame" x="76" y="32" width="235" height="36"/>
+                                                            <rect key="frame" x="76" y="39.5" width="235" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" red="0.34901960784313724" green="0.45490196078431372" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -274,14 +274,15 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="kbW-5y-Wc7" secondAttribute="bottom" constant="12" id="98Y-1v-dGe"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kbW-5y-Wc7" secondAttribute="bottom" constant="12" id="98Y-1v-dGe"/>
                                                         <constraint firstItem="kbW-5y-Wc7" firstAttribute="centerY" secondItem="wn0-Oe-pLf" secondAttribute="centerY" constant="10" id="IEz-N9-B00"/>
                                                         <constraint firstItem="kbW-5y-Wc7" firstAttribute="leading" secondItem="XGS-E8-GPt" secondAttribute="leading" id="OZj-Hi-zjE"/>
-                                                        <constraint firstItem="kbW-5y-Wc7" firstAttribute="top" secondItem="XGS-E8-GPt" secondAttribute="bottom" constant="4" id="Odj-fT-6gf"/>
-                                                        <constraint firstItem="XGS-E8-GPt" firstAttribute="leading" secondItem="wn0-Oe-pLf" secondAttribute="trailing" constant="12" id="Yoi-ks-fsm"/>
+                                                        <constraint firstItem="kbW-5y-Wc7" firstAttribute="top" secondItem="XGS-E8-GPt" secondAttribute="bottom" priority="750" constant="4" id="Odj-fT-6gf"/>
                                                         <constraint firstItem="wn0-Oe-pLf" firstAttribute="centerY" secondItem="KZP-Gd-iIT" secondAttribute="centerY" id="dJS-Je-NS8"/>
+                                                        <constraint firstItem="kbW-5y-Wc7" firstAttribute="leading" secondItem="wn0-Oe-pLf" secondAttribute="trailing" constant="12" id="jsW-yU-Gfn"/>
                                                         <constraint firstAttribute="trailing" secondItem="kbW-5y-Wc7" secondAttribute="trailing" constant="24" id="u0c-Pd-UDJ"/>
-                                                        <constraint firstItem="XGS-E8-GPt" firstAttribute="top" secondItem="KZP-Gd-iIT" secondAttribute="top" constant="8" id="uFh-l0-VdN"/>
+                                                        <constraint firstItem="XGS-E8-GPt" firstAttribute="top" secondItem="KZP-Gd-iIT" secondAttribute="top" priority="750" constant="13" id="uFh-l0-VdN"/>
+                                                        <constraint firstItem="kbW-5y-Wc7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KZP-Gd-iIT" secondAttribute="top" constant="23" id="wLk-th-02w"/>
                                                         <constraint firstItem="wn0-Oe-pLf" firstAttribute="leading" secondItem="KZP-Gd-iIT" secondAttribute="leading" constant="20" id="wuD-JO-GbM"/>
                                                         <constraint firstAttribute="trailing" secondItem="XGS-E8-GPt" secondAttribute="trailing" constant="24" id="zoh-ex-26c"/>
                                                     </constraints>
@@ -297,6 +298,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="backView" destination="KZP-Gd-iIT" id="dpn-dI-nfw"/>
+                                            <outlet property="centerConstraint" destination="IEz-N9-B00" id="86k-K6-w3v"/>
                                             <outlet property="iconLabel" destination="wn0-Oe-pLf" id="ceL-uR-5Bv"/>
                                             <outlet property="listLabel" destination="kbW-5y-Wc7" id="uoU-n3-aSh"/>
                                             <outlet property="timeLabel" destination="XGS-E8-GPt" id="5MQ-9u-rL3"/>
