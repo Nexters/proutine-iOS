@@ -45,4 +45,15 @@ extension UIView {
             self.layer.borderWidth = 1.0
         }
     }
+    
+    func dropShadow(color: UIColor, offSet: CGSize, opacity: Float, radius: CGFloat) {
+        let containerView = UIView()
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOffset = offSet
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowRadius = radius
+        self.layer.masksToBounds = false
+        
+        addSubview(containerView)
+    }
 }
