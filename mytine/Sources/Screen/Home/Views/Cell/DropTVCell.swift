@@ -1,20 +1,20 @@
 //
-//  DropdownCell.swift
+//  DropTVCell.swift
 //  mytine
 //
-//  Created by 황수빈 on 2020/08/11.
+//  Created by 황수빈 on 2020/08/22.
 //  Copyright © 2020 황수빈. All rights reserved.
 //
 
 import UIKit
 
-class DropdownCell: UITableViewCell {
+class DropTVCell: UITableViewCell {
+    static let reuseIdentifier = "DropTVCell"
     @IBOutlet var backView: UIView!
     @IBOutlet var label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.selectionStyle = .none
         backView.viewRounded(cornerRadius: 8)
     }
@@ -27,4 +27,5 @@ class DropdownCell: UITableViewCell {
             backView.backgroundColor = .white
         }
     }
+
 }

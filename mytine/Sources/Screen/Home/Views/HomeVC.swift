@@ -21,12 +21,13 @@ struct WeekRootineModel {
 class HomeVC: UIViewController {
     @IBOutlet var navigationView: UIView!
     @IBOutlet var navigationTitle: UILabel!
-    @IBOutlet var dropView: UIView!
     @IBOutlet var downButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var dropView: UIView!
+    @IBOutlet var dropTableView: UITableView!
     var isExpanded = true
-    var dropdownIdx: Int = 0
+    var dropdownIdx: Int?
     private var messageLabel: UILabel!
     private var selectedIdx: Int = 0
     
@@ -42,14 +43,17 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        setupRoutine()
-        setDropView()
+        setupRoutine(week: 0)
         setupTableView()
         setupCollectionView()
+        setDropView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        reloadRoutineDB()
+        guard let curWeekRoutine = self.curWeekRoutineModel else {
+            return
+        }
+        setupRoutine(week: curWeekRoutine.weekRoutine.week)
         setNavigationBar()
         tableView.reloadData()
         collectionView.reloadData()
@@ -87,6 +91,7 @@ class HomeVC: UIViewController {
     
     func setDropView() {
         dropView.isHidden = true
+        dropTableView.viewRounded(cornerRadius: 12)
         dropView.layer.cornerRadius = 12
         dropView.layer.shadowColor = UIColor.darkGray.cgColor
         dropView.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
@@ -94,13 +99,21 @@ class HomeVC: UIViewController {
         dropView.layer.shadowOpacity = 0.5
     }
     
-    func setupRoutine() {
+    func setupRoutine(week: Int) {
         allWeekRoutine = FMDBManager.shared.selectWeekRootine(week: 0)
+
         guard let weekRoutine = allWeekRoutine.last else {
             return
         }
-        dropdownIdx = weekRoutine.week
-        loadRoutineDB(week: weekRoutine.week)
+        
+        // week : 0 가장 처음, 최신 꺼 로드
+        if week == weekRoutine.week || week == 0 {
+            loadRoutineDB(week: weekRoutine.week)
+            dropdownIdx = weekRoutine.week
+        } else {
+            loadRoutineDB(week: week)
+            dropdownIdx = week
+        }
     }
     
     func loadRoutineDB(week: Int) {
@@ -115,14 +128,6 @@ class HomeVC: UIViewController {
         self.navigationTitle.text = weekRoutine.weekString
     }
     
-    func reloadRoutineDB() {
-        allWeekRoutine = FMDBManager.shared.selectWeekRootine(week: 0)
-        guard let curWeekRoutine = self.curWeekRoutineModel else {
-            return
-        }
-        loadRoutineDB(week: curWeekRoutine.weekRoutine.week)
-    }
-    
     func presentPopup() {
         guard let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as? HomePopVC else { return }
         popup.modalPresentationStyle = .overFullScreen
@@ -135,6 +140,8 @@ class HomeVC: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: WeekRootineTVCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        dropTableView.delegate = self
+        dropTableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.keyboardHide))
         tapGesture.cancelsTouchesInView = false
@@ -181,7 +188,7 @@ class HomeVC: UIViewController {
             selectRoutine[indexPath!].1 = true
             curWeekRoutine.dayRoutine[self.selectedIdx].complete.append(routineId!)
             _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-            reloadRoutineDB()
+            setupRoutine(week: curWeekRoutine.weekRoutine.week)
         }
     }
     
@@ -199,7 +206,7 @@ class HomeVC: UIViewController {
             selectRoutine[indexPath!].1 = false
             curWeekRoutine.dayRoutine[self.selectedIdx].complete.remove(at: index)
             _ = FMDBManager.shared.updateDayRootine(rootine: curWeekRoutine.dayRoutine[self.selectedIdx])
-            reloadRoutineDB()
+            setupRoutine(week: curWeekRoutine.weekRoutine.week)
         }
     }
     
@@ -215,7 +222,8 @@ class HomeVC: UIViewController {
                 self.downButton.transform = .identity
             }
             dropView.isHidden = true
-            loadRoutineDB(week: dropdownIdx)
+            setupRoutine(week: dropdownIdx!)
+            print("dropdown", dropdownIdx)
             tableView.reloadData()
             collectionView.reloadData()
         }
@@ -251,11 +259,9 @@ extension HomeVC: UICollectionViewDelegate {
             }
         }
         selectRoutine += tempList
-        print("selectRoutine", selectRoutine)
         tableView.reloadData()
         messageLabel.isHidden = true
     }
-    
 }
 
 extension HomeVC: UICollectionViewDataSource {
@@ -290,119 +296,146 @@ extension HomeVC: UICollectionViewDataSource {
 //MARK:- 일별 루틴 체크 table view
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && cellType == .routine {
-            let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
-            guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
-            dvc.rootine = selectRoutine[indexPath.row].0
-            dvc.curWeekRoutine = curWeekRoutineModel
-            self.navigationController?.pushViewController(dvc, animated: true)
+        if tableView == dropTableView {
+            dropdownIdx = indexPath.row+1
+        } else {
+            if indexPath.section == 2 && cellType == .routine {
+                let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
+                guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
+                dvc.rootine = selectRoutine[indexPath.row].0
+                dvc.curWeekRoutine = curWeekRoutineModel
+                self.navigationController?.pushViewController(dvc, animated: true)
+            }
         }
     }
 }
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        if tableView == dropTableView {
+            return 1
+        } else {
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let curWeekRoutine = curWeekRoutineModel else {
-            return 0
-        }
-        
-        if section == 0 {
-            return (isExpanded) ? curWeekRoutine.weekRoutine.rootines().count : 0
-        } else if section == 1 {
-            return 1
-        } else if cellType == .routine {
-            if curWeekRoutine.weekRoutine.rootines().count == 0 {
-                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "homeNullImage")
-            } else {
-                tableView.restore()
-            }
-            return selectRoutine.count
+        if tableView == dropTableView {
+            return allWeekRoutine.count
         } else {
-            tableView.setEmptyView()
-            return 1
+            guard let curWeekRoutine = curWeekRoutineModel else {
+                return 0
+            }
+            
+            if section == 0 {
+                return (isExpanded) ? curWeekRoutine.weekRoutine.rootines().count : 0
+            } else if section == 1 {
+                return 1
+            } else if cellType == .routine {
+                if curWeekRoutine.weekRoutine.rootines().count == 0 {
+                    tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "homeNullImage")
+                } else {
+                    tableView.restore()
+                }
+                return selectRoutine.count
+            } else {
+                tableView.setEmptyView()
+                return 1
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekRootineTVCell.reuseIdentifier, for: indexPath) as? WeekRootineTVCell else {
-                return .init()
-            }
-            cell.bind(model: curWeekRoutineModel?.routine[indexPath.row], dayId: curWeekRoutineModel?.dayRoutine[0].id)
-            return cell
-        } else if indexPath.section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
-                return .init()
-            }
-            cell.homeDelegate = self
-            cell.expandBtn.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+        if tableView == dropTableView {
+            
+            let cell = dropTableView.dequeueReusableCell(withIdentifier: DropTVCell.reuseIdentifier, for: indexPath) as! DropTVCell
+            cell.label.text = allWeekRoutine[indexPath.row].weekString
             return cell
         } else {
-            if cellType == .routine {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
+            if indexPath.section == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekRootineTVCell.reuseIdentifier, for: indexPath) as? WeekRootineTVCell else {
                     return .init()
                 }
-                let model = selectRoutine[indexPath.row]
-                if model.0.goal == "" {
-                    cell.centerConstraint.constant = 0
+                cell.bind(model: curWeekRoutineModel?.routine[indexPath.row], dayId: curWeekRoutineModel?.dayRoutine[0].id)
+                return cell
+            } else if indexPath.section == 1 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TabTVCell.reuseIdentifier) as? TabTVCell else {
+                    return .init()
                 }
-                cell.bind(routine: model.0, isCompleted: model.1)
+                cell.homeDelegate = self
+                cell.expandBtn.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
                 return cell
             } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
-                    return .init(style: .default, reuseIdentifier: "")
+                if cellType == .routine {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: RoutineTVCell.reuseIdentifier, for: indexPath) as? RoutineTVCell else {
+                        return .init()
+                    }
+                    let model = selectRoutine[indexPath.row]
+                    if model.0.goal == "" {
+                        cell.centerConstraint.constant = 0
+                    }
+                    cell.bind(routine: model.0, isCompleted: model.1)
+                    return cell
+                } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
+                        return .init(style: .default, reuseIdentifier: "")
+                    }
+                    guard let retrospect = curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect else {
+                        return .init()
+                    }
+                    cell.textView.delegate = self
+                    cell.bind(content: retrospect)
+                    textViewDidChange(cell.textView)
+                    return cell
                 }
-                guard let retrospect = curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect else {
-                    return .init()
-                }
-                cell.textView.delegate = self
-                cell.bind(content: retrospect)
-                textViewDidChange(cell.textView)
-                return cell
             }
         }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 2 && cellType == .routine {
-            let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
-                guard let curWeekRoutine = self.curWeekRoutineModel else {
-                    return
-                }
-                
-                let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
-                NotificationCenter.default.post(name: .routineComplete, object: nil, userInfo: ["routineIndex": self.selectRoutine[indexPath.row].0.id, "indexPath": indexPath.row, "dayId": dayRoutine.id])
-                self.collectionView.reloadData()
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-            doneAction.image = UIImage(named: "complete")
-            doneAction.backgroundColor = UIColor.subBlue
-            return UISwipeActionsConfiguration(actions: [doneAction])
-        } else {
+        if tableView == dropTableView {
             return nil
+        } else {
+            if indexPath.section == 2 && cellType == .routine {
+                let doneAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
+                    guard let curWeekRoutine = self.curWeekRoutineModel else {
+                        return
+                    }
+                    
+                    let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
+                    NotificationCenter.default.post(name: .routineComplete, object: nil, userInfo: ["routineIndex": self.selectRoutine[indexPath.row].0.id, "indexPath": indexPath.row, "dayId": dayRoutine.id])
+                    self.collectionView.reloadData()
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+                doneAction.image = UIImage(named: "complete")
+                doneAction.backgroundColor = UIColor.subBlue
+                return UISwipeActionsConfiguration(actions: [doneAction])
+            } else {
+                return nil
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 2 && cellType == .routine {
-            let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
-                guard let curWeekRoutine = self.curWeekRoutineModel else {
-                    return
-                }
-                
-                let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
-                NotificationCenter.default.post(name: .routineUnComplete, object: nil, userInfo: ["shouldRemoveIndex": self.selectRoutine[indexPath.row].0.id, "indexPath": indexPath.row, "dayId": dayRoutine.id])
-                self.collectionView.reloadData()
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-            cancelAction.image = UIImage(named: "undo")
-            cancelAction.backgroundColor = UIColor.subBlue
-            return UISwipeActionsConfiguration(actions: [cancelAction])
-        } else {
+        if tableView == dropTableView {
             return nil
+        } else {
+            if indexPath.section == 2 && cellType == .routine {
+                let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
+                    guard let curWeekRoutine = self.curWeekRoutineModel else {
+                        return
+                    }
+                    
+                    let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
+                    NotificationCenter.default.post(name: .routineUnComplete, object: nil, userInfo: ["shouldRemoveIndex": self.selectRoutine[indexPath.row].0.id, "indexPath": indexPath.row, "dayId": dayRoutine.id])
+                    self.collectionView.reloadData()
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+                cancelAction.image = UIImage(named: "undo")
+                cancelAction.backgroundColor = UIColor.subBlue
+                return UISwipeActionsConfiguration(actions: [cancelAction])
+            } else {
+                return nil
+            }
         }
     }
 }
@@ -427,10 +460,13 @@ extension HomeVC: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        guard let curWeekRoutine = curWeekRoutineModel else {
+            return
+        }
         if var dayRoutine = curWeekRoutineModel?.dayRoutine[selectedIdx] {
             dayRoutine.retrospect = textView.text
             FMDBManager.shared.updateDayRootine(rootine: dayRoutine)
-            reloadRoutineDB()
+            setupRoutine(week: curWeekRoutine.weekRoutine.week)
             collectionView.reloadData()
             collectionView(collectionView, didSelectItemAt: IndexPath(item: selectedIdx, section: 0))
             
