@@ -14,7 +14,8 @@ class RoutineTVCell: UITableViewCell {
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var iconLabel: UILabel!
     @IBOutlet var listLabel: UILabel!
-  
+    @IBOutlet var centerConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         iconLabel.viewRounded(cornerRadius: 10)

@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     var isExpanded = true
     var dropdownIdx: Int = 0
+    private var messageLabel: UILabel!
     private var selectedIdx: Int = 0
     
     private var allWeekRoutine: [WeekRootine] = []
@@ -40,6 +41,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
         setupRoutine()
         setDropView()
         setupTableView()
@@ -68,6 +70,19 @@ class HomeVC: UIViewController {
     
     func setNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    func setUI() {
+        messageLabel = {
+            let label = UILabel()
+            label.tag = 100
+            label.text = "회고가 저장되었습니다."
+            label.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 10)
+            label.textAlignment = NSTextAlignment.center
+            label.textColor = .mainBlue
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
     }
     
     func setDropView() {
@@ -236,7 +251,9 @@ extension HomeVC: UICollectionViewDelegate {
             }
         }
         selectRoutine += tempList
+        print("selectRoutine", selectRoutine)
         tableView.reloadData()
+        messageLabel.isHidden = true
     }
     
 }
@@ -296,17 +313,16 @@ extension HomeVC: UITableViewDataSource {
             return (isExpanded) ? curWeekRoutine.weekRoutine.rootines().count : 0
         } else if section == 1 {
             return 1
-        } else {
+        } else if cellType == .routine {
             if curWeekRoutine.weekRoutine.rootines().count == 0 {
-                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "dropdown")
+                tableView.setEmptyView(message: "상단에 추가버튼을 눌러\n새로운 루틴을 생성해보세요!", image: "homeNullImage")
             } else {
                 tableView.restore()
             }
-            if cellType == .routine {
-                return selectRoutine.count
-            } else {
-                return 1
-            }
+            return selectRoutine.count
+        } else {
+            tableView.setEmptyView()
+            return 1
         }
     }
     
@@ -330,14 +346,20 @@ extension HomeVC: UITableViewDataSource {
                     return .init()
                 }
                 let model = selectRoutine[indexPath.row]
+                if model.0.goal == "" {
+                    cell.centerConstraint.constant = 0
+                }
                 cell.bind(routine: model.0, isCompleted: model.1)
                 return cell
             } else {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: RetrospectTVCell.reuseIdentifier, for: indexPath) as? RetrospectTVCell else {
                     return .init(style: .default, reuseIdentifier: "")
                 }
+                guard let retrospect = curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect else {
+                    return .init()
+                }
                 cell.textView.delegate = self
-                cell.bind(content: curWeekRoutineModel?.dayRoutine[selectedIdx].retrospect ?? "")
+                cell.bind(content: retrospect)
                 textViewDidChange(cell.textView)
                 return cell
             }
@@ -365,7 +387,7 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 2 {
+        if indexPath.section == 2 && cellType == .routine {
             let cancelAction = UIContextualAction(style: .normal, title: "") { (action, view, bool) in
                 guard let curWeekRoutine = self.curWeekRoutineModel else {
                     return
@@ -388,6 +410,7 @@ extension HomeVC: UITableViewDataSource {
 extension HomeVC: HomeTabCellTypeDelegate {
     func clickRoutine() {
         self.cellType = .routine
+        messageLabel.isHidden = true
     }
     
     func clickRetrospect() {
@@ -396,18 +419,31 @@ extension HomeVC: HomeTabCellTypeDelegate {
 }
 
 extension HomeVC: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if messageLabel.tag == 100 {
+            messageLabel.removeFromSuperview()
+        }
+    }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if var dayRoutine = curWeekRoutineModel?.dayRoutine[selectedIdx] {
             dayRoutine.retrospect = textView.text
             FMDBManager.shared.updateDayRootine(rootine: dayRoutine)
             reloadRoutineDB()
             collectionView.reloadData()
+            collectionView(collectionView, didSelectItemAt: IndexPath(item: selectedIdx, section: 0))
+            
+            view.addSubview(messageLabel)
+            messageLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 4).isActive = true
+            messageLabel.trailingAnchor.constraint(equalTo: textView.trailingAnchor).isActive = true
+            messageLabel.isHidden = false
         }
         textView.resignFirstResponder()
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: view.frame.width-32, height: .infinity)
+        let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         textView.constraints.forEach { (constraint) in
             if constraint.firstAttribute == .height {
