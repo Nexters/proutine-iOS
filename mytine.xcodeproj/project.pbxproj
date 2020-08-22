@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0028C44641753489C46D550B /* Pods_mytine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDA17E344702CFAAB58362C /* Pods_mytine.framework */; };
+		060D5DA124F0F4B5002273DD /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 060D5DA024F0F4B5002273DD /* Splash.storyboard */; };
+		060D5DA324F0F4CF002273DD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060D5DA224F0F4CF002273DD /* SplashViewController.swift */; };
 		0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */; };
 		0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */; };
 		0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */; };
@@ -47,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		060D5DA024F0F4B5002273DD /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		060D5DA224F0F4CF002273DD /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeRootine.storyboard; sourceTree = "<group>"; };
 		0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRootineTVCell.swift; sourceTree = "<group>"; };
 		0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRootineTVCell.xib; sourceTree = "<group>"; };
@@ -102,6 +106,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060D5D9D24F0F496002273DD /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				060D5D9E24F0F49B002273DD /* Views */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		060D5D9E24F0F49B002273DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				060D5D9F24F0F4A6002273DD /* Storyboard */,
+				060D5DA224F0F4CF002273DD /* SplashViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		060D5D9F24F0F4A6002273DD /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				060D5DA024F0F4B5002273DD /* Splash.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		0636994524CD738900C1C900 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +250,7 @@
 		08A7A64C24CC3CD400D609E2 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				060D5D9D24F0F496002273DD /* Splash */,
 				08A7A64E24CC3CE500D609E2 /* HomeEtc */,
 				08A7A64D24CC3CDD00D609E2 /* Home */,
 			);
@@ -381,6 +411,7 @@
 				0833EC7124D34BAC00DE5518 /* .swiftlint.yml in Resources */,
 				0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */,
 				0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */,
+				060D5DA124F0F4B5002273DD /* Splash.storyboard in Resources */,
 				08A5E5DE24C85E0300AA7B61 /* Montserrat-Regular.ttf in Resources */,
 				08A5E5DD24C85E0300AA7B61 /* Montserrat-Bold.ttf in Resources */,
 				0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */,
@@ -475,6 +506,7 @@
 				088E029F24E2A7F400B87CAA /* DropDownTVC.swift in Sources */,
 				0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */,
 				0804D25624B84C5B002D2A12 /* AppDelegate.swift in Sources */,
+				060D5DA324F0F4CF002273DD /* SplashViewController.swift in Sources */,
 				0833EC6E24D3455500DE5518 /* CheckReusableView.swift in Sources */,
 				06A720AE24CEF93300ED31DC /* UserDefaultKeyName.swift in Sources */,
 				08A3F44D24C58AE400201278 /* HomePopVC.swift in Sources */,
