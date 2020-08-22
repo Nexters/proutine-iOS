@@ -28,9 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("::::::::::::App Open:::::::::::::::::")
 
-        let storyboard = UIStoryboard(name: "Home", bundle: .main)
-        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeNav")
-
+        if UserDefaults.standard.bool(forKey: UserDefaultKeyName.tutorial.getString) {
+            let storyboard = UIStoryboard(name: "Home", bundle: .main)
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeNav")
+        } else {
+            let splashVC = UIStoryboard(name: "Splash", bundle: nil)
+                .instantiateViewController(withIdentifier: "SplashVC")
+            window?.rootViewController = splashVC
+        }
         return true
     }
     
