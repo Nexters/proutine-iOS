@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mlL-cR-mO3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -14,13 +14,94 @@
                     <view key="view" contentMode="scaleToFill" id="6GP-GX-k7f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSE-2K-n1h">
+                                <rect key="frame" x="43" y="168" width="328" height="240"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="De8-Gc-hAJ"/>
+                                    <constraint firstAttribute="width" constant="328" id="eTA-HJ-4qd"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="data1"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kee-u3-xrC">
+                                <rect key="frame" x="24" y="627" width="366" height="50"/>
+                                <color key="backgroundColor" red="0.22745098039215686" green="0.45882352941176469" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="d16-No-AwF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="다음">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextClick:" destination="mlL-cR-mO3" eventType="touchUpInside" id="iNi-D1-dGB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="루틴 생성하기" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LL-s3-MAW">
+                                <rect key="frame" x="142" y="427" width="130" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" red="0.27058823529411763" green="0.34901960784313724" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qN5-fy-cvt">
+                                <rect key="frame" x="112" y="463" width="190.5" height="41"/>
+                                <string key="text">원하는 이모지로 
+나만의 루틴을 만들어보세요!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.57647058823529407" green="0.69019607843137254" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="pYY-JT-kv9">
+                                <rect key="frame" x="187.5" y="560" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.76862745098039209" green="0.81568627450980391" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.27058823529999998" green="0.34901960780000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMI-oF-q9k">
+                                <rect key="frame" x="24" y="687" width="366" height="50"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="건너뛰기">
+                                    <color key="titleColor" red="0.27058823529999998" green="0.34901960780000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="skipClick:" destination="mlL-cR-mO3" eventType="touchUpInside" id="d6u-b2-zaT"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="uMI-oF-q9k" firstAttribute="trailing" secondItem="kee-u3-xrC" secondAttribute="trailing" id="2rG-i0-5J5"/>
+                            <constraint firstItem="qN5-fy-cvt" firstAttribute="centerX" secondItem="1LL-s3-MAW" secondAttribute="centerX" id="3BM-6B-smz"/>
+                            <constraint firstItem="uMI-oF-q9k" firstAttribute="height" secondItem="kee-u3-xrC" secondAttribute="height" id="3ag-ab-t2m"/>
+                            <constraint firstItem="uMI-oF-q9k" firstAttribute="leading" secondItem="kee-u3-xrC" secondAttribute="leading" id="E1i-Iu-jS0"/>
+                            <constraint firstItem="qN5-fy-cvt" firstAttribute="top" secondItem="1LL-s3-MAW" secondAttribute="bottom" constant="7" id="HC5-zb-5qR"/>
+                            <constraint firstItem="1LL-s3-MAW" firstAttribute="top" secondItem="cSE-2K-n1h" secondAttribute="bottom" constant="19" id="KPc-74-N7L"/>
+                            <constraint firstItem="pYY-JT-kv9" firstAttribute="centerX" secondItem="qN5-fy-cvt" secondAttribute="centerX" id="ZLS-l4-w5L"/>
+                            <constraint firstItem="1LL-s3-MAW" firstAttribute="centerX" secondItem="6GP-GX-k7f" secondAttribute="centerX" id="gFS-oQ-Ezj"/>
+                            <constraint firstItem="cSE-2K-n1h" firstAttribute="centerX" secondItem="6GP-GX-k7f" secondAttribute="centerX" id="gm8-zL-th6"/>
+                            <constraint firstItem="cSE-2K-n1h" firstAttribute="centerY" secondItem="6GP-GX-k7f" secondAttribute="centerY" constant="-160" id="mi8-nc-nH8"/>
+                            <constraint firstItem="kee-u3-xrC" firstAttribute="top" secondItem="pYY-JT-kv9" secondAttribute="bottom" constant="30" id="nOc-2d-CLt"/>
+                            <constraint firstItem="pYY-JT-kv9" firstAttribute="top" secondItem="qN5-fy-cvt" secondAttribute="bottom" constant="56" id="szo-4g-kZK"/>
+                            <constraint firstItem="eOT-1Y-90G" firstAttribute="trailing" secondItem="kee-u3-xrC" secondAttribute="trailing" constant="24" id="wXz-X7-s6J"/>
+                            <constraint firstItem="uMI-oF-q9k" firstAttribute="top" secondItem="kee-u3-xrC" secondAttribute="bottom" constant="10" id="wtO-u9-RZE"/>
+                            <constraint firstItem="kee-u3-xrC" firstAttribute="leading" secondItem="eOT-1Y-90G" secondAttribute="leading" constant="24" id="xfm-Hx-ck6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="eOT-1Y-90G"/>
                     </view>
+                    <connections>
+                        <outlet property="mainLabel" destination="1LL-s3-MAW" id="nFX-Kh-566"/>
+                        <outlet property="nextButton" destination="kee-u3-xrC" id="Yt9-zo-mdA"/>
+                        <outlet property="onboardLottieView" destination="cSE-2K-n1h" id="opw-1N-UQx"/>
+                        <outlet property="pageController" destination="pYY-JT-kv9" id="fUN-OH-7Zc"/>
+                        <outlet property="skipButton" destination="uMI-oF-q9k" id="92B-cH-RVG"/>
+                        <outlet property="subLabel" destination="qN5-fy-cvt" id="xLl-7e-afQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wZS-g6-LXL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28" y="121"/>
+            <point key="canvasLocation" x="-278" y="115"/>
         </scene>
     </scenes>
 </document>
