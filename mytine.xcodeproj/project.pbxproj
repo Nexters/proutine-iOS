@@ -10,6 +10,10 @@
 		0028C44641753489C46D550B /* Pods_mytine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDA17E344702CFAAB58362C /* Pods_mytine.framework */; };
 		060D5DA124F0F4B5002273DD /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 060D5DA024F0F4B5002273DD /* Splash.storyboard */; };
 		060D5DA324F0F4CF002273DD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060D5DA224F0F4CF002273DD /* SplashViewController.swift */; };
+		060D5DAC24F0F644002273DD /* data1.json in Resources */ = {isa = PBXBuildFile; fileRef = 060D5DAB24F0F644002273DD /* data1.json */; };
+		060D5DAF24F0F64C002273DD /* data2.json in Resources */ = {isa = PBXBuildFile; fileRef = 060D5DAD24F0F64C002273DD /* data2.json */; };
+		060D5DB024F0F64C002273DD /* data3.json in Resources */ = {isa = PBXBuildFile; fileRef = 060D5DAE24F0F64C002273DD /* data3.json */; };
+		060D5DBC24F0F98F002273DD /* images in Resources */ = {isa = PBXBuildFile; fileRef = 060D5DBB24F0F98F002273DD /* images */; };
 		0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */; };
 		0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */; };
 		0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */; };
@@ -51,6 +55,10 @@
 /* Begin PBXFileReference section */
 		060D5DA024F0F4B5002273DD /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		060D5DA224F0F4CF002273DD /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		060D5DAB24F0F644002273DD /* data1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data1.json; sourceTree = "<group>"; };
+		060D5DAD24F0F64C002273DD /* data2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data2.json; sourceTree = "<group>"; };
+		060D5DAE24F0F64C002273DD /* data3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data3.json; sourceTree = "<group>"; };
+		060D5DBB24F0F98F002273DD /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeRootine.storyboard; sourceTree = "<group>"; };
 		0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRootineTVCell.swift; sourceTree = "<group>"; };
 		0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRootineTVCell.xib; sourceTree = "<group>"; };
@@ -131,6 +139,17 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		060D5DB324F0F7F7002273DD /* LottieJson */ = {
+			isa = PBXGroup;
+			children = (
+				060D5DAE24F0F64C002273DD /* data3.json */,
+				060D5DAD24F0F64C002273DD /* data2.json */,
+				060D5DAB24F0F644002273DD /* data1.json */,
+				060D5DBB24F0F98F002273DD /* images */,
+			);
+			path = LottieJson;
+			sourceTree = "<group>";
+		};
 		0636994524CD738900C1C900 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +228,7 @@
 		0804D26D24B85066002D2A12 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				060D5DB324F0F7F7002273DD /* LottieJson */,
 				0636994524CD738900C1C900 /* Helper */,
 				08A3F45024C5F77B00201278 /* Fonts */,
 				0804D27324B8594C002D2A12 /* Extensions */,
@@ -413,10 +433,14 @@
 				0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */,
 				060D5DA124F0F4B5002273DD /* Splash.storyboard in Resources */,
 				08A5E5DE24C85E0300AA7B61 /* Montserrat-Regular.ttf in Resources */,
+				060D5DAC24F0F644002273DD /* data1.json in Resources */,
+				060D5DAF24F0F64C002273DD /* data2.json in Resources */,
 				08A5E5DD24C85E0300AA7B61 /* Montserrat-Bold.ttf in Resources */,
+				060D5DB024F0F64C002273DD /* data3.json in Resources */,
 				0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */,
 				0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */,
 				0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */,
+				060D5DBC24F0F98F002273DD /* images in Resources */,
 				0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
