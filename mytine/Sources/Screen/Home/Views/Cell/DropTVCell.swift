@@ -28,4 +28,7 @@ class DropTVCell: UITableViewCell {
         }
     }
 
+    func bind(weekString: String) {
+        label.text = weekString
+    }
 }
