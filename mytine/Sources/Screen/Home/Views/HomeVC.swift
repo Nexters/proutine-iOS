@@ -101,7 +101,7 @@ class HomeVC: UIViewController {
     
     func setupRoutine(week: Int) {
         allWeekRoutine = FMDBManager.shared.selectWeekRootine(week: 0)
-
+        
         guard let weekRoutine = allWeekRoutine.last else {
             return
         }
