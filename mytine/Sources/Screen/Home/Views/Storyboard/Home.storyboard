@@ -533,21 +533,6 @@
             </objects>
             <point key="canvasLocation" x="3960.8000000000002" y="1604.3478260869567"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Hvh-hK-qkL">
-            <objects>
-                <viewController id="1Xx-Lg-kon" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Brh-SZ-GJe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="OSj-hE-Wjd"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xow-eS-awf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4899" y="2127"/>
-        </scene>
     </scenes>
     <resources>
         <image name="addBtn" width="24" height="24"/>

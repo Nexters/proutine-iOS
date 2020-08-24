@@ -16,10 +16,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proutineImage" translatesAutoresizingMaskIntoConstraints="NO" id="u9L-V0-hsN">
-                                <rect key="frame" x="43" y="398.5" width="328" height="109"/>
+                                <rect key="frame" x="43" y="348.5" width="328" height="109"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신의 더 나은 내일을 위하여!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mh-cT-4eP">
-                                <rect key="frame" x="124.5" y="525.5" width="165" height="17"/>
+                                <rect key="frame" x="124.5" y="475.5" width="165" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.57647058823529407" green="0.69019607843137254" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -28,7 +28,7 @@
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="u9L-V0-hsN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="43" id="7Wl-ad-laZ"/>
-                            <constraint firstItem="u9L-V0-hsN" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="9Qv-c1-s8V"/>
+                            <constraint firstItem="u9L-V0-hsN" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-50" id="9Qv-c1-s8V"/>
                             <constraint firstItem="8mh-cT-4eP" firstAttribute="top" secondItem="u9L-V0-hsN" secondAttribute="bottom" constant="18" id="JPr-wS-cmc"/>
                             <constraint firstItem="8mh-cT-4eP" firstAttribute="centerX" secondItem="u9L-V0-hsN" secondAttribute="centerX" id="jwA-je-ttm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="u9L-V0-hsN" secondAttribute="trailing" constant="43" id="yUu-l8-Ok3"/>

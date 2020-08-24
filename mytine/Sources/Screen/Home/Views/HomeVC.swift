@@ -101,7 +101,7 @@ class HomeVC: UIViewController {
     
     func setupRoutine(week: Int) {
         allWeekRoutine = FMDBManager.shared.selectWeekRootine(week: 0)
-
+        
         guard let weekRoutine = allWeekRoutine.last else {
             return
         }
@@ -176,7 +176,6 @@ class HomeVC: UIViewController {
     
     @objc
     func routineComplete(_ notification: NSNotification) {
-        
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
@@ -194,7 +193,6 @@ class HomeVC: UIViewController {
     
     @objc
     func routineUnComplete(_ notification: NSNotification) {
-        
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
@@ -347,8 +345,10 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == dropTableView {
             
-            let cell = dropTableView.dequeueReusableCell(withIdentifier: DropTVCell.reuseIdentifier, for: indexPath) as! DropTVCell
-            cell.label.text = allWeekRoutine[indexPath.row].weekString
+            guard let cell = dropTableView.dequeueReusableCell(withIdentifier: DropTVCell.reuseIdentifier, for: indexPath) as? DropTVCell else {
+                return .init()
+            }
+            cell.bind(weekString: allWeekRoutine[indexPath.row].weekString)
             return cell
         } else {
             if indexPath.section == 0 {
