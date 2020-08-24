@@ -176,7 +176,6 @@ class HomeVC: UIViewController {
     
     @objc
     func routineComplete(_ notification: NSNotification) {
-        
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
@@ -194,7 +193,6 @@ class HomeVC: UIViewController {
     
     @objc
     func routineUnComplete(_ notification: NSNotification) {
-        
         guard var curWeekRoutine = self.curWeekRoutineModel else {
             return
         }
