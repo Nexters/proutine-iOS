@@ -48,6 +48,7 @@
 		08A5E5DE24C85E0300AA7B61 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A5E5DC24C85E0300AA7B61 /* Montserrat-Regular.ttf */; };
 		08A5E5E024C8644200AA7B61 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5E5DF24C8644200AA7B61 /* EditVC.swift */; };
 		08BA3D5F24E03DAB0015A217 /* WeekCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA3D5E24E03DAB0015A217 /* WeekCVCell.swift */; };
+		08D1D97224F4124B008D45D6 /* Month.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D1D97124F4124B008D45D6 /* Month.storyboard */; };
 		08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		08A5E5DC24C85E0300AA7B61 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		08A5E5DF24C8644200AA7B61 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		08BA3D5E24E03DAB0015A217 /* WeekCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCVCell.swift; sourceTree = "<group>"; };
+		08D1D97124F4124B008D45D6 /* Month.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Month.storyboard; sourceTree = "<group>"; };
 		08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineTVCell.swift; sourceTree = "<group>"; };
 		568D2029B4D2C58F7F2D5318 /* Pods-mytine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.debug.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.debug.xcconfig"; sourceTree = "<group>"; };
 		69B35999940CD37C423E5A5B /* Pods-mytine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.release.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.release.xcconfig"; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				060D5D9D24F0F496002273DD /* Splash */,
 				08A7A64E24CC3CE500D609E2 /* HomeEtc */,
 				08A7A64D24CC3CDD00D609E2 /* Home */,
+				08D1D96E24F41208008D45D6 /* Month */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -333,6 +336,30 @@
 				08A3F44C24C58AE400201278 /* HomePopVC.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		08D1D96E24F41208008D45D6 /* Month */ = {
+			isa = PBXGroup;
+			children = (
+				08D1D96F24F4121E008D45D6 /* Views */,
+			);
+			path = Month;
+			sourceTree = "<group>";
+		};
+		08D1D96F24F4121E008D45D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08D1D97024F41221008D45D6 /* Storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		08D1D97024F41221008D45D6 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				08D1D97124F4124B008D45D6 /* Month.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		08D4139A24BF4D2B0049BB44 /* Cell */ = {
@@ -426,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0833EC7124D34BAC00DE5518 /* .swiftlint.yml in Resources */,
+				08D1D97224F4124B008D45D6 /* Month.storyboard in Resources */,
 				0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */,
 				0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */,
 				060D5DA124F0F4B5002273DD /* Splash.storyboard in Resources */,
