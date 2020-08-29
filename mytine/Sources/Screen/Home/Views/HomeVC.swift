@@ -209,21 +209,12 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func clickDownButton(_ sender: UIButton) {
-        downButton.isSelected = !downButton.isSelected
+        downButton.isSelected = true
         if downButton.isSelected == true {
             UIView.animate(withDuration: 0.3) {
                 self.downButton.transform = CGAffineTransform(rotationAngle: .pi)
             }
             dropView.isHidden = false
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                self.downButton.transform = .identity
-            }
-            dropView.isHidden = true
-            setupRoutine(week: dropdownIdx!)
-            print("dropdown", dropdownIdx)
-            tableView.reloadData()
-            collectionView.reloadData()
         }
     }
     
@@ -295,7 +286,16 @@ extension HomeVC: UICollectionViewDataSource {
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == dropTableView {
+            UIView.animate(withDuration: 0.3) {
+                self.downButton.transform = .identity
+            }
+            dropView.isHidden = true
+            downButton.isSelected = false
             dropdownIdx = indexPath.row+1
+            setupRoutine(week: dropdownIdx!)
+            print("dropdown", dropdownIdx)
+            tableView.reloadData()
+            collectionView.reloadData()
         } else {
             if indexPath.section == 2 && cellType == .routine {
                 let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
