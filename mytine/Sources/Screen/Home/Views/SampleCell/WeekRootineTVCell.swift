@@ -19,6 +19,7 @@ class WeekRootineTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
         setupCollectionView()
     }
     
