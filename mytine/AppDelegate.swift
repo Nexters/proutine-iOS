@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Thread.sleep(forTimeInterval: 2.0)
+        
         // Override point for customization after application launch.
         checkWeek()
         print("현재 저장된 루틴::::::::")
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func checkWeek() {
+        _ = FMDBManager.shared.createTable()
         // 첫번째접속이아닌경우
         if let firstDate    // 처음접속날짜
             = UserDefaults.standard.string(forKey: UserDefaultKeyName.firstEnter.getString),
@@ -96,7 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(1,
                                       forKey: UserDefaultKeyName.recentWeek.getString)
 
-            _ = FMDBManager.shared.createTable()
             _ = FMDBManager.shared.addWeek(rootineIdx: nil, weekString: newRecentDate.weekFirstToEnd())
             
             // 데이루틴 생성

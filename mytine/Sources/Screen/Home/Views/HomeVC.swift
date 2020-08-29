@@ -404,7 +404,12 @@ extension HomeVC: UITableViewDataSource {
                     }
                     
                     let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
-                    NotificationCenter.default.post(name: .routineComplete, object: nil, userInfo: ["routineIndex": self.selectRoutine[indexPath.row].0.id, "indexPath": indexPath.row, "dayId": dayRoutine.id])
+                    let month = String(dayRoutine.id).monthWithDayRoutineId()
+                    let routineId = self.selectRoutine[indexPath.row].0.id
+                    if !dayRoutine.complete.contains(routineId) {
+                        FMDBManager.shared.addRoutineCount(month: month, routineId: routineId)
+                    }
+                    NotificationCenter.default.post(name: .routineComplete, object: nil, userInfo: ["routineIndex": routineId, "indexPath": indexPath.row, "dayId": dayRoutine.id])
                     self.collectionView.reloadData()
                     tableView.reloadRows(at: [indexPath], with: .automatic)
                 }
@@ -428,7 +433,12 @@ extension HomeVC: UITableViewDataSource {
                     }
                     
                     let dayRoutine = curWeekRoutine.dayRoutine[self.selectedIdx]
-                    NotificationCenter.default.post(name: .routineUnComplete, object: nil, userInfo: ["shouldRemoveIndex": self.selectRoutine[indexPath.row].0.id, "indexPath": indexPath.row, "dayId": dayRoutine.id])
+                    let month = String(dayRoutine.id).monthWithDayRoutineId()
+                    let routineId = self.selectRoutine[indexPath.row].0.id
+                    if dayRoutine.complete.contains(routineId) {
+                        FMDBManager.shared.removeRoutineCount(month: month, routineId: routineId)
+                    }
+                    NotificationCenter.default.post(name: .routineUnComplete, object: nil, userInfo: ["shouldRemoveIndex": routineId, "indexPath": indexPath.row, "dayId": dayRoutine.id])
                     self.collectionView.reloadData()
                     tableView.reloadRows(at: [indexPath], with: .automatic)
                 }
