@@ -10,7 +10,7 @@
         <!--Title-->
         <scene sceneID="rE3-hK-Er3">
             <objects>
-                <viewController id="4vO-6L-6FL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MonthVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4vO-6L-6FL" customClass="MonthVC" customModule="Proutine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VG2-6M-JSy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,6 +127,9 @@
                     <navigationItem key="navigationItem" title="Title" id="Stf-ha-teL">
                         <barButtonItem key="leftBarButtonItem" title="월간회고" image="back" id="etS-Bg-32a"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="l5E-qj-41Y" id="r6Z-uu-gyh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4b-zw-hvZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -135,7 +138,7 @@
         <!--Title-->
         <scene sceneID="VbT-Zl-rDt">
             <objects>
-                <viewController id="rmy-fq-UIB" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MonthDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rmy-fq-UIB" customClass="MonthDetailVC" customModule="Proutine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cQe-AN-gMi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -244,6 +247,9 @@
                     <navigationItem key="navigationItem" title="Title" id="Lv4-8T-nca">
                         <barButtonItem key="leftBarButtonItem" title="7월회고" image="back" id="0q9-Sm-RBn"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="sXn-FU-M6e" id="YlF-ez-lrL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zgQ-oT-14v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
