@@ -15,10 +15,15 @@ class WeekRootineTVCell: UITableViewCell {
     @IBOutlet weak var dayCollectionView: UICollectionView!
     
     private var model: Rootine?
-    private var dayRoutineId: Int?
+    private var days: [Int] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupCollectionView()
+    }
+    
+    override func prepareForReuse() {
+        model = nil
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,9 +31,11 @@ class WeekRootineTVCell: UITableViewCell {
     }
     
     func bind(model: Rootine?, dayId: Int?) {
-        setupCollectionView()
         self.model = model
-        self.dayRoutineId = dayId
+        if let dayId = dayId {
+            days = (0...6).map{ Int(String(dayId).afterDayString(addDay: $0)) ?? -1 }
+        }
+        dayCollectionView.reloadData()
     }
     
     func setupCollectionView() {
@@ -45,19 +52,14 @@ extension WeekRootineTVCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayRootineCVCell.reuseIdentifier, for: indexPath) as? DayRootineCVCell else {
             return .init()
         }
         
-        let isActive = model?.repeatDays[indexPath.row] == 1 ? true : false
+        let isActive = model?.repeatDays[indexPath.item] == 1 ? true : false
         let emoji = model?.emoji
         
-        var dayId = -1
-        if let dayRoutineId = dayRoutineId {
-            dayId = Int(String(dayRoutineId).afterDayString(addDay: indexPath.item)) ?? -1
-        }
-        cell.bind(dayId: dayId, routineId: model?.id, emoji: emoji ?? "", isActive: isActive)
+        cell.bind(dayId: days[indexPath.item], routineId: model?.id, emoji: emoji ?? "", isActive: isActive)
         return cell
     }
 }

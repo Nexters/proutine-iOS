@@ -294,8 +294,10 @@ extension HomeVC: UITableViewDelegate {
             dropdownIdx = indexPath.row+1
             setupRoutine(week: dropdownIdx!)
             print("dropdown", dropdownIdx)
-            self.tableView.reloadData()
             collectionView.reloadData()
+            let selectIndexPath = IndexPath(item: selectedIdx, section: 0)
+            collectionView.selectItem(at: selectIndexPath, animated: false, scrollPosition: .left)
+            collectionView(collectionView, didSelectItemAt: selectIndexPath)
         } else {
             if indexPath.section == 2 && cellType == .routine {
                 let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)

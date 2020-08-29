@@ -34,6 +34,9 @@ class DayRootineCVCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         contentView.backgroundColor = .white
+        emoji = ""
+        dayId = -1
+        routineId = -1
     }
     
     @objc
@@ -63,6 +66,8 @@ class DayRootineCVCell: UICollectionViewCell {
     func bind(dayId: Int?, routineId rId: Int?, emoji: String, isActive: Bool) {
         if !isActive {
             contentView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9529411765, blue: 0.968627451, alpha: 1)
+            self.emoji = ""
+            self.emojiLabel.text = ""
         } else {
             guard let dayId = dayId,
                 let rId = rId,
