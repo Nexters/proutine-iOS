@@ -56,7 +56,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uis-13-7Vv">
-                                        <rect key="frame" x="295" y="0.0" width="35" height="44"/>
+                                        <rect key="frame" x="10" y="0.0" width="35" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="4OC-3o-Ry8"/>
                                             <constraint firstAttribute="width" constant="35" id="dpM-CL-uvl"/>
@@ -77,7 +77,7 @@
                                     <constraint firstItem="Uis-13-7Vv" firstAttribute="centerY" secondItem="6yL-KS-N9H" secondAttribute="centerY" id="MeX-Ib-Bh8"/>
                                     <constraint firstAttribute="trailing" secondItem="6yL-KS-N9H" secondAttribute="trailing" constant="10" id="ab8-zB-Tlo"/>
                                     <constraint firstItem="CUy-8J-9xI" firstAttribute="centerY" secondItem="mOP-eB-cpc" secondAttribute="centerY" id="gln-VA-J41"/>
-                                    <constraint firstItem="6yL-KS-N9H" firstAttribute="leading" secondItem="Uis-13-7Vv" secondAttribute="trailing" id="xpM-28-Vxx"/>
+                                    <constraint firstItem="Uis-13-7Vv" firstAttribute="leading" secondItem="oHC-ho-cs7" secondAttribute="leading" constant="10" id="phU-DU-G4f"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-ki-rMu">
