@@ -12,7 +12,7 @@ import FMDB
 class FMDBManager {
     
     enum TableType {
-        case week, day, rootine
+        case week, day, rootine, record
         
         var tableName: String {
             switch self {
@@ -22,6 +22,8 @@ class FMDBManager {
                 return "DayRootine"
             case .rootine:
                 return "Rootine"
+            case .record:
+                return "Record"
             }
         }
     }
@@ -31,6 +33,7 @@ class FMDBManager {
     private let weekTableName = "WeekRootine"
     private let dayTableName = "DayRootine"
     private let rootineTableName = "Rootine"
+    private let monthRecordTableName = "Record"
     
     init() {
         let fileURL = try! FileManager.default
@@ -54,6 +57,8 @@ class FMDBManager {
             try database.executeUpdate("create table if not exists \(dayTableName)(id Integer Primary key, retrospect Text, week Integer, completes Text)", values: nil)
             
             try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title Text, goal Text, repeatDays Text)", values: nil)
+            
+            try database.executeUpdate("create table if not exists \(monthRecordTableName)(id Integer Primary key AutoIncrement, month Text, routineId Integer, count Integer)", values: nil)
         } catch {
             print("create fail")
             database.close()
@@ -79,7 +84,7 @@ class FMDBManager {
         return true
     }
     
-    // MARK: WeekRootine Manager
+    // MARK: - WeekRootine Manager
     func addWeek(rootineIdx: String?, weekString: String) -> Bool {
         guard database.open() else {
             print("Unable to open database")
@@ -157,7 +162,7 @@ class FMDBManager {
         return true
     }
     
-    // MARK: DayRootine Manager
+    // MARK: - DayRootine Manager
     func createDayRootine(rootine: DayRootine) -> Bool {
         guard database.open() else {
             print("Unable to open database")
@@ -301,6 +306,7 @@ class FMDBManager {
         return true
     }
     
+    // MARK: - Rootine Manager
     func createRootine(rootine: Rootine) -> Bool {
         guard database.open() else {
             print("Unable to open database")
@@ -417,30 +423,62 @@ class FMDBManager {
         database.close()
         return true
     }
+    
+    // MARK: - MonthRecord Manager
+    // 카운트 추가
+    func addRoutineCount(month: String, routineId: String) {
+        guard database.open() else {
+            print("Unable to open database")
+            return
+        }
+        
+        let count = searchRecordCount(month: month, routineId: routineId)
+        do {
+            if count > 0 {
+                try database.executeUpdate("update \(monthRecordTableName) set count = ? where routineId = ?",
+                    values: [count+1, routineId])
+            } else {
+                try database.executeUpdate("insert into \(monthRecordTableName) (month, routineId, count) values (?,?,?)",
+                    values: [month, routineId, 1])
+            }
+            
+        } catch {
+            print("failed: \(error.localizedDescription)")
+            database.close()
+            return
+        }
+        
+        database.close()
+    }
+    
+    // 루틴 현재기록 조회
+    func searchRecordCount(month: String, routineId: String) -> Int {
+        
+        var count = 0
+        do {
+            let queryString = "select count from \(monthRecordTableName) where routineId = \(routineId)"
+            let rs = try database.executeQuery(queryString, values: nil)
+            
+            while rs.next() {
+                count = Int(rs.int(forColumn: "count"))
+                
+                print("month routine count \(count)")
+            }
+           
+        } catch {
+            print("Unable to open database")
+            database.close()
+            return 0
+        }
+        
+        database.close()
+        return count
+    }
+    
+    // 월간기록 조회
+    func selectRecordWithMonth(month: String) {
+        
+    }
+    
 }
-
-/*
- class WeekRootine {
-   let rootinesIdx: [Int] = [1,3,4,9] //주차별 해당 루틴
-   let week = 1 //주차, PK
- }
-
- class DayRootine {
-   let id = 20200720 //idx를위한구분, PK
-   let retrospect: String = "회고를 적어따" //회고
-   let week = 1 // 주차구분을위한
-   let complete = [true, false, true, false] //완료여부 - WeekRootine과 매칭 1완료
-   let rootinesState: [Int] = [4,9,1,3] //일별 루틴 (완료시 순서뒤로)
- }
-
- //////////
- class Rootine {
-   let idx = 1 //id, PK
-   let iconImg: String //이모지
-   let title: String
-   let goal: String
-   let repeatDays = [.mon, .fri] //반복요일
-   let count = 1 // 0일때 디비에서 삭제
- }
- */
-
+//id Integer Primary key AutoIncrement, month Text, routineId Integer, count Integer
