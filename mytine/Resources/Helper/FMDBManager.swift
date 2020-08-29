@@ -451,6 +451,28 @@ class FMDBManager {
         database.close()
     }
     
+    
+    func removeRoutineCount(month: Int, routineId: Int) {
+        guard database.open() else {
+            print("Unable to open database")
+            return
+        }
+        
+        let count = searchRecordCount(month: month, routineId: routineId)
+        do {
+            if count > 0 {
+                try database.executeUpdate("update \(monthRecordTableName) set count = ? where routineId = ? and month = ?",
+                    values: [count-1, routineId, month])
+            }
+        } catch {
+            print("failed: \(error.localizedDescription)")
+            database.close()
+            return
+        }
+        
+        database.close()
+    }
+    
     // 루틴 현재기록 조회
     func searchRecordCount(month: Int, routineId: Int) -> Int {
         var count = 0
@@ -472,6 +494,7 @@ class FMDBManager {
     
         return count
     }
+    
     
     // 월간기록 조회
     func selectRecordWithMonth(month: String) {

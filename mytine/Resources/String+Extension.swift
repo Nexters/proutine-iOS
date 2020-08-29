@@ -97,6 +97,15 @@ extension String {
         let mmdd = formatter.string(from: date)
         return "\(curYear)\(mmdd)"
     }
+    
+    func monthWithDayRoutineId() -> Int {
+        let formatter = simpleDateFormatter(format: "yyyyMMdd")
+        guard let date = formatter.date(from: self) else {
+                return -1
+        }
+        let calendar = Calendar.current.dateComponents([.month], from: date)
+        return calendar.month ?? -1
+    }
 }
 
 extension Character {
