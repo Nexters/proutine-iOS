@@ -58,7 +58,7 @@ class FMDBManager {
             
             try database.executeUpdate("create table if not exists \(rootineTableName)(id Integer Primary key AutoIncrement, emoji Text, title Text, goal Text, repeatDays Text)", values: nil)
             
-            try database.executeUpdate("create table if not exists \(monthRecordTableName)(id Integer Primary key AutoIncrement, month Text, routineId Integer, count Integer)", values: nil)
+            try database.executeUpdate("create table if not exists \(monthRecordTableName)(id Integer Primary key AutoIncrement, month Integer, routineId Integer, count Integer)", values: nil)
         } catch {
             print("create fail")
             database.close()
@@ -426,7 +426,7 @@ class FMDBManager {
     
     // MARK: - MonthRecord Manager
     // 카운트 추가
-    func addRoutineCount(month: String, routineId: String) {
+    func addRoutineCount(month: Int, routineId: Int) {
         guard database.open() else {
             print("Unable to open database")
             return
@@ -435,10 +435,10 @@ class FMDBManager {
         let count = searchRecordCount(month: month, routineId: routineId)
         do {
             if count > 0 {
-                try database.executeUpdate("update \(monthRecordTableName) set count = ? where routineId = ?",
-                    values: [count+1, routineId])
+                try database.executeUpdate("update \(monthRecordTableName) set count = ? where routineId = ? and month = ?",
+                    values: [count+1, routineId, month])
             } else {
-                try database.executeUpdate("insert into \(monthRecordTableName) (month, routineId, count) values (?,?,?)",
+                try database.executeUpdate("insert into \(monthRecordTableName) (month, routineId, count) values (?, ?, ?)",
                     values: [month, routineId, 1])
             }
             
@@ -452,32 +452,30 @@ class FMDBManager {
     }
     
     // 루틴 현재기록 조회
-    func searchRecordCount(month: String, routineId: String) -> Int {
-        
+    func searchRecordCount(month: Int, routineId: Int) -> Int {
         var count = 0
         do {
-            let queryString = "select count from \(monthRecordTableName) where routineId = \(routineId)"
+            let queryString = "select count from \(monthRecordTableName) where month = \(month) and routineId = \(routineId)"
+            
             let rs = try database.executeQuery(queryString, values: nil)
             
             while rs.next() {
-                count = Int(rs.int(forColumn: "count"))
-                
-                print("month routine count \(count)")
+                let dbCount = Int(rs.int(forColumn: "count"))
+                print("month dbCount \(dbCount)")
+                count = dbCount
             }
            
         } catch {
             print("Unable to open database")
-            database.close()
             return 0
         }
-        
-        database.close()
+    
         return count
     }
     
     // 월간기록 조회
     func selectRecordWithMonth(month: String) {
-        
+      
     }
     
 }
