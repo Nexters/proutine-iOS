@@ -13,8 +13,32 @@ class MonthVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTableView()
+        setNavigationBar()
+        findTopRoutine()
+    }
+    
+    func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func setNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold),
+               NSAttributedString.Key.foregroundColor: UIColor.mainFont
+        ]
+    }
+    
+    func findTopRoutine() {
+        // FMDBManager.shared.searchRecordCount(month: 7, routineId: Int)
+    }
+    
+    @IBAction func goBackHome(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 extension MonthVC: UITableViewDelegate {
@@ -23,7 +47,8 @@ extension MonthVC: UITableViewDelegate {
 
 extension MonthVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        tableView.setEmptyView(message: "이번달 말 10개 이상의 루틴 수행 시,\n루틴 순위를 확인할 수 있어요!", image: "group_2")
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
