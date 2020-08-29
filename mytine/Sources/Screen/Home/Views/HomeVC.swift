@@ -294,7 +294,7 @@ extension HomeVC: UITableViewDelegate {
             dropdownIdx = indexPath.row+1
             setupRoutine(week: dropdownIdx!)
             print("dropdown", dropdownIdx)
-            tableView.reloadData()
+            self.tableView.reloadData()
             collectionView.reloadData()
         } else {
             if indexPath.section == 2 && cellType == .routine {

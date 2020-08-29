@@ -22,7 +22,7 @@ class WeekCVCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backView.viewRounded(cornerRadius: 4)
+        backView.viewRounded(cornerRadius: 5)
         routineCheckView.viewRounded(cornerRadius: 2)
     }
     
