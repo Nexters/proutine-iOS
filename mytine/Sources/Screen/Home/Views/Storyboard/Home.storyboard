@@ -45,7 +45,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yL-KS-N9H">
-                                        <rect key="frame" x="331" y="0.0" width="44" height="44"/>
+                                        <rect key="frame" x="321" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Z0Q-5k-dAr"/>
                                             <constraint firstAttribute="width" constant="44" id="aOL-i9-LJh"/>
@@ -63,7 +63,7 @@
                                     <constraint firstItem="6yL-KS-N9H" firstAttribute="centerY" secondItem="oHC-ho-cs7" secondAttribute="centerY" id="9gT-yF-Cgr"/>
                                     <constraint firstItem="mOP-eB-cpc" firstAttribute="centerY" secondItem="oHC-ho-cs7" secondAttribute="centerY" id="Acf-Vn-HfY"/>
                                     <constraint firstItem="mOP-eB-cpc" firstAttribute="centerX" secondItem="oHC-ho-cs7" secondAttribute="centerX" id="JWx-Wh-8vV"/>
-                                    <constraint firstAttribute="trailing" secondItem="6yL-KS-N9H" secondAttribute="trailing" id="ab8-zB-Tlo"/>
+                                    <constraint firstAttribute="trailing" secondItem="6yL-KS-N9H" secondAttribute="trailing" constant="10" id="ab8-zB-Tlo"/>
                                     <constraint firstItem="CUy-8J-9xI" firstAttribute="centerY" secondItem="mOP-eB-cpc" secondAttribute="centerY" id="gln-VA-J41"/>
                                 </constraints>
                             </view>
@@ -535,7 +535,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="addBtn" width="24" height="24"/>
+        <image name="addBtn" width="26" height="26"/>
         <image name="dropdown" width="27" height="26"/>
     </resources>
 </document>
