@@ -79,6 +79,8 @@ class DayRootineCVCell: UICollectionViewCell {
             self.emoji = emoji
             if dayRoutine.complete.contains(rId) {
                 emojiLabel.text = emoji
+            } else {
+                emojiLabel.text = ""
             }
         }
     }
