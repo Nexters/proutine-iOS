@@ -28,9 +28,9 @@ class HomeVC: UIViewController {
     @IBOutlet var dropTableView: UITableView!
     var isExpanded = true
     var dropdownIdx: Int?
+    var keyboardHeight: CGFloat = .zero
     private var messageLabel: UILabel!
     private var selectedIdx: Int = 0
-    
     private var allWeekRoutine: [WeekRootine] = []
     private var selectRoutine: [(Rootine, Bool)] = []
     private var curWeekRoutineModel: WeekRootineModel?
@@ -156,16 +156,31 @@ class HomeVC: UIViewController {
     func registerRoutinesNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(routineComplete(_:)), name: .routineComplete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(routineUnComplete(_:)), name: .routineUnComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     func unregisterRoutinesNotifications() {
         NotificationCenter.default.removeObserver(self, name: .routineComplete, object: nil)
         NotificationCenter.default.removeObserver(self, name: .routineUnComplete, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @objc
     func keyboardHide() {
         view.endEditing(true)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        if #available(iOS 11.0, *) {
+            keyboardHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+        } else {
+            keyboardHeight = keyboardFrame.cgRectValue.height
+        }
     }
     
     @objc
@@ -491,13 +506,9 @@ extension HomeVC: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: textView.frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        textView.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
-            }
-        }
+        let caret = textView.caretRect(for: textView.selectedTextRange!.start)
+        textView.scrollRectToVisible(caret, animated: true)
+        textView.contentInset.bottom = keyboardHeight - 155
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
     }
