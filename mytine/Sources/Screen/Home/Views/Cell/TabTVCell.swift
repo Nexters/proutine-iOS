@@ -40,8 +40,7 @@ class TabTVCell: UITableViewCell {
             self.routineBtn.isSelected = false
             self.reviewBtn.isSelected = true
             self.barView.frame.size.width = self.reviewBtn.frame.width
-            self.barView.transform = CGAffineTransform(translationX: sender.frame.width+16
-                , y: 0)
+            self.barView.transform = CGAffineTransform(translationX: sender.frame.width+16, y: 0)
         })
         homeDelegate?.clickRetrospect()
         self.layoutIfNeeded()
