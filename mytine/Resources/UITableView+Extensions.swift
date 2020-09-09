@@ -34,8 +34,8 @@ extension UITableView {
         
         picImage.addSubview(messageLabel)
         messageLabel.bottomAnchor.constraint(equalTo: picImage.bottomAnchor, constant: 50).isActive = true
-        messageLabel.leftAnchor.constraint(equalTo: picImage.leftAnchor, constant: -30).isActive = true
-        messageLabel.rightAnchor.constraint(equalTo: picImage.rightAnchor, constant: 50).isActive = true
+        messageLabel.leftAnchor.constraint(equalTo: picImage.leftAnchor, constant: -40).isActive = true
+        messageLabel.rightAnchor.constraint(equalTo: picImage.rightAnchor, constant: 60).isActive = true
         
         emptyView.addSubview(picImage)
         picImage.translatesAutoresizingMaskIntoConstraints = false

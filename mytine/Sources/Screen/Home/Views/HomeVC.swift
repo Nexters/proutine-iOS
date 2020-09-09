@@ -218,6 +218,12 @@ class HomeVC: UIViewController {
         }
     }
     
+    @IBAction func showMonthly(_ sender: UIButton) {
+        let storyboard = UIStoryboard.init(name: "Month", bundle: nil)
+        guard let dvc = storyboard.instantiateViewController(identifier: "MonthVC") as? MonthVC else { return }
+        self.navigationController?.pushViewController(dvc, animated: true)
+    }
+    
     @IBAction func addRoutine(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
         guard let dvc = storyboard.instantiateViewController(identifier: "EditVC") as? EditVC else { return }

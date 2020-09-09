@@ -34,9 +34,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUy-8J-9xI">
-                                        <rect key="frame" x="210" y="0.0" width="44" height="44"/>
+                                        <rect key="frame" x="210" y="0.0" width="35" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="N0S-uf-g6g"/>
+                                            <constraint firstAttribute="width" constant="35" id="N0S-uf-g6g"/>
                                             <constraint firstAttribute="height" constant="44" id="yCx-T3-sGT"/>
                                         </constraints>
                                         <state key="normal" image="dropdown"/>
@@ -48,11 +48,22 @@
                                         <rect key="frame" x="321" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Z0Q-5k-dAr"/>
-                                            <constraint firstAttribute="width" constant="44" id="aOL-i9-LJh"/>
+                                            <constraint firstAttribute="width" constant="35" id="aOL-i9-LJh"/>
                                         </constraints>
                                         <state key="normal" image="addBtn"/>
                                         <connections>
                                             <action selector="addRoutine:" destination="n16-al-WaH" eventType="touchUpInside" id="Y6M-7b-9e4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uis-13-7Vv">
+                                        <rect key="frame" x="10" y="0.0" width="35" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="4OC-3o-Ry8"/>
+                                            <constraint firstAttribute="width" constant="35" id="dpM-CL-uvl"/>
+                                        </constraints>
+                                        <state key="normal" image="remembrance"/>
+                                        <connections>
+                                            <action selector="showMonthly:" destination="n16-al-WaH" eventType="touchUpInside" id="B74-Ny-Uvo"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -65,6 +76,7 @@
                                     <constraint firstItem="mOP-eB-cpc" firstAttribute="centerX" secondItem="oHC-ho-cs7" secondAttribute="centerX" id="JWx-Wh-8vV"/>
                                     <constraint firstAttribute="trailing" secondItem="6yL-KS-N9H" secondAttribute="trailing" constant="10" id="ab8-zB-Tlo"/>
                                     <constraint firstItem="CUy-8J-9xI" firstAttribute="centerY" secondItem="mOP-eB-cpc" secondAttribute="centerY" id="gln-VA-J41"/>
+                                    <constraint firstItem="Uis-13-7Vv" firstAttribute="leading" secondItem="oHC-ho-cs7" secondAttribute="leading" constant="10" id="phU-DU-G4f"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-ki-rMu">
@@ -537,5 +549,6 @@
     <resources>
         <image name="addBtn" width="26" height="26"/>
         <image name="dropdown" width="27" height="26"/>
+        <image name="remembrance" width="26" height="26"/>
     </resources>
 </document>
