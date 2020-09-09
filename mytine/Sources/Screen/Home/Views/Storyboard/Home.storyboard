@@ -304,18 +304,18 @@
                                             <outlet property="timeLabel" destination="XGS-E8-GPt" id="5MQ-9u-rL3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RetrospectTVCell" rowHeight="300" id="Bzx-79-6pt" customClass="RetrospectTVCell" customModule="Proutine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="194" width="375" height="300"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RetrospectTVCell" rowHeight="185" id="Bzx-79-6pt" customClass="RetrospectTVCell" customModule="Proutine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="194" width="375" height="185"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bzx-79-6pt" id="Vsb-eJ-k0Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="185"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcU-qB-d7p">
-                                                    <rect key="frame" x="20" y="5" width="335" height="275"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcU-qB-d7p">
+                                                    <rect key="frame" x="20" y="3" width="335" height="162"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" priority="750" constant="300" id="CiT-A6-nIP"/>
+                                                        <constraint firstAttribute="height" priority="750" constant="185" id="CiT-A6-nIP"/>
                                                     </constraints>
                                                     <color key="textColor" red="0.27058823529999998" green="0.34901960780000002" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
@@ -324,7 +324,7 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="DcU-qB-d7p" firstAttribute="top" secondItem="Vsb-eJ-k0Q" secondAttribute="top" constant="5" id="L7l-td-jb6"/>
+                                                <constraint firstItem="DcU-qB-d7p" firstAttribute="top" secondItem="Vsb-eJ-k0Q" secondAttribute="top" constant="3" id="L7l-td-jb6"/>
                                                 <constraint firstAttribute="trailing" secondItem="DcU-qB-d7p" secondAttribute="trailing" constant="20" id="YeL-6c-NOE"/>
                                                 <constraint firstAttribute="bottom" secondItem="DcU-qB-d7p" secondAttribute="bottom" constant="20" id="YuP-9N-ti3"/>
                                                 <constraint firstItem="DcU-qB-d7p" firstAttribute="leading" secondItem="Vsb-eJ-k0Q" secondAttribute="leading" constant="20" id="hIZ-lL-BeD"/>

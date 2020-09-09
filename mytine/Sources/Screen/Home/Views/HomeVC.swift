@@ -186,7 +186,7 @@ class HomeVC: UIViewController {
     @objc
     func handleExpandClose(button: UIButton) {
         isExpanded = !isExpanded
-        tableView.reloadSections(.init(integer: 0), with: .fade)
+        tableView.reloadSections(.init(integer: 0), with: .none)
     }
     
     @objc
@@ -401,6 +401,9 @@ extension HomeVC: UITableViewDataSource {
                     }
                     cell.textView.delegate = self
                     cell.bind(content: retrospect)
+                    if isExpanded {
+                        cell.textView.isScrollEnabled = false
+                    }
                     textViewDidChange(cell.textView)
                     return cell
                 }
@@ -503,12 +506,26 @@ extension HomeVC: UITextViewDelegate {
             messageLabel.isHidden = false
         }
         textView.resignFirstResponder()
+        // textView.contentInset.bottom = 0
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: textView.frame.width, height: .infinity)
         let caret = textView.caretRect(for: textView.selectedTextRange!.start)
+        let estimatedSize = textView.sizeThatFits(size)
         textView.scrollRectToVisible(caret, animated: true)
-        textView.contentInset.bottom = keyboardHeight - 155
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+                if !isExpanded {
+                    textView.isScrollEnabled = true
+                    constraint.constant = 185
+                }
+            }
+        }
+//        let caret = textView.caretRect(for: textView.selectedTextRange!.start)
+//        textView.scrollRectToVisible(caret, animated: true)
+//        textView.contentInset.bottom = keyboardHeight - 155
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
     }
