@@ -171,7 +171,7 @@ class HomeVC: UIViewController {
     @objc
     func handleExpandClose(button: UIButton) {
         isExpanded = !isExpanded
-        tableView.reloadSections(.init(integer: 0), with: .bottom)
+        tableView.reloadSections(.init(integer: 0), with: .fade)
     }
     
     @objc
