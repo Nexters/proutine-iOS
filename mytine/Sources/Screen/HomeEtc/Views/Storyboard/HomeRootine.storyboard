@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PxV-5s-hpk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PxV-5s-hpk">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -133,8 +135,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0pd-nE-vXp">
-                                                <rect key="frame" x="20" y="366" width="374" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <rect key="frame" x="0.0" y="366" width="414" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="thL-u2-vGi"/>
                                                 </constraints>
@@ -142,11 +144,11 @@
                                                     <size key="itemSize" width="40" height="40"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditWeekCVCell" id="VXn-yW-Pct" customClass="EditWeekCVCell" customModule="Proutine" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="20" y="0.0" width="40" height="40"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Zi-00-iWy">
                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -173,12 +175,12 @@
                                                 </cells>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1개 이상의 요일을 선택해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fa-Zr-VaW">
-                                                <rect key="frame" x="20" y="411" width="126.5" height="12"/>
+                                                <rect key="frame" x="0.0" y="411" width="126" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="1" green="0.74117647060000003" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-RA-CU8">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-RA-CU8">
                                                 <rect key="frame" x="20" y="576" width="374" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Q12-W8-s6o"/>
@@ -209,7 +211,7 @@
                                                 <color key="textColor" red="1" green="0.74117647060000003" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pj4-3y-yAB">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pj4-3y-yAB">
                                                 <rect key="frame" x="20" y="506" width="374" height="60"/>
                                                 <color key="backgroundColor" red="0.23137254900000001" green="0.46274509800000002" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -223,14 +225,14 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="EbQ-J8-oJr" secondAttribute="trailing" constant="24" id="0jJ-xy-Vnd"/>
                                             <constraint firstItem="HLC-VP-02u" firstAttribute="leading" secondItem="IK6-2x-nJW" secondAttribute="leading" id="1rs-9P-AA1"/>
                                             <constraint firstItem="1Fa-Zr-VaW" firstAttribute="leading" secondItem="0pd-nE-vXp" secondAttribute="leading" id="2hy-9L-Zbh"/>
                                             <constraint firstItem="1Fa-Zr-VaW" firstAttribute="top" secondItem="0pd-nE-vXp" secondAttribute="bottom" constant="5" id="3Zn-7P-Bcr"/>
                                             <constraint firstItem="EbQ-J8-oJr" firstAttribute="leading" secondItem="8bp-CG-4yl" secondAttribute="leading" id="4t4-9A-0x5"/>
-                                            <constraint firstAttribute="trailing" secondItem="0pd-nE-vXp" secondAttribute="trailing" constant="20" id="5Xn-nv-1mm"/>
+                                            <constraint firstAttribute="trailing" secondItem="0pd-nE-vXp" secondAttribute="trailing" id="5Xn-nv-1mm"/>
                                             <constraint firstItem="q9r-Q9-vDS" firstAttribute="top" secondItem="NFs-pO-Ihp" secondAttribute="bottom" constant="4" id="5mq-La-j3l"/>
                                             <constraint firstItem="Tmi-eW-DAu" firstAttribute="leading" secondItem="HLC-VP-02u" secondAttribute="leading" id="7Dh-GJ-wPP"/>
                                             <constraint firstItem="Tmi-eW-DAu" firstAttribute="top" secondItem="TdG-yR-phS" secondAttribute="bottom" constant="30" id="8uZ-aG-UwT"/>
@@ -242,7 +244,7 @@
                                             <constraint firstItem="NFs-pO-Ihp" firstAttribute="leading" secondItem="IK6-2x-nJW" secondAttribute="leading" id="J19-s0-6UO"/>
                                             <constraint firstAttribute="trailing" secondItem="TdG-yR-phS" secondAttribute="trailing" constant="24" id="Kcp-9B-psU"/>
                                             <constraint firstItem="EPe-0h-emE" firstAttribute="leading" secondItem="8bp-CG-4yl" secondAttribute="trailing" constant="4" id="PcY-C8-lBi"/>
-                                            <constraint firstItem="0pd-nE-vXp" firstAttribute="leading" secondItem="rBk-0R-Xtx" secondAttribute="leading" constant="20" id="Q8G-bE-yiA"/>
+                                            <constraint firstItem="0pd-nE-vXp" firstAttribute="leading" secondItem="rBk-0R-Xtx" secondAttribute="leading" id="Q8G-bE-yiA"/>
                                             <constraint firstAttribute="trailing" secondItem="QIL-RA-CU8" secondAttribute="trailing" constant="20" id="QCN-ux-127"/>
                                             <constraint firstItem="q9r-Q9-vDS" firstAttribute="leading" secondItem="NFs-pO-Ihp" secondAttribute="leading" id="Rho-mz-uLf"/>
                                             <constraint firstItem="fZe-4p-kdB" firstAttribute="top" secondItem="Tmi-eW-DAu" secondAttribute="top" id="Rpo-AV-DZL"/>
@@ -274,7 +276,8 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="0q8-gs-oxT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0q8-gs-oxT" firstAttribute="trailing" secondItem="m4m-Gz-m9e" secondAttribute="trailing" id="CXM-MO-GcV"/>
                             <constraint firstItem="m4m-Gz-m9e" firstAttribute="leading" secondItem="0q8-gs-oxT" secondAttribute="leading" id="S7F-n0-h1i"/>
@@ -282,7 +285,6 @@
                             <constraint firstItem="rBk-0R-Xtx" firstAttribute="width" secondItem="8wk-z8-vQq" secondAttribute="width" id="XPE-DC-dB5"/>
                             <constraint firstItem="0q8-gs-oxT" firstAttribute="bottom" secondItem="m4m-Gz-m9e" secondAttribute="bottom" id="i97-F6-bj4"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="0q8-gs-oxT"/>
                     </view>
                     <navigationItem key="navigationItem" id="XfP-8X-Dkf">
                         <barButtonItem key="leftBarButtonItem" image="back" id="9qN-SA-Q2Y">
@@ -322,7 +324,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4iF-jC-g3k">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="BjE-Jf-xPo">
                                     <size key="itemSize" width="40" height="58"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -394,14 +396,14 @@
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="pCM-Ri-EEh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4iF-jC-g3k" firstAttribute="leading" secondItem="pCM-Ri-EEh" secondAttribute="leading" id="ESI-2f-GB0"/>
                             <constraint firstAttribute="bottom" secondItem="4iF-jC-g3k" secondAttribute="bottom" id="lyK-1x-1fW"/>
                             <constraint firstItem="4iF-jC-g3k" firstAttribute="top" secondItem="pCM-Ri-EEh" secondAttribute="top" id="phQ-jC-c1A"/>
                             <constraint firstItem="pCM-Ri-EEh" firstAttribute="trailing" secondItem="4iF-jC-g3k" secondAttribute="trailing" id="pt6-d0-Tqd"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="pCM-Ri-EEh"/>
                     </view>
                     <navigationItem key="navigationItem" title="2020.July" id="YKe-xx-aB0"/>
                     <connections>
@@ -434,5 +436,8 @@
     </scenes>
     <resources>
         <image name="back" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
