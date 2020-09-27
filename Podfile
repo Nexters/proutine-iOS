@@ -10,4 +10,6 @@ target 'mytine' do
   pod 'SnapKit','~> 5.0.1'
   pod 'lottie-ios','~> 3.1.8'
   pod 'SwiftLint'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
 end
