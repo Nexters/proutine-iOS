@@ -1,5 +1,5 @@
 //
-//  HomeVC3.swift
+//  HomeVC.swift
 //  mytine
 //
 //  Created by 황수빈 on 2020/07/19.
@@ -311,7 +311,7 @@ extension HomeVC: UITableViewDelegate {
             downButton.isSelected = false
             dropdownIdx = indexPath.row+1
             setupRoutine(week: dropdownIdx!)
-            print("dropdown", dropdownIdx)
+            // print("dropdown", dropdownIdx)
             collectionView.reloadData()
             let selectIndexPath = IndexPath(item: selectedIdx, section: 0)
             collectionView.selectItem(at: selectIndexPath, animated: false, scrollPosition: .left)

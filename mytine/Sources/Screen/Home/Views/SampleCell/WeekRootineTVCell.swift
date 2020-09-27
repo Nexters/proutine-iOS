@@ -68,6 +68,6 @@ extension WeekRootineTVCell: UICollectionViewDataSource {
 extension WeekRootineTVCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // 루틴 한칸사이즈
-        return CGSize(width: 44, height: 44)
+        return CGSize(width: 44, height: 54)
     }
 }
