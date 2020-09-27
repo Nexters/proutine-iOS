@@ -59,7 +59,10 @@ class HomeVC: UIViewController {
         collectionView.reloadData()
         registerRoutinesNotifications()
         
-        let todayIndex = Date().getWeekday() - 2
+        var todayIndex = Date().getWeekday() - 2
+        if todayIndex == -1 {
+            todayIndex = 6
+        }
         let selectIndexPath = IndexPath(item: todayIndex, section: 0)
         collectionView.selectItem(at: selectIndexPath, animated: false, scrollPosition: .left)
         collectionView(collectionView, didSelectItemAt: selectIndexPath)
