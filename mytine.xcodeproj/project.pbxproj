@@ -31,6 +31,7 @@
 		0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26024B84C5D002D2A12 /* LaunchScreen.storyboard */; };
 		0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0804D26B24B84FD3002D2A12 /* Home.storyboard */; };
 		0804D27024B850E3002D2A12 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D26F24B850E3002D2A12 /* CalendarVC.swift */; };
+		08102E852520B51E0057AF3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08102E842520B51E0057AF3C /* GoogleService-Info.plist */; };
 		0823BE8F24DED60800AC5D54 /* RetrospectTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823BE8E24DED60800AC5D54 /* RetrospectTVCell.swift */; };
 		0833EC6C24D3455500DE5518 /* EditWeekCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6924D3455500DE5518 /* EditWeekCVCell.swift */; };
 		0833EC6D24D3455500DE5518 /* CheckCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6A24D3455500DE5518 /* CheckCVCell.swift */; };
@@ -78,6 +79,7 @@
 		0804D26324B84C5D002D2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0804D26B24B84FD3002D2A12 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0804D26F24B850E3002D2A12 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
+		08102E842520B51E0057AF3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0823BE8E24DED60800AC5D54 /* RetrospectTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectTVCell.swift; sourceTree = "<group>"; };
 		0833EC6924D3455500DE5518 /* EditWeekCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWeekCVCell.swift; sourceTree = "<group>"; };
 		0833EC6A24D3455500DE5518 /* CheckCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCVCell.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		0804D25424B84C5B002D2A12 /* mytine */ = {
 			isa = PBXGroup;
 			children = (
+				08102E842520B51E0057AF3C /* GoogleService-Info.plist */,
 				0804D26D24B85066002D2A12 /* Resources */,
 				0804D26924B84FA9002D2A12 /* Sources */,
 				0804D25524B84C5B002D2A12 /* AppDelegate.swift */,
@@ -461,6 +464,7 @@
 				060D5DAC24F0F644002273DD /* data1.json in Resources */,
 				060D5DAF24F0F64C002273DD /* data2.json in Resources */,
 				08A5E5DD24C85E0300AA7B61 /* Montserrat-Bold.ttf in Resources */,
+				08102E852520B51E0057AF3C /* GoogleService-Info.plist in Resources */,
 				060D5DB024F0F64C002273DD /* data3.json in Resources */,
 				0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */,
 				0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */,
