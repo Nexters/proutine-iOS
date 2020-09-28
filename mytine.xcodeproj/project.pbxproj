@@ -17,8 +17,6 @@
 		0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */; };
 		0636993824CC1E4F00C1C900 /* WeekRootineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */; };
 		0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */; };
-		0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */; };
-		0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */; };
 		0636994724CD73A500C1C900 /* FMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0636994624CD73A500C1C900 /* FMDBManager.swift */; };
 		06A720A224CE9AA200ED31DC /* RootineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A124CE9AA200ED31DC /* RootineModel.swift */; };
 		06A720A424CE9C4700ED31DC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A720A324CE9C4700ED31DC /* Date+Extension.swift */; };
@@ -49,6 +47,8 @@
 		08A5E5DE24C85E0300AA7B61 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A5E5DC24C85E0300AA7B61 /* Montserrat-Regular.ttf */; };
 		08A5E5E024C8644200AA7B61 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5E5DF24C8644200AA7B61 /* EditVC.swift */; };
 		08BA3D5F24E03DAB0015A217 /* WeekCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA3D5E24E03DAB0015A217 /* WeekCVCell.swift */; };
+		08BB776F25220D45002FC5EF /* DayRootineCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB776D25220D45002FC5EF /* DayRootineCVCell.swift */; };
+		08BB777025220D45002FC5EF /* DayRootineCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08BB776E25220D45002FC5EF /* DayRootineCVCell.xib */; };
 		08D1D97224F4124B008D45D6 /* Month.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D1D97124F4124B008D45D6 /* Month.storyboard */; };
 		08D4139C24BF4D410049BB44 /* RoutineTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */; };
 /* End PBXBuildFile section */
@@ -63,8 +63,6 @@
 		0636992A24CC1D3D00C1C900 /* HomeRootine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeRootine.storyboard; sourceTree = "<group>"; };
 		0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRootineTVCell.swift; sourceTree = "<group>"; };
 		0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRootineTVCell.xib; sourceTree = "<group>"; };
-		0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRootineCVCell.swift; sourceTree = "<group>"; };
-		0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayRootineCVCell.xib; sourceTree = "<group>"; };
 		0636994624CD73A500C1C900 /* FMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBManager.swift; sourceTree = "<group>"; };
 		06A720A124CE9AA200ED31DC /* RootineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootineModel.swift; sourceTree = "<group>"; };
 		06A720A324CE9C4700ED31DC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -97,6 +95,8 @@
 		08A5E5DC24C85E0300AA7B61 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		08A5E5DF24C8644200AA7B61 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		08BA3D5E24E03DAB0015A217 /* WeekCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCVCell.swift; sourceTree = "<group>"; };
+		08BB776D25220D45002FC5EF /* DayRootineCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRootineCVCell.swift; sourceTree = "<group>"; };
+		08BB776E25220D45002FC5EF /* DayRootineCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayRootineCVCell.xib; sourceTree = "<group>"; };
 		08D1D97124F4124B008D45D6 /* Month.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Month.storyboard; sourceTree = "<group>"; };
 		08D4139B24BF4D410049BB44 /* RoutineTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineTVCell.swift; sourceTree = "<group>"; };
 		568D2029B4D2C58F7F2D5318 /* Pods-mytine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mytine.debug.xcconfig"; path = "Target Support Files/Pods-mytine/Pods-mytine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -323,8 +323,8 @@
 			children = (
 				0636993624CC1E4F00C1C900 /* WeekRootineTVCell.swift */,
 				0636993724CC1E4F00C1C900 /* WeekRootineTVCell.xib */,
-				0636993E24CC1EEF00C1C900 /* DayRootineCVCell.swift */,
-				0636993F24CC1EEF00C1C900 /* DayRootineCVCell.xib */,
+				08BB776D25220D45002FC5EF /* DayRootineCVCell.swift */,
+				08BB776E25220D45002FC5EF /* DayRootineCVCell.xib */,
 			);
 			path = SampleCell;
 			sourceTree = "<group>";
@@ -467,7 +467,7 @@
 				08102E852520B51E0057AF3C /* GoogleService-Info.plist in Resources */,
 				060D5DB024F0F64C002273DD /* data3.json in Resources */,
 				0804D26224B84C5D002D2A12 /* LaunchScreen.storyboard in Resources */,
-				0636994124CC1EEF00C1C900 /* DayRootineCVCell.xib in Resources */,
+				08BB777025220D45002FC5EF /* DayRootineCVCell.xib in Resources */,
 				0804D25F24B84C5D002D2A12 /* Assets.xcassets in Resources */,
 				060D5DBC24F0F98F002273DD /* images in Resources */,
 				0804D26C24B84FD3002D2A12 /* Home.storyboard in Resources */,
@@ -545,8 +545,8 @@
 				06A720A424CE9C4700ED31DC /* Date+Extension.swift in Sources */,
 				08A3F45724C61B0A00201278 /* UIView+Extensions.swift in Sources */,
 				0833EC6D24D3455500DE5518 /* CheckCVCell.swift in Sources */,
+				08BB776F25220D45002FC5EF /* DayRootineCVCell.swift in Sources */,
 				0851908A24E99BBA0000DCDF /* NotificationKeyName.swift in Sources */,
-				0636994024CC1EEF00C1C900 /* DayRootineCVCell.swift in Sources */,
 				08A3F45624C61B0A00201278 /* UIColor+Additions.swift in Sources */,
 				06A720B024CEFB0800ED31DC /* String+Extension.swift in Sources */,
 				08BA3D5F24E03DAB0015A217 /* WeekCVCell.swift in Sources */,

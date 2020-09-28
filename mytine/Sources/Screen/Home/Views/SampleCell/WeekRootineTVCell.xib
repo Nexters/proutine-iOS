@@ -19,10 +19,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kod-sq-6Cv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                        <rect key="frame" x="5" y="5" width="310" height="44"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="5" id="cHh-80-MN3">
-                            <size key="itemSize" width="44" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="kVc-Nw-kBy"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="5" id="cHh-80-MN3">
+                            <size key="itemSize" width="44" height="44"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
@@ -30,10 +33,10 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="kod-sq-6Cv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="37e-40-boq"/>
-                    <constraint firstItem="kod-sq-6Cv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ACy-b1-bTA"/>
-                    <constraint firstAttribute="bottom" secondItem="kod-sq-6Cv" secondAttribute="bottom" id="EIy-Lp-6BX"/>
-                    <constraint firstAttribute="trailing" secondItem="kod-sq-6Cv" secondAttribute="trailing" id="idV-Pj-LkK"/>
+                    <constraint firstAttribute="bottom" secondItem="kod-sq-6Cv" secondAttribute="bottom" constant="5" id="5E5-5R-K0w"/>
+                    <constraint firstAttribute="trailing" secondItem="kod-sq-6Cv" secondAttribute="trailing" constant="5" id="Dxb-Rs-hnj"/>
+                    <constraint firstItem="kod-sq-6Cv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="RJO-0i-O0q"/>
+                    <constraint firstItem="kod-sq-6Cv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="duj-qf-8aV"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
