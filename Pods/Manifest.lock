@@ -76,7 +76,6 @@ PODS:
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.10)
   - SnapKit (5.0.1)
-  - SwiftLint (0.39.2)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -84,7 +83,6 @@ DEPENDENCIES:
   - FMDB (~> 2.7.5)
   - lottie-ios (~> 3.1.8)
   - SnapKit (~> 5.0.1)
-  - SwiftLint
 
 SPEC REPOS:
   trunk:
@@ -102,7 +100,6 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SnapKit
-    - SwiftLint
 
 SPEC CHECKSUMS:
   Firebase: 47176280bfba198e531f909cfb1612dad216cb96
@@ -119,8 +116,7 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: 79a85e4e743c528c494389cf6e99bc397673f1b0
+PODFILE CHECKSUM: 0d504ac3e5807d2a4dcd4b9e0c9bf485f48ff192
 
 COCOAPODS: 1.9.1
