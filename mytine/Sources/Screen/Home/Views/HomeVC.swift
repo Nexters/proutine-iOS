@@ -22,10 +22,10 @@ class HomeVC: UIViewController {
     @IBOutlet var navigationView: UIView!
     @IBOutlet var navigationTitle: UILabel!
     @IBOutlet var downButton: UIButton!
-    @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var tableView: UITableView!
     @IBOutlet var dropView: UIView!
     @IBOutlet var dropTableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var tableView: UITableView!
     var isExpanded = true
     var dropdownIdx: Int?
     var keyboardHeight: CGFloat = .zero
@@ -132,7 +132,9 @@ class HomeVC: UIViewController {
     }
     
     func presentPopup() {
-        guard let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as? HomePopVC else { return }
+        guard let popup = self.storyboard?.instantiateViewController(identifier: "HomePopVC") as? HomePopVC else {
+            return
+        }
         popup.modalPresentationStyle = .overFullScreen
         popup.modalTransitionStyle = .crossDissolve
         present(popup, animated: true, completion: nil)
@@ -154,18 +156,6 @@ class HomeVC: UIViewController {
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-    }
-    
-    func registerRoutinesNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(routineComplete(_:)), name: .routineComplete, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(routineUnComplete(_:)), name: .routineUnComplete, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    func unregisterRoutinesNotifications() {
-        NotificationCenter.default.removeObserver(self, name: .routineComplete, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .routineUnComplete, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @objc
@@ -238,14 +228,16 @@ class HomeVC: UIViewController {
     
     @IBAction func addRoutine(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
-        guard let dvc = storyboard.instantiateViewController(identifier: "EditVC") as? EditVC else { return }
+        guard let dvc = storyboard.instantiateViewController(identifier: "EditVC") as? EditVC else {
+            return
+        }
         dvc.curWeekRoutine = curWeekRoutineModel
         self.navigationController?.pushViewController(dvc, animated: true)
     }
 }
-//MARK:- 월 화 수 목 금 토 일 collection view
+
+// MARK:- CollectionView
 extension HomeVC: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: .init(item: selectedIdx, section: 0))
         cell?.isSelected = false
@@ -284,42 +276,48 @@ extension HomeVC: UICollectionViewDataSource {
         guard let curWeekRoutine = curWeekRoutineModel else {
             return .init()
         }
+        
         var dayCount = 0
         curWeekRoutine.routine.forEach {
             if $0.repeatDays[indexPath.item] == 1 {
                 dayCount += 1
             }
         }
+        
         cell.bind(model: curWeekRoutine.dayRoutine[indexPath.item],
                   dayRoutineCount: Float(dayCount),
                   index: indexPath.item)
         if selectedIdx == indexPath.item {
             cell.isSelected = true
         }
+        
         return cell
     }
 }
 
-//MARK:- 일별 루틴 체크 table view
+// MARK:- TableView
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == dropTableView {
             UIView.animate(withDuration: 0.3) {
                 self.downButton.transform = .identity
             }
+            
             dropView.isHidden = true
             downButton.isSelected = false
             dropdownIdx = indexPath.row+1
             setupRoutine(week: dropdownIdx!)
-            // print("dropdown", dropdownIdx)
             collectionView.reloadData()
+            
             let selectIndexPath = IndexPath(item: selectedIdx, section: 0)
             collectionView.selectItem(at: selectIndexPath, animated: false, scrollPosition: .left)
             collectionView(collectionView, didSelectItemAt: selectIndexPath)
         } else {
             if indexPath.section == 2 && cellType == .routine {
                 let storyboard = UIStoryboard.init(name: "HomeRootine", bundle: nil)
-                guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
+                guard let dvc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC else {
+                    return
+                }
                 dvc.rootine = selectRoutine[indexPath.row].0
                 dvc.curWeekRoutine = curWeekRoutineModel
                 self.navigationController?.pushViewController(dvc, animated: true)
@@ -327,6 +325,7 @@ extension HomeVC: UITableViewDelegate {
         }
     }
 }
+
 extension HomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == dropTableView {
@@ -364,7 +363,6 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == dropTableView {
-            
             guard let cell = dropTableView.dequeueReusableCell(withIdentifier: DropTVCell.reuseIdentifier, for: indexPath) as? DropTVCell else {
                 return .init()
             }
@@ -430,6 +428,7 @@ extension HomeVC: UITableViewDataSource {
                     if !dayRoutine.complete.contains(routineId) {
                         FMDBManager.shared.addRoutineCount(month: month, routineId: routineId)
                     }
+                    
                     NotificationCenter.default.post(name: .routineComplete, object: nil, userInfo: ["routineIndex": routineId, "indexPath": indexPath.row, "dayId": dayRoutine.id])
                     self.collectionView.reloadData()
                     tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -473,6 +472,7 @@ extension HomeVC: UITableViewDataSource {
     }
 }
 
+// MARK:- HomeTabCellTypeDelegate
 extension HomeVC: HomeTabCellTypeDelegate {
     func clickRoutine() {
         self.cellType = .routine
@@ -484,8 +484,8 @@ extension HomeVC: HomeTabCellTypeDelegate {
     }
 }
 
+// MARK:- TextView
 extension HomeVC: UITextViewDelegate {
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if messageLabel.tag == 100 {
             messageLabel.removeFromSuperview()
@@ -531,5 +531,20 @@ extension HomeVC: UITextViewDelegate {
 //        textView.contentInset.bottom = keyboardHeight - 155
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
+    }
+}
+
+// MARK:- Notification
+extension HomeVC {
+    func registerRoutinesNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(routineComplete(_:)), name: .routineComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(routineUnComplete(_:)), name: .routineUnComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    func unregisterRoutinesNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .routineComplete, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .routineUnComplete, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 }
