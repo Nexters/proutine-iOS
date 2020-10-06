@@ -34,7 +34,6 @@
 		0833EC6C24D3455500DE5518 /* EditWeekCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6924D3455500DE5518 /* EditWeekCVCell.swift */; };
 		0833EC6D24D3455500DE5518 /* CheckCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6A24D3455500DE5518 /* CheckCVCell.swift */; };
 		0833EC6E24D3455500DE5518 /* CheckReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833EC6B24D3455500DE5518 /* CheckReusableView.swift */; };
-		0833EC7124D34BAC00DE5518 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0833EC7024D34BAC00DE5518 /* .swiftlint.yml */; };
 		0851908A24E99BBA0000DCDF /* NotificationKeyName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851908924E99BBA0000DCDF /* NotificationKeyName.swift */; };
 		085C345924F019B900144F18 /* DropTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C345824F019B900144F18 /* DropTVCell.swift */; };
 		08A3F42724C40CB300201278 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3F42624C40CB300201278 /* HomeVC.swift */; };
@@ -82,7 +81,6 @@
 		0833EC6924D3455500DE5518 /* EditWeekCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWeekCVCell.swift; sourceTree = "<group>"; };
 		0833EC6A24D3455500DE5518 /* CheckCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCVCell.swift; sourceTree = "<group>"; };
 		0833EC6B24D3455500DE5518 /* CheckReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckReusableView.swift; sourceTree = "<group>"; };
-		0833EC7024D34BAC00DE5518 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		0851908924E99BBA0000DCDF /* NotificationKeyName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKeyName.swift; sourceTree = "<group>"; };
 		085C345824F019B900144F18 /* DropTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropTVCell.swift; sourceTree = "<group>"; };
 		08A3F42624C40CB300201278 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 		0804D24924B84C5B002D2A12 = {
 			isa = PBXGroup;
 			children = (
-				0833EC7024D34BAC00DE5518 /* .swiftlint.yml */,
 				0804D25424B84C5B002D2A12 /* mytine */,
 				0804D25324B84C5B002D2A12 /* Products */,
 				2A3460BF91BC7C7AB44DFFC7 /* Pods */,
@@ -455,7 +452,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0833EC7124D34BAC00DE5518 /* .swiftlint.yml in Resources */,
 				08D1D97224F4124B008D45D6 /* Month.storyboard in Resources */,
 				0636992B24CC1D3D00C1C900 /* HomeRootine.storyboard in Resources */,
 				0636993924CC1E4F00C1C900 /* WeekRootineTVCell.xib in Resources */,
